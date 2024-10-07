@@ -50,7 +50,7 @@ Chosen Outcome, Vue.js, because see pros and cons below.
 * Bad, because steep learning curve
 * Bad, because quite large
 
-###Angular
+### Angular
 
 * Good, because modular
 * Good, because scalable

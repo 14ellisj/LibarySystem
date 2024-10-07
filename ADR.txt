@@ -1,3 +1,0 @@
-Transfer this to "https://adr.github.io/madr/#applying-madr-to-your-project"
-
-Architecture Decision Record

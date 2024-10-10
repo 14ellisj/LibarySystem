@@ -1,13 +1,13 @@
 ---
 # These are optional metadata elements. Feel free to remove any of them.
 status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: {YYYY-MM-DD when the decision was last updated}
-decision-makers: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
-informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
+date: 2024/10/10
+decision-makers: Henry Barker, Jake Ellis, Joe Denton
+consulted: N/A
+informed: N/A
 ---
 
-# {short title, representative of solved problem and found solution}
+# Choosing an architecture for the project
 
 ## Context and Problem Statement
 
@@ -22,9 +22,8 @@ The architecture of our system needs to be able to account for a considerable in
 
 ## Considered Options
 
-* {title of option 1}
-* {title of option 2}
-* {title of option 3}
+* Micro services
+* 
 * … <!-- numbers of options can vary -->
 
 ## Decision Outcome
@@ -46,12 +45,9 @@ Chosen option: "{title of option 1}", because {justification. e.g., only option,
 <!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### {title of option 1}
+### Micro services
 
-<!-- This is an optional element. Feel free to remove. -->
-{example | description | pointer to more information | …}
-
-* Good, because {argument a}
+* Good, because it can split the complex system down into more manageable services
 * Good, because {argument b}
 <!-- use "neutral" if the given argument weights neither for good nor bad -->
 * Neutral, because {argument c}

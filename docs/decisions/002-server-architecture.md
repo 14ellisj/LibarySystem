@@ -23,7 +23,7 @@ The architecture of our system needs to be able to account for a considerable in
 ## Considered Options
 
 * Micro services
-* 
+* Event Driven
 * … <!-- numbers of options can vary -->
 
 ## Decision Outcome
@@ -49,10 +49,18 @@ Chosen option: "{title of option 1}", because {justification. e.g., only option,
 
 * Good, because it can split the complex system down into more manageable services
 * Good, because {argument b}
-<!-- use "neutral" if the given argument weights neither for good nor bad -->
 * Neutral, because {argument c}
 * Bad, because {argument d}
 * … <!-- numbers of pros and cons can vary -->
+
+### Event Driven
+
+{example | description | pointer to more information | …}
+
+* Good, because it keeps the different functions of the service seperate and manageable
+* Good, because it is easy to add new features to the architecture
+* Bad, because finding issues and testing can be difficult as finding the origins of a problem is hard
+* …
 
 ### {title of other option}
 

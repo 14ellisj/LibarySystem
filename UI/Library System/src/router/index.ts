@@ -21,8 +21,8 @@ const router = createRouter({
     {
       path: '/media',
       name: 'Media',
-      component: MediaView 
-    }
+      component: MediaView,
+    },
   ],
 })
 

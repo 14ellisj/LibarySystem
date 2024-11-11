@@ -1,29 +1,31 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
+import { type Media } from '../../models/media';
+import MediaService from '@/services/MediaService'
 
 export default defineComponent({
   name: "MediaTable",
   data() {
     return {
-      mediaData: Media[]
+      mediaData: [] as Media[]
     }
   },
   methods: {
-    increment() {
-      this.count++;
-      this.message = "Incremented";
-    }
+    
+  },
+  mounted() {
+    let m = new MediaService;
+    this.mediaData = m.getData();
   }
 })
 
 </script>
 
 <template>
-  <div>
-    {{count}}
+  <div v-if="mediaData.length > 0">
+    {{mediaData[0].author.first_name}}
   </div>
 
-  <button @click="increment()">Click me</button>
 
 </template>
 

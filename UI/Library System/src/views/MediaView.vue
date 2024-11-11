@@ -4,6 +4,6 @@ import MediaTable from '../components/MediaView/MediaTable.vue'
 
 <template>
   <main>
-    <MediaTable props="{count: 1}"/>
+    <MediaTable props="{count: 1}" />
   </main>
 </template>

@@ -26,7 +26,7 @@ namespace API_Gateway.Controllers
                 name = "Media Name"
             };
 
-            return Json(returning);
+            return Json(new List<Media>() { returning });
         }
     }
 }

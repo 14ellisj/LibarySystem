@@ -1,18 +1,18 @@
 import { Genre, Type, type Media } from "@/models/media";
+import axios from "axios";
 
 export default class {
 
-    getData(): Media[] {
-    return [
-        {
-            author: {
-            first_name: 'First',
-            last_name: 'Last'
-            },
-            type: Type.DVD,
-            genre: Genre.FANTASY,
-            name: "Name of media"
-        }
-        ];
+    data: any;
+
+    async getData(): Promise<Media[]> {
+        await axios
+        .get("https://localhost:7090/Router")
+        .then((response) => {
+            console.log(response.data)
+            this.data = response.data
+        })
+
+        return this.data;
     }
   }

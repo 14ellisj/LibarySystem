@@ -15,7 +15,7 @@ export default defineComponent({
   },
   mounted() {
     let m = new MediaService;
-    this.mediaData = m.getData();
+    m.getData().then(result => this.mediaData = result);
   }
 })
 

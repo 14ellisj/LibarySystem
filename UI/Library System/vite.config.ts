@@ -16,10 +16,3 @@ export default defineConfig({
     },
   },
 })
-
-module.exports = {
-  devServer: {
-    port: 7090,
-  },
-};
-

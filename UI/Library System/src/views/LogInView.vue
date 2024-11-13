@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import LogIn from '../components/LogIn.vue'
+import '../styles/variables.css'
 </script>
 
 <template>
-    <div>
+    <div class="home">
         <main>
         <LogIn />
         </main>

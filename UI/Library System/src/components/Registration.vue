@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import RegistrationItem from './RegistrationItem.vue'
+import '../styles/variables.css'
 </script>
 
 <template>
     <RegistrationItem>
-    <template #Heading>Register</template>
+        <template #Heading>Register</template>
     </RegistrationItem>
 
-    <form>
-        <label for="Email">Email:</label><br>
-        <input type="text" id="Email" name="Email"><br>
-        <label for="FirstName">First Name:</label><br>
-        <input type="text" id="FirstName" name="FirstName"><br>
-        <label for="LastName">Last Name:</label><br>
-        <input type="text" id="LastName" name="LastName"><br>
+    <form action="/">
+        <label for="registerEmail">Email:</label><br>
+        <input type="text" id="registerEmail" name="registerEmail"><br>
+        <label for="fName">First Name:</label><br>
+        <input type="text" id="fName" name="fName"><br>
+        <label for="lName">Last Name:</label><br>
+        <input type="text" id="lName" name="lName"><br>
         <label for="DOB">Date Of Birth:</label><br>
         <input type="text" id="DOB" name="DOB"><br>
         <label for="Password">Password:</label><br>

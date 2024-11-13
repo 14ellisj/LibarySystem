@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import Registration from '../components/Registration.vue'
+import '../styles/variables.css'
 </script>
 
 <template>
-    <div>
+    <div class="home">
         <main>
         <Registration />
         </main>

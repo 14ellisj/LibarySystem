@@ -1,0 +1,33 @@
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\appsettings.json
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\API Gateway.exe
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\API Gateway.deps.json
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\API Gateway.runtimeconfig.json
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\API Gateway.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\API Gateway.pdb
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.csproj.AssemblyReference.cache
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.AssemblyInfoInputs.cache
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.AssemblyInfo.cs
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.csproj.CoreCompileInputs.cache
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.sourcelink.json
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets\msbuild.API Gateway.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets\msbuild.build.API Gateway.props
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.API Gateway.props
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.API Gateway.props
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\scopedcss\bundle\API Gateway.styles.css
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gate.582AC83B.Up2Date
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\refint\API Gateway.dll
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.pdb
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\API Gateway.genruntimeconfig.cache
+C:\Users\henry\LibarySystem\Services\API Gateway\obj\Debug\net8.0\ref\API Gateway.dll

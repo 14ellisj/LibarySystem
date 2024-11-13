@@ -1,0 +1,138 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\api gateway.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:api gateway.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Media.cs",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Media.cs",
+              "RelativeDocumentMoniker": "Media.cs",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Media.cs",
+              "RelativeToolTip": "Media.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAAwBEAAAAUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T16:12:58.715Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "API Gateway.http",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\API Gateway.http",
+              "RelativeDocumentMoniker": "API Gateway.http",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\API Gateway.http",
+              "RelativeToolTip": "API Gateway.http",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-11-11T15:57:41.285Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T15:57:09.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecast.cs",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\WeatherForecast.cs",
+              "RelativeDocumentMoniker": "WeatherForecast.cs",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\WeatherForecast.cs",
+              "RelativeToolTip": "WeatherForecast.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T15:48:55.945Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-11T15:57:03.134Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RouterController.cs",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\RouterController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RouterController.cs",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\RouterController.cs",
+              "RelativeToolTip": "Controllers\\RouterController.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAwwBYAAABLAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T15:37:15.204Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Controllers\\WeatherForecastController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwBsAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-11T15:35:51.379Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

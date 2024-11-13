@@ -4,7 +4,6 @@ import MediaTable from '../components/MediaView/MediaTable.vue'
 
 <template>
   <main>
-    <p style="color: var(--primary-color)">AJsdjhgasd</p>
-    <MediaTable style="color: var(primary-color)" props="{count: 1}" />
+    <MediaTable/>
   </main>
 </template>

@@ -32,7 +32,7 @@ a {
     display: flex;
     margin: auto;
     position: relative;
-    color: pink;
+    color: var(--secondary-color);
 }
 
 form {
@@ -40,7 +40,7 @@ form {
 }
 
 form label {
-    color: pink;
+    color: var(--secondary-color);
 }
 
 </style>

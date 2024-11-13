@@ -5,7 +5,7 @@
   <header>
         <table>
             <tr class="tabletop">
-                <td>Library</td>
+                <td colspan="4">Library</td>
             </tr>
             <tr class="headers">
                 <td>Title</td>
@@ -38,13 +38,15 @@
     color: black;
   }
   table{
-    width: 100%;
+    width:100%;
     background-color: #EDE8DC;
     text-align: center;
     border: 1px solid;
     border-color: black;
     padding: 0%;
     font-size: small;
+    margin-left: 40%;
+    margin-right: 40%;
   }
   .tabletop{
     text-align: center;
@@ -56,6 +58,10 @@
     font-size: medium;
     border: 1px solid;
     border-color: black;
+    width: 25%;
+  }
+  tr, td{
+    border: 400%;
   }
 
 </style>

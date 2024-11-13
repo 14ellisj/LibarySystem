@@ -1,0 +1,33 @@
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.csproj.AssemblyReference.cache
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.AssemblyInfoInputs.cache
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.AssemblyInfo.cs
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.csproj.CoreCompileInputs.cache
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.sourcelink.json
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\appsettings.json
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Media Service.exe
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Media Service.deps.json
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Media Service.runtimeconfig.json
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Media Service.dll
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Media Service.pdb
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\henry\LibarySystem\Services\Media Service\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets\msbuild.Media Service.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets\msbuild.build.Media Service.props
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Media Service.props
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Media Service.props
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\scopedcss\bundle\Media Service.styles.css
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Se.68D04698.Up2Date
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.dll
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\refint\Media Service.dll
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.pdb
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\Media Service.genruntimeconfig.cache
+C:\Users\henry\LibarySystem\Services\Media Service\obj\Debug\net8.0\ref\Media Service.dll

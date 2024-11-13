@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|solutionrelative:controllers\\routercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{287F3F49-B389-411F-9F07-05455454EB74}|API Gateway.csproj|c:\\users\\henry\\libarysystem\\services\\api gateway\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -38,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,15 +46,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Media.cs",
               "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Media.cs",
               "RelativeDocumentMoniker": "Media.cs",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Media.cs",
               "RelativeToolTip": "Media.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAAwBEAAAAUAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T16:12:58.715Z"
+              "WhenOpened": "2024-11-11T16:12:58.715Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -70,13 +71,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAuAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-11T15:57:09.136Z",
               "EditorCaption": ""
@@ -107,16 +108,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "RouterController.cs",
               "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\RouterController.cs",
               "RelativeDocumentMoniker": "Controllers\\RouterController.cs",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\API Gateway\\Controllers\\RouterController.cs",
               "RelativeToolTip": "Controllers\\RouterController.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAwwBYAAABLAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBQAAAAPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-11T15:37:15.204Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-11T15:37:15.204Z"
             },
             {
               "$type": "Document",

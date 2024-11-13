@@ -23,7 +23,7 @@ import RegistrationItem from './RegistrationItem.vue'
         <input type="submit" value="Confirm details">
     </form>
 
-    <a href="logIn"> Log In </a>
+    <a href="login"> Log In </a>
 </template>
   
 <style scoped> 

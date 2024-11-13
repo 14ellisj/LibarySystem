@@ -1,5 +1,8 @@
-﻿using Media_Service.Models;
+﻿using AutoMapper;
+using Media_Service.Database;
+using Media_Service.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Media_Service.Controllers
 {
@@ -9,24 +12,29 @@ namespace Media_Service.Controllers
     {
 
         private readonly ILogger<MediaController> _logger;
+        private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public MediaController(ILogger<MediaController> logger)
+        public MediaController(ILogger<MediaController> logger, AppDbContext context, IMapper mapper)
         {
             _logger = logger;
+            _context = context;
+            _mapper = mapper;
         }
 
-        [HttpGet(Name = "GetRouter")]
-        public JsonResult Get()
+        [HttpGet(Name = "GetMedia")]
+        public async Task<JsonResult> Get()
         {
-            Media returning = new Media()
-            {
-                author = new Author() { first_name = "First Name", last_name = "Last Name" },
-                type = MediaType.AUDIO_BOOK,
-                genre = Genre.CRIME,
-                name = "Media Name"
-            };
+            var results = await _context.Media
+                .Include(x => x.author)
+                .Include(x => x.genre)
+                .Include(x => x.type)
+                .ToListAsync();
 
-            return Json(new List<Media>() { returning });
+            var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
+
+
+            return Json(output);
         }
     }
 }

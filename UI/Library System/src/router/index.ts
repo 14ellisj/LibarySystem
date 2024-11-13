@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import MediaView from '../views/MediaView.vue'
 import StartView from '../views/StartView.vue'
+import SingleItemView from '@/components/SingleItemView.vue'
+import SingleMediaView from '@/views/SingleMediaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +30,11 @@ const router = createRouter({
       path: '/front',
       name: 'Front',
       component: StartView,
+    },
+    {
+      path: '/item',
+      name: 'Item',
+      component: SingleMediaView,
     },
   ],
 })

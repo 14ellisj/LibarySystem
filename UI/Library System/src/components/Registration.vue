@@ -8,7 +8,7 @@ import '../styles/variables.css'
         <template #Heading>Register</template>
     </RegistrationItem>
 
-    <form action="/">
+    <form action="front">
         <label for="registerEmail">Email:</label><br>
         <input type="text" id="registerEmail" name="registerEmail"><br>
         <label for="fName">First Name:</label><br>

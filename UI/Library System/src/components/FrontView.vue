@@ -4,6 +4,7 @@
 <template>
   <header>
     <img src="../images/LibraryLogoDone.png" alt="Logo Image" class="logo">
+    <a href="profile"><img src="../images/profile.webp" alt="Profile" class="logo"></a>
     </header>
     <body>
     <tbody>

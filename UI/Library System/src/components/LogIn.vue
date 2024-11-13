@@ -8,7 +8,7 @@ import '../styles/variables.css'
         <template #Heading>Log In</template>
     </LogInItem>
 
-    <form action="/">
+    <form action="front">
         <label for="logInEmail">Email:</label><br>
         <input type="text" id="logInEmail" name="logInEmail"><br>
         <label for="Password">Password:</label><br>

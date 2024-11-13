@@ -4,6 +4,8 @@ import MediaView from '../views/MediaView.vue'
 import StartView from '../views/StartView.vue'
 import SingleItemView from '@/components/SingleItemView.vue'
 import SingleMediaView from '@/views/SingleMediaView.vue'
+import RegisterView from '../views/RegistrationView.vue'
+import LogInView from '@/views/LogInView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,7 @@ const router = createRouter({
       component: MediaView,
     },
     {
+
       path: '/front',
       name: 'Front',
       component: StartView,
@@ -35,6 +38,16 @@ const router = createRouter({
       path: '/item',
       name: 'Item',
       component: SingleMediaView,
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: RegisterView,
+    },
+    {
+      path: '/login',
+      name: 'Log In',
+      component: LogInView,
     },
   ],
 })

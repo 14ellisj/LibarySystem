@@ -1,6 +1,6 @@
 <template>
     <div class="item">
-      <div class="field">
+      <div class="details">
         <h3>
           <slot name="Heading"></slot>
         </h3>
@@ -15,7 +15,7 @@
   position: relative;
 }
 
-.field {
+.details {
   flex: 1;
   margin-left: 1rem;
 }

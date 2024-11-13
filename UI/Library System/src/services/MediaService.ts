@@ -7,7 +7,7 @@ export default class {
 
     async getData(): Promise<Media[]> {
         await axios
-        .get("https://localhost:7090/Router")
+        .get("https://localhost:7166/Media")
         .then((response) => {
             console.log(response.data)
             this.data = response.data

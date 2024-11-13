@@ -1,10 +1,18 @@
-﻿namespace Media_Service.Models
+﻿using System.Text.Json.Serialization;
+
+namespace Media_Service.Models
 {
     public class Media
     {
-        public Author author { get; set; }
-        public MediaType type { get; set; }
-        public Genre genre { get; set; }
-        public string name { get; set; }
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+        [JsonPropertyName("author")]
+        public Author Author { get; set; }
+        [JsonPropertyName("type")]
+        public MediaType Type { get; set; }
+        [JsonPropertyName("genre")]
+        public Genre Genre { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
     }
 }

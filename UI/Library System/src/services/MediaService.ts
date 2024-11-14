@@ -4,21 +4,15 @@ import axios from "axios";
 
 export default class {
 
-    data: any;
-
+    mediaStore = useMediaStore();
 
     async getData(): Promise<Media[]> {
-
-        console.log("Current Data: " + this.data);
-        const mediaStore = useMediaStore();
-
         await axios
-        .get("https://localhost:7166/Media")
-        .then((response) => {
-            this.data = response.data
-            mediaStore.setMedia(response.data)
-        })
+            .get("https://localhost:7166/Media")
+            .then((response) => {
+                this.mediaStore.setMedia(response.data)
+            })
 
-        return this.data;
+        return this.mediaStore.media;
     }
   }

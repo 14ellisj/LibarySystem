@@ -62,7 +62,8 @@
               "RelativeToolTip": "MapperConfig.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T13:13:18.389Z"
+              "WhenOpened": "2024-11-13T13:13:18.389Z",
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -120,7 +121,7 @@
               "RelativeDocumentMoniker": "Controllers\\MediaController.cs",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\Media Service\\Controllers\\MediaController.cs",
               "RelativeToolTip": "Controllers\\MediaController.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAwwCMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T11:50:42.089Z",
               "EditorCaption": ""

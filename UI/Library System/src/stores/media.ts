@@ -4,14 +4,12 @@ import type { Media } from '@/models/media'
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
-    media: [] as Media[]
+    media: [] as Media[],
+    count: 0
   }),
-  getters: {
-    media: (state) => state.media
-  },
   actions: {
-    setMedia(media: Media[]) {
-      this.media = media;
+    setMedia(mediaInput: Media[]) {
+      this.media = mediaInput
     }
   }
 })

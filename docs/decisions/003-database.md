@@ -32,7 +32,8 @@ Chosen option: SQL database, because the library has many interconnecting tables
 ### Consequences
 
 * Good, because this allows us to have a very interconnected database
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
+* Good with structured data
+* Bad, because it is slow and cannot handle too large of volumes of data
 * … <!-- numbers of consequences can vary -->
 
 <!-- This is an optional element. Feel free to remove. -->
@@ -43,26 +44,22 @@ Chosen option: SQL database, because the library has many interconnecting tables
 <!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### {title of option 1}
+### SQL database
 
 <!-- This is an optional element. Feel free to remove. -->
 {example | description | pointer to more information | …}
 
-* Good, because {argument a}
-* Good, because {argument b}
-<!-- use "neutral" if the given argument weights neither for good nor bad -->
+* Good, because it helps structure the data and keeps it related throughout the database
 * Neutral, because {argument c}
 * Bad, because {argument d}
 * … <!-- numbers of pros and cons can vary -->
 
-### {title of other option}
+### No-SQL database
 
 {example | description | pointer to more information | …}
 
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
+* Good, because it's fast at updating and retrieving information
+* Bad, because there is no structure available for the database
 * …
 
 <!-- This is an optional element. Feel free to remove. -->

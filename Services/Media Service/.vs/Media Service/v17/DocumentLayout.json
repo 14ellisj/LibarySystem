@@ -50,12 +50,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 3,
@@ -67,7 +63,7 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T13:13:18.389Z",
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -79,8 +75,7 @@
               "RelativeToolTip": "Models\\Entities.cs",
               "ViewState": "AQIAACIAAAAAAAAAAAAUwBgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:29:38.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:29:38.161Z"
             },
             {
               "$type": "Document",
@@ -92,8 +87,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAA0AAAAAAAAAAAAIwBQAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:57:24.2Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:57:24.2Z"
             },
             {
               "$type": "Document",
@@ -105,8 +99,7 @@
               "RelativeToolTip": "Models\\Enums.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:53:34.285Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:53:34.285Z"
             },
             {
               "$type": "Document",
@@ -118,8 +111,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-11-13T12:17:16.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:17:16.217Z"
             },
             {
               "$type": "Document",
@@ -129,7 +121,7 @@
               "RelativeDocumentMoniker": "Controllers\\MediaController.cs",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\Media Service\\Controllers\\MediaController.cs",
               "RelativeToolTip": "Controllers\\MediaController.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAADwvyMAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-13T11:50:42.089Z",
               "EditorCaption": ""
@@ -144,8 +136,7 @@
               "RelativeToolTip": "Models\\Media.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAAAcAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:53:03.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:53:03.385Z"
             },
             {
               "$type": "Document",
@@ -157,21 +148,19 @@
               "RelativeToolTip": "Models\\Author.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:54:02.68Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T11:54:02.68Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "Media Service",
+              "Title": "Media Service.csproj",
               "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\Media Service\\Media Service.csproj",
               "RelativeDocumentMoniker": "Media Service.csproj",
               "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\Media Service\\Media Service.csproj",
               "RelativeToolTip": "Media Service.csproj",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-13T13:10:43.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T13:10:43.004Z"
             },
             {
               "$type": "Document",
@@ -183,8 +172,11 @@
               "RelativeToolTip": "Database\\AppDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAoAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T12:15:38.932Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-13T12:15:38.932Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             }
           ]
         }

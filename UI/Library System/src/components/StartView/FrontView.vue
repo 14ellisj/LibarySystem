@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineComponent, ref } from 'vue'
-import { type Media } from '../models/media';
+import { type Media } from '../../models/media';
 import MediaService from '@/services/MediaService'
 
 
@@ -101,9 +101,9 @@ import MediaService from '@/services/MediaService'
                 <td>0</td>
                 <td>Book</td>
             </tr>
-        </table>
+            </table>
         </tbody>
-        </body>
+    </body>
 </template>
 
 <style>
@@ -160,5 +160,4 @@ import MediaService from '@/services/MediaService'
     height: 20%;
     padding-bottom: 5%;
     }
-  
 </style>

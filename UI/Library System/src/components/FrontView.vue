@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { defineComponent, ref } from 'vue'
+import { type Media } from '../models/media';
+import MediaService from '@/services/MediaService'
+
+
 </script>
 
 <template>
@@ -19,8 +24,8 @@
                 <td>Type Media</td>
             </tr>
             <tr>
-                <td><a href="SingleMediaView.vue">Cd 1</a> </td>
-                <td>Joe Denton</td>
+                <td><a href="Item">Cd 1</a> </td>
+                <td>BOB</td>
                 <td>1</td>
                 <td>CD</td>
             </tr>

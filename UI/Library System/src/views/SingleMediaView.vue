@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SingleItemView from '../components/SingleItemView.vue'
+import SingleItemView from '../components/SingleMediaView/SingleItemView.vue'
 
 </script>
 

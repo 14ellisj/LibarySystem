@@ -1,4 +1,5 @@
 <script lang="ts">
+import type { Filter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 import { useMediaStore } from '@/stores/media';
 import { defineComponent } from 'vue'
@@ -18,8 +19,11 @@ export default defineComponent({
   methods: {
     submit() {
         const mediaService = new MediaService();
-        mediaService.getData();
-        alert(`Searching: ${this.query} for ${this.searchType}`);
+        const filter: Filter = {
+            author: this.searchType === "Author" ? this.query : undefined,
+            title: this.searchType === "Title" ? this.query : undefined
+        }
+        mediaService.filterData(filter);
     },
     handleKeyPress(e: KeyboardEvent) {
         if (e.key === 'Enter')

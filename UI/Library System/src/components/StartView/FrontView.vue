@@ -8,11 +8,11 @@ import MediaService from '@/services/MediaService'
 
 <template>
   <header>
-    <img src="../images/LibraryLogoDone.png" alt="Logo Image" class="logo">
-    <a href="profile"><img src="../images/profile.webp" alt="Profile" class="logo"></a>
+    <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo Image" class="logo"></a>
+    <a href="profile"><img src="../../images/profile.webp" alt="Profile" class="logo"></a>
     </header>
     <body>
-    <tbody>
+    <tbody class="table-flex">
         <table>
             <tr class="table-top">
                 <td colspan="4">Library</td>
@@ -114,7 +114,7 @@ import MediaService from '@/services/MediaService'
     background-color: var(--background-color);
     color: black;
   }
-  table{
+  .table-flex{
     width:100%;
     background-color: var(--highlight-color);
     text-align: center;

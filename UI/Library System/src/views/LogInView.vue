@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LogIn from '../components/LogIn.vue'
+import LogIn from '../components/LogInView/LogIn.vue'
 import '../styles/variables.css'
 </script>
 

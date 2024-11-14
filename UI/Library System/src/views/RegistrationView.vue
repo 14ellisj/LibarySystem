@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Registration from '../components/Registration.vue'
+import Registration from '../components/RegistrationView/Registration.vue'
 import '../styles/variables.css'
 </script>
 

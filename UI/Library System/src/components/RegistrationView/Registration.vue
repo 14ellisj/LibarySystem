@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RegistrationItem from './RegistrationItem.vue'
-import '../styles/variables.css'
+import '../../styles/variables.css'
 </script>
 
 <template>

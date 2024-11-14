@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LogInItem from './LogInItem.vue'
-import '../styles/variables.css'
+import '../../styles/variables.css'
 </script>
 
 <template>

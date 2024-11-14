@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import ProfileOptions from '../components/Profile.vue'
+import ProfileOptions from '../components/ProfileView/Profile.vue'
 </script>
 
 <template>
-    <body>
-      <main>
-        <ProfileOptions />
-      </main>
-    </body>
-  </template>
+  <body>
+    <main>
+      <ProfileOptions />
+    </main>
+  </body>
+</template>

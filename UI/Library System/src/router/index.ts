@@ -7,6 +7,7 @@ import SingleMediaView from '@/views/SingleMediaView.vue'
 import RegisterView from '../views/RegistrationView.vue'
 import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import ReturnView from '@/views/ReturnView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,6 +46,11 @@ const router = createRouter({
       path: '/profile',
       name: 'Profile',
       component: ProfileView,
+    },
+    {
+      path: '/return',
+      name: 'Return',
+      component: ReturnView,
     },
   ],
 })

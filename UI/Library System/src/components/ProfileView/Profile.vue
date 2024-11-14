@@ -4,10 +4,10 @@ import '../../styles/variables.css'
 
 <template>
     <h2>Profile</h2>
-    <button onclick="window.location.href = 'logIn';"> Orders </button> <br>
-    <button onclick="window.location.href = 'logIn';"> Wishlist </button> <br>
-    <button onclick="window.location.href = 'logIn';"> Return Media</button> <br>
-    <button onclick="window.location.href = 'logIn';"> Settings </button> <br>
+    <button onclick="window.location.href = '';"> Orders </button> <br>
+    <button onclick="window.location.href = '';"> Wishlist </button> <br>
+    <button onclick="window.location.href = 'Return';"> Return Media </button> <br>
+    <button onclick="window.location.href = '';"> Settings </button> <br>
     <button onclick="window.location.href = 'logIn';"> Log Out </button>
 </template>
   

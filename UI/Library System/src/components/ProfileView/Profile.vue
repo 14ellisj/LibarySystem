@@ -4,12 +4,17 @@ import '../../styles/variables.css'
 
 <template>
     <h2>Profile</h2>
-    <a href="" class="button-class"> Orders </a> <br>
-    <a href="" class="button-class"> Wishlist </a> <br>
-    <a href="" class="button-class"> Return Media </a> <br>
-    <a href="" class="button-class"> Settings </a> <br>
-    <a href="logIn" class="button-class"> Log Out </a>
+    <button onclick="window.location.href = 'logIn';"> Orders </button> <br>
+    <button onclick="window.location.href = 'logIn';"> Wishlist </button> <br>
+    <button onclick="window.location.href = 'logIn';"> Return Media</button> <br>
+    <button onclick="window.location.href = 'logIn';"> Settings </button> <br>
+    <button onclick="window.location.href = 'logIn';"> Log Out </button>
 </template>
   
 <style scoped> 
+    button {
+        color: var(--secondary-color);
+        padding: 1%;
+        align-items: center;
+    }
 </style>

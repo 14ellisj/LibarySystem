@@ -5,7 +5,23 @@ import ProfileOptions from '../components/ProfileView/Profile.vue'
 <template>
   <body>
     <main>
-      <ProfileOptions />
+      <div class="profileContainer">
+        <div class="profile">
+          <ProfileOptions />
+        </div>
+      </div>
     </main>
   </body>
 </template>
+
+<style scoped> 
+    .profileContainer {
+      margin: auto;
+    }
+
+    .profile{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+</style>

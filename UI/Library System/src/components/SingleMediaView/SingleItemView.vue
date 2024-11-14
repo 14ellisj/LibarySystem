@@ -6,18 +6,18 @@
     <img src="../../images/LibraryLogoDone.png" alt="Logo Image" class="logo">
     </header>
     <body>
-        <div>Media Art</div>
-        <div>Title</div>
-        <div>Description</div>
-        <div>Reviews</div>
-        <div>Wishlist</div>
-        <div>Borrow</div>
-        <div>Stars</div>
+        <div class="media_art">Media Art</div>
+        <div class="title">Title</div>
+        <div class="description">Description</div>
+        <div class="reviews">Reviews</div>
+        <div class="wishlist">Wishlist</div>
+        <div class="borrow">Borrow</div>
+        <div class="stars">Stars</div>
     </body>
 </template>
 
 <style>
-     .logo{
+    .logo{
     position: fixed;
     display: block;
     margin-top: 20%;
@@ -25,5 +25,33 @@
     width: 15%;
     height: 25%;
     padding-bottom: 5%;
+    }
+    
+    .media_art{
+        text-align: center;
+    }
+
+    .title{
+        text-align: center;
+    }
+
+    .description{
+        text-align: center;
+    }
+
+    .reviews{
+        text-align: center;
+    }
+
+    .wishlist{
+        text-align: center;
+    }
+    
+    .borrow{
+        text-align: center;
+    }
+
+    .stars{
+        text-align: center;
     }
 </style>

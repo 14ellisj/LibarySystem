@@ -9,7 +9,7 @@ import MediaService from '@/services/MediaService'
 <template>
   <header>
     <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo Image" class="logo"></a>
-    <a href="profile"><img src="../../images/profile.webp" alt="Profile" class="logo"></a>
+    <a href="profile"><img src="../../images/profile.webp" alt="Profile" class="logo-profile"></a>
     </header>
     <body>
     <tbody class="table-flex">
@@ -114,7 +114,8 @@ import MediaService from '@/services/MediaService'
     background-color: var(--background-color);
     color: black;
   }
-  .table-flex{
+
+  table{
     width:100%;
     background-color: var(--highlight-color);
     text-align: center;
@@ -131,6 +132,14 @@ import MediaService from '@/services/MediaService'
     border-radius: 3%;
     color: black;
   }
+
+  .table-flex{
+    width: 50%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 30%;
+  }
+
   .table-top{
     text-align: center;
     font-size: large;
@@ -138,12 +147,14 @@ import MediaService from '@/services/MediaService'
     border-color: black;
     color: black;
   }
+
   .headers{
     font-size: medium;
     border: 1px solid;
     border-color: black;
     color: black;
   }
+
   td{
     padding-top: 5%;
     padding-left: 5%;
@@ -154,10 +165,18 @@ import MediaService from '@/services/MediaService'
   }
 
     .logo{
+        position: fixed;
         display: block;
-    margin-left: 0;
-    width: 20%;
-    height: 20%;
-    padding-bottom: 5%;
+        margin-left: 0%;
+        width: 30%;
+        height: 30%;
+        padding-bottom: 5%;
+    }
+
+    .logo-profile{
+        position: fixed;
+        margin-left: 0%;
+        width: 15%;
+        height: 20%;
     }
 </style>

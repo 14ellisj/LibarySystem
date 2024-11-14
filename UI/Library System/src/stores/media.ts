@@ -9,7 +9,8 @@ export const useMediaStore = defineStore('media', {
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
-      this.media = mediaInput
+      this.media = mediaInput;
+      console.log(this.media);
     }
   }
 })

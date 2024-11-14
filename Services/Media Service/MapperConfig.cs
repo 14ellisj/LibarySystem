@@ -13,6 +13,7 @@ namespace Media_Service
 
 
             CreateMap<AuthorEntity, Author>();
+            CreateMap<MediaItemEntity, MediaItem>();
         }
     }
 

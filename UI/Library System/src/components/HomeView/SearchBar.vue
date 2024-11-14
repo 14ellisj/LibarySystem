@@ -1,4 +1,6 @@
 <script lang="ts">
+import MediaService from '@/services/MediaService';
+import { useMediaStore } from '@/stores/media';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -15,6 +17,8 @@ export default defineComponent({
   },
   methods: {
     submit() {
+        const mediaService = new MediaService();
+        mediaService.getData();
         alert(`Searching: ${this.query} for ${this.searchType}`);
     },
     handleKeyPress(e: KeyboardEvent) {

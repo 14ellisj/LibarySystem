@@ -13,7 +13,7 @@ import MediaService from '@/services/MediaService'
     </header>
     <body>
     <tbody class="table-flex">
-        <table>
+        <table class="table_front">
             <tr class="table-top">
                 <td colspan="4">Library</td>
             </tr>
@@ -106,7 +106,7 @@ import MediaService from '@/services/MediaService'
     </body>
 </template>
 
-<style>
+<style scoped>
     body {
     font-family: helvetica, arial, sans-serif;
     font-size: 1rem;
@@ -115,7 +115,7 @@ import MediaService from '@/services/MediaService'
     color: black;
   }
 
-  table{
+  .table_front{
     width:100%;
     background-color: var(--highlight-color);
     text-align: center;

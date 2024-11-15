@@ -4,8 +4,39 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Media_Service.Models
 {
+
+    [Table("MediaItem")]
+    public class MediaItemEntity
+    {
+        [Key]
+        public int id { get; set; }
+
+        [ForeignKey("media_id")]
+        public MediaEntity media { get ; set; }
+
+        [ForeignKey("borrower_id")]
+        public UserEntity? borrower { get; set; }
+
+        [ForeignKey("library_id")]
+        public LibraryEntity library { get; set; }
+    }
+
+    [Table("Profile")]
+    public class UserEntity
+    {
+        [Key]
+        public int id { get; set; }
+    }
+
+    [Table("Library")]
+    public class LibraryEntity
+    {
+        [Key]
+        public int id { get; set; }
+
+    }
+
     [Table("Media")]    
-    
     public class MediaEntity
     {
         [Key]

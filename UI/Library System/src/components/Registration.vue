@@ -27,7 +27,7 @@ import '../styles/variables.css'
     <a href="login"> Log In </a>
 </template>
   
-<style scoped> 
+<style> 
 a {
     display: flex;
     margin: auto;

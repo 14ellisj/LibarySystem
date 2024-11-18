@@ -2,86 +2,147 @@
 </script>
 
 <template>
-    <header>
-    <!--<img src="../../images/LibraryLogoDone.png" alt="Logo Image" class="logo">-->
-    </header>
-    <body class="body">
-        <tbody>
-            <table class="table_item">
-                <tr>
-                    <td></td>
-                    <td><div class="title">Title</div></td>
-                    <td><div class="stars">Stars</div></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><div class="media_art">Media Art</div></td>
-                    <td><div class="description">Description</div></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><div class="wishlist">Wishlist</div></td>
-                    <td><div class="borrow">Borrow</div></td>
-                </tr>
-                <tr>
-                    <td colspan="3"> <div class="reviews">Reviews</div></td>
-                </tr>
-            </table>
-        </tbody>
-    </body>
+   <!DOCTYPE html>
+<body>
+    <div class="product-page">
+        <div class="product-container">
+            <!-- Product Image -->
+            <div class="product-image">
+                <img src="../../images/It_(1986)_front_cover,_first_edition.jpg" alt="Product Image">
+            </div>
+            
+            <!-- Product Info -->
+            <div class="product-info">
+                <h1 class="product-title">IT</h1>
+
+                <!-- Star Review -->
+                <div class="product-reviews">
+                    <span class="stars">★★★★★</span>
+                    <span class="review-count">(120 reviews)</span>
+                </div>
+
+                <!-- Product Description -->
+                <p class="product-description">
+                    The story begins when a band of seven “uncool” 11-year-olds, led by Bill Denbrough, discovers and battles an evil, shape-changing monster that the children call “It.
+                </p>
+
+                <!-- Customer Reviews Section -->
+                <div class="customer-reviews">
+                    <h2>Customer Reviews</h2>
+                    <div class="review">
+                        <p><strong>John Doe:</strong> Great product, highly recommend!</p>
+                    </div>
+                    <div class="review">
+                        <p><strong>Jane Smith:</strong> It exceeded my expectations. Worth the price!</p>
+                    </div>
+                </div>
+                <button class="borrow-button">Borrow</button>
+                <button class="borrow-button">+ Wish-list</button>
+            </div>
+        <div>
+            <a href="Front"><-- Back</a>
+        </div>
+        </div>
+    </div>
+</body>
 </template>
 
 <style scopped>
-    .table_item{
-       
-    }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    .body{
-        margin: auto;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
 
-    .logo{
-    position: fixed;
-    margin-top: 0%;
-    padding-bottom: 5%;
-    display: block;
-    margin-left: 0;
-    width: 120px;
-    height: 120px;
-    }
-    
-    .media_art{
-        text-align: center;
-        border: solid;
-    }
+.product-page {
+    max-width: 900px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-    .title{
-        text-align: center;
-        border: solid;
-    }
+.product-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
 
-    .description{
-        text-align: center;
-        border: solid;
-    }
+.product-image img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-    .reviews{
-        text-align: center;
-        border: solid;
-    }
+.product-info {
+    flex: 1;
+}
 
-    .wishlist{
-        text-align: center;
-        border: solid;
-    }
-    
-    .borrow{
-        text-align: center;
-        border: solid;
-    }
+.product-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
 
-    .stars{
-        text-align: center;
-        border: solid;
-    }
+.product-reviews {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.stars {
+    color: gold;
+}
+
+.review-count {
+    margin-left: 10px;
+    color: #888;
+}
+
+.product-description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.customer-reviews {
+    margin-bottom: 20px;
+}
+
+.customer-reviews h2 {
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.review {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.borrow-button {
+    background-color: #28a745;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.borrow-button:hover {
+    background-color: #218838;
+}
+
 </style>

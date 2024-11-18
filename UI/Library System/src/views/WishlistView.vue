@@ -5,6 +5,6 @@ import Wishlist from '../components/WishlistView/Wishlist.vue'
 
 <template>
   <main>
-    <Wishlist.vue/>
+    <Wishlist/>
   </main>
 </template>

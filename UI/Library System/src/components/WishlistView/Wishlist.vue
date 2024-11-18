@@ -2,7 +2,9 @@
 </script>
 
 <template>
-   <!DOCTYPE html>
 <body>
 </body>
 </template> 
+
+<script scoped>
+</script>

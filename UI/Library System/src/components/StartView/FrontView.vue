@@ -8,11 +8,12 @@ import MediaService from '@/services/MediaService'
 
 <template>
 <head>
+    <title>Single Media View</title>
 </head>
 <body>
     <header>
         <div class="logo">
-            <img src="../../images/LibraryLogoDone.png" alt="Logo">
+            <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo"></a>
         </div>
         <div class="logo">
             <a href="Profile"><img src="../../images/profile.webp" alt="Profile"></a>

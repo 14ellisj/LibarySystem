@@ -32,7 +32,6 @@
                     <td>CD</td>
                     <td><button class="remove-btn">Remove</button></td>
                 </tr>
-                <!-- Add more books here as needed -->
             </tbody>
         </table>
     </div>

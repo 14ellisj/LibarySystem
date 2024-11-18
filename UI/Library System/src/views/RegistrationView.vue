@@ -12,6 +12,10 @@ import '../styles/variables.css'
 </template>
 
 <style scoped>
+main{
+    text-align: center;
+    padding-top: 26vh;
+}
  div {
     margin-left: 15%;
     margin-right: 15%;

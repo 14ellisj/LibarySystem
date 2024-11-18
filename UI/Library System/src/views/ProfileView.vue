@@ -20,8 +20,7 @@ import ProfileOptions from '../components/ProfileView/Profile.vue'
     }
 
     .profile{
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        text-align: center;
+        padding-top: 20vh;
       }
 </style>

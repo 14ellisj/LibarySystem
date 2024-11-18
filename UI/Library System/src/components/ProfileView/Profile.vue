@@ -15,6 +15,7 @@ import '../../styles/variables.css'
     button {
         color: var(--secondary-color);
         padding: 1%;
-        align-items: center;
+        text-align: center;
+        margin: 0.81rem;
     }
 </style>

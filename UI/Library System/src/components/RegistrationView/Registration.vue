@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import RegistrationItem from './RegistrationItem.vue'
 import '../../styles/variables.css'
+import ProfileService from '@/services/ProfileService';
+import { useUserStore } from '@/stores/profileInformation';
 </script>
 
 <template>
@@ -29,7 +31,6 @@ import '../../styles/variables.css'
   
 <style scoped> 
 a {
-    display: flex;
     margin: auto;
     position: relative;
     color: var(--secondary-color);

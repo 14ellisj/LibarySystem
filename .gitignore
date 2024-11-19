@@ -114,7 +114,7 @@ Backup*/
 UpgradeLog*.XML
 src/.vs/config/applicationhost.config
 
-# JetBrains Rider's auto generated files
 .idea/
-"Services/Media Service/bin/"
 "Services/Media Service/obj/"
+"Services/Media Service/bin/"
+"Services/Media Service/.vs/"

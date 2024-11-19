@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <button class="borrow-button">Borrow</button>
-                <button class="borrow-button">+ Wish-list</button>
+                <a href="Wishlist"><button class="borrow-button">+ Wish-list</button></a>
             </div>
         <div>
             <a href="Front"><-- Back</a>

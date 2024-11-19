@@ -17,13 +17,14 @@ export default defineComponent({
     }
   },
   methods: {
-    submit() {
+    async submit() {
         const mediaService = new MediaService();
         const filter: Filter = {
             author: this.searchType === "Author" ? this.query : undefined,
             title: this.searchType === "Title" ? this.query : undefined
         }
-        mediaService.filterData(filter);
+        await mediaService.filterData(filter);
+        this.$router.push('/front');
     },
     handleKeyPress(e: KeyboardEvent) {
         if (e.key === 'Enter')

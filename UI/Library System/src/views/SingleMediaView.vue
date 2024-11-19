@@ -1,10 +1,17 @@
-<script setup lang="ts">
-import SingleItemView from '../components/SingleMediaView/SingleItemView.vue'
+<script lang="ts">
+    import SingleItemView from '../components/SingleMediaView/SingleItemView.vue';
+    import { defineComponent } from 'vue';
 
+    export default defineComponent({
+        name: "Item",
+        components: {
+            SingleItemView
+        }
+    })
 </script>
 
 <template>
-  <main>
+  <div> 
     <SingleItemView/>
-  </main>
+  </div>
 </template>

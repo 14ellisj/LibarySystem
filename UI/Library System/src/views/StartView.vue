@@ -1,19 +1,17 @@
-<script setup lang="ts">
-import FrontView from '../components/StartView/FrontView.vue'
+<script lang="ts">
+    import FrontView from '../components/StartView/FrontView.vue';
+    import { defineComponent } from 'vue';
 
+    export default defineComponent({
+        name: "Front",
+        components: {
+            FrontView
+        }
+    })
 </script>
 
 <template>
-  <main>
-    <div>
-      <FrontView/>
-     </div> 
-  </main>
+  <div> 
+    <FrontView/>
+  </div>
 </template>
-
-<style scoped>
- div {
-    margin-left: 15%;
-    margin-right: 15%;
- }
-</style>

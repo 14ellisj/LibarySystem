@@ -118,3 +118,4 @@ src/.vs/config/applicationhost.config
 .idea/
 Services/Media Service/bin/Debug/
 Services/Media Service/bin/Release/
+Services/Media Service/bin/Debug/net8.0/Media Service.dll

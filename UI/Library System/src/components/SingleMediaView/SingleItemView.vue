@@ -36,8 +36,11 @@
                         <p><strong>Jane Smith:</strong> It exceeded my expectations. Worth the price!</p>
                     </div>
                 </div>
+                <div class="button-single">
                 <button class="borrow-button">Borrow</button>
                 <a href="Wishlist"><button class="borrow-button">+ Wish-list</button></a>
+                <button class="borrow-button">Join waiting list</button>
+                </div>
             </div>
         <div>
             <a href="Front"><-- Back</a>
@@ -143,6 +146,11 @@ body {
 
 .borrow-button:hover {
     background-color: #218838;
+}
+
+.button-single {
+    display: flex;
+    justify-content: space-between;
 }
 
 </style>

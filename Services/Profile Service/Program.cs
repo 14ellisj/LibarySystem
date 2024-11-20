@@ -1,6 +1,6 @@
 using AutoMapper;
-using Media_Service.Database;
-using Media_Service.Models;
+using Profile_Service.Database;
+using Profile_Service.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;

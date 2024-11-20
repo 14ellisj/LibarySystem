@@ -31,7 +31,7 @@ namespace Profile_Service.Controllers
                 .Include(x => x.library)
                 .ToListAsync();
 
-            var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<Profile>>(results);
+            var output = _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserProfile>>(results);
 
 
             return Json(output);

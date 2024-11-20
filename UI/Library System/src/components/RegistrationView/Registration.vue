@@ -3,6 +3,7 @@ import RegistrationItem from './RegistrationItem.vue'
 import '../../styles/variables.css'
 import ProfileService from '@/services/ProfileService';
 import { useUserStore } from '@/stores/profileInformation';
+import { ref } from 'vue'
 </script>
 
 <template>
@@ -10,7 +11,7 @@ import { useUserStore } from '@/stores/profileInformation';
         <template #Heading>Register</template>
     </RegistrationItem>
 
-    <form action="front">
+    <form action="registration-check">
         <label for="registerEmail">Email:</label><br>
         <input type="text" id="registerEmail" name="registerEmail"><br>
         <label for="fName">First Name:</label><br>
@@ -28,7 +29,7 @@ import { useUserStore } from '@/stores/profileInformation';
 
     <a href="login"> Log In </a>
 </template>
-  
+
 <style scoped> 
 a {
     margin: auto;

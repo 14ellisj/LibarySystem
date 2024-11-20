@@ -7,6 +7,6 @@ namespace Profile_Service.Database
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<MediaEntity> Profile {  get; set; }
+        public DbSet<UserEntity> Profile {  get; set; }
     }
 }

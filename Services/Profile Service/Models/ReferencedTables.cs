@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Profile_Service.Models
 {
     public class Address

@@ -2,7 +2,7 @@
 
 namespace Profile_Service.Models
 {
-    public class Profile
+    public class UserProfile
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }

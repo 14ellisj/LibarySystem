@@ -7,6 +7,7 @@ import RegisterView from '../views/RegistrationView.vue'
 import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
+import ReturnView from '@/views/ReturnView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +55,11 @@ const router = createRouter({
       path: '/wishlist',
       name: 'WishList',
       component: WishlistView,
+    },
+    {
+      path: '/return',
+      name: 'Return',
+      component: ReturnView,
     },
   ],
 })

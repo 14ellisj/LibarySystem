@@ -1,9 +1,9 @@
 <template>
     <div class="item">
-      <div class="button">
-        <button type="button">
-          <slot name="ButtonName"></slot>
-        </button>
+      <div class="details">
+        <h3>
+          <slot name="Heading"></slot>
+        </h3>
       </div>
     </div>
 </template>

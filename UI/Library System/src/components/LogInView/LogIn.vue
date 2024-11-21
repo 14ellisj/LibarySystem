@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import LogInItem from './LogInItem.vue'
-import '../styles/variables.css'
+import '../../styles/variables.css'
 </script>
 
 <template>
@@ -21,8 +21,7 @@ import '../styles/variables.css'
   
 <style scoped> 
 a {
-    display: flex;
-    margin: auto;
+    margin-top: 2rem;
     position: relative;
     color: var(--secondary-color);
 }

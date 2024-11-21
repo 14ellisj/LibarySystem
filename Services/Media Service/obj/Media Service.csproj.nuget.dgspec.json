@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "/Users/jakeellis/Documents/GitHub/LibarySystem/Services/Media Service/Media Service.csproj": {}
   },
   "projects": {
@@ -15,11 +16,36 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/jakeellis/.nuget/NuGet/NuGet.Config"
+=======
+    "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Media Service\\Media Service.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Media Service\\Media Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Media Service\\Media Service.csproj",
+        "projectName": "Media Service",
+        "projectPath": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Media Service\\Media Service.csproj",
+        "packagesPath": "C:\\Users\\jdent\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Media Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\jdent\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> main
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+<<<<<<< HEAD
+=======
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+>>>>>>> main
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -36,8 +62,14 @@
         "restoreAuditProperties": {
           "enableAudit": "true",
           "auditLevel": "low",
+<<<<<<< HEAD
           "auditMode": "direct"
         }
+=======
+          "auditMode": "all"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+>>>>>>> main
       },
       "frameworks": {
         "net8.0": {
@@ -75,7 +107,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+=======
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
         }
       }
     }

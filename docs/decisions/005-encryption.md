@@ -1,17 +1,17 @@
 ---
 # These are optional metadata elements. Feel free to remove any of them.
-status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: {YYYY-MM-DD when the decision was last updated}
-decision-makers: {list everyone involved in the decision}
-consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
+status: proposed
+date: 21/11/24
+decision-makers: Henry Barker, Jake Ellis, Joe Denton
+consulted: N/A
 informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
 ---
 
-# {short title, representative of solved problem and found solution}
+# How to secure the users' passwords
 
 ## Context and Problem Statement
 
-{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story. You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
+We need a way to keep the passwords secure in the database
 
 <!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
@@ -22,10 +22,9 @@ informed: {list everyone who is kept up-to-date on progress; and with whom there
 
 ## Considered Options
 
-* {title of option 1}
-* {title of option 2}
-* {title of option 3}
-* … <!-- numbers of options can vary -->
+* Hashed password
+* 1 way encryption
+* Symmetric key
 
 ## Decision Outcome
 
@@ -46,29 +45,27 @@ Chosen option: "{title of option 1}", because {justification. e.g., only option,
 <!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### {title of option 1}
+### Hashed password 
 
-<!-- This is an optional element. Feel free to remove. -->
-{example | description | pointer to more information | …}
+Scrambling a password with it's own contents and adding a special key 
 
-* Good, because {argument a}
-* Good, because {argument b}
-<!-- use "neutral" if the given argument weights neither for good nor bad -->
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* … <!-- numbers of pros and cons can vary -->
+* Good, because it's simple to implement
+* Bad, because it can't handle very large amounts data
+* Bad, because it has been known not to be very secure
 
-### {title of other option}
+### 1 Way encryption
 
-{example | description | pointer to more information | …}
+Scrambling it with a key to unscramble it
 
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* …
+* Good, because it is more secure than hashing
+* Bad, because if you don't have the key you can't unscramble the password
 
-<!-- This is an optional element. Feel free to remove. -->
-## More Information
+### Symmetric Key
+
+Scrambling it with a key to unscramble it
+
+* Good, because it is secure
+* Good, because it is fast
+* Bad, because the key might need to be brought to different places and therefore makes the key less secure
 
 {You might want to provide additional evidence/confidence for the decision outcome here and/or document the team agreement on the decision and/or define when/how this decision the decision should be realized and if/when it should be re-visited. Links to other decisions and resources might appear here as well.}

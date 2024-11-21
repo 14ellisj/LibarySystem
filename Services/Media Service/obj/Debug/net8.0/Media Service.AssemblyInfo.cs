@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Media Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5eb67489be86a1cbb4b3aa01f0c73249828f537c")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d89afc6c3b80c2e7b22a4f4670170145e42298ec")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("Media Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Media Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

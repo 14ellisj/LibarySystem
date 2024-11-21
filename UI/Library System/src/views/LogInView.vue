@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LogIn from '../components/LogIn.vue'
+import LogIn from '../components/LogInView/LogIn.vue'
 import '../styles/variables.css'
 </script>
 
@@ -12,6 +12,11 @@ import '../styles/variables.css'
 </template>
 
 <style scoped>
+.home{
+    text-align: center;
+    padding-top: 36vh;
+
+}
  div {
     margin-left: 15%;
     margin-right: 15%;

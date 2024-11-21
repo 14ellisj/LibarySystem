@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Registration from '../components/Registration.vue'
+import Registration from '../components/RegistrationView/Registration.vue'
 import '../styles/variables.css'
 </script>
 
@@ -12,6 +12,10 @@ import '../styles/variables.css'
 </template>
 
 <style scoped>
+main{
+    text-align: center;
+    padding-top: 26vh;
+}
  div {
     margin-left: 15%;
     margin-right: 15%;

@@ -1,14 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\",
+  "WorkspaceRootPath": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\henry\\libarysystem\\services\\profile service\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:controllers\\profilecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\models\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:models\\profile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\henry\\libarysystem\\services\\profile service\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\database\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:database\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\models\\referencedtables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:models\\referencedtables.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|c:\\users\\jdent\\onedrive\\desktop\\1) uni stuff\\year 3\\software architecture and design\\libarysystem\\services\\profile service\\models\\entities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E53E39EE-F459-46D7-AB9D-736D0560A271}|Profile Service.csproj|solutionrelative:models\\entities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +34,84 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 3,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Database\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Database\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Database\\AppDbContext.cs",
+              "RelativeToolTip": "Database\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:51:42.096Z",
+              "WhenOpened": "2024-11-20T13:43:03.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T13:33:15.599Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ReferencedTables.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\ReferencedTables.cs",
+              "RelativeDocumentMoniker": "Models\\ReferencedTables.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\ReferencedTables.cs",
+              "RelativeToolTip": "Models\\ReferencedTables.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T13:07:49.534Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\WeatherForecast.cs",
-              "RelativeDocumentMoniker": "WeatherForecast.cs",
-              "ToolTip": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\WeatherForecast.cs",
-              "RelativeToolTip": "WeatherForecast.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Profile.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\Profile.cs",
+              "RelativeDocumentMoniker": "Models\\Profile.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\Profile.cs*",
+              "RelativeToolTip": "Models\\Profile.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-13T11:51:37.67Z",
+              "WhenOpened": "2024-11-20T13:07:49.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Entities.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\Entities.cs",
+              "RelativeDocumentMoniker": "Models\\Entities.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Models\\Entities.cs",
+              "RelativeToolTip": "Models\\Entities.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T13:07:44.961Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProfileController.cs",
+              "DocumentMoniker": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Controllers\\ProfileController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProfileController.cs",
+              "ToolTip": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Controllers\\ProfileController.cs*",
+              "RelativeToolTip": "Controllers\\ProfileController.cs*",
+              "ViewState": "AgIAABcAAAAAAAAAAIAwwCEAAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-19T19:36:16.842Z",
               "EditorCaption": ""
             }
           ]

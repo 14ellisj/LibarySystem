@@ -6,7 +6,11 @@ import axios from "axios";
 export default class {
 
     mediaStore = useMediaStore();
+<<<<<<< Updated upstream
     apiUrl = "https://localhost:7166/Media"
+=======
+    apiUrl = "http://localhost:5132/Media"
+>>>>>>> Stashed changes
 
     async getData(): Promise<Media[]> {
         await axios

@@ -1,13 +1,42 @@
-<script setup lang="ts">
+<script lang="ts">
 import MediaService from '@/services/MediaService'
+import type { Filter } from '@/models/filters';
 import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: "table display",
+  data() {
+
+    var author: string = "Author";
+    var name: string = "Title";
+    var availability: string = "Availability";
+    var type: string = "type";
+
+
+    return {
+        author,
+        name,
+        availability,
+        type
+        
+    }
+  },
+  methods: {
+    async submit() {
+        const mediaService = new MediaService();
+        }
+  }
+});
+
 </script>
 
 <template>
+    
 <head>
     <title>Single Media View</title>
 </head>
 <body>
+   
     <header>
         <div class="logo">
             <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo"></a>
@@ -33,7 +62,7 @@ import { defineComponent } from 'vue'
                     <td><a href="Item">IT</a></td>
                     <td>Stephen King</td>
                     <td>Available</td>
-                    <td>Book</td>
+                    <td><button class="remove-btn" @click="submit()">Test</button></td>
                 </tr>
             </tbody>
         </table>
@@ -107,5 +136,14 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+
+.remove-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 </style>

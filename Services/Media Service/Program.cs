@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
     app.UseCors(policy => policy.AllowAnyHeader()
                                 .AllowAnyMethod()
                                 .AllowCredentials()
-                                .WithOrigins("http://localhost:5173"));
+                                .WithOrigins("http://localhost:5132"));
 }
 
 app.UseHttpsRedirection();

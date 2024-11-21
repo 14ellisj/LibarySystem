@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import MediaService from '@/services/MediaService'
 import { defineComponent } from 'vue'
-
-
 </script>
 
 <template>

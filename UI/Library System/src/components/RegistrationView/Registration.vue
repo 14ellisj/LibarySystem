@@ -28,13 +28,9 @@ import { useUserStore } from '@/stores/profileInformation';
 
     <a href="login"> Log In </a>
 </template>
-<<<<<<< HEAD:UI/Library System/src/components/Registration.vue
-  
-<style> 
-=======
+
 
 <style scoped> 
->>>>>>> Joe-Drop:UI/Library System/src/components/RegistrationView/Registration.vue
 a {
     margin: auto;
     position: relative;

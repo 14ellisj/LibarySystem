@@ -54,14 +54,6 @@ const router = createRouter({
       path: '/wishlist',
       name: 'WishList',
       component: WishlistView,
-<<<<<<< Updated upstream
-=======
-    },
-    {
-      path: '/return',
-      name: 'Return',
-      component: ReturnView,
->>>>>>> Stashed changes
     },
   ],
 })

@@ -3,7 +3,6 @@ import RegistrationItem from './RegistrationItem.vue'
 import '../../styles/variables.css'
 import ProfileService from '@/services/ProfileService';
 import { useUserStore } from '@/stores/profileInformation';
-import { ref } from 'vue'
 </script>
 
 <template>
@@ -29,13 +28,9 @@ import { ref } from 'vue'
 
     <a href="login"> Log In </a>
 </template>
-<<<<<<< HEAD:UI/Library System/src/components/Registration.vue
-  
-<style> 
-=======
+
 
 <style scoped> 
->>>>>>> Joe-Drop:UI/Library System/src/components/RegistrationView/Registration.vue
 a {
     margin: auto;
     position: relative;

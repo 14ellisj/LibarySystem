@@ -5,3 +5,8 @@ export interface Filter {
     author?: string,
     availability?: boolean
 }
+
+export interface ProfileFilter {
+    firstname?: string,
+    lastname?: string,
+}

@@ -3,7 +3,6 @@ import RegistrationItem from './RegistrationItem.vue'
 import '../../styles/variables.css'
 import ProfileService from '@/services/ProfileService';
 import { useUserStore } from '@/stores/profileInformation';
-import { ref } from 'vue'
 </script>
 
 <template>

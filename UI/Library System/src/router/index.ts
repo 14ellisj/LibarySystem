@@ -52,15 +52,14 @@ const router = createRouter({
       component: ProfileView,
     },
     {
-<<<<<<< HEAD
       path: '/wishlist',
       name: 'WishList',
       component: WishlistView,
-=======
+    },
+    {
       path: '/return',
       name: 'Return',
       component: ReturnView,
->>>>>>> Joe-Drop
     },
   ],
 })

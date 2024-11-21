@@ -1,31 +1,27 @@
 <script lang="ts">
 import MediaService from '@/services/MediaService'
-import type { Filter } from '@/models/filters';
 import { defineComponent } from 'vue'
+import { type Media } from '../../models/media';
+import { useMediaStore } from '@/stores/media';
 
 export default defineComponent({
-  name: "table display",
-  data() {
+    name: 'Front-View',
+    data() {
+        const mS = useMediaStore() 
+        console.log("ajkshgd");
+        var query: string = "";
+        var author: string = "Author";
 
-    var author: string = "Author";
-    var name: string = "Title";
-    var availability: string = "Availability";
-    var type: string = "type";
-
-
-    return {
-        author,
-        name,
-        availability,
-        type
-        
-    }
-  },
-  methods: {
-    async submit() {
-        const mediaService = new MediaService();
+        return {
+            author,
+            mS
         }
-  }
+    },
+    methods: {
+        change() {
+            this.author = 'Changed';
+        }
+    }
 });
 
 </script>
@@ -36,22 +32,12 @@ export default defineComponent({
     <title>Single Media View</title>
 </head>
 <body>
-   
-    <header>
-        <div class="logo">
-            <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo"></a>
-        </div>
-        <div class="logo">
-            <a href="Profile"><img src="../../images/profile.webp" alt="Profile"></a>
-        </div>
-    </header>
-
     <main>
         <h1>Library</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Book Name</th>
+                    <th>Book Name</th> 
                     <th>Author</th>
                     <th>Availability</th>
                     <th>Type</th>
@@ -59,10 +45,10 @@ export default defineComponent({
             </thead>
             <tbody>
                 <tr>
-                    <td><a href="Item">IT</a></td>
+                    <td><a href="Item">IT</a></td> 
                     <td>Stephen King</td>
-                    <td>Available</td>
-                    <td><button class="remove-btn" @click="submit()">Test</button></td>
+                    <td>{{ mS.media[0].name }}</td> 
+                    <button :click="change()">Change</button>
                 </tr>
             </tbody>
         </table>

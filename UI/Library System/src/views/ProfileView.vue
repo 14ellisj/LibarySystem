@@ -21,6 +21,6 @@ import ProfileOptions from '../components/ProfileView/Profile.vue'
 
     .profile{
         text-align: center;
-        padding-top: 20vh;
+        padding-top: 15vh;
       }
 </style>

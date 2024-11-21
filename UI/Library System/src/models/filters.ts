@@ -9,4 +9,5 @@ export interface Filter {
 export interface ProfileFilter {
     firstname?: string,
     lastname?: string,
+    email?: string,
 }

@@ -14,7 +14,7 @@ import '../styles/variables.css'
 <style scoped>
 main{
     text-align: center;
-    padding-top: 26vh;
+    padding-top: 16vh;
 }
  div {
     margin-left: 15%;

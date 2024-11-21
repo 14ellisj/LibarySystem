@@ -6,7 +6,7 @@ import '../styles/variables.css'
 <template>
     <div class="home">
         <main>
-        <Registration />
+            <Registration />
         </main>
     </div>
 </template>

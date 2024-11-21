@@ -17,7 +17,7 @@ defineComponent({
     <div class="header-container header-container-in-place"></div>
     <div class="header-container">
         <div class="header-logo">
-            <img class="logo-img" src="@/images/LibraryLogoDone.png" />
+            <a href="home"><img class="logo-img" src="@/images/LibraryLogoDone.png" /></a>
         </div>
         <div class="header-navigation">
             <MenuItem Title="Home" Path="/home"></MenuItem>
@@ -25,7 +25,7 @@ defineComponent({
             <MenuItem Title="News" Path="/news"></MenuItem>
         </div>
         <div class="header-user">
-            <img class="user-img" src="@/images/profile.webp" />
+            <a href="Profile"><img class="user-img" src="@/images/profile.webp" /></a>
         </div>
     </div>
 </template>

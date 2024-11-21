@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<style scoped>
+<style>
 .item {
   margin-top: 2rem;
   display: flex;

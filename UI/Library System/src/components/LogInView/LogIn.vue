@@ -8,7 +8,7 @@ import '../../styles/variables.css'
         <template #Heading>Log In</template>
     </LogInItem>
 
-    <form action="logInValidation" >
+    <form action="logInValidation" method="post">
         <label for="logInEmail">Email:</label><br>
         <input type="text" id="logInEmail" name="logInEmail"><br>
         <label for="Password">Password:</label><br>

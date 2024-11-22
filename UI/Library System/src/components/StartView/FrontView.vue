@@ -1,27 +1,17 @@
 <script lang="ts">
-import MediaService from '@/services/MediaService'
-import { defineComponent } from 'vue'
-import { type Media } from '../../models/media';
-import { useMediaStore } from '@/stores/media';
+import { defineComponent, ref } from 'vue'
+import { useMediaStore } from '../../stores/media';
+ 
 
 export default defineComponent({
-    name: 'Front-View',
-    data() {
-        const mS = useMediaStore() 
-        console.log("ajkshgd");
-        var query: string = "";
-        var author: string = "Author";
+  name: 'SingleMediaView',
+  setup() {
+    const store = useMediaStore();
 
-        return {
-            author,
-            mS
-        }
-    },
-    methods: {
-        change() {
-            this.author = 'Changed';
-        }
-    }
+    return {
+      store,
+    };
+  },
 });
 
 </script>
@@ -37,19 +27,21 @@ export default defineComponent({
         <table>
             <thead>
                 <tr>
-                    <th>Book Name</th> 
+                    <th>Name</th> 
                     <th>Author</th>
+                    <th>Genre</th>
                     <th>Availability</th>
                     <th>Type</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="Item">IT</a></td> 
-                    <td>Stephen King</td>
-                    <td>{{ mS.media[0].name }}</td> 
-                    <button :click="change()">Change</button>
-                </tr>
+            <tr v-for="media in store.media" :key="media.id">
+              <td><a :href="`/item/${media.id}`">{{ media.name }}</a></td>
+              <td>{{ media.author }}</td>
+              <td>{{ media.genre }}</td>
+              <td>{{ media.avaliablity }}</td>
+              <td>{{ media.type }}</td>
+            </tr>
             </tbody>
         </table>
     </main>
@@ -65,7 +57,7 @@ export default defineComponent({
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var( --background-color);
     color: #333;
 }
 
@@ -122,14 +114,5 @@ footer {
     position: fixed;
     width: 100%;
     bottom: 0;
-}
-
-.remove-btn {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    cursor: pointer;
-    border-radius: 4px;
 }
 </style>

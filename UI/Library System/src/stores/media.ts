@@ -5,7 +5,8 @@ import type { Media } from '@/models/media'
 export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [{
-      name: 'TYest'
+      id:456,
+      name:"Test",
     }] as Media[],
     count: 0
   }),

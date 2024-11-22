@@ -1,40 +1,47 @@
-<script setup lang="ts">
-import MediaService from '@/services/MediaService'
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMediaStore } from '../../stores/media';
+ 
+
+export default defineComponent({
+  name: 'SingleMediaView',
+  setup() {
+    const store = useMediaStore();
+
+    return {
+      store,
+    };
+  },
+});
+
 </script>
 
 <template>
+    
 <head>
     <title>Single Media View</title>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <a href="home"><img src="../../images/LibraryLogoDone.png" alt="Logo"></a>
-        </div>
-        <div class="logo">
-            <a href="Profile"><img src="../../images/profile.webp" alt="Profile"></a>
-        </div>
-    </header>
-
     <main>
         <h1>Library</h1>
         <table>
             <thead>
                 <tr>
-                    <th>Book Name</th>
+                    <th>Name</th> 
                     <th>Author</th>
+                    <th>Genre</th>
                     <th>Availability</th>
                     <th>Type</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td><a href="Item">IT</a></td>
-                    <td>Stephen King</td>
-                    <td>Available</td>
-                    <td>Book</td>
-                </tr>
+            <tr v-for="media in store.media" :key="media.id">
+              <td><a :href="`/item/${media.id}`">{{ media.name }}</a></td>
+              <td>{{ media.author }}</td>
+              <td>{{ media.genre }}</td>
+              <td>{{ media.avaliablity }}</td>
+              <td>{{ media.type }}</td>
+            </tr>
             </tbody>
         </table>
     </main>
@@ -50,7 +57,7 @@ import { defineComponent } from 'vue'
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: var( --background-color);
     color: #333;
 }
 

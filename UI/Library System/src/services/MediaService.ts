@@ -6,7 +6,7 @@ import axios from "axios";
 export default class {
 
     mediaStore = useMediaStore();
-    apiUrl = "https://localhost:7166/Media"
+    apiUrl = "http://localhost:5132/Media"
 
     async getData(): Promise<Media[]> {
         await axios

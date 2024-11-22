@@ -1,6 +1,8 @@
 export interface Media {
+  id: number;
   name: string
   author: Author
+  avaliablity: boolean;
   type: Type
   genre: Genre
 }

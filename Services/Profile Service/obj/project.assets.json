@@ -1724,13 +1724,26 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+    "C:\\Users\\henry\\.nuget\\packages\\": {}
+=======
+    "/Users/jakeellis/.nuget/packages/": {}
+>>>>>>> Stashed changes
+=======
     "C:\\Users\\jdent\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+>>>>>>> main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+      "projectUniqueName": "C:\\Users\\henry\\LibarySystem\\Services\\Profile Service\\Profile Service.csproj",
+=======
       "projectUniqueName": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Profile Service.csproj",
+>>>>>>> main
       "projectName": "Profile Service",
       "projectPath": "C:\\Users\\jdent\\OneDrive\\Desktop\\1) Uni stuff\\Year 3\\Software Architecture and Design\\LibarySystem\\Services\\Profile Service\\Profile Service.csproj",
       "packagesPath": "C:\\Users\\jdent\\.nuget\\packages\\",
@@ -1743,12 +1756,29 @@
         "C:\\Users\\jdent\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+=======
+      "projectUniqueName": "/Users/jakeellis/Documents/GitHub/LibarySystem/Services/Profile Service/Profile Service.csproj",
+      "projectName": "Profile Service",
+      "projectPath": "/Users/jakeellis/Documents/GitHub/LibarySystem/Services/Profile Service/Profile Service.csproj",
+      "packagesPath": "/Users/jakeellis/.nuget/packages/",
+      "outputPath": "/Users/jakeellis/Documents/GitHub/LibarySystem/Services/Profile Service/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/Users/jakeellis/.nuget/NuGet/NuGet.Config"
+>>>>>>> Stashed changes
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+<<<<<<< Updated upstream
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+<<<<<<< HEAD
+        "C:\\Program Files\\dotnet\\library-packs": {},
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> main
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1805,7 +1835,15 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.204/PortableRuntimeIdentifierGraph.json"
+>>>>>>> Stashed changes
+=======
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.100/PortableRuntimeIdentifierGraph.json"
+>>>>>>> main
       }
     }
   }

@@ -8,6 +8,7 @@ import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
+import LogInValidation from '@/components/LogInView/LogIn.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -61,6 +62,11 @@ const router = createRouter({
       name: 'Return',
       component: ReturnView,
     },
+    {
+      path: '/logInValidation',
+      name: '',
+      component: LogInValidation,
+    }
   ],
 })
 

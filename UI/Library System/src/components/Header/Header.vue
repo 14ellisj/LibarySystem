@@ -21,6 +21,7 @@ defineComponent({
         </div>
         <div class="header-navigation">
             <MenuItem Title="Home" Path="/home"></MenuItem>
+            <MenuItem Title="View All Media" Path="/front"></MenuItem>
             <MenuItem Title="News" Path="/news"></MenuItem>
         </div>
         <div class="header-user">

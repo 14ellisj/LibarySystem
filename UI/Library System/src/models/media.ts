@@ -1,25 +1,17 @@
+import type { Author } from "./author";
+import type { Genre } from "./genre";
+import type { Type } from "./type";
+
 export interface Media {
-  id: number;
-  name: string
-  author: Author
-  avaliablity: boolean;
-  type: Type
-  genre: Genre
+  id: number,
+  name: string,
+  author_id: Author,
+  avaliablity: boolean,
+  type_id: Type,
+  length: number,
+  genre: Genre,
+  description: string,
+  media_art: Blob,
+  rating: number
 }
 
-export interface Author {
-  first_name: string
-  last_name: string
-}
-
-export enum Type {
-  AUDIO_BOOK,
-  BOOK,
-  DVD,
-}
-
-export enum Genre {
-  FANTASY,
-  ROMANCE,
-  CRIME,
-}

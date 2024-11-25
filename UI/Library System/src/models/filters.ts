@@ -1,4 +1,5 @@
-import type { Author } from "./media";
+import type { Author } from "./author";
+
 
 export interface Filter {
     title?: string,

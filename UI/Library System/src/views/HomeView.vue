@@ -5,8 +5,9 @@
     export default defineComponent({
         name: "HomeView",
         components: {
-            SearchBar
+            SearchBar,
         }
+
     })
 </script>
 

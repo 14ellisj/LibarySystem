@@ -21,7 +21,7 @@ defineComponent({
         </div>
         <div class="header-navigation">
             <MenuItem Title="Home" Path="/home"></MenuItem>
-            <MenuItem Title="About" Path="/about"></MenuItem>
+            <MenuItem Title="View All Media" Path="/front"></MenuItem>
             <MenuItem Title="News" Path="/news"></MenuItem>
         </div>
         <div class="header-user">
@@ -51,6 +51,10 @@ defineComponent({
         top: 0;
         z-index: 4;
     }
+
+    a {
+        text-decoration: none;
+    }   
 
     .header-container-in-place {
         position: relative;

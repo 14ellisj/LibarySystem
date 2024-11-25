@@ -1,5 +1,5 @@
 import type { ProfileFilter } from "@/models/filters";
-import {type ProfileDetails } from "@/models/profileDetials";
+import {type ProfileDetails } from "@/models/profile";
 import { useUserStore } from "@/stores/profileInformation";
 import axios from "axios";
 

@@ -9,6 +9,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogIn.vue'
+import AboutPage from '@/views/AboutPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,7 +67,12 @@ const router = createRouter({
       path: '/logInValidation',
       name: '',
       component: LogInValidation,
-    }
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: AboutPage,
+    },
   ],
 })
 

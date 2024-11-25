@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { ProfileDetails } from '@/models/profileDetials'
+import type { ProfileDetails } from '@/models/profile'
 
 export const useUserStore = defineStore('user', {
   state: () => ({

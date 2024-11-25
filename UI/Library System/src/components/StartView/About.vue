@@ -35,25 +35,28 @@ export default defineComponent({
   <h1>Locations</h1>
 
   <section class="locations">
-    <div class="location">
+    <div class="location"><a href="https://www.google.com/maps/place/Sheffield/@53.3956027,-1.6646059,11z/data=!3m1!4b1!4m6!3m5!1s0x48790aa9fae8be15:0x3e2827f5af06b078!8m2!3d53.381129!4d-1.470085!16zL20vMG03NWc?entry=ttu&g_ep=EgoyMDI0MTExOS4yIKXMDSoASAFQAw%3D%3D">
       <h3>Central Branch</h3>
       <p><strong>Address:</strong> Sheffield </p>
       <p><strong>Hours:</strong> Mon-Fri 9:00 AM - 6:00 PM, Sat 10:00 AM - 4:00 PM</p>
       <p><strong>Contact:</strong> +44 4567 139642</p>
+      </a>
     </div>
 
-    <div class="location">
+    <div class="location"><a href="https://www.google.com/maps/place/Glasgow/@55.8553495,-4.3976075,11z/data=!3m1!4b1!4m6!3m5!1s0x488815562056ceeb:0x71e683b805ef511e!8m2!3d55.8616704!4d-4.2583345!16zL20vMGh5eHY?entry=ttu&g_ep=EgoyMDI0MTExOS4yIKXMDSoASAFQAw%3D%3D">
       <h3>North Branch</h3>
       <p><strong>Address:</strong> Glasgow </p>
       <p><strong>Hours:</strong> Mon-Fri 9:00 AM - 5:00 PM, Closed on Sundays</p>
       <p><strong>Contact:</strong> +44 6789 109649</p>
+      </a>
     </div>
 
-    <div class="location">
+    <div class="location"><a href="https://www.google.com/maps/place/London/@51.5281779,-0.4319226,10z/data=!3m1!4b1!4m6!3m5!1s0x47d8a00baf21de75:0x52963a5addd52a99!8m2!3d51.5072178!4d-0.1275862!16zL20vMDRqcGw?entry=ttu&g_ep=EgoyMDI0MTExOS4yIKXMDSoASAFQAw%3D%3D">
       <h3>South Branch</h3>
       <p><strong>Address:</strong>  London </p>
       <p><strong>Hours:</strong> Mon-Sat 10:00 AM - 6:00 PM</p>
       <p><strong>Contact:</strong> +44 2078 104582</p>
+      </a>
     </div>
   
   </section>
@@ -75,9 +78,7 @@ body {
   color: #333;
 }
 
-section {
-  margin: 30px 0;
-}
+
 
 .about h2, .locations h2 {
   font-size: 2em;
@@ -94,6 +95,10 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .location {

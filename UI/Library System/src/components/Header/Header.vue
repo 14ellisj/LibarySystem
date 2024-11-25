@@ -52,6 +52,10 @@ defineComponent({
         z-index: 4;
     }
 
+    a {
+        text-decoration: none;
+    }   
+
     .header-container-in-place {
         position: relative;
         visibility: hidden;

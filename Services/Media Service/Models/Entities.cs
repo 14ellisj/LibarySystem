@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Media_Service.Database;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Media_Service.Models
 {
@@ -47,6 +49,7 @@ namespace Media_Service.Models
         public TypeEntity type { get; set; }
         [ForeignKey("author_id")]
         public AuthorEntity author { get; set; }
+        public ICollection<MediaItemEntity> media_items { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public float length { get; set; }
@@ -59,8 +62,8 @@ namespace Media_Service.Models
     {
         [Key]
         public int id { get; set; }
-        public string first_name { get; set; }
-        public string last_name { get; set; }
+        public string? first_name { get; set; }
+        public string? last_name { get; set; }
     }
 
     [Table("Type")]

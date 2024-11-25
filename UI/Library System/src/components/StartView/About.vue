@@ -26,7 +26,7 @@ export default defineComponent({
             </div>
         </div>
   </Section>
-
+<div class="padding">
   <section class="about">
     <h2>About Us</h2>
     <p>Our library has been a cornerstone of the community for over 50 years, providing access to a wide range of books, digital resources, and educational programs. We are committed to fostering a love for reading and lifelong learning for people of all ages.</p>
@@ -55,8 +55,9 @@ export default defineComponent({
       <p><strong>Hours:</strong> Mon-Sat 10:00 AM - 6:00 PM</p>
       <p><strong>Contact:</strong> +44 2078 104582</p>
     </div>
-
+  
   </section>
+  </div>
 </body>
 </template>
 
@@ -121,6 +122,9 @@ footer {
   margin-top: 40px;
 }
 
+.padding{
+ padding: 20px
+}
 footer p {
   font-size: 1em;
 }

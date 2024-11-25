@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Media_Service.Database;
 using Media_Service.Models;
+using Media_Service.Models.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,39 +33,28 @@ namespace Media_Service.Controllers
                 .Include(x => x.type)
                 .AsQueryable();
 
-            if (title is not null)
-                query = query.Where(x => x.name.ToLower().Contains(title.ToLower()));
 
-            if (author is not null)
-                query = query.Where(x => _mapper.Map<Author>(x.author).Filter(author));
+            TitleSpecification titleSpec = new TitleSpecification(title);
+            AuthorSpecification authorSpec = new AuthorSpecification(author);
+            AvailabilitySpecification availabilitySpec = new AvailabilitySpecification(availability);
 
-            if (availability.HasValue)
+            query = query
+                .ApplySpecification(titleSpec)
+                .ApplySpecification(authorSpec)
+                .ApplySpecification(availabilitySpec);
+
+            try
             {
-                // Get IDs of Media entries that have available or all borrowed copies based on availability
-                var mediaIdsWithAvailability = availability.Value
-                    ? _context.MediaItem
-                        .Where(item => item.borrower == null) // Only available copies
-                        .Select(item => item.media.id)
-                        .Distinct()
-                        .ToList()
-                    : _context.MediaItem
-                        .GroupBy(item => item.media.id) // Group by Media ID first
-                        .Where(g => g.All(item => item.borrower != null)) // Check all copies are borrowed
-                        .Select(g => g.Key)
-                        .ToList();
+                var results = await query.ToListAsync();
+                var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
 
-                if (!mediaIdsWithAvailability.Any())
-                    return Json(new List<Media>());
 
-                // Filter Media query based on these IDs
-                query = query.Where(x => mediaIdsWithAvailability.Contains(x.id));
+                return Json(output);
             }
-
-            var results = await query.ToListAsync();
-            var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
-
-
-            return Json(output);
+            catch (Exception e)
+            {
+                return Json(e);
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ import { useMediaStore } from '@/stores/media';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "SearchBar",
+  name: "Search-Bar",
   data() {
 
     var query: string = "";

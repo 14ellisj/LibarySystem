@@ -36,28 +36,7 @@ namespace Media_Service.Controllers
                 query = query.Where(x => x.name.ToLower().Contains(title.ToLower()));
 
             if (author is not null)
-            {
-                var authorSplit = author.Split(" ");
-                var first = authorSplit.First().ToLower();
-                var last = authorSplit.Last().ToLower();
-
-                if (authorSplit.Length == 1)
-                {
-                    query = query.Where(x => x.author.first_name.ToLower().Contains(first) || x.author.last_name.ToLower().Contains(last));
-                }
-                else
-                {
-                    query = query.Where(x =>
-                        x.author.first_name.ToLower().Contains(first)
-                        || x.author.first_name.ToLower().Contains(last)
-                        || x.author.last_name.ToLower().Contains(first)
-                        || x.author.last_name.ToLower().Contains(last)
-                    );
-                }
-
-            }
-
-
+                query = query.Where(x => _mapper.Map<Author>(x.author).Filter(author));
 
             if (availability.HasValue)
             {

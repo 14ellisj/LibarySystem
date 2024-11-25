@@ -1,4 +1,18 @@
 <script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMediaStore } from '../../stores/media';
+
+export default defineComponent({
+  name: 'SingleMediaView',
+  setup() {
+    const store = useMediaStore();
+
+    return {
+      store,
+    };
+  },
+});
+
 </script>
 
 <template>
@@ -18,18 +32,11 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Harry Potter</td>
-                    <td>J.K. Rowling</td>
-                    <td>Available</td>
-                    <td>Book</td>
-                    <td><button class="remove-btn">Remove</button></td>
-                </tr>
-                <tr>
-                    <td>The Hobbit</td>
-                    <td>J.R.R. Tolkien</td>
-                    <td>Out of Stock</td>
-                    <td>CD</td>
+                <tr v-for="wishlist in store.media" :key="wishlist.id">
+                    <td><a :href="`/item/${wishlist.id}`">{{ wishlist.name }}</a></td>
+                    <td>{{ wishlist.author }}</td>
+                    <td>{{ wishlist.avaliablity }}</td>
+                    <td>{{ wishlist.type }}</td>
                     <td><button class="remove-btn">Remove</button></td>
                 </tr>
             </tbody>
@@ -47,10 +54,12 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: var(--background-color);
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding-top: 1%;
 }
 
 .container {

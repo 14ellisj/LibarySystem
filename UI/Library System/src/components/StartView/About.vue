@@ -72,7 +72,6 @@ body {
   line-height: 1.6;
   background-color: var(--background-color);
   color: #333;
-  padding: 20px;
 }
 
 section {

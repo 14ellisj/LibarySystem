@@ -25,10 +25,10 @@ namespace Media_Service.Models
                 return true;
 
 
-            var authorSplit = query.Split(" ");
+            var authorSplit = query.Trim().ToLower().Split(" ");
 
-            var first = authorSplit.First().ToLower();
-            var last = authorSplit.Last().ToLower();
+            var first = authorSplit.First();
+            var last = authorSplit.Last();
 
             if (authorSplit.Length == 1)
             {

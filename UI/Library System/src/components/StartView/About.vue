@@ -17,8 +17,8 @@ export default defineComponent({
   <Section>
     <div class="home-container">
             <div class="welcome-area">
-              <h1>Welcome to Our Library.........</h1>
-              <p> Your gateway to knowledge and exploration.</p>
+              <h1>Welcome to Our Library</h1>
+              <p> Your gateway to knowledge and exploration</p>
             </div>
             <div class="welcome-area welcome-border"></div> 
             <div class = "introduction-area">

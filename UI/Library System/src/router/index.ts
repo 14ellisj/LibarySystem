@@ -21,7 +21,7 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView,
+      component: AboutPage,
     },
     {
       path: '/media',
@@ -67,11 +67,6 @@ const router = createRouter({
       path: '/logInValidation',
       name: '',
       component: LogInValidation,
-    },
-    {
-      path: '/about',
-      name: 'About',
-      component: AboutPage,
     },
   ],
 })

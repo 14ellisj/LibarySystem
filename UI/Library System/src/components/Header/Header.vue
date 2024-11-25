@@ -21,7 +21,6 @@ defineComponent({
         </div>
         <div class="header-navigation">
             <MenuItem Title="Home" Path="/home"></MenuItem>
-            <MenuItem Title="About" Path="/about"></MenuItem>
             <MenuItem Title="News" Path="/news"></MenuItem>
         </div>
         <div class="header-user">

@@ -1,19 +1,33 @@
-<script setup lang="ts">
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+import { useMediaStore } from '../../stores/media';
+
+
+export default defineComponent({
+  name: 'SingleMediaView1',
+  setup() {
+    const store = useMediaStore();
+
+    return {
+      store,
+    };
+  },
+});
+
 </script>
 
 <template>
    <!DOCTYPE html>
-<body>
+<body v-for="media in store.media" :key="media.id" >
     <div class="product-page">
         <div class="product-container">
             <!-- Product Image -->
             <div class="product-image">
                 <img src="../../images/It_(1986)_front_cover,_first_edition.jpg" alt="Product Image">
-            </div>
-            
+                </div>
             <!-- Product Info -->
             <div class="product-info">
-                <h1 class="product-title">IT</h1>
+                <h1 class="product-title">{{ media.name }}</h1>
 
                 <!-- Star Review -->
                 <div class="product-reviews">

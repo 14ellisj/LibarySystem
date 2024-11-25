@@ -78,8 +78,6 @@ body {
   color: #333;
 }
 
-
-
 .about h2, .locations h2 {
   font-size: 2em;
   color: #333;

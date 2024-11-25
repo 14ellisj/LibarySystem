@@ -10,6 +10,7 @@ import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogIn.vue'
 import AboutPage from '@/views/AboutPage.vue'
+import NewsView from '@/views/NewsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,6 +69,11 @@ const router = createRouter({
       name: '',
       component: LogInValidation,
     },
+    {
+      path: '/news',
+      name: 'News',
+      component: NewsView,
+    }
   ],
 })
 

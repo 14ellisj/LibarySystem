@@ -1,12 +1,15 @@
 <script lang="ts">
     import SearchBar from '@/components/HomeView/SearchBar.vue';
+    import AboutView from '../components/StartView/About.vue';
     import { defineComponent } from 'vue';
 
     export default defineComponent({
         name: "HomeView",
         components: {
-            SearchBar
+            SearchBar,
+            AboutView
         }
+
     })
 </script>
 
@@ -21,6 +24,7 @@
                 <SearchBar />
             </div>
             <div class="about-area"></div>
+            <div><AboutView/></div>
         </div>
     </main>
 </template>

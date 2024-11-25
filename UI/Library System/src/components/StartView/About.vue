@@ -1,33 +1,31 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMediaStore } from '../../stores/media';
+import SearchBar from '@/components/HomeView/SearchBar.vue';
  
 
 export default defineComponent({
-  name: 'SingleMediaView',
-  setup() {
-    const store = useMediaStore();
-
-    return {
-      store,
-    };
-  },
-});
+        name: "HomeView",
+        components: {
+            SearchBar,
+        }
+    })
 
 </script>
 
 <template>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Library</title>
-</head>
 <body>
-
-  <header>
-    <h1>Welcome to Our Library.........</h1>
-    <p> Your gateway to knowledge and exploration.</p>
-  </header>
+  <Section>
+    <div class="home-container">
+            <div class="welcome-area">
+              <h1>Welcome to Our Library.........</h1>
+              <p> Your gateway to knowledge and exploration.</p>
+            </div>
+            <div class="welcome-area welcome-border"></div> 
+            <div class = "introduction-area">
+                <SearchBar />
+            </div>
+        </div>
+  </Section>
 
   <section class="about">
     <h2>About Us</h2>
@@ -75,21 +73,6 @@ body {
   background-color: var(--background-color);
   color: #333;
   padding: 20px;
-}
-
-header {
-  background-color: var(--secondary-color);
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-header h1 {
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.2em;
 }
 
 section {
@@ -141,6 +124,41 @@ footer {
 
 footer p {
   font-size: 1em;
+}
+
+.welcome-area {
+  width: 100%;
+  background-color: var(--secondary-color);
+  height: 15rem;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
+  position: absolute;
+  z-index: 3;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.welcome-border {
+  background-color: black;
+  z-index: 2;
+  margin-top: 8px;
+}
+
+.home-container {
+  display: grid;
+}
+
+.introduction-area {
+  display: grid;
+  border-bottom: solid black 8px;
+  margin-top: 11.5rem;
+  height: 30rem;
+  align-content: center;
+  justify-items: center;
+  background-image: url('../../assets/Welcome-background.jpg');
+  background-position: center; 
 }
 
 </style>

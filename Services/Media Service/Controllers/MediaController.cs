@@ -24,7 +24,7 @@ namespace Media_Service.Controllers
 
         [HttpGet(Name = "GetMedia")]
         [HttpGet(Name = "GetAuthor")]
-        public async Task<JsonResult> Get(string? title, string? author, bool? availability, number? rating)
+        public async Task<JsonResult> Get(string? title, string? author, bool? availability)
         {
 
             var query = _context.Media

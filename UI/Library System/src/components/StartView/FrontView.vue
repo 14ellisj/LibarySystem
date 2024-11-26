@@ -39,7 +39,7 @@ export default defineComponent({
               <td><a :href="`/item/${media.id}`">{{ media.name }}</a></td>
               <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
               <td>{{ media.genre }}</td>
-              <td>{{ media.description }}</td>
+              <td>{{ }}</td>
               <td>{{ media.type }}</td>
             </tr>
             </tbody>

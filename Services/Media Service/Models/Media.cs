@@ -14,10 +14,7 @@ namespace Media_Service.Models
         public Genre Genre { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+         public int Description { get; set; }
         [JsonPropertyName("description")]
-         public string Description { get; set; }
-         [JsonPropertyName("rating")]
-         public int Rating { get; set; }
-        
     }
 }

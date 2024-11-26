@@ -10,5 +10,6 @@ namespace Media_Service.Database
         public DbSet<GenreEntity> Genre { get; set; }
         public DbSet<MediaEntity> Media { get; set; }
         public DbSet<MediaItemEntity> MediaItem { get; set; }
+        public DbSet<AuthorEntity> Author { get; set; }
     }
 }

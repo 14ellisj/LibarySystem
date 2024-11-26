@@ -23,7 +23,10 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "GetMedia")]
+<<<<<<< HEAD
         [HttpGet(Name = "GetAuthor")]
+=======
+>>>>>>> parent of 1e3625d (Database Change)
         public async Task<JsonResult> Get(string? title, string? author, bool? availability)
         {
 
@@ -31,7 +34,6 @@ namespace Media_Service.Controllers
                 .Include(x => x.author)
                 .Include(x => x.genre)
                 .Include(x => x.type)
-                .Include(x => x.rating)
                 .AsQueryable();
 
             if (title is not null)

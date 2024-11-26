@@ -37,9 +37,9 @@ export default defineComponent({
             <tbody>
             <tr v-for="media in store.media" :key="media.id">
               <td><a :href="`/item/${media.id}`">{{ media.name }}</a></td>
-              <td>{{ media.author }}</td>
+              <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
               <td>{{ media.genre }}</td>
-              <td>{{ media.avaliablity }}</td>
+              <td>{{ media.description }}</td>
               <td>{{ media.type }}</td>
             </tr>
             </tbody>

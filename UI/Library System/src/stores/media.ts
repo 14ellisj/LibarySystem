@@ -1,13 +1,9 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { Media } from '@/models/media'
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
-    media: [{
-      id:456,
-      name:"Test",
-    }] as Media[],
+    media: [{}] as Media[],
     count: 0
   }),
   actions: {

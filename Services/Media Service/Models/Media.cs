@@ -9,10 +9,12 @@ namespace Media_Service.Models
         [JsonPropertyName("author")]
         public Author Author { get; set; }
         [JsonPropertyName("type")]
-        public MediaType Type { get; set; }
+        public Type Type { get; set; }
         [JsonPropertyName("genre")]
         public Genre Genre { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("description")]
+        public string Description { get; set; }
     }
 }

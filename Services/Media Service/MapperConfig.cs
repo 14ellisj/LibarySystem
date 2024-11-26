@@ -9,11 +9,12 @@ namespace Media_Service
         {
             CreateMap<MediaEntity, Media>()
                 .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.Parse<Genre>(src.genre.name.ToUpper())))
-                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())));
+                //.ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())));
 
 
             CreateMap<AuthorEntity, Author>();
             CreateMap<MediaItemEntity, MediaItem>();
+            CreateMap<TypeEntity, Type>();
         }
     }
 

@@ -4,7 +4,8 @@ import type { Author } from "./author";
 export interface Filter {
     title?: string,
     author?: string,
-    availability?: boolean
+    availability?: boolean,
+    type?: string
 }
 
 export interface ProfileFilter {

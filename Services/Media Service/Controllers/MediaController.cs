@@ -23,11 +23,7 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "GetMedia")]
-<<<<<<< HEAD
-        [HttpGet(Name = "GetAuthor")]
-=======
->>>>>>> parent of 1e3625d (Database Change)
-        public async Task<JsonResult> Get(string? title, string? author, bool? availability)
+        public async Task<JsonResult> Get(string? title, string? author, bool? availability, string? type,)
         {
 
             var query = _context.Media
@@ -56,6 +52,24 @@ namespace Media_Service.Controllers
                         || x.author.first_name.ToLower().Contains(last)
                         || x.author.last_name.ToLower().Contains(first)
                         || x.author.last_name.ToLower().Contains(last)
+                    );
+                }
+
+            }
+
+            if (type is not null)
+            {
+                var typeSplit = type.Split(" ");
+                var name = typeSplit.name().ToLower();
+
+                if (typeSplit.Length == 1)
+                {
+                    query = query.Where(x => x.type.name.ToLower().Contains(name));
+                }
+                else
+                {
+                    query = query.Where(x =>
+                        x.type.name.ToLower().Contains(name)
                     );
                 }
 

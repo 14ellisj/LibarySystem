@@ -7,7 +7,7 @@ export interface Media {
   name: string,
   author_id: Author,
   avaliablity: boolean,
-  type_id: Type,
+  type: Type,
   length: number,
   genre: Genre,
   description: string,

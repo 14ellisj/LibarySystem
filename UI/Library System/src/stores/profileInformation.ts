@@ -1,14 +1,14 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { ProfileDetails } from '@/models/profile'
+import type { Profile } from '@/models/profile'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: [] as ProfileDetails[],
+    user: [] as Profile[],
     count: 0
   }),
   actions: {
-    setUser(userInput: ProfileDetails[]) {
+    setUser(userInput: Profile[]) {
       this.user = userInput
     }
   }

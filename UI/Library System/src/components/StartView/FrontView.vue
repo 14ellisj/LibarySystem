@@ -1,15 +1,18 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { useMediaStore } from '../../stores/media';
+import { useAuthorStore } from '@/stores/author';
  
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
     const store = useMediaStore();
+    const storeA = useAuthorStore();
 
     return {
       store,
+      storeA
     };
   },
 });
@@ -40,7 +43,7 @@ export default defineComponent({
               <td>{{ media.author_id }}</td>
               <td>{{ media.genre }}</td>
               <td>{{ media.avaliablity }}</td>
-              <td>{{ media.description }}</td>
+              <td>{{ media.type }}</td>
             </tr>
             </tbody>
         </table>

@@ -23,13 +23,15 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "GetMedia")]
-        public async Task<JsonResult> Get(string? title, string? author, bool? availability)
+        [HttpGet(Name = "GetAuthor")]
+        public async Task<JsonResult> Get(string? title, string? author, bool? availability, number? rating)
         {
 
             var query = _context.Media
                 .Include(x => x.author)
                 .Include(x => x.genre)
                 .Include(x => x.type)
+                .Include(x => x.rating)
                 .AsQueryable();
 
             if (title is not null)

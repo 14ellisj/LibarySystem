@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Media_Service.Database;
 using Media_Service.Models;
+using Media_Service.Models.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "GetMedia")]
-        public async Task<JsonResult> Get(string? title, string? author, bool? availability, string? type,)
+        public async Task<JsonResult> Get(string? title, string? author, bool? availability)
         {
 
             var query = _context.Media
@@ -32,78 +33,28 @@ namespace Media_Service.Controllers
                 .Include(x => x.type)
                 .AsQueryable();
 
-            if (title is not null)
-                query = query.Where(x => x.name.ToLower().Contains(title.ToLower()));
 
-            if (author is not null)
+            TitleSpecification titleSpec = new TitleSpecification(title);
+            AuthorSpecification authorSpec = new AuthorSpecification(author);
+            AvailabilitySpecification availabilitySpec = new AvailabilitySpecification(availability);
+
+            query = query
+                .ApplySpecification(titleSpec)
+                .ApplySpecification(authorSpec)
+                .ApplySpecification(availabilitySpec);
+
+            try
             {
-                var authorSplit = author.Split(" ");
-                var first = authorSplit.First().ToLower();
-                var last = authorSplit.Last().ToLower();
+                var results = await query.ToListAsync();
+                var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
 
-                if (authorSplit.Length == 1)
-                {
-                    query = query.Where(x => x.author.first_name.ToLower().Contains(first) || x.author.last_name.ToLower().Contains(last));
-                }
-                else
-                {
-                    query = query.Where(x =>
-                        x.author.first_name.ToLower().Contains(first)
-                        || x.author.first_name.ToLower().Contains(last)
-                        || x.author.last_name.ToLower().Contains(first)
-                        || x.author.last_name.ToLower().Contains(last)
-                    );
-                }
 
+                return Json(output);
             }
-
-            if (type is not null)
+            catch (Exception e)
             {
-                var typeSplit = type.Split(" ");
-                var name = typeSplit.name().ToLower();
-
-                if (typeSplit.Length == 1)
-                {
-                    query = query.Where(x => x.type.name.ToLower().Contains(name));
-                }
-                else
-                {
-                    query = query.Where(x =>
-                        x.type.name.ToLower().Contains(name)
-                    );
-                }
-
+                return Json(e);
             }
-
-
-
-            if (availability.HasValue)
-            {
-                // Get IDs of Media entries that have available or all borrowed copies based on availability
-                var mediaIdsWithAvailability = availability.Value
-                    ? _context.MediaItem
-                        .Where(item => item.borrower == null) // Only available copies
-                        .Select(item => item.media.id)
-                        .Distinct()
-                        .ToList()
-                    : _context.MediaItem
-                        .GroupBy(item => item.media.id) // Group by Media ID first
-                        .Where(g => g.All(item => item.borrower != null)) // Check all copies are borrowed
-                        .Select(g => g.Key)
-                        .ToList();
-
-                if (!mediaIdsWithAvailability.Any())
-                    return Json(new List<Media>());
-
-                // Filter Media query based on these IDs
-                query = query.Where(x => mediaIdsWithAvailability.Contains(x.id));
-            }
-
-            var results = await query.ToListAsync();
-            var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
-
-
-            return Json(output);
         }
     }
 }

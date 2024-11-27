@@ -1,10 +1,11 @@
 import type { Author } from "./author";
 
 
-export interface Filter {
+export interface MediaFilter {
     title?: string,
     author?: string,
-    availability?: boolean
+    availability?: boolean,
+    isSelected?: boolean
 }
 
 export interface ProfileFilter {

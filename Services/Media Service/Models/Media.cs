@@ -14,5 +14,7 @@ namespace Media_Service.Models
         public Genre Genre { get; set; }
         [JsonPropertyName("name")]
         public string Name { get; set; }
+        [JsonPropertyName("is_available")]
+        public bool IsAvailable { get; set; }
     }
 }

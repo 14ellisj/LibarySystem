@@ -1,4 +1,4 @@
-namespace Media_Service.Models.Specifications
+﻿namespace Media_Service.Models.Specifications
 {
     public static class SpecificationExtensions
     {

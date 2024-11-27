@@ -6,12 +6,12 @@ export interface Media {
   id: number,
   name: string,
   author: Author,
-  avaliablity: boolean,
   type: Type,
   length: number,
   genre: Genre,
   description: string,
   media_art: Blob,
-  rating: number
+  rating: number,
+  is_available: boolean
 }
 

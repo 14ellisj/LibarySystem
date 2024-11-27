@@ -5,6 +5,7 @@ import '../../styles/variables.css'
 
 <template>
     <ReturnItem>
-        <template #Heading>Return point</template>
+        <template #Heading> Return point </template>
+        <template #Subheading> This is where you can return the media you have borrowed </template>
     </ReturnItem>
 </template>

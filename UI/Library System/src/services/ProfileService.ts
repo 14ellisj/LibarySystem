@@ -8,7 +8,7 @@ export default class {
     userStore = useUserStore();
     apiUrl = "http://localhost:7166/Profile"
 
-    async getData(): Promise<ProfileDetails[]> {
+    async getData(): Promise<ProfileDetails> {
         await axios
             .get(this.apiUrl)
             .then((response) => {
@@ -18,7 +18,7 @@ export default class {
         return this.userStore.user;
     }
 
-    async filterData(filter: ProfileFilter): Promise<ProfileDetails[]> {
+    async filterData(filter: ProfileFilter): Promise<ProfileDetails> {
         await axios
             .get(this.apiUrl, {
                 params: filter

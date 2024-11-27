@@ -8,7 +8,7 @@ import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
-import LogInValidation from '@/components/LogInView/LogIn.vue'
+import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import AboutPage from '@/views/AboutPage.vue'
 import NewsView from '@/views/NewsView.vue'
 
@@ -66,7 +66,7 @@ const router = createRouter({
     },
     {
       path: '/logInValidation',
-      name: '',
+      name: 'logInValidation',
       component: LogInValidation,
     },
     {

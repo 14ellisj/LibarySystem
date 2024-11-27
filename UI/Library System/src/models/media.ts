@@ -5,9 +5,9 @@ import type { Type } from "./type";
 export interface Media {
   id: number,
   name: string,
-  author_id: Author,
+  author: Author,
   avaliablity: boolean,
-  type_id: Type,
+  type: Type,
   length: number,
   genre: Genre,
   description: string,

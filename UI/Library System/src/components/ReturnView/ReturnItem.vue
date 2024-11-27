@@ -1,9 +1,17 @@
 <template>
     <div class="item">
       <div class="details">
-        <h3>
+        <h2>
           <slot name="Heading"></slot>
+        </h2>
+
+        <h3>
+          <slot name="Subheading"></slot>
         </h3>
+
+        <body>
+          <slot name="Body"></slot>
+        </body>
       </div>
     </div>
 </template>
@@ -11,13 +19,21 @@
 <style scoped>
 .item {
   margin-top: 2rem;
-  display: flex;
+  text-align: center;
   position: relative;
 }
 
 .details {
+  margin-top: 2rem;
   flex: 1;
   margin-left: 1rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  color: var(--color-heading);
 }
 
 h3 {

@@ -1,11 +1,11 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import { useMediaStore } from '../../stores/media';
+import { useWishListStore } from '../../stores/wishlist';
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
-    const store = useMediaStore();
+    const store = useWishListStore();
 
     return {
       store,
@@ -32,11 +32,11 @@ export default defineComponent({
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="wishlist in store.media" :key="wishlist.id">
-                    <td><a :href="`/item/${wishlist.id}`">{{ wishlist.name }}</a></td>
-                    <td>{{ wishlist.author }}</td>
-                    <td>{{ wishlist.avaliablity }}</td>
-                    <td>{{ wishlist.type }}</td>
+                <tr v-for="wishlist in store.Wishlist" :key="wishlist.id">
+                    <td><a :href="`/item/${wishlist.id}`">{{ wishlist.media_id.name }}</a></td>
+                    <td>{{ wishlist.media_id.author_id.first_name }} {{ wishlist.media_id.author_id.last_name }}</td>
+                    <td>{{ wishlist.media_id.avaliablity }}</td>
+                    <td>{{ wishlist.media_id.type_id.name}}</td>
                     <td><button class="remove-btn">Remove</button></td>
                 </tr>
             </tbody>

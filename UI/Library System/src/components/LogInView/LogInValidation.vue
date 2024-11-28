@@ -9,7 +9,7 @@ export default defineComponent({
         const userStore = useUserStore();
 
         if (userStore != null){
-            console.log("the user store has something in it")
+            console.log(userStore)
         }
 
         return {
@@ -20,5 +20,5 @@ export default defineComponent({
 </script>
 
 <template>
-    <p v-for="user in userStore.user" :key="user.id"> {{ user.first_name }} </p>
+    <p v-for="user in userStore.user"> {{ user.firstName }} </p>
 </template>

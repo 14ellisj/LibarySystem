@@ -15,7 +15,7 @@ export default defineComponent({
     }
   },
   methods: {
-    async submit() {
+    async signIn() {
         const profileService = new ProfileService();
         const filter: ProfileFilter = {
             email: this.query
@@ -32,13 +32,11 @@ export default defineComponent({
         <template #Heading>Log In</template>
     </LogInItem>
 
-    <form action="/logInValidation">
         <label for="logInEmail">Email:</label><br>
-        <input type="text" id="logInEmail" name="logInEmail"><br>
+        <input type="text" id="logInEmail" name="logInEmail" v-model="query"><br>
         <label for="Password">Password:</label><br>
         <input type="text" id="Password" name="Password"><br>
-        <button @click="submit()"> Sign in </button>
-    </form>
+        <button @click="signIn()"> Sign in </button><br>
 
     <a href="register"> Register </a>
 </template>

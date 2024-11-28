@@ -25,7 +25,7 @@ import { defineComponent } from 'vue'
                     <tr>
                         <td> Item 3 </td> 
                         <td> 02/11/24 </td> 
-                        <td> Borrowed </td> 
+                        <td> Borrowing </td> 
                         <td> <button> Return </button> </td> 
                     </tr>
                     <tr>

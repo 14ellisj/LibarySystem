@@ -2,8 +2,10 @@
 using Media_Service.Database;
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
+using Media_Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Media_Service.Controllers
 {
@@ -11,64 +13,25 @@ namespace Media_Service.Controllers
     public class AutoCompleteController : Controller
     {
         private readonly ILogger<AutoCompleteController> _logger;
-        private readonly IMapper _mapper;
-        private readonly AppDbContext _context;
-
-        public AutoCompleteController(ILogger<AutoCompleteController> logger, AppDbContext context, IMapper mapper)
+        private readonly IAutoCompleteService _autoCompleteService;
+        public AutoCompleteController(ILogger<AutoCompleteController> logger, IAutoCompleteService autoCompleteService)
         {
             _logger = logger;
-            _context = context;
-            _mapper = mapper;
-        }
-        [HttpGet("Title", Name = "GetMediaWithTitle")]
-        public async Task<JsonResult> GetTitles(string name)
-        {
-            name = name.Trim();
-
-            if (string.IsNullOrWhiteSpace(name))
-                return Json(new List<Author>());
-
-            var titleSpec = new MediaTitleSpecification(name, false);
-
-            var query = _context.Media
-                .ApplySpecification(titleSpec)
-                .Take(5);
-
-            try
-            {
-                var result = await query.ToListAsync();
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex);
-            }
+            _autoCompleteService = autoCompleteService;
         }
 
-        [HttpGet("Author", Name = "GetAuthor")]
-        public async Task<JsonResult> GetAuthor(string name)
+        [HttpGet(Name = "Get Auto Complete Options")]
+        public async Task<ActionResult<IEnumerable<string>>> GetAutoComplete(string query, SearchType search_type)
         {
-            name = name.Trim();
+            query = query.Trim();
 
-            if (string.IsNullOrWhiteSpace(name))
-                return Json(new List<Author>());
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Please include a query.");
 
-            var authorSpec = new AuthorNameSpecification(name);
 
-            var query = _context.Author
-                .ApplySpecification(authorSpec)
-                .Take(5);
+            var result = await _autoCompleteService.GetAutoComplete(query, search_type);
 
-            try 
-            {
-                var result = await query.ToListAsync();
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex);
-            }
-
+            return Ok(result);
         }
     }
 }

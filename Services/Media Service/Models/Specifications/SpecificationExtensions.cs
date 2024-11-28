@@ -6,5 +6,15 @@
         {
             return query.Where(spec.Criteria);
         }
+
+        public static IQueryable<T> ApplySpecifications<T>(this IQueryable<T> query, IEnumerable<ISpecification<T>> specs)
+        {
+            foreach (ISpecification<T> spec in specs)
+            {
+                query = query.Where(spec.Criteria);
+            }
+
+            return query;
+        }
     }
 }

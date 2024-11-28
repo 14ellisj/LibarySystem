@@ -1,3 +1,6 @@
+import type { SearchType } from "./searchType";
+
 export interface IAutoCompleteParams {
-    name: string
+    query: string,
+    search_type: SearchType
 }

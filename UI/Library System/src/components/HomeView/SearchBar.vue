@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { Author } from '@/models/author';
 import type { MediaFilter } from '@/models/filters';
+import { SearchType } from '@/models/searchType';
 import MediaService from '@/services/MediaService';
 import { useMediaStore } from '@/stores/media';
 import { defineComponent } from 'vue'
@@ -10,15 +11,19 @@ export default defineComponent({
   data() {
 
     var query: string = "";
-    var searchType: string = "Title";
+    var searchType: number = 0;
     var autoCompleteResults: string[] = [];
     var autoCompleteTimeout: number = 0;
+    
+    const searchTypesCount = Object.keys(SearchType).length / 2;
 
     const mediaService = new MediaService();
 
     return {
         query,
         searchType,
+        searchTypesCount,
+        SearchType,
         autoCompleteResults,
         autoCompleteTimeout,
         mediaService
@@ -27,9 +32,9 @@ export default defineComponent({
   methods: {
     async submit(fromSuggestions: boolean) {
         const filter: MediaFilter = {
-            author: this.searchType === "Author" ? this.query : undefined,
-            title: this.searchType === "Title" ? this.query : undefined,
-            isSelected: fromSuggestions
+            title: this.searchType === SearchType.Title ? this.query : undefined,
+            author: this.searchType === SearchType.Author ? this.query : undefined,
+            is_selected: fromSuggestions
         }
         await this.mediaService.filterData(filter);
         this.$router.push('/front');
@@ -46,9 +51,7 @@ export default defineComponent({
         
         clearTimeout(this.autoCompleteTimeout);
         this.autoCompleteTimeout = setTimeout(async () => {
-            this.autoCompleteResults = this.searchType === 'Author'
-                ? await this.mediaService.getAutoCompleteAuthors(this.query)
-                : await this.mediaService.getAutoCompleteTitles(this.query)
+            this.autoCompleteResults = await this.mediaService.getAutoComplete(this.query, this.searchType)
         }, 300);
     },
     handleKeyPress(e: KeyboardEvent) {
@@ -70,8 +73,7 @@ export default defineComponent({
                 <div class="search-bar-select-dropdown">
                     <label>Searching For...</label>
                     <select v-model="searchType" name="search-for">
-                        <option>Title</option>
-                        <option>Author</option>
+                        <option v-for="(n, index) in searchTypesCount" :value="index">{{ SearchType[index] }}</option>
                     </select>
                 </div>
             </div>

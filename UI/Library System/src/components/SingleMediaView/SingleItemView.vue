@@ -12,13 +12,14 @@ export default defineComponent({
       store,
     };
   },
+  
 });
 
 </script>
 
 <template>
    <!DOCTYPE html>
-<body v-for="media in store.media" :key="media.id" >
+<body>
     <div class="product-page">
         <div class="product-container">
             <!-- Product Image -->
@@ -27,7 +28,7 @@ export default defineComponent({
                 </div>
             <!-- Product Info -->
             <div class="product-info">
-                <h1 class="product-title">{{ media.name }}</h1>
+                <h1 class="product-title">IT</h1>
 
                 <!-- Star Review -->
                 <div class="product-reviews">

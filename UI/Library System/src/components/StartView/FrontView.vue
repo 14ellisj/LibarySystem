@@ -71,10 +71,10 @@ export default defineComponent({
                       <img :src="media.name" alt="Media Image" />
                     </div>
                     <div class="media-info">
-                      <h2>{{ media.name }}</h2>
+                      <h2>{{ media.image }}</h2>
                       <p><strong>Author:</strong> {{ media.author.first_name }} {{ media.author.last_name }}</p>
                       <p><strong>Description:</strong> {{ media.description }}</p>
-                      <p><strong>Rating:</strong></p>
+                      <p><strong>Rating:</strong>{{ media.rating }}/5</p>
                       <ul>
                       </ul>
                       <div class="actions">

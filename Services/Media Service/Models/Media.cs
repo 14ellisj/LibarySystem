@@ -18,7 +18,7 @@ namespace Media_Service.Models
         public bool IsAvailable { get; set; }
         [JsonPropertyName("description")]
         public string Description { get; set; }
-        [JsonPropertyName("rating")]
-        public string Rating { get; set; }
+         [JsonPropertyName("image")]
+        public string Image { get; set; }
     }
 }

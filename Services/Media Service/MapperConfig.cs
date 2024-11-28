@@ -10,7 +10,6 @@ namespace Media_Service
             CreateMap<MediaEntity, Media>()
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())))
                 .ForMember(dest => dest.IsAvailable, opt => opt.MapFrom(src => src.media_items.Any(mi => mi.borrower == null)));
-                .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())));
 
             CreateMap<AuthorEntity, Author>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.first_name))
@@ -18,10 +17,6 @@ namespace Media_Service
 
             CreateMap<GenreEntity, Genre>();
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.name))
-            CreateMap<MediaItemEntity, MediaItem>();
-
-            CreateMap<GenreEntity, Genre>()
-                .ForMember(dest => dest.name, opt => opt.MapFrom(src => src.name))
         }
     }
 }

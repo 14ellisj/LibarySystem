@@ -1,17 +1,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import { Genre }  from '../../models/genre';
-import { Type } from '../../models/type';
 
 export default defineComponent({
   name: 'SingleMediaView',
-  data() {
-    return {
-        Genre,
-        Type
-    }
-  },
   setup() {
     const store = useMediaStore();
 
@@ -43,8 +35,6 @@ export default defineComponent({
     };
   },
 });
-
-
 </script>
 
 

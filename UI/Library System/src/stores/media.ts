@@ -8,13 +8,6 @@ export const useMediaStore = defineStore('media', {
     media: [] as Media[],
     autoCompleteOptions: [] as string[]
   }),
-
-  getters: {
-    getMediaById: (state) => {
-      return (id: number) => state.media.find((item) => item.id === id);
-    },
-  },
-
   actions: {
     setMedia(mediaInput: Media[]) {
       this.media = mediaInput;
@@ -24,5 +17,3 @@ export const useMediaStore = defineStore('media', {
     }
   }
 })
-
-

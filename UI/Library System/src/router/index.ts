@@ -12,7 +12,6 @@ import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import AboutPage from '@/views/AboutPage.vue'
 import NewsView from '@/views/NewsView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,7 +35,7 @@ const router = createRouter({
       component: StartView,
     },
     {
-      path: '/item/:id',
+      path: '/item',
       name: 'Item',
       component: SingleMediaView,
     },

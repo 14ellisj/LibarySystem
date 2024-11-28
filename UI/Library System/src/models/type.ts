@@ -1,5 +1,4 @@
-export enum Type {
-    AudioBook,
-    Book,
-    DVD
+export interface Type {
+    id: number,
+    name: string
 }

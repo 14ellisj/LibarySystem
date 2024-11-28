@@ -52,8 +52,9 @@ namespace Media_Service.Models
         public ICollection<MediaItemEntity> media_items { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public float length { get; set; }
-         public string image { get; set; }
+        public string length { get; set; }
+        public string rating { get; set; }
+        public string image { get; set; }
     }
 
     [Table("Author")]

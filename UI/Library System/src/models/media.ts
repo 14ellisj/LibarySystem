@@ -10,7 +10,7 @@ export interface Media {
   length: number,
   genre: Genre,
   description: string,
-  image: string,
+  media_art: Blob,
   rating: number,
   is_available: boolean
 }

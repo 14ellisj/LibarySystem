@@ -20,9 +20,5 @@ namespace Media_Service.Models
         public string Description { get; set; }
         [JsonPropertyName("rating")]
         public string Rating { get; set; }
-        [JsonPropertyName("image")]
-        public string Image { get; set; }
-        [JsonPropertyName("length")]
-        public int length { get; set; }
     }
 }

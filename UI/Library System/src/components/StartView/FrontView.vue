@@ -61,20 +61,20 @@ export default defineComponent({
                 <td>{{ media.name }}</td>
                 <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
                 <td>{{ media.genre }}</td>
-                <td>{{ media.is_available }}</td>
+                <td>{{ media.description }}</td>
                 <td>{{ media.type }}</td>
               </tr>
               <tr v-if="expandedRowId === media.id">
                 <td colspan="6">
                   <div class="details-container">
                     <div class="media-image">
-                      <img :src="media.image" alt="Media Image" />
+                      <img :src="media.name" alt="Media Image" />
                     </div>
                     <div class="media-info">
                       <h2>{{ media.name }}</h2>
                       <p><strong>Author:</strong> {{ media.author.first_name }} {{ media.author.last_name }}</p>
                       <p><strong>Description:</strong> {{ media.description }}</p>
-                      <p><strong>Rating:</strong> {{ media.rating }}/5</p>
+                      <p><strong>Rating:</strong></p>
                       <ul>
                       </ul>
                       <div class="actions">

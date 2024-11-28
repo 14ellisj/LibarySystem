@@ -4,26 +4,45 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace Media_Service.Models.Specifications
 {
 
-    public class TitleSpecification : ISpecification<MediaEntity>
+    public class MediaTitleSpecification : ISpecification<MediaEntity>
     {
         string? _query;
-        public TitleSpecification(string? query)
+        bool? _isSelected;
+        public MediaTitleSpecification(string? query, bool? isSelected)
         {
             _query = query;
+            _isSelected = isSelected;
         }
 
-        public Expression<Func<MediaEntity, bool>> Criteria =>
-            string.IsNullOrWhiteSpace(_query)
-            ? _ => true
-            : x => x.name.ToLower().Contains(_query.ToLower());
+        public Expression<Func<MediaEntity, bool>> Criteria
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_query))
+                    return _ => true;
+                
+                if (_isSelected.HasValue && _isSelected.Value)
+                {
+                    return x => x.name.ToLower().Equals(_query.ToLower());
+                }
+                else
+                {
+                    return x => x.name.ToLower().Contains(_query.ToLower());
+                }
+                
+
+            }
+        }
     }
 
-    public class AuthorSpecification : ISpecification<MediaEntity>
+    public class MediaAuthorSpecification : ISpecification<MediaEntity>
     {
         string? _query;
-        public AuthorSpecification(string? query)
+        bool? _isAuthorSelected;
+        public MediaAuthorSpecification(string? query, bool? isAuthorSelected)
         {
             _query = query;
+            _isAuthorSelected = isAuthorSelected;
         }
         public Expression<Func<MediaEntity, bool>> Criteria
         {
@@ -33,18 +52,27 @@ namespace Media_Service.Models.Specifications
                     return _ => true;
 
                 var authorNames = _query.Trim().ToLower().Split(" ");
-                return x => authorNames.All(name =>
-                          x.author.first_name.ToLower().Contains(name) ||
-                          x.author.last_name.ToLower().Contains(name));
+               
+                if (_isAuthorSelected.HasValue && _isAuthorSelected.Value)
+                {
+                    return x => x.author.first_name.ToLower().Equals(authorNames.First()) &&
+                              x.author.last_name.ToLower().Equals(authorNames.Last());
+                }
+                else
+                {
+                    return x => authorNames.All(name =>
+                              x.author.first_name.ToLower().Contains(name) ||
+                              x.author.last_name.ToLower().Contains(name));
+                }
             }
         }
     }
 
-    public class AvailabilitySpecification : ISpecification<MediaEntity>
+    public class MediaAvailabilitySpecification : ISpecification<MediaEntity>
     {
         bool? _isAvailable;
 
-        public AvailabilitySpecification(bool? isAvailable)
+        public MediaAvailabilitySpecification(bool? isAvailable)
         {
             _isAvailable = isAvailable;
         }

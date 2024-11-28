@@ -1,11 +1,11 @@
-import type { Author } from "./author";
+import type { SearchType } from "./searchType";
 
 
 export interface MediaFilter {
     title?: string,
     author?: string,
-    availability?: boolean,
-    isSelected?: boolean
+    is_selected?: boolean,
+    availability?: boolean
 }
 
 export interface ProfileFilter {

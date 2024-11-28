@@ -1,6 +1,5 @@
 export enum Type {
-    Book,
     Audiobook,
+    Book,
     DVD
-    
 }

@@ -1,7 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
 import { Type } from '@/models/type';
+import { Genre } from '@/models/genre';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -49,6 +50,8 @@ export default defineComponent({
       addToWishlist,
       reserveMedia,
       decodeBase64Image,
+      Type,
+      Genre,
     };
   },
 });
@@ -76,9 +79,9 @@ export default defineComponent({
             <tr @click="toggleRowDetails(media.id)">
               <td>{{ media.name }}</td>
               <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
-              <td>{{ media.genre }}</td>
-              <td>{{ media.is_available }}</td>
-              <td>{{ media.type[Type] }}</td>
+              <td>{{ Genre[media.genre] }}</td>
+              <td>{{ media.is_available ? 'Available' : 'Not Available' }}</td>
+              <td>{{ Type[media.type] }}</td>
             </tr>
             <tr v-if="expandedRowId === media.id">
               <td colspan="6">
@@ -95,7 +98,9 @@ export default defineComponent({
                     <ul>
                     </ul>
                     <div class="actions">
-                      <button @click="borrowMedia(media.id)">Borrow</button>
+                      <button v-if="media.is_available" @click="borrowMedia(media.id)">Borrow</button>
+                      <p v-else>Sorry, not available right now</p>
+
                       <button @click="addToWishlist(media.id)">Add to Wishlist</button>
                       <button @click="reserveMedia(media.id)">Reserve</button>
                     </div>

@@ -9,7 +9,7 @@ export default class {
 
     mediaStore = useMediaStore();
 
-    apiUrl = "http://localhost:5132/"
+    apiUrl = "http://localhost:5273/"
 
     async filterData(filter: MediaFilter): Promise<Media[]> {
         const requestUrl = this.apiUrl + 'Media';

@@ -7,7 +7,7 @@ namespace Profile_Service
     {
         public MapperConfig()
         {
-            CreateMap<UserEntity, UserProfile>()
+            CreateMap<ProfileEntity, UserProfile>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.first_name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.last_name))
                 .ForMember(dest => dest.DateOfBirth, opt => opt.MapFrom(src => src.DOB));

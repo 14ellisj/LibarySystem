@@ -9,7 +9,10 @@ export default defineComponent({
         const store = useUserStore();
 
         if (store != null){
-            console.log(store)
+            console.log(store.user)
+        }
+        else {
+            console.log('for fucks sake')
         }
 
         return {
@@ -22,7 +25,7 @@ export default defineComponent({
 <template>
     <body>
         <main>
-            <p v-for = "user in store.user"> The ID is: {{ user.id }} </p>
+            <p> The name is: {{ store.user.first_name }} </p>
         </main>
     </body>
 </template>

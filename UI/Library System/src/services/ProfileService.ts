@@ -6,13 +6,14 @@ import axios from "axios";
 export default class {
 
     userStore = useUserStore();
-    apiUrl = "http://localhost:7166/Profile"
+    apiUrl = "http://localhost:5273/Profile"
 
     async getData(): Promise<ProfileDetails> {
         await axios
             .get(this.apiUrl)
             .then((response) => {
                 this.userStore.setUser(response.data)
+                console.log(response.data);
             })
 
         return this.userStore.user;

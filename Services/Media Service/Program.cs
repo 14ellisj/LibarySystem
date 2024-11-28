@@ -1,6 +1,8 @@
 using AutoMapper;
 using Media_Service.Database;
 using Media_Service.Models;
+using Media_Service.Repositories;
+using Media_Service.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
@@ -19,6 +21,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
+builder.Services.AddScoped<IMediaDatabase, MediaDatabase>();
+builder.Services.AddScoped<IMediaService, MediaService>();
+builder.Services.AddScoped<IAutoCompleteService, AutoCompleteService>();
 
 var app = builder.Build();
 

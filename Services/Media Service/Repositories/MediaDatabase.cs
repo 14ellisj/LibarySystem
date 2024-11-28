@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Media_Service.Repositories
 {
-    public class MediaDatabase
+    public class MediaDatabase : IMediaDatabase
     {
         private readonly AppDbContext _context;
         public MediaDatabase(AppDbContext context)
@@ -13,12 +13,37 @@ namespace Media_Service.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<MediaEntity>> FilterMediaTitles(MediaTitleSpecification filter)
+        public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
         {
             var query = _context.Media
-                    .ApplySpecification(filter)
+                .Include(x => x.author)
+                .Include(x => x.genre)
+                .Include(x => x.type)
+                .Include(x => x.media_items)
+                    .ThenInclude(mi => mi.borrower)
+                .ApplySpecifications(specs)
+                .OrderBy(x => x.name);
+
+            return await query.ToListAsync();
+        }
+
+
+        public async Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec)
+        {
+            var dbQuery = _context.Author
+                    .ApplySpecification(spec)
+                    .OrderBy(x => x.last_name)
+                    .Take(5);
+
+            return await dbQuery.ToListAsync();
+        }
+
+        public async Task<IEnumerable<MediaEntity>> GetMediaByTitle(MediaTitleSpecification spec)
+        {
+            var query = _context.Media
+                    .ApplySpecification(spec)
                     .Distinct()
-                    .OrderBy(x => x)
+                    .OrderBy(x => x.name)
                     .Take(5);
 
             return await query.ToListAsync();

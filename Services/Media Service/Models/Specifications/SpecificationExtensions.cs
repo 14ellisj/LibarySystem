@@ -11,7 +11,7 @@
         {
             foreach (ISpecification<T> spec in specs)
             {
-                query.Where(spec.Criteria);
+                query = query.Where(spec.Criteria);
             }
 
             return query;

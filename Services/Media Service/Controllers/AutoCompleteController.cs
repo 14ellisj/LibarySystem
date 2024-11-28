@@ -4,6 +4,7 @@ using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace Media_Service.Controllers
 {
@@ -20,55 +21,56 @@ namespace Media_Service.Controllers
             _context = context;
             _mapper = mapper;
         }
-        [HttpGet("Title", Name = "GetMediaWithTitle")]
-        public async Task<JsonResult> GetTitles(string name)
+
+        [HttpGet(Name = "Get Auto Complete Options")]
+        public async Task<ActionResult<IEnumerable<string>>> GetAutoComplete(string query, SearchType search_type)
         {
-            name = name.Trim();
+            query = query.Trim();
 
-            if (string.IsNullOrWhiteSpace(name))
-                return Json(new List<Author>());
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest("Please include a query.");
 
-            var titleSpec = new MediaTitleSpecification(name, false);
-
-            var query = _context.Media
-                .ApplySpecification(titleSpec)
-                .Take(5);
-
-            try
+            if (search_type == SearchType.TITLE)
             {
-                var result = await query.ToListAsync();
-                return Json(result);
+                if (string.IsNullOrWhiteSpace(query))
+                    return Ok(new List<string>());
+
+                var titleSpec = new MediaTitleSpecification(query, false);
+
+                var dbQuery = _context.Media
+                    .ApplySpecification(titleSpec)
+                    .Distinct()
+                    .OrderBy(x => x)
+                    .Take(5);
+
+                try
+                {
+                    var result = await dbQuery.ToListAsync();
+                    return Ok(result.Select(x => x.name));
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                return Json(ex);
+                var authorSpec = new AuthorNameSpecification(query);
+
+                var dbQuery = _context.Author
+                    .ApplySpecification(authorSpec)
+                    .Take(5);
+
+                try
+                {
+                    var result = await dbQuery.ToListAsync();
+                    return Ok(result.Select(x => x.first_name + " " + x.last_name));
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, ex.Message);
+                }
             }
-        }
-
-        [HttpGet("Author", Name = "GetAuthor")]
-        public async Task<JsonResult> GetAuthor(string name)
-        {
-            name = name.Trim();
-
-            if (string.IsNullOrWhiteSpace(name))
-                return Json(new List<Author>());
-
-            var authorSpec = new AuthorNameSpecification(name);
-
-            var query = _context.Author
-                .ApplySpecification(authorSpec)
-                .Take(5);
-
-            try 
-            {
-                var result = await query.ToListAsync();
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                return Json(ex);
-            }
-
         }
     }
 }

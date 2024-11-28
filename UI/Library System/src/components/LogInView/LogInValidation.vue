@@ -4,21 +4,25 @@ import { defineComponent, ref } from 'vue'
 import { useUserStore } from '../../stores/profileInformation';
 
 export default defineComponent({
-    name: 'SingleMediaView',
+    name: 'logInValidation',
     setup() {
-        const userStore = useUserStore();
+        const store = useUserStore();
 
-        if (userStore != null){
-            console.log(userStore)
+        if (store != null){
+            console.log(store)
         }
 
         return {
-            userStore,
+            store,
         };
     },
 });
 </script>
 
 <template>
-    <p v-for="user in userStore.user"> {{ user.firstName }} </p>
+    <body>
+        <main>
+            <p v-for = "user in store.user"> The ID is: {{ user.id }} </p>
+        </main>
+    </body>
 </template>

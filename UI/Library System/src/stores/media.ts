@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 import type { Media } from '@/models/media'
 import type { Author } from '@/models/author';
 
-export const useMediaStore = defineStore('media', {
+export const useMediaStore = defineStore('book', {
   state: () => ({
     media: [] as Media[],
     autoCompleteOptions: [] as string[]

@@ -9,13 +9,11 @@ export const useUserStore = defineStore('user', {
       email: "test@test",
       first_name: "testName",
       last_name: "Test",
-    } as ProfileDetails,
-    count: 0
+    } as ProfileDetails
   }),
   actions: {
     setUser(userInput: ProfileDetails) {
       this.user = userInput
-      console.log(this.user);
     }
   }
 })

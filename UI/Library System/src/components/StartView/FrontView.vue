@@ -2,7 +2,6 @@
 import { defineComponent, ref } from 'vue'
 import { useMediaStore } from '../../stores/media';
  
-
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
@@ -37,9 +36,9 @@ export default defineComponent({
             <tbody>
             <tr v-for="media in store.media" :key="media.id">
               <td><a :href="`/item/${media.id}`">{{ media.name }}</a></td>
-              <td>{{ media.author.first_name }}{{ media.author.last_name }}</td>
+              <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
               <td>{{ media.genre }}</td>
-              <td>{{ media.avaliablity }}</td>
+              <td>{{ media.is_available }}</td>
               <td>{{ media.type }}</td>
             </tr>
             </tbody>

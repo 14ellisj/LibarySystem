@@ -1,5 +1,6 @@
 export enum Genre {
     Fantasy,
+    Horror,
     Romance,
-    Horror
+    NO
 }

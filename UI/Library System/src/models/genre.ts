@@ -1,4 +1,5 @@
-export interface Genre {
-    id: number,
-    name: string
+export enum Genre {
+    Fantasy,
+    Crime,
+    Horror
 }

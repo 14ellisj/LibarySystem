@@ -23,6 +23,11 @@ namespace Media_Service.Controllers
             _mapper = mapper;
         }
 
+        getters: {
+            getMediaById: (state) => {
+            return (id: number) => state.mediaList.find((item) => item.id === id);
+        },
+
         [HttpGet(Name = "GetMedia")]
         public async Task<JsonResult> Get(string? title, string? author, bool? isSelected, bool? availability)
         {

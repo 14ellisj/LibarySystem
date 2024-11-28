@@ -1,34 +1,59 @@
 <script lang="ts">
-import type { Filter } from '@/models/filters';
+import type { Author } from '@/models/author';
+import type { MediaFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 import { useMediaStore } from '@/stores/media';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "SearchBar",
+  name: "Search-Bar",
   data() {
 
     var query: string = "";
     var searchType: string = "Title";
+    var autoCompleteResults: string[] = [];
+    var autoCompleteTimeout: number = 0;
+
+    const mediaService = new MediaService();
 
     return {
         query,
-        searchType
+        searchType,
+        autoCompleteResults,
+        autoCompleteTimeout,
+        mediaService
     }
   },
   methods: {
-    async submit() {
-        const mediaService = new MediaService();
-        const filter: Filter = {
+    async submit(fromSuggestions: boolean) {
+        const filter: MediaFilter = {
             author: this.searchType === "Author" ? this.query : undefined,
-            title: this.searchType === "Title" ? this.query : undefined
+            title: this.searchType === "Title" ? this.query : undefined,
+            isSelected: fromSuggestions
         }
-        await mediaService.filterData(filter);
+        await this.mediaService.filterData(filter);
         this.$router.push('/front');
+    },
+    selectAutocompleteOption(e: MouseEvent, selected: string) {
+        this.query = selected;
+        this.submit(true);
+    },
+    async getAutoComplete() {
+        if (this.query.trim().length < 2) {
+            this.autoCompleteResults = [];
+            return;
+        }
+        
+        clearTimeout(this.autoCompleteTimeout);
+        this.autoCompleteTimeout = setTimeout(async () => {
+            this.autoCompleteResults = this.searchType === 'Author'
+                ? await this.mediaService.getAutoCompleteAuthors(this.query)
+                : await this.mediaService.getAutoCompleteTitles(this.query)
+        }, 300);
     },
     handleKeyPress(e: KeyboardEvent) {
         if (e.key === 'Enter')
-            this.submit();
+            this.submit(false);
     } 
   }
 });
@@ -37,39 +62,75 @@ export default defineComponent({
 
 <template>
     <div class="search-container">
-        <div class="search-area">
-            <input type="text" v-model="query" placeholder="Find your next... " @keypress="handleKeyPress($event)"/>
-        </div>
-        <div class="search-select-area">
-            <div class="search-for-dropdown">
-                <label>Searching For...</label>
-                <select v-model="searchType" name="search-for">
-                    <option>Title</option>
-                    <option>Author</option>
-                </select>
+        <div class="search-bar-container">
+            <div class="search-bar-area">
+                <input type="text" v-model="query" placeholder="Find your next... " @input="getAutoComplete()" @keypress="handleKeyPress($event)"/>
+            </div>
+            <div class="search-bar-select-area">
+                <div class="search-bar-select-dropdown">
+                    <label>Searching For...</label>
+                    <select v-model="searchType" name="search-for">
+                        <option>Title</option>
+                        <option>Author</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-bar-button-area">
+                <button class="search-bar-button" @click="submit(false)">Search</button>
             </div>
         </div>
-        <div class="search-button-area">
-            <button class="search-button" @click="submit()">Search</button>
+        <div class="auto-complete-container" v-show="autoCompleteResults.length > 0">
+            <ul class="auto-complete-item-container">
+                <li v-for="author in autoCompleteResults" class="auto-complete-item" @click="selectAutocompleteOption($event, author)">
+                    {{ author }}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
 
 <style scoped>
-
-
     .search-container {
+        display: block;
+        width: 70%;
+    }
+
+    .auto-complete-container {
+        position: absolute;
+        width: 70%;
+        border-radius: 2.5rem;
+        background-color: white;
+        border: solid black 2px;
+        padding: 1rem 2.5rem;
+        box-shadow: -4px 4px 5px 0px rgba(0,0,0,0.75);
+    }
+
+    .auto-complete-item-container {
+        list-style: none;
+        font-size: 1.25rem;
+        cursor: pointer;
+    }
+
+    .auto-complete-item {
+        padding: 0.25rem 1rem;
+    }
+    
+    .auto-complete-item:hover {
+        background-color: #ccc;
+        text-decoration: underline;
+    }
+
+    .search-bar-container {
         background-color: white;
         border-radius: 2.5rem;
         height: 5rem;
-        width: 70%;
         outline: solid black 2px;
 
         display: flex;
         box-shadow: -4px 4px 5px 0px rgba(0,0,0,0.75);
     }
 
-    .search-for-dropdown {
+    .search-bar-select-dropdown {
         display: flex;
         width: 100%;
         height: 100%;
@@ -99,7 +160,7 @@ export default defineComponent({
 
     }
 
-    .search-area {
+    .search-bar-area {
         flex-direction: column;
         flex: 3 1 0;
         border-right: solid black 2px;
@@ -116,13 +177,13 @@ export default defineComponent({
         font-size: 1.5rem;
     }
 
-    .search-select-area {
+    .search-bar-select-area {
         flex: 1 0 0;
         flex-direction: column;
         border-right: solid black 2px;
     }
 
-    .search-button-area {
+    .search-bar-button-area {
         flex: 1 0 0;
         flex-direction: column;
         justify-content: center;
@@ -130,7 +191,7 @@ export default defineComponent({
         text-align: center;
     }
 
-    .search-button {
+    .search-bar-button {
         background: linear-gradient(0, var(--primary-color) 50%, var(--tertiary-color) 100%);
         border-radius: 0 10rem 10rem 0;
         color: white;
@@ -142,7 +203,7 @@ export default defineComponent({
         font-size: 1.25rem;
     }
 
-    .search-button:hover {
+    .search-bar-button:hover {
         filter: brightness(85%);
     }
 

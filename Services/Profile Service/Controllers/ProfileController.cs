@@ -34,7 +34,7 @@ namespace Profile_Service.Controllers
                 query = query.Where(x => x.first_name.ToLower().Contains(firstName.ToLower()));
 
             var results = await query.ToListAsync();
-            var output = _mapper.Map<IEnumerable<UserEntity>, IEnumerable<UserProfile>>(results);
+            var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
 
 
             return Json(output);

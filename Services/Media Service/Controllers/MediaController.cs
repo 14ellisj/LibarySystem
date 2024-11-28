@@ -24,19 +24,21 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "GetMedia")]
-        public async Task<JsonResult> Get(string? title, string? author, bool? availability)
+        public async Task<JsonResult> Get(string? title, string? author, bool? isSelected, bool? availability)
         {
 
             var query = _context.Media
                 .Include(x => x.author)
                 .Include(x => x.genre)
                 .Include(x => x.type)
+                .Include(x => x.media_items)
+                    .ThenInclude(mi => mi.borrower)
                 .AsQueryable();
 
 
-            TitleSpecification titleSpec = new TitleSpecification(title);
-            AuthorSpecification authorSpec = new AuthorSpecification(author);
-            AvailabilitySpecification availabilitySpec = new AvailabilitySpecification(availability);
+            MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
+            MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
+            MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(availability);
 
             query = query
                 .ApplySpecification(titleSpec)

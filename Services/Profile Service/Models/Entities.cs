@@ -6,7 +6,7 @@ namespace Profile_Service.Models
 {
     [Table("Profile")]    
     
-    public class UserEntity
+    public class ProfileEntity
     {
         [Key]
         public int id { get; set; }

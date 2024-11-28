@@ -53,7 +53,8 @@ namespace Media_Service.Models
         public string name { get; set; }
         public string description { get; set; }
         public float length { get; set; }
-        public float rating { get; set; }
+        public string rating { get; set; }
+        public string image { get; set; }
 
     }
 

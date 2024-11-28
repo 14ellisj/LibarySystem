@@ -15,9 +15,6 @@ namespace Media_Service
             CreateMap<AuthorEntity, Author>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.first_name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.last_name));
-
-            CreateMap<GenreEntity, Genre>();
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.name))
         }
     }
 }

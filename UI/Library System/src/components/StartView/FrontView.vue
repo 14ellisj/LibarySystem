@@ -8,7 +8,7 @@ import toastr from 'toastr'
 import { useUserStore } from '@/stores/profileInformation'
 
 export default defineComponent({
-  name: 'SingleMediaView',
+  name: 'Front View',
   setup() {
     const media = ref(useMediaStore().media)
     const userStore = useUserStore()
@@ -258,7 +258,6 @@ tbody tr:hover {
   z-index: 999;
 }
 
-/* Popup styling */
 .popup {
   position: fixed;
   top: 50%;

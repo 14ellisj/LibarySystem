@@ -13,22 +13,6 @@ namespace Media_Service.Repositories
             _context = context;
         }
 
-        public async Task<bool> BorrowItem(MediaItemEntity mediaItem, int profileId)
-        {
-            mediaItem.borrower_id = profileId;
-
-            _context.Update(mediaItem);
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            } 
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
         public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
         {
             var query = _context.Media

@@ -7,7 +7,6 @@ namespace Media_Service.Database
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<GenreEntity> Genre { get; set; }
         public DbSet<MediaEntity> Media { get; set; }
         public DbSet<MediaItemEntity> MediaItems { get; set; }
         public DbSet<AuthorEntity> Author { get; set; }

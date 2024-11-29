@@ -11,7 +11,7 @@
     {
         FANTASY,
         ROMANCE,
-        CRIME
+        HORROR
     }
 
     public enum SearchType

@@ -4,3 +4,8 @@ export interface IAutoCompleteParams {
     query: string,
     search_type: SearchType
 }
+
+export interface IBorrowRequest {
+    media_id: number,
+    profile_id: number
+}

@@ -20,8 +20,12 @@ namespace Media_Service.Services
             MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
 
             var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).First();
+
+            var isUserCurrentlyBorrowing = media.media_items.Any(x => x.borrower_id ==  profileId);
+            if (isUserCurrentlyBorrowing)
+                return false;
+
             var availableItems = media.media_items.Where(x => x.borrower is null);
-            
             if (availableItems.Count() == 0)
                 return false;
 

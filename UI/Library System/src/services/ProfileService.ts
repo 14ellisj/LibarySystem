@@ -26,6 +26,7 @@ export default class {
             })
             .then((response) => {
                 this.userStore.setUser(response.data)
+                console.log(response.data);
             })
 
         return this.userStore.user;

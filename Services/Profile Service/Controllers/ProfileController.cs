@@ -23,7 +23,7 @@ namespace Profile_Service.Controllers
         }
 
         [HttpGet(Name = "GetProfile")]
-        public async Task<JsonResult> Get(string? firstName, string? lastName)
+        public async Task<JsonResult> Get(string? email)
         {
             var query = _context.Profile
                 .Include(x => x.address)
@@ -31,7 +31,7 @@ namespace Profile_Service.Controllers
                 .Include(x => x.library)
                 .AsQueryable();
 
-                query = query.Where(x => x.first_name.ToLower().Contains(firstName.ToLower()));
+                query = query.Where(x => x.email.ToLower().Contains(email.ToLower()));
 
             var results = await query.ToListAsync();
             var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);

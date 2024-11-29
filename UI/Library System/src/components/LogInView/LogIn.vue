@@ -4,23 +4,25 @@ import ProfileService from '@/services/ProfileService';
 import type { ProfileFilter } from '@/models/filters';
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
-
 export default defineComponent({
     name: "Log-In",
     data() {
     var query: string = "";
+    const profileService = new ProfileService();
 
     return {
-        query
+        query,
+        profileService
     }
   },
   methods: {
     async signIn() {
-        const profileService = new ProfileService();
         const filter: ProfileFilter = {
             email: this.query
         }
-        await profileService.filterData(filter);
+        await this.profileService.filterData(filter);
+        console.log(Response);
+        this.$router.push('/logInValidation');
         }
     }
   }

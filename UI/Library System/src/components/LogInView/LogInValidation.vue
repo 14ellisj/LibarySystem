@@ -7,14 +7,6 @@ export default defineComponent({
     name: 'logInValidation',
     setup() {
         const store = useUserStore();
-
-        if (store != null){
-            console.log(store.user)
-        }
-        else {
-            console.log('for fucks sake')
-        }
-
         return {
             store,
         };
@@ -25,7 +17,7 @@ export default defineComponent({
 <template>
     <body>
         <main>
-            <p> The name is: {{ store.user.first_name }} </p>
+            <p> The name is: {{ store.user[0]['firstName'] }} </p>
         </main>
     </body>
 </template>

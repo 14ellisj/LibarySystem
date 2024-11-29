@@ -4,6 +4,7 @@ import { useMediaStore } from '../../stores/media';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
+import toastr from 'toastr';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -67,9 +68,15 @@ export default defineComponent({
     };
   },
   methods: {
-    borrowMedia(id: number) {
+    async borrowMedia(id: number) {
       const mediaService = new MediaService();
-      mediaService.borrowMedia(id, 1);
+      const success = await mediaService.borrowMedia(id, 1);
+      console.log(success);
+      if (success)
+        toastr.success("Successfully borrowed the media.");
+
+      else
+        toastr.error("Failed to borrow the media.");
     }
   },
 });

@@ -39,6 +39,7 @@ export default class {
             .patch(requestUrl, body)
             .then(
                 (response) => {success = true},
+                (error) => {console.log(error); success = false}
             )
 
         return success;

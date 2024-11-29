@@ -35,6 +35,27 @@ namespace Media_Service.Models.Specifications
         }
     }
 
+    public class MediaIdSpecification : ISpecification<MediaEntity>
+    {
+        int? _id;
+
+        public MediaIdSpecification(int? id)
+        {
+            _id = id;
+        }
+
+        public Expression<Func<MediaEntity, bool>> Criteria
+        {
+            get
+            {
+                if (!_id.HasValue)
+                    return x => false;
+
+                return x => x.id.Equals(_id.Value);
+            }
+        }
+    }
+
     public class MediaAuthorSpecification : ISpecification<MediaEntity>
     {
         string? _query;

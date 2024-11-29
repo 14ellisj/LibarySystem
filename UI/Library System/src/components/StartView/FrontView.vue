@@ -3,6 +3,7 @@ import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
+import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -23,10 +24,6 @@ export default defineComponent({
 
     const closePopup = () => {
       isPopupVisible.value = false;
-    };
-
-    const borrowMedia = (id: number) => {
-      console.log(`Borrowing media with ID: ${id}`);
     };
 
     const addToWishlist = (id: number) => {
@@ -59,7 +56,6 @@ export default defineComponent({
       store,
       expandedRowId,
       toggleRowDetails,
-      borrowMedia,
       addToWishlist,
       reserveMedia,
       decodeBase64Image,
@@ -69,6 +65,12 @@ export default defineComponent({
       Type,
       Genre,
     };
+  },
+  methods: {
+    borrowMedia(id: number) {
+      const mediaService = new MediaService();
+      mediaService.borrowMedia(id, 1);
+    }
   },
 });
 </script>

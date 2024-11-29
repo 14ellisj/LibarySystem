@@ -18,6 +18,7 @@ namespace Media_Service.Models
 
         [ForeignKey("borrower_id")]
         public UserEntity? borrower { get; set; }
+        public int? borrower_id;
 
         [ForeignKey("library_id")]
         public LibraryEntity library { get; set; }

@@ -1,67 +1,58 @@
-import type { Author } from '@/models/author'
-import type { MediaFilter } from '@/models/filters'
-import type { Media } from '@/models/media'
-import type { IAutoCompleteParams, IBorrowRequest } from '@/models/requests'
-import type { SearchType } from '@/models/searchType'
-import { useMediaStore } from '@/stores/media'
-import { useUserStore } from '@/stores/profileInformation'
-import axios from 'axios'
+import type { Author } from "@/models/author";
+import type { MediaFilter } from "@/models/filters";
+import type { Media } from "@/models/media";
+import type { IAutoCompleteParams } from "@/models/requests";
+import { useMediaStore } from "@/stores/media";
+import axios from "axios";
 
 export default class {
-  mediaStore = useMediaStore()
 
-  apiUrl = 'http://localhost:5132/'
+    mediaStore = useMediaStore();
 
-  async filterData(filter: MediaFilter): Promise<Media[]> {
-    const requestUrl = this.apiUrl + 'Media'
+    apiUrl = "http://localhost:5132/"
 
-    await axios
-      .get(requestUrl, {
-        params: filter,
-      })
-      .then((response) => {
-        this.mediaStore.setMedia(response.data)
-      })
+    async filterData(filter: MediaFilter): Promise<Media[]> {
+        const requestUrl = this.apiUrl + 'Media';
 
-    return this.mediaStore.media
-  }
+        await axios
+            .get(requestUrl, {
+                params: filter
+            })
+            .then((response) => {
+                this.mediaStore.setMedia(response.data)
+                console.log(response.data);
+            })
 
-  async borrowMedia(mediaId: number, profileId: number): Promise<boolean> {
-    const requestUrl = this.apiUrl + 'Media/Borrow'
-    const body: IBorrowRequest = {
-      media_id: mediaId,
-      profile_id: profileId,
+        return this.mediaStore.media;
     }
 
-    let success = false
+    async getAutoCompleteAuthors(author: string) : Promise<string[]> {
+        const requestUrl = this.apiUrl + 'AutoComplete/Author';
+        const params : IAutoCompleteParams = { name: author }
 
-    await axios.patch(requestUrl, body).then(
-      (response) => {
-        success = true
-        this.mediaStore.updateMediaItem(response.data)
-      },
-      (error) => {
-        console.log(error)
-        success = false
-      },
-    )
+        await axios
+            .get(requestUrl, {
+                params
+            })
+            .then((response) => {
+                this.mediaStore.setAutocompleteOptions((response.data as Author[]).map(x => x.first_name + ' ' + x.last_name));
+            })
 
-    return success
+        return this.mediaStore.autoCompleteOptions;
+    }
+
+    async getAutoCompleteTitles(name: string) : Promise<string[]> {
+        const requestUrl = this.apiUrl + 'AutoComplete/Title';
+        const params: IAutoCompleteParams = { name }
+
+        await axios
+            .get(requestUrl, {
+                params
+            })
+            .then((response) => {
+                this.mediaStore.setAutocompleteOptions((response.data as Media[]).map(x => x.name))
+            })
+
+        return this.mediaStore.autoCompleteOptions;
+    }
   }
-
-  async getAutoComplete(query: string, searchType: SearchType): Promise<string[]> {
-    const requestUrl = this.apiUrl + 'AutoComplete'
-    const params: IAutoCompleteParams = { query, search_type: searchType }
-    console.log(requestUrl)
-    await axios
-      .get(requestUrl, {
-        params,
-      })
-      .then((response) => {
-        console.log(response)
-        this.mediaStore.setAutocompleteOptions(response.data as string[])
-      })
-
-    return this.mediaStore.autoCompleteOptions
-  }
-}

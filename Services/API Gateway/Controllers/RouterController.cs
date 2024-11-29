@@ -21,8 +21,8 @@ namespace API_Gateway.Controllers
             Media returning = new Media()
             {
                 author = new Author() { first_name = "First Name", last_name = "Last Name" },
-                type = Type.AUDIO_BOOK,
-                genre = Genre.CRIME,
+                type = new Type() { name = "name"},
+                genre = Genre,
                 name = "Media Name"
             };
 

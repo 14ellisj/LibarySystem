@@ -2,6 +2,7 @@
 using Media_Service.Database;
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
+using Media_Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,50 +14,30 @@ namespace Media_Service.Controllers
     {
 
         private readonly ILogger<MediaController> _logger;
-        private readonly IMapper _mapper;
-        private readonly AppDbContext _context;
+        private readonly IMediaService _mediaService;
 
-        public MediaController(ILogger<MediaController> logger, AppDbContext context, IMapper mapper)
+        public MediaController(ILogger<MediaController> logger, IMediaService mediaService)
         {
             _logger = logger;
-            _context = context;
-            _mapper = mapper;
+            _mediaService = mediaService;
         }
 
-        [HttpGet(Name = "GetMedia")]
-        public async Task<JsonResult> Get(string? title, string? author, bool? isSelected, bool? availability)
+        [HttpGet(Name = "Get Media")]
+        public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? isSelected, bool? availability)
         {
+            var results = await _mediaService.FilterMedia(title, author, isSelected, availability);
+            
+            return Ok(results);
+        }
 
-            var query = _context.Media
-                .Include(x => x.author)
-                .Include(x => x.genre)
-                .Include(x => x.type)
-                .Include(x => x.media_items)
-                    .ThenInclude(mi => mi.borrower)
-                .AsQueryable();
+        [HttpPatch("borrow", Name = "Borrow Media")]
+        public async Task<IActionResult> BorrowMedia([FromBody] BorrowItemRequest body)
+        {
+            if (!body.MediaId.HasValue || !body.ProfileId.HasValue)
+                return BadRequest("Please include a media_id and a profile_id");
 
+            return Ok();
 
-            MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
-            MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
-            MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(availability);
-
-            query = query
-                .ApplySpecification(titleSpec)
-                .ApplySpecification(authorSpec)
-                .ApplySpecification(availabilitySpec);
-
-            try
-            {
-                var results = await query.ToListAsync();
-                var output = _mapper.Map<IEnumerable<MediaEntity>, IEnumerable<Media>>(results);
-
-
-                return Json(output);
-            }
-            catch (Exception e)
-            {
-                return Json(e);
-            }
         }
     }
 }

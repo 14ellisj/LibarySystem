@@ -13,4 +13,10 @@
         ROMANCE,
         CRIME
     }
+
+    public enum SearchType
+    {
+        TITLE,
+        AUTHOR
+    }
 }

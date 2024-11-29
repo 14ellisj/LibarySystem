@@ -23,7 +23,7 @@ export default defineComponent({
 
 <template>
   <div v-if="mediaData.length > 0">
-    {{mediaData[0].author_id.first_name}}
+    {{mediaData[0].author.first_name}}
   </div>
 
 

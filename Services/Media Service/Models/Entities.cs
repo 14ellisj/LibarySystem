@@ -45,8 +45,10 @@ namespace Media_Service.Models
         public int id { get; set; }
         [ForeignKey("genre_id")]
         public GenreEntity genre { get; set; }
+
         [ForeignKey("type_id")]
         public TypeEntity type { get; set; }
+
         [ForeignKey("author_id")]
         public AuthorEntity author { get; set; }
         public ICollection<MediaItemEntity> media_items { get; set; }

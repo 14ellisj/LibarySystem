@@ -7,6 +7,10 @@ export default defineComponent({
   setup() {
     const store = useWishListStore()
 
+    console.log(storeW)
+    console.log(storeP)
+    console.log(storeM)
+
     return {
       store,
     }

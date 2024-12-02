@@ -8,7 +8,7 @@ import toastr from 'toastr'
 import { useUserStore } from '@/stores/profileInformation'
 
 export default defineComponent({
-  name: 'Front View',
+  name: 'SingleMediaView',
   setup() {
     const media = ref(useMediaStore().media)
     const userStore = useUserStore()
@@ -29,15 +29,15 @@ export default defineComponent({
       isPopupVisible.value = false
     }
 
-    const addToWishlist = (id: number) => {
-      console.log(`Adding with ID: ${id} to wishlist`)
-      showPopup('Media has been added to your wishlist!')
-    }
+    const addToWishlist = (id: number, name: string) => {
+      console.log(`Adding "${name}" with ID: ${id} to wishlist`);
+      showPopup(`${name} has been added to your wishlist!`);
+    };
 
-    const reserveMedia = (id: number) => {
-      console.log(`Reserving media with ID: ${id}`)
-      showPopup('Media has been reserved!')
-    }
+    const reserveMedia = (id: number, name: string) => {
+      console.log(`Reserved ${name} with ID: ${id}`);
+      showPopup(`You have reserved ${name} successfully`);
+    };
 
     const decodeBase64Image = (base64String: string): string => {
       let cleanBase64String = base64String
@@ -51,9 +51,9 @@ export default defineComponent({
         const byte = byteCharacters.charCodeAt(offset)
         byteArrays.push(byte)
       }
-      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' })
-      return URL.createObjectURL(blob)
-    }
+      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' });
+      return URL.createObjectURL(blob);
+    };
 
     return {
       media,
@@ -128,8 +128,8 @@ export default defineComponent({
                       <button :disabled="!item.is_available || item.is_borrowed_by_user || !userStore.user?.id" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button @click="addToWishlist(item.id)">Add to Wishlist</button>
-                      <button @click="reserveMedia(item.id)">Reserve</button>
+                      <button @click="addToWishlist(item.id, item.name)">Add to Wishlist</button>
+                      <button @click="reserveMedia(item.id, item.name)">Reserve</button>
                       
                       <p v-if="!item.is_available">Sorry, not available right now.</p>
                       <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
@@ -258,6 +258,7 @@ tbody tr:hover {
   z-index: 999;
 }
 
+/* Popup styling */
 .popup {
   position: fixed;
   top: 50%;

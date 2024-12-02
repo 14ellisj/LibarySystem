@@ -1,7 +1,7 @@
 import type { Library } from "./library";
 import type { Role } from "./role";
 
-export interface ProfileDetails {
+export interface Profile {
     id: number,
     role_id: Role,
     library_id: Library,

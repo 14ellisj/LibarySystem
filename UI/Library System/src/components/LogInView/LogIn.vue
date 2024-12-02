@@ -4,27 +4,40 @@ import ProfileService from '@/services/ProfileService';
 import type { ProfileFilter } from '@/models/filters';
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
+import { useUserStore } from "@/stores/profileInformation";
+
 export default defineComponent({
     name: "Log-In",
+    components: {
+            LogInItem,
+        },
     data() {
-    var query: string = "";
+    var email: string = "";
+    var password: string = "";
     const profileService = new ProfileService();
 
     return {
-        query,
+        email,
+        password,
         profileService
     }
   },
   methods: {
     async signIn() {
         const filter: ProfileFilter = {
-            email: this.query
+            email: this.email
         }
-        await this.profileService.filterData(filter);
-        console.log(Response);
+        await this.profileService.filterData(filter, this.password);
+            
         this.$router.push('/logInValidation');
-        }
+        },
+    async setNotLoggedIn() {
+        useUserStore().setNotLoggedIn()
     }
+    },
+    beforeMount() {
+        this.setNotLoggedIn();
+    },
   }
 );
 </script>
@@ -35,9 +48,9 @@ export default defineComponent({
     </LogInItem>
 
         <label for="logInEmail">Email:</label><br>
-        <input type="text" id="logInEmail" name="logInEmail" v-model="query"><br>
+        <input type="text" id="logInEmail" name="logInEmail" v-model="email"><br>
         <label for="Password">Password:</label><br>
-        <input type="text" id="Password" name="Password"><br>
+        <input type="password" id="Password" name="Password" v-model="password"><br>
         <button @click="signIn()"> Sign in </button><br>
 
     <a href="register"> Register </a>

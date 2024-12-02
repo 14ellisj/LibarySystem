@@ -39,5 +39,23 @@ namespace Profile_Service.Controllers
 
             return Json(output);
         }
+
+        [HttpPut(Name = "CreateProfile")]
+        public async Task<JsonResult> Put(Profile profileEntity)
+        {
+            var query = _context.Profile
+                .Include(x => x.address)
+                .Include(x => x.role)
+                .Include(x => x.library)
+                .AsQueryable();
+
+                query = query.
+
+            var results = await query.ToListAsync();
+            var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
+
+
+            return Json(output);
+        }
     }
 }

@@ -14,7 +14,7 @@ import '../styles/variables.css'
 <style scoped>
 .home{
     text-align: center;
-    padding-top: 26vh;
+    padding-top: 13vh;
 
 }
  div {

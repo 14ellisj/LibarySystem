@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router';
-import Header from './components/Header/Header.vue';
-import Footer from './components/Footer/Footer.vue';
-import 'toastr/build/toastr.min.css';
+import { RouterView } from 'vue-router'
+import Header from './components/Header/Header.vue'
+import Footer from './components/Footer/Footer.vue'
+import 'toastr/build/toastr.min.css'
 </script>
 
 <template>
-    <Header></Header>
-    <RouterView />
-    <Footer></Footer>
+  <Header></Header>
+  <RouterView />
+  <Footer></Footer>
 </template>
 
 <style global>
-
-
 body {
   margin: 0;
   background-color: var(--background-color);
+  font-family: Arial, sans-serif;
 }
 
 header {

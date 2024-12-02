@@ -1,4 +1,4 @@
 export enum SearchType {
-    Title,
-    Author
+  Title,
+  Author,
 }

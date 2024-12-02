@@ -14,13 +14,13 @@ import ProfileOptions from '../components/ProfileView/Profile.vue'
   </body>
 </template>
 
-<style scoped> 
-    .profileContainer {
-      margin: auto;
-    }
+<style scoped>
+.profileContainer {
+  margin: auto;
+}
 
-    .profile{
-        text-align: center;
-        padding-top: 15vh;
-      }
+.profile {
+  text-align: center;
+  padding-top: 15vh;
+}
 </style>

@@ -3,13 +3,13 @@ import ReturnOptions from '../components/ReturnView/Return.vue'
 </script>
 
 <template>
-    <body>
-      <main>
-        <div class="profileContainer">
-          <div class="profile">
-            <ReturnOptions />
-          </div>
+  <body>
+    <main>
+      <div class="profileContainer">
+        <div class="profile">
+          <ReturnOptions />
         </div>
-      </main>
-    </body>
-  </template>
+      </div>
+    </main>
+  </body>
+</template>

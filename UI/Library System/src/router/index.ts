@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import MediaView from '../views/MediaView.vue'
 import StartView from '../views/StartView.vue'
 import SingleMediaView from '@/views/SingleMediaView.vue'
@@ -9,20 +8,20 @@ import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
-import AboutPage from '@/views/AboutPage.vue'
+import HomeView from '@/views/HomeView.vue'
 import NewsView from '@/views/NewsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      redirect: { path: "/home" },
+      path: '/',
+      redirect: { path: '/home' },
     },
     {
       path: '/home',
       name: 'home',
-      component: AboutPage,
+      component: HomeView,
     },
     {
       path: '/media',
@@ -73,7 +72,7 @@ const router = createRouter({
       path: '/news',
       name: 'News',
       component: NewsView,
-    }
+    },
   ],
 })
 

@@ -1,11 +1,11 @@
-import type { SearchType } from "./searchType";
+import type { SearchType } from './searchType'
 
 export interface IAutoCompleteParams {
-    query: string,
-    search_type: SearchType
+  query: string
+  search_type: SearchType
 }
 
 export interface IBorrowRequest {
-    media_id: number,
-    profile_id: number
+  media_id: number
+  profile_id: number
 }

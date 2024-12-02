@@ -1,11 +1,11 @@
 <template>
-    <div class="item">
-      <div class="details">
-        <h3>
-          <slot name="Heading"></slot>
-        </h3>
-      </div>
+  <div class="item">
+    <div class="details">
+      <h3>
+        <slot name="Heading"></slot>
+      </h3>
     </div>
+  </div>
 </template>
 
 <style scoped>

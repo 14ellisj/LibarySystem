@@ -1,6 +1,6 @@
-import type { Address } from "./address";
+import type { Address } from './address'
 
 export interface Library {
-    id: number,
-    address_is: Address
+  id: number
+  address_is: Address
 }

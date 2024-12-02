@@ -1,15 +1,14 @@
-import type { SearchType } from "./searchType";
-
+import type { SearchType } from './searchType'
 
 export interface MediaFilter {
-    title?: string,
-    author?: string,
-    is_selected?: boolean,
-    availability?: boolean
+  title?: string
+  author?: string
+  is_selected?: boolean
+  availability?: boolean
 }
 
 export interface ProfileFilter {
-    firstname?: string,
-    lastname?: string,
-    email?: string,
+  firstname?: string
+  lastname?: string
+  email?: string
 }

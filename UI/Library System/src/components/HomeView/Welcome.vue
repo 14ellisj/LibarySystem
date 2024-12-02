@@ -1,77 +1,22 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Welcome-Area',
-})
+  name: "Welcome-Area",
+});
 </script>
 
 <template>
-  <div class="home-container">
-    <div class="welcome-area">
-      <h1>Welcome to Our Library</h1>
-      <p>Your gateway to knowledge and exploration</p>
+    <div class="home-container">
+        <div class="welcome-area">
+            <h1>Welcome to Our Library</h1>
+            <p> Your gateway to knowledge and exploration</p>
+        </div>
+        <div class="welcome-area welcome-border"></div>
     </div>
-    <div class="welcome-area welcome-border"></div>
-  </div>
 </template>
 
 <style scoped>
-.about h2,
-.locations h2 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.about p {
-  font-size: 1.1em;
-  color: #555;
-}
-
-.locations {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-}
-
-a {
-  text-decoration: none;
-}
-
-.location {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: center;
-}
-
-.location h3 {
-  color: black;
-  margin-bottom: 10px;
-}
-
-.location p {
-  font-size: 1.1em;
-  color: #666;
-}
-
-footer {
-  text-align: center;
-  padding: 20px;
-  background-color: #333;
-  color: #fff;
-  margin-top: 40px;
-}
-
-.padding {
-  padding: 20px;
-}
-
-footer p {
-  font-size: 1em;
-}
 
 .welcome-area {
   width: 100%;

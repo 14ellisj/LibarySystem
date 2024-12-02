@@ -57,14 +57,13 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.about {
+.about-container {
   padding: 1rem;
 }
 
 .about h2,
 .locations h2 {
   font-size: 2rem;
-  color: #333;
   margin-bottom: 1rem;
 }
 

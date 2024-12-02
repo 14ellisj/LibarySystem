@@ -8,7 +8,7 @@ namespace Media_Service
         public MapperConfig()
         {
             CreateMap<MediaEntity, Media>()
-                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())))
+                .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => Enum.Parse<Genre>(src.genre.name.ToUpper())))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => Enum.Parse<MediaType>(src.type.name.ToUpper())))
                 .ForMember(dest => dest.IsAvailable, opt => opt.MapFrom(src => src.media_items.Any(mi => mi.borrower == null)));
 

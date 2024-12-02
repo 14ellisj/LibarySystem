@@ -15,6 +15,23 @@ namespace Media_Service.Services
             _mapper = mapper;
         }
 
+        public async Task<bool> BorrowMedia(int mediaId, int profileId)
+        {
+            MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
+
+            var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).First();
+
+            var isUserCurrentlyBorrowing = media.media_items.Any(x => x.borrower_id ==  profileId);
+            if (isUserCurrentlyBorrowing)
+                return false;
+
+            var availableItems = media.media_items.Where(x => x.borrower is null);
+            if (availableItems.Count() == 0)
+                return false;
+
+            return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
+        }
+
         public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);

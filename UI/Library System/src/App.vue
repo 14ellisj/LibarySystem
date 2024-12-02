@@ -2,6 +2,7 @@
 import { RouterView } from 'vue-router';
 import Header from './components/Header/Header.vue';
 import Footer from './components/Footer/Footer.vue';
+import 'toastr/build/toastr.min.css';
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import Footer from './components/Footer/Footer.vue';
 </template>
 
 <style global>
+
 
 body {
   margin: 0;

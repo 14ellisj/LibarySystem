@@ -20,7 +20,7 @@ export default defineComponent({
       <div class="welcome-area">
         <WelcomeArea />
       </div>
-      <div class="welcome-area welcome-border"></div>
+      <div class="welcome-area welcome-border"></div> <!-- This blocks the space so things appear below-->
       <div class="introduction-area">
         <SearchBar />
       </div>

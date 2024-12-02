@@ -115,7 +115,7 @@ export default defineComponent({
   border-radius: 2.5rem;
   background-color: white;
   border: solid black 2px;
-  padding: 1rem 2.5rem;
+  padding: 1rem 0;
   box-shadow: -4px 4px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
@@ -123,10 +123,11 @@ export default defineComponent({
   list-style: none;
   font-size: 1.25rem;
   cursor: pointer;
+  padding: 0;
 }
 
 .auto-complete-item {
-  padding: 0.25rem 1rem;
+  padding: 1rem 2rem;
 }
 
 .auto-complete-item:hover {

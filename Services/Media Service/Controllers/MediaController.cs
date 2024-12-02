@@ -36,12 +36,19 @@ namespace Media_Service.Controllers
             if (!body.MediaId.HasValue || !body.ProfileId.HasValue)
                 return BadRequest("Please include a media_id and a profile_id");
 
-            var success = await _mediaService.BorrowMedia((int)body.MediaId, (int)body.ProfileId);
+            try
+            {
+                var success = await _mediaService.BorrowMedia((int)body.MediaId, (int)body.ProfileId);
 
-            if (success)
-                return Ok();
+                if (success)
+                    return Ok();
 
-            return Conflict("No available items");
+                return Conflict("No available items");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
 
         }
     }

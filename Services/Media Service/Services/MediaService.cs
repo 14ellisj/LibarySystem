@@ -18,8 +18,10 @@ namespace Media_Service.Services
         public async Task<bool> BorrowMedia(int mediaId, int profileId)
         {
             MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
+            var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
 
-            var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).First();
+            if (media is null)
+                return false;
 
             var isUserCurrentlyBorrowing = media.media_items.Any(x => x.borrower_id ==  profileId);
             if (isUserCurrentlyBorrowing)

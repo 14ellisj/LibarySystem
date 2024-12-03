@@ -55,6 +55,8 @@ export default defineComponent({
       return URL.createObjectURL(blob);
     };
 
+    console.log(store.media)
+
     return {
       media,
       expandedRowId,

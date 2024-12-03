@@ -1,24 +1,9 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useWishListStore } from '../../stores/wishlist';
-import type { MediaFilter } from '@/models/filters';
-import { SearchType } from '@/models/searchType';
-import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'SingleMediaView',
-  data() {
-    var query: string = "";
-    var searchType: number = 0;
-
-    const mediaService = new MediaService();
-
-    return{
-      searchType,
-      query,
-      mediaService,
-    }
-  },
   setup() {
     const storeW = useWishListStore();
 
@@ -36,24 +21,13 @@ export default defineComponent({
     };
 
   },
-  methods: {
-    async submit(fromSuggestions: boolean) {
-        const filter: MediaFilter = {
-            title: this.searchType === SearchType.Title ? this.query : undefined,
-            author: this.searchType === SearchType.Author ? this.query : undefined,
-            is_selected: fromSuggestions
-        }
-        await this.mediaService.filterData(filter);
-        this.$router.push('/wishlist');
-    },
-  }
 });
 </script>
 
 <template>
     <h2>Profile</h2>
     <button onclick="window.location.href = '';"> Orders </button> <br>
-    <button @click="submit"> Wishlist</button> <br>
+    <button onclick="window.location.href = 'Wishlist';" @click="fetchWishlist" >Wishlist</button> <br>
     <button onclick="window.location.href = 'Return';"> Return Media </button> <br>
     <button onclick="window.location.href = '';"> Settings </button> <br>
     <button onclick="window.location.href = 'logIn';"> Log Out </button>

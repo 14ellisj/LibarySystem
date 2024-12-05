@@ -1,14 +1,29 @@
-<script setup lang="ts">
+<script lang="ts">
 import { defineComponent } from 'vue';
 import MenuItem from './MenuItem.vue';
 
-defineComponent({
+export default defineComponent({
     name: 'Header',
+    components: {
+            MenuItem,
+        },
     data() {
+        var hovering = false
 
+        return {
+            hovering
+        }
     },
     methods: {
-
+        async toHome() {  
+            this.$router.push('/home');
+        },
+        async toProfile() {  
+            this.$router.push('/profile');
+        },
+        async darkenImage() {
+            this.hovering = true
+        }
     }
 })
 </script>
@@ -16,15 +31,18 @@ defineComponent({
 <template>
     <div class="header-container header-container-in-place"></div>
     <div class="header-container">
-        <div class="header-logo">
-            <a href="home"><img class="logo-img" src="@/images/LibraryLogoDone.png" /></a>
+        <div class="header-logo" @click= "toHome()">
+            <img class="logo-img" src="@/images/LibraryLogoDone.png"><img>
         </div>
         <div class="header-navigation">
             <MenuItem Title="Home" Path="/home"></MenuItem>
             <MenuItem Title="News" Path="/news"></MenuItem>
         </div>
-        <div class="header-user">
-            <a href="Profile"><img class="user-img" src="@/images/profile.webp" /></a>
+        <div class="header-user" @click= "toProfile()" @hover= "darkenImage()" v-if="hovering == false">
+            <img class="user-img" src="@/images/profile.webp"><img>
+        </div>
+        <div class="header-user-dark" @click= "toProfile()" @hover= "darkenImage()" v-else>
+            <img class="user-img-dark" src="@/images/profile.webp"><img>
         </div>
     </div>
 </template>
@@ -37,6 +55,11 @@ defineComponent({
 
     .user-img {
         width: 5rem;
+    }
+
+    .user-img-dark {
+        width: 5rem;
+        filter: brightness(50%);
     }
 
     .header-container {
@@ -75,6 +98,9 @@ defineComponent({
 
     .header-user {
         flex: 0 1;
+    }
 
+    .header-user-dark {
+        flex: 0 1;
     }
 </style>

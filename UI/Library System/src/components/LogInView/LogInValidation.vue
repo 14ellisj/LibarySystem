@@ -31,7 +31,6 @@ export default defineComponent({
             <button @click="push(); setLoggedIn();">
                 Go searching!
             </button>
-            <p>{{ store.loggedIn }}</p>
         </main>
         <main v-else>
             <p>Your email or password was incorrect, please try again</p>

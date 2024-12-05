@@ -40,8 +40,8 @@ namespace Profile_Service.Controllers
             return Json(output);
         }
 
-        [HttpPut(Name = "CreateProfile")]
-        public async Task<JsonResult> Put(Profile profileEntity)
+        [HttpPost(Name = "CreateProfile")]
+        public async Task<JsonResult> Post(Profile profileEntity)
         {
             var query = _context.Profile
                 .Include(x => x.address)

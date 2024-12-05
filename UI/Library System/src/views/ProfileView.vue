@@ -11,10 +11,8 @@ export default defineComponent({
     },
     setup() {
         const store = useUserStore();
-        var isLoggedIn: "true" | undefined = undefined
         return {
             store,
-            isLoggedIn
         };
     },
     methods: {
@@ -39,7 +37,6 @@ export default defineComponent({
       <div class="profileContainer">
         <div class="profile">
           <button @click="push()"> Log In </button>
-          <p> {{ store.loggedIn }}</p>
         </div>
       </div>
     </main>
@@ -53,6 +50,6 @@ export default defineComponent({
 
     .profile{
         text-align: center;
-        padding-top: 15vh;
+        padding-top: 10vh;
       }
 </style>

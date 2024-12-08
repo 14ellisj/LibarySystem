@@ -26,7 +26,7 @@ import { useUserStore } from '@/stores/profileInformation'
     <input type="submit" value="Confirm details" />
   </form>
 
-  <a href="login"> Log In </a>
+  <RouterLink to="/login"> Log In </RouterLink>
 </template>
 
 <style scoped>

@@ -51,12 +51,12 @@ export default defineComponent({
           </div>
           <div class="button-single">
             <button class="borrow-button">Borrow</button>
-            <a href="Wishlist"><button class="borrow-button">+ Wish-list</button></a>
+            <RouterLink to="/Wishlist"><button class="borrow-button">+ Wish-list</button></RouterLink>
             <button class="borrow-button">Join waiting list</button>
           </div>
         </div>
         <div>
-          <a href="Front"><-- Back</a>
+          <RouterLink to="/Front"><-- Back</RouterLink>
         </div>
       </div>
     </div>

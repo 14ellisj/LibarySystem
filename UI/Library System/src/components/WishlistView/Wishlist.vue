@@ -32,7 +32,7 @@ export default defineComponent({
         <tbody>
           <tr v-for="wishlist in store.Wishlist" :key="wishlist.id">
             <td>
-              <a :href="`/item/${wishlist.id}`">{{ wishlist.media_id.name }}</a>
+              <RouterLink :to="`/item/${wishlist.id}`">{{ wishlist.media_id.name }}</RouterLink>
             </td>
             <td>
               {{ wishlist.media_id.author_id.first_name }}

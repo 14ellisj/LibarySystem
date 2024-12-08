@@ -23,7 +23,7 @@ export default defineComponent({
   <div class="header-container header-container-in-place"></div>
   <div class="header-container">
     <div class="header-logo">
-      <a href="home"><img class="logo-img" src="@/images/LibraryLogoDone.png" /></a>
+      <RouterLink to="/home"><img class="logo-img" src="@/images/LibraryLogoDone.png" /></RouterLink>
     </div>
     <div class="header-navigation">
       <MenuItem Title="Home" Path="/home"></MenuItem>

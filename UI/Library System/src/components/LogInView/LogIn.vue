@@ -37,7 +37,7 @@ export default defineComponent({
   <input type="text" id="Password" name="Password" /><br />
   <button @click="signIn()">Sign in</button><br />
 
-  <a href="register"> Register </a>
+  <RouterLink to="/register"> Register </RouterLink>
 </template>
 
 <style scoped>

@@ -25,6 +25,7 @@ export default defineComponent({
     const fetchWishlist = async (): Promise<void> => {
       try {
         await storeW.fetchAllWishlistItems();
+        console.log(storeW.Wishlist)
       } catch (error) {
         console.error('Failed to fetch wishlist:', error);
       }
@@ -52,10 +53,10 @@ export default defineComponent({
 
 <template>
     <h2>Profile</h2>
-    <button onclick="window.location.href = '';"> Orders </button> <br>
-    <button @click="submit"> Wishlist</button> <br>
+    <button onclick="window.location.href = 'Home';"> Orders </button> <br>
+    <button @click="fetchWishlist" >Wishlist</button> <br>
     <button onclick="window.location.href = 'Return';"> Return Media </button> <br>
-    <button onclick="window.location.href = '';"> Settings </button> <br>
+    <button onclick="window.location.href = 'Home';"> Settings </button> <br>
     <button onclick="window.location.href = 'logIn';"> Log Out </button>
 </template>
   

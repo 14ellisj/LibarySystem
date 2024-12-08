@@ -56,7 +56,7 @@ export default defineComponent({
     };
 
     console.log(store.media)
-
+  
     return {
       media,
       expandedRowId,

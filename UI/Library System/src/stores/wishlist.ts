@@ -14,9 +14,9 @@ export const useWishListStore = defineStore('wishlist', {
     },
     async fetchAllWishlistItems(): Promise<void> {
       try {
-        const response = await axios.get('/wishlist');
+        const response = await axios.get('https://localhost:5132/wishlist');
         this.Wishlist = response.data; 
-        console.log('Fetched all wishlist items:', this.Wishlist);
+        console.log('Fetched all wishlist items');
       } catch (error) {
         console.error('Error fetching wishlist items:', error);
         throw error;

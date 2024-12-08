@@ -4,6 +4,7 @@ import type { Media } from '@/models/media'
 import type { IAutoCompleteParams, IBorrowRequest } from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
+import { useUserStore } from '@/stores/profileInformation'
 import axios from 'axios'
 
 export default class {
@@ -37,6 +38,7 @@ export default class {
     await axios.patch(requestUrl, body).then(
       (response) => {
         success = true
+        this.mediaStore.updateMediaItem(response.data)
       },
       (error) => {
         console.log(error)

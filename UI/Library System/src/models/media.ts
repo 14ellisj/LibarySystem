@@ -13,4 +13,5 @@ export interface Media {
   image: string
   rating: number
   is_available: boolean
+  is_borrowed_by_user: boolean
 }

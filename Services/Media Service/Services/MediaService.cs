@@ -17,8 +17,7 @@ namespace Media_Service.Services
 
         public async Task<bool> BorrowMedia(int mediaId, int profileId)
         {
-            MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
-            var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
+            var media = await GetMediaById(mediaId);
 
             if (media is null)
                 return false;
@@ -34,7 +33,7 @@ namespace Media_Service.Services
             return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
         }
 
-        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable)
+        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
             MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
@@ -48,9 +47,26 @@ namespace Media_Service.Services
             };
 
             var entities = await _mediaDatabase.FilterMediaAllInfo(specs);
-            var mapped = _mapper.Map<IEnumerable<Media>>(entities);
+            var mapped = _mapper.Map<IEnumerable<Media>>(entities, opts => opts.Items["profile_id"] = profileId);
 
             return mapped;
+        }
+
+        public async Task<Media> GetMedia(int id, int? profileId)
+        {
+            var media = await GetMediaById(id);
+
+            if (media is null)
+                throw new Exception("Media Not Found.");
+
+            var mapped = _mapper.Map<Media>(media, opts => opts.Items["profile_id"] = profileId);
+            return mapped;
+        }
+
+        private async Task<MediaEntity?> GetMediaById(int id)
+        {
+            MediaIdSpecification idSpec = new MediaIdSpecification(id);
+            return (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
         }
     }
 }

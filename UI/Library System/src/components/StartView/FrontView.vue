@@ -5,11 +5,13 @@ import { Type } from '@/models/type'
 import { Genre } from '@/models/genre'
 import MediaService from '@/services/MediaService'
 import toastr from 'toastr'
+import { useUserStore } from '@/stores/profileInformation'
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
-    const store = useMediaStore()
+    const media = ref(useMediaStore().media)
+    const userStore = useUserStore()
     const expandedRowId = ref<number | null>(null)
     const isPopupVisible = ref(false)
     const popupMessage = ref('')
@@ -54,7 +56,7 @@ export default defineComponent({
     }
 
     return {
-      store,
+      media,
       expandedRowId,
       toggleRowDetails,
       addToWishlist,
@@ -63,15 +65,16 @@ export default defineComponent({
       isPopupVisible,
       popupMessage,
       closePopup,
+      userStore,
       Type,
       Genre,
     }
   },
   methods: {
-    async borrowMedia(id: number) {
+    async borrowMedia(media_id: number) {
       const mediaService = new MediaService()
-      const success = await mediaService.borrowMedia(id, 1)
-      console.log(success)
+      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id)
+
       if (success) toastr.success('Successfully borrowed the media.')
       else toastr.error('Failed to borrow the media.')
     },
@@ -97,38 +100,40 @@ export default defineComponent({
           </tr>
         </thead>
         <tbody>
-          <template v-for="media in store.media" :key="media.id">
-            <tr @click="toggleRowDetails(media.id)">
-              <td>{{ media.name }}</td>
-              <td>{{ media.author.first_name }} {{ media.author.last_name }}</td>
-              <td>{{ Genre[media.genre] }}</td>
-              <td>{{ media.is_available ? 'Available' : 'Not Available' }}</td>
-              <td>{{ Type[media.type] }}</td>
+          <template v-for="item in media" :key="item.id">
+            <tr @click="toggleRowDetails(item.id)">
+              <td>{{ item.name }}</td>
+              <td>{{ item.author.first_name }} {{ item.author.last_name }}</td>
+              <td>{{ Genre[item.genre] }}</td>
+              <td>{{ item.is_available ? 'Available' : 'Not Available' }}</td>
+              <td>{{ Type[item.type] }}</td>
             </tr>
-            <tr v-if="expandedRowId === media.id">
+            <tr v-if="expandedRowId === item.id">
               <td colspan="6">
                 <div class="details-container">
                   <div class="media-image">
-                    <img :src="decodeBase64Image(media.image)" alt="Media Image" />
+                    <img :src="decodeBase64Image(item.image)" alt="Media Image" />
                   </div>
                   <div class="media-info">
-                    <h2>{{ media.name }}</h2>
+                    <h2>{{ item.name }}</h2>
                     <p>
-                      <strong>Author: </strong> {{ media.author.first_name }}
-                      {{ media.author.last_name }}
+                      <strong>Author: </strong> {{ item.author.first_name }}
+                      {{ item.author.last_name }}
                     </p>
-                    <p><strong>Length: </strong>{{ media.length }} pages</p>
-                    <p><strong>Description: </strong> {{ media.description }}</p>
-                    <p><strong>Rating: </strong>{{ media.rating }}/5</p>
+                    <p><strong>Length: </strong>{{ item.length }} pages</p>
+                    <p><strong>Description: </strong> {{ item.description }}</p>
+                    <p><strong>Rating: </strong>{{ item.rating }}/5</p>
                     <ul></ul>
                     <div class="actions">
-                      <button v-if="media.is_available" @click="borrowMedia(media.id)">
+                      <button :disabled="!item.is_available || item.is_borrowed_by_user || !userStore.user?.id" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <p v-else>Sorry, not available right now</p>
-
-                      <button @click="addToWishlist(media.id)">Add to Wishlist</button>
-                      <button @click="reserveMedia(media.id)">Reserve</button>
+                      <button @click="addToWishlist(item.id)">Add to Wishlist</button>
+                      <button @click="reserveMedia(item.id)">Reserve</button>
+                      
+                      <p v-if="!item.is_available">Sorry, not available right now.</p>
+                      <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
+                      <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
                     </div>
                   </div>
                 </div>

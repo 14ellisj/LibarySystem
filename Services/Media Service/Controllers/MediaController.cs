@@ -23,9 +23,9 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "Get Media")]
-        public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? isSelected, bool? availability)
+        public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? is_selected, bool? availability, int? profile_id)
         {
-            var results = await _mediaService.FilterMedia(title, author, isSelected, availability);
+            var results = await _mediaService.FilterMedia(title, author, is_selected, availability, profile_id);
             
             return Ok(results);
         }
@@ -40,10 +40,11 @@ namespace Media_Service.Controllers
             {
                 var success = await _mediaService.BorrowMedia((int)body.MediaId, (int)body.ProfileId);
 
-                if (success)
-                    return Ok();
+                if (!success)
+                    return Conflict("No available items");
 
-                return Conflict("No available items");
+                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
+                return Ok(updatedItem);
             }
             catch (Exception ex)
             {

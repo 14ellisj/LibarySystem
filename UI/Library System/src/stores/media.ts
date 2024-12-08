@@ -15,5 +15,11 @@ export const useMediaStore = defineStore('media', {
     setAutocompleteOptions(input: string[]) {
       this.autoCompleteOptions = input
     },
+    updateMediaItem(updatedItem: Media) {
+      var mediaIndex = this.media.findIndex(x => x.id === updatedItem.id);
+      this.media[mediaIndex] = updatedItem;
+      console.log(updatedItem)
+      console.log(this.media)
+    }
   },
 })

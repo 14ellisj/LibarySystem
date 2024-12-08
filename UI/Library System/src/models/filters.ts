@@ -5,6 +5,7 @@ export interface MediaFilter {
   author?: string
   is_selected?: boolean
   availability?: boolean
+  profile_id?: number
 }
 
 export interface ProfileFilter {

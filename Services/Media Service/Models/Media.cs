@@ -24,5 +24,7 @@ namespace Media_Service.Models
         public string Length { get; set; }
         [JsonPropertyName("rating")]
         public string Rating { get; set; }
+        [JsonPropertyName("is_borrowed_by_user")]
+        public bool IsBorrwedByUser { get; set; }
     }
 }

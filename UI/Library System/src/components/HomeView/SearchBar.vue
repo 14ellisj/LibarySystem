@@ -4,6 +4,7 @@ import type { MediaFilter } from '@/models/filters'
 import { SearchType } from '@/models/searchType'
 import MediaService from '@/services/MediaService'
 import { useMediaStore } from '@/stores/media'
+import { useUserStore } from '@/stores/profileInformation'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -13,6 +14,8 @@ export default defineComponent({
     var searchType: number = 0
     var autoCompleteResults: string[] = []
     var autoCompleteTimeout: number = 0
+    var userStore = useUserStore()
+
 
     const searchTypesCount = Object.keys(SearchType).length / 2
 
@@ -26,14 +29,17 @@ export default defineComponent({
       autoCompleteResults,
       autoCompleteTimeout,
       mediaService,
+      userStore
     }
   },
   methods: {
     async submit(fromSuggestions: boolean) {
+    
       const filter: MediaFilter = {
         title: this.searchType === SearchType.Title ? this.query : undefined,
         author: this.searchType === SearchType.Author ? this.query : undefined,
         is_selected: fromSuggestions,
+        profile_id: this.userStore.user?.id
       }
       await this.mediaService.filterData(filter)
       this.$router.push('/front')

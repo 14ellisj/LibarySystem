@@ -1,10 +1,20 @@
-<script setup lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
 import MenuItem from './MenuItem.vue'
+import { useUserStore } from '@/stores/profileInformation';
 
-defineComponent({
+export default defineComponent({
   name: 'Header',
-  data() {},
+  data() {
+    const user = ref(useUserStore().user);
+    const userRoute = user.value?.id ? "/profile" : "/login"
+    return {
+      userRoute
+    }
+  },
+  components: {
+    MenuItem
+  },
   methods: {},
 })
 </script>
@@ -20,7 +30,7 @@ defineComponent({
       <MenuItem Title="News" Path="/news"></MenuItem>
     </div>
     <div class="header-user">
-      <a href="Profile"><img class="user-img" src="@/images/profile.webp" /></a>
+      <RouterLink :to="userRoute"><img class="user-img" src="@/images/profile.webp" /></RouterLink>
     </div>
   </div>
 </template>

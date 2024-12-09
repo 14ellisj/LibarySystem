@@ -15,6 +15,8 @@ export default defineComponent({
     const expandedRowId = ref<number | null>(null)
     const isPopupVisible = ref(false)
     const popupMessage = ref('')
+    const mediaStore = useMediaStore()
+
 
     const toggleRowDetails = (id: number) => {
       expandedRowId.value = expandedRowId.value === id ? null : id
@@ -29,15 +31,15 @@ export default defineComponent({
       isPopupVisible.value = false
     }
 
-    const addToWishlist = (id: number) => {
-      console.log(`Adding with ID: ${id} to wishlist`)
-      showPopup('Media has been added to your wishlist!')
-    }
+    const addToWishlist = (id: number, name: string) => {
+      console.log(`Adding "${name}" with ID: ${id} to wishlist`);
+      showPopup(`${name} has been added to your wishlist!`);
+    };
 
-    const reserveMedia = (id: number) => {
-      console.log(`Reserving media with ID: ${id}`)
-      showPopup('Media has been reserved!')
-    }
+    const reserveMedia = (id: number, name: string) => {
+      console.log(`Reserved ${name} with ID: ${id}`);
+      showPopup(`You have reserved ${name} successfully`);
+    };
 
     const decodeBase64Image = (base64String: string): string => {
       let cleanBase64String = base64String
@@ -51,10 +53,12 @@ export default defineComponent({
         const byte = byteCharacters.charCodeAt(offset)
         byteArrays.push(byte)
       }
-      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' })
-      return URL.createObjectURL(blob)
-    }
+      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' });
+      return URL.createObjectURL(blob);
+    };
 
+    console.log(mediaStore.media)
+  
     return {
       media,
       expandedRowId,
@@ -68,6 +72,7 @@ export default defineComponent({
       userStore,
       Type,
       Genre,
+      mediaStore,
     }
   },
   methods: {
@@ -128,12 +133,19 @@ export default defineComponent({
                       <button :disabled="!item.is_available || item.is_borrowed_by_user || !userStore.user?.id" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button @click="addToWishlist(item.id)">Add to Wishlist</button>
-                      <button @click="reserveMedia(item.id)">Reserve</button>
-                      
-                      <p v-if="!item.is_available">Sorry, not available right now.</p>
-                      <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
-                      <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
+                      <button :disabled="item.is_available || item.is_reserved_by_me || !userStore.user?.id" @click="reserveMedia(item.id, item.name)">
+                        Reserve
+                      </button>
+                      <button @click="addToWishlist(item.id, item.name)">Add to Wishlist</button>
+                      <div>
+                        <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>
+                        <p v-else-if="!userStore.user?.id">Log in to reserve this item.</p>
+                      </div>
+                      <div>
+                        <p v-if="!item.is_available">Sorry, not available right now.</p>
+                        <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
+                        <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
+                      </div>
                     </div>
                   </div>
                 </div>

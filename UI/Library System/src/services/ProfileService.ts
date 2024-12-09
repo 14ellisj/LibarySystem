@@ -1,5 +1,5 @@
 import type { ProfileFilter } from '@/models/filters'
-import { type ProfileDetails } from '@/models/profile'
+import { type Profile } from '@/models/profile'
 import { useUserStore } from '@/stores/profileInformation'
 import axios from 'axios'
 
@@ -7,7 +7,7 @@ export default class {
   userStore = useUserStore()
   apiUrl = 'http://localhost:5273/Profile'
 
-  async getData(): Promise<ProfileDetails> {
+  async getData(): Promise<Profile> {
     await axios.get(this.apiUrl).then((response) => {
       this.userStore.setUser(response.data)
       console.log(response.data)
@@ -16,7 +16,7 @@ export default class {
     return this.userStore.user
   }
 
-  async filterData(filter: ProfileFilter): Promise<ProfileDetails> {
+  async filterData(filter: ProfileFilter): Promise<Profile> {
     await axios
       .get(this.apiUrl, {
         params: filter,

@@ -9,3 +9,8 @@ export interface IBorrowRequest {
   media_id: number
   profile_id: number
 }
+
+export interface IReserveRequest {
+  media_id: number
+  profile_id: number
+}

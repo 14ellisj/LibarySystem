@@ -36,11 +36,6 @@ export default defineComponent({
       showPopup(`${name} has been added to your wishlist!`);
     };
 
-    const reserveMedia = (id: number, name: string) => {
-      console.log(`Reserved ${name} with ID: ${id}`);
-      showPopup(`You have reserved ${name} successfully`);
-    };
-
     const decodeBase64Image = (base64String: string): string => {
       let cleanBase64String = base64String
       if (cleanBase64String.startsWith('data:image')) {
@@ -64,7 +59,6 @@ export default defineComponent({
       expandedRowId,
       toggleRowDetails,
       addToWishlist,
-      reserveMedia,
       decodeBase64Image,
       isPopupVisible,
       popupMessage,
@@ -82,6 +76,21 @@ export default defineComponent({
 
       if (success) toastr.success('Successfully borrowed the media.')
       else toastr.error('Failed to borrow the media.')
+    },
+    async reserveMedia(media_id: number, media_name: string) {
+      const mediaService = new MediaService()
+      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id)
+
+      if (success) {
+        // Update reserve queue locally if the reservation was successful
+        const reservedItem = this.media.find(item => item.id === media_id)
+        if (reservedItem) {
+          reservedItem.reserve_queue = (reservedItem.reserve_queue || 0) + 1
+        }
+        toastr.success(`Successfully reserved ${media_name}. You are ${reservedItem?.reserve_queue}`)
+      } else {
+        toastr.error(`Failed to reserve ${media_name}.`)
+      }
     },
   },
 })

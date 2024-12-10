@@ -3,6 +3,9 @@ using Profile_Service.Database;
 using Profile_Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
+
+
 
 namespace Profile_Service.Controllers
 
@@ -40,22 +43,41 @@ namespace Profile_Service.Controllers
             return Json(output);
         }
 
-        [HttpPost(Name = "CreateProfile")]
-        public async Task<JsonResult> Post(Profile profileEntity)
-        {
-            var query = _context.Profile
-                .Include(x => x.address)
-                .Include(x => x.role)
-                .Include(x => x.library)
-                .AsQueryable();
+    [HttpPost(Name = "CreateProfile")]
+    public async Task<IActionResult> Post([FromBody] RegisterDetails body)
+    {
 
-                query = query.
+    var sql = "INSERT INTO Profile (email, first_name, last_name, password) " + "VALUES (@email, @firstName, @lastName, @password)";
 
-            var results = await query.ToListAsync();
-            var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
+    var email = (string)body.email;
+    var firstName = (string)body.firstName;
+    var lastName = (string)body.lastName;
+    var password = (string)body.password;
 
+    try
+    {
+        using var connection = new SqliteConnection(@"Data Source=C:\Users\jdent\OneDrive\Desktop\1) Uni stuff\Year 3\Software Architecture and Design\LibarySystem\LibarySystem\database\Library Database.db");
+        connection.Open();
 
-            return Json(output);
-        }
+        using var command = new SqliteCommand(sql, connection);
+
+        command.Parameters.AddWithValue("@email", email);
+        command.Parameters.AddWithValue("@firstName", firstName);
+        command.Parameters.AddWithValue("@lastName", lastName);
+        command.Parameters.AddWithValue("@password", password);
+        
+        var rowInserted = command.ExecuteNonQuery();
+
+    
+    return Ok();
+
     }
+    catch (SqliteException ex)
+    {
+        Console.WriteLine(ex.Message);
+        return Conflict("Error");
+    }
+            
+            }
+        }
 }

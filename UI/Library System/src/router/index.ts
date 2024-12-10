@@ -9,6 +9,7 @@ import ProfileView from '@/views/ProfileView.vue'
 import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
+import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
 import AboutPage from '@/views/AboutPage.vue'
 import NewsView from '@/views/NewsView.vue'
 
@@ -68,6 +69,11 @@ const router = createRouter({
       path: '/logInValidation',
       name: 'logInValidation',
       component: LogInValidation,
+    },
+    {
+      path: '/registrationValidation',
+      name: 'registrationValidation',
+      component: RegistrationValidation,
     },
     {
       path: '/news',

@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import '../../styles/variables.css'
+import type { MediaFilter } from '@/models/filters';
 
 export default defineComponent({
     name: 'Profile',

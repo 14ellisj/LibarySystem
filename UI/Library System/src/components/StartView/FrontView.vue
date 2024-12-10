@@ -53,6 +53,7 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media)
+    console.log(userStore)
   
     return {
       media,
@@ -82,7 +83,7 @@ export default defineComponent({
       const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id)
 
       if (success) {
-        // Update reserve queue locally if the reservation was successful
+  
         const reservedItem = this.media.find(item => item.id === media_id)
         if (reservedItem) {
           reservedItem.reserve_queue = (reservedItem.reserve_queue || 0) + 1

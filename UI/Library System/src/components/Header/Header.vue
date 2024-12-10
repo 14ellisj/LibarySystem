@@ -1,84 +1,106 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import MenuItem from './MenuItem.vue'
-import { useUserStore } from '@/stores/profileInformation';
+import { defineComponent } from 'vue';
+import MenuItem from './MenuItem.vue';
 
 export default defineComponent({
-  name: 'Header',
-  data() {
-    const user = ref(useUserStore().user);
-    const userRoute = user.value?.id ? "/profile" : "/login"
-    return {
-      userRoute
+    name: 'Header',
+    components: {
+            MenuItem,
+        },
+    data() {
+        var hovering = false
+
+        return {
+            hovering
+        }
+    },
+    methods: {
+        async toHome() {  
+            this.$router.push('/home');
+        },
+        async toProfile() {  
+            this.$router.push('/profile');
+        },
+        async darkenImage() {
+            this.hovering = true
+        }
     }
-  },
-  components: {
-    MenuItem
-  },
-  methods: {},
 })
 </script>
 
 <template>
-  <div class="header-container header-container-in-place"></div>
-  <div class="header-container">
-    <div class="header-logo">
-      <RouterLink to="/home"><img class="logo-img" src="@/images/LibraryLogoDone.png" /></RouterLink>
+    <div class="header-container header-container-in-place"></div>
+    <div class="header-container">
+        <div class="header-logo" @click= "toHome()">
+            <img class="logo-img" src="@/images/LibraryLogoDone.png"><img>
+        </div>
+        <div class="header-navigation">
+            <MenuItem Title="Home" Path="/home"></MenuItem>
+            <MenuItem Title="News" Path="/news"></MenuItem>
+        </div>
+        <div class="header-user" @click= "toProfile()" @hover= "darkenImage()" v-if="hovering == false">
+            <img class="user-img" src="@/images/profile.webp"><img>
+        </div>
+        <div class="header-user-dark" @click= "toProfile()" @hover= "darkenImage()" v-else>
+            <img class="user-img-dark" src="@/images/profile.webp"><img>
+        </div>
     </div>
-    <div class="header-navigation">
-      <MenuItem Title="Home" Path="/home"></MenuItem>
-      <MenuItem Title="News" Path="/news"></MenuItem>
-    </div>
-    <div class="header-user">
-      <RouterLink :to="userRoute"><img class="user-img" src="@/images/profile.webp" /></RouterLink>
-    </div>
-  </div>
 </template>
+  
+<style scoped> 
 
-<style scoped>
-.logo-img {
-  width: 5rem;
-}
+    .logo-img {
+        width: 5rem;
+    }
 
-.user-img {
-  width: 5rem;
-}
+    .user-img {
+        width: 5rem;
+    }
 
-.header-container {
-  display: flex;
-  flex-direction: row;
-  height: 5rem;
-  width: 100%;
+    .user-img-dark {
+        width: 5rem;
+        filter: brightness(50%);
+    }
 
-  background-color: var(--tertiary-color);
-  position: fixed;
-  top: 0;
-  z-index: 4;
-}
+    .header-container {
+        display: flex;
+        flex-direction: row;
+        height: 5rem;
+        width: 100%;
 
-a {
-  text-decoration: none;
-}
+        background-color: var(--tertiary-color);
+        position: fixed;
+        top: 0;
+        z-index: 4;
+    }
 
-.header-container-in-place {
-  position: relative;
-  visibility: hidden;
-}
+    a {
+        text-decoration: none;
+    }   
 
-.header-logo {
-  flex: 0 1;
-}
+    .header-container-in-place {
+        position: relative;
+        visibility: hidden;
+    }
 
-.header-navigation {
-  flex: 1 1;
-  padding: 0.5rem;
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  flex-direction: row;
-}
+    .header-logo {
+        flex: 0 1;
+    }
 
-.header-user {
-  flex: 0 1;
-}
+    .header-navigation {
+        flex: 1 1;
+        padding: 0.5rem;
+        display: flex;
+        align-items: end;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .header-user {
+        flex: 0 1;
+    }
+
+    .header-user-dark {
+        flex: 0 1;
+    }
 </style>

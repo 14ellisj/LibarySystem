@@ -34,7 +34,7 @@ export default defineComponent({
         </main>
         <main v-else>
             <p>Your email or password was incorrect, please try again</p>
-            <a href="logIn">Go back</a>
+            <a href="logIn"> Go back </a>
         </main>
     </body>
 </template>

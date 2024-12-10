@@ -31,6 +31,9 @@ export default defineComponent({
             
         this.$router.push('/logInValidation');
         },
+    async toRegister() {
+        this.$router.push('/register');
+    },
     async setNotLoggedIn() {
         useUserStore().setNotLoggedIn()
     }
@@ -53,7 +56,7 @@ export default defineComponent({
         <input type="password" id="Password" name="Password" v-model="password"><br>
         <button @click="signIn()"> Sign in </button><br>
 
-    <a href="register"> Register </a>
+        <button @click="toRegister()"> Go to registration </button><br>
 </template>
   
 <style scoped> 

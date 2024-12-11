@@ -1,35 +1,35 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMediaStore } from '../../stores/media'
-import { Type } from '@/models/type'
-import { Genre } from '@/models/genre'
-import MediaService from '@/services/MediaService'
-import toastr from 'toastr'
-import { useUserStore } from '@/stores/profileInformation'
+import { defineComponent, ref } from 'vue';
+import { useMediaStore } from '../../stores/media';
+import { Type } from '@/models/type';
+import { Genre } from '@/models/genre';
+import MediaService from '@/services/MediaService';
+import toastr from 'toastr';
+import { useUserStore } from '@/stores/profileInformation';
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
-    const media = ref(useMediaStore().media)
-    const userStore = useUserStore()
-    const expandedRowId = ref<number | null>(null)
-    const isPopupVisible = ref(false)
-    const popupMessage = ref('')
-    const mediaStore = useMediaStore()
-
+    const media = ref(useMediaStore().media);
+    const userStore = useUserStore();
+    const expandedRowId = ref<number | null>(null);
+    const isPopupVisible = ref(false);
+    const popupMessage = ref('');
+    const mediaStore = useMediaStore();
+    //const isAdmin = ref(userStore.user?.role_id.id === 1);
 
     const toggleRowDetails = (id: number) => {
-      expandedRowId.value = expandedRowId.value === id ? null : id
-    }
+      expandedRowId.value = expandedRowId.value === id ? null : id;
+    };
 
     const showPopup = (message: string) => {
-      popupMessage.value = message
-      isPopupVisible.value = true
-    }
+      popupMessage.value = message;
+      isPopupVisible.value = true;
+    };
 
     const closePopup = () => {
-      isPopupVisible.value = false
-    }
+      isPopupVisible.value = false;
+    };
 
     const addToWishlist = (id: number, name: string) => {
       console.log(`Adding "${name}" with ID: ${id} to wishlist`);
@@ -37,23 +37,23 @@ export default defineComponent({
     };
 
     const decodeBase64Image = (base64String: string): string => {
-      let cleanBase64String = base64String
+      let cleanBase64String = base64String;
       if (cleanBase64String.startsWith('data:image')) {
-        cleanBase64String = cleanBase64String.split(',')[1]
+        cleanBase64String = cleanBase64String.split(',')[1];
       }
-      const byteCharacters = atob(cleanBase64String)
-      const byteArrays = []
+      const byteCharacters = atob(cleanBase64String);
+      const byteArrays = [];
 
       for (let offset = 0; offset < byteCharacters.length; offset++) {
-        const byte = byteCharacters.charCodeAt(offset)
-        byteArrays.push(byte)
+        const byte = byteCharacters.charCodeAt(offset);
+        byteArrays.push(byte);
       }
       const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' });
       return URL.createObjectURL(blob);
     };
 
-    console.log(mediaStore.media)
-  
+    console.log(mediaStore.media);
+
     return {
       media,
       expandedRowId,
@@ -67,33 +67,33 @@ export default defineComponent({
       Type,
       Genre,
       mediaStore,
-    }
+      //isAdmin, 
+    };
   },
   methods: {
     async borrowMedia(media_id: number) {
-      const mediaService = new MediaService()
-      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id)
+      const mediaService = new MediaService();
+      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id);
 
-      if (success) toastr.success('Successfully borrowed the media.')
-      else toastr.error('Failed to borrow the media.')
+      if (success) toastr.success('Successfully borrowed the media.');
+      else toastr.error('Failed to borrow the media.');
     },
     async reserveMedia(media_id: number, media_name: string) {
-      const mediaService = new MediaService()
-      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id)
+      const mediaService = new MediaService();
+      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
 
       if (success) {
-  
-        const reservedItem = this.media.find(item => item.id === media_id)
+        const reservedItem = this.media.find((item) => item.id === media_id);
         if (reservedItem) {
-          reservedItem.reserve_queue = (reservedItem.reserve_queue || 0) + 1
+          reservedItem.reserve_queue = (reservedItem.reserve_queue || 0) + 1;
         }
-        toastr.success(`Successfully reserved ${media_name}. You are ${reservedItem?.reserve_queue}`)
+        toastr.success(`Successfully reserved ${media_name}. You are ${reservedItem?.reserve_queue}`);
       } else {
-        toastr.error(`Failed to reserve ${media_name}.`)
+        toastr.error(`Failed to reserve ${media_name}.`);
       }
-    },
+    }
   },
-})
+});
 </script>
 
 <template>
@@ -163,6 +163,10 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
+
+      <button class="admin-button" @click="$router.push('/add')">
+        Add Media
+      </button>
     </main>
 
     <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>
@@ -279,7 +283,6 @@ tbody tr:hover {
   z-index: 999;
 }
 
-/* Popup styling */
 .popup {
   position: fixed;
   top: 50%;
@@ -307,5 +310,18 @@ tbody tr:hover {
 
 .close-btn:hover {
   background: var(--secondary-color);
+}
+.admin-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 80px;
 }
 </style>

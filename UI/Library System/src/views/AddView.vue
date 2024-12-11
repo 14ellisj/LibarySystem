@@ -1,18 +1,18 @@
 <script lang="ts">
-import Wishlist from '../components/WishlistView/Wishlist.vue'
+import AddMedia from '@/components/AddNewMedia/addMedia.vue';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'Wish-list',
+  name: 'add-media',
   components: {
-    Wishlist,
+    AddMedia,
   },
 })
 </script>
 
 <template>
   <div class="container">
-    <Wishlist />
+    <AddMedia />
   </div>
 </template>
 

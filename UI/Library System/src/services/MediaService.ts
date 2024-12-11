@@ -4,7 +4,6 @@ import type { Media } from '@/models/media'
 import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest } from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
-import { useUserStore } from '@/stores/profileInformation'
 import axios from 'axios'
 
 export default class {

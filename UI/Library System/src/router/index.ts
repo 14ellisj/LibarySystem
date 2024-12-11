@@ -5,12 +5,12 @@ import SingleMediaView from '@/views/SingleMediaView.vue'
 import RegisterView from '../views/RegistrationView.vue'
 import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
 import NewsView from '@/views/NewsView.vue'
 import HomeView from '@/views/HomeView.vue'
+import AddView from '@/views/AddView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,11 +55,6 @@ const router = createRouter({
       component: ProfileView,
     },
     {
-      path: '/wishlist',
-      name: 'WishList',
-      component: WishlistView,
-    },
-    {
       path: '/return',
       name: 'Return',
       component: ReturnView,
@@ -78,6 +73,11 @@ const router = createRouter({
       path: '/news',
       name: 'News',
       component: NewsView,
+    },
+    {
+      path: '/add',
+      name: 'Add',
+      component: AddView,
     },
   ],
 })

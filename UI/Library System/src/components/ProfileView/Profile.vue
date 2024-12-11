@@ -1,43 +1,17 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
 import '../../styles/variables.css';
 
-export default defineComponent({
-  name: 'Profile',
-  data() {
-    return {
-      hovering: false,
-    };
-  },
-  methods: {
-    async toOrders() {
-      this.$router.push('');
-    },
-    async toWishlist() {
-      this.$router.push('/Wishlist');
-    },
-    async toReturn() {
-      this.$router.push('/Return');
-    },
-    async toSettings() {
-      this.$router.push('');
-    },
-    async toLogIn() {
-      this.$router.push('/logIn');
-    },
-  },
-});
 </script>
 
 <template>
   <div class="profile-container">
     <h2>My Profile</h2>
     <div class="profile-card">
-      <button @click="toOrders()">Orders</button>
-      <button @click="toWishlist()">Wishlist</button>
-      <button @click="toReturn()">Return Media</button>
-      <button @click="toSettings()">Settings</button>
-      <button @click="toLogIn()" class="logout-button">Log Out</button>
+      <button @click="">Add Media</button>
+      <button @click="$router.push('/Orders')">Orders</button>
+      <button @click="$router.push('/Return')">Return Media</button>
+      <button @click="$router.push('/Settings')">Settings</button>
+      <button @click="$router.push('/logIn')" class="logout-button">Log Out</button>
     </div>
   </div>
 </template>

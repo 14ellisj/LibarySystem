@@ -16,5 +16,6 @@ export interface Media {
   is_borrowed_by_user: boolean
   is_reserved_by_me: boolean
   reserve_queue: number
+  quantity: number
 
 }

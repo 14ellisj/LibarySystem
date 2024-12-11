@@ -53,7 +53,6 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media)
-    console.log(userStore)
   
     return {
       media,
@@ -140,16 +139,16 @@ export default defineComponent({
                     <p><strong>Rating: </strong>{{ item.rating }}/5</p>
                     <ul></ul>
                     <div class="actions">
-                      <button :disabled="!item.is_available || item.is_borrowed_by_user || !userStore.user?.id" @click="borrowMedia(item.id)">
+                      <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="item.is_available || item.is_reserved_by_me || !userStore.user?.id" @click="reserveMedia(item.id, item.name)">
+                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id, item.name)">
                         Reserve
                       </button>
                       <button @click="addToWishlist(item.id, item.name)">Add to Wishlist</button>
                       <div>
                         <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>
-                        <p v-else-if="!userStore.user?.id">Log in to reserve this item.</p>
+                        <p v-else-if="userStore.user?.id">Log in to reserve this item.</p>
                       </div>
                       <div>
                         <p v-if="!item.is_available">Sorry, not available right now.</p>

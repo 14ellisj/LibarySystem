@@ -10,4 +10,12 @@ namespace Media_Service.Models
         public int? ProfileId { get; set; }
 
     }
+    public class ReserveItemRequest
+    {
+        [JsonPropertyName("media_id")]
+        public int? MediaId { get; set; }
+        [JsonPropertyName("profile_id")]
+        public int? ProfileId { get; set; }
+
+    }
 }

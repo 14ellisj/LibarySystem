@@ -30,7 +30,5 @@ namespace Media_Service.Models
         public bool IsReservedByMe { get; set; }
         [JsonPropertyName("reserve_queue")]
         public string ReserveQueue { get; set; }
-        [JsonPropertyName("quantity")]
-        public string Quantity { get; set; }
     }
 }

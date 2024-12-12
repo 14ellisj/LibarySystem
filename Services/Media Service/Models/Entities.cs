@@ -58,7 +58,6 @@ namespace Media_Service.Models
         public string length { get; set; }
         public string rating { get; set; }
         public string image { get; set; } 
-        public string quantity { get; set; }
     }
 
     [Table("Author")]

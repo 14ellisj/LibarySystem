@@ -11,6 +11,7 @@ import RegistrationValidation from '@/components/RegistrationView/RegistrationVa
 import NewsView from '@/views/NewsView.vue'
 import HomeView from '@/views/HomeView.vue'
 import AddView from '@/views/AddView.vue'
+import ChangeQuantity from '@/views/ChangeQuantity.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,6 +79,11 @@ const router = createRouter({
       path: '/add',
       name: 'Add',
       component: AddView,
+    },
+    {
+      path: '/change',
+      name: 'Change',
+      component: ChangeQuantity,
     },
   ],
 })

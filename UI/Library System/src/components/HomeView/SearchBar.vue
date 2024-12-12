@@ -1,9 +1,7 @@
 <script lang="ts">
-import type { Author } from '@/models/author'
 import type { MediaFilter } from '@/models/filters'
 import { SearchType } from '@/models/searchType'
 import MediaService from '@/services/MediaService'
-import { useMediaStore } from '@/stores/media'
 import { useUserStore } from '@/stores/profileInformation'
 import { defineComponent } from 'vue'
 

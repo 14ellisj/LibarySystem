@@ -7,7 +7,7 @@ export default defineComponent({
   setup() {
     const mediaStore = useMediaStore()
     const media = ref(mediaStore.media)
-    const isAddingNewAuthor = ref(false) // State to show/hide new author inputs
+    const isAddingNewAuthor = ref(false)
     const newAuthorFirstName = ref('')
     const newAuthorLastName = ref('')
 
@@ -96,6 +96,9 @@ export default defineComponent({
   <div class="form-container">
     <h1>Media Input Form</h1>
     <form @submit="handleSubmit">
+        <div>
+            <button class="back-button" @click="$router.push('/change')">Change Quantity</button>
+        </div>
       <div class="form-group">
         <label for="media-name">Media Name:</label>
         <input type="text" id="media-name" name="media-name" placeholder="Enter media name" required />
@@ -129,8 +132,7 @@ export default defineComponent({
           <option
             v-for="item in uniqueAuthors"
             :key="item.id"
-            :value="item.author.first_name + ' ' + item.author.last_name"
-          >
+            :value="item.author.first_name + ' ' + item.author.last_name">
             {{ item.author.first_name }} {{ item.author.last_name }}
           </option>
           <option value="+ Add New">+ Add New</option>
@@ -257,5 +259,15 @@ export default defineComponent({
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-        }     
+        }   
+        .back-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }  
 </style>

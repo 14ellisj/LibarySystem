@@ -23,6 +23,9 @@ namespace Media_Service.Controllers
         [HttpGet(Name = "Get Auto Complete Options")]
         public async Task<ActionResult<IEnumerable<string>>> GetAutoComplete(string query, SearchType search_type)
         {
+            if (query is null)
+                return BadRequest("No query entered");
+
             query = query.Trim();
 
             if (string.IsNullOrWhiteSpace(query))

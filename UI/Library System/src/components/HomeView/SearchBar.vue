@@ -87,7 +87,7 @@ export default defineComponent({
       <div class="search-bar-select-area">
         <div class="search-bar-select-dropdown">
           <label>Searching For...</label>
-          <select v-model="searchType" name="search-for">
+          <select v-model="searchType" name="search-for" @change="getAutoComplete()">
             <option v-for="(n, index) in searchTypesCount" :value="index">
               {{ SearchType[index] }}
             </option>

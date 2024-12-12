@@ -36,12 +36,13 @@ export default class {
     let success = false
 
     await axios.patch(requestUrl, body).then(
-      (response) => {
+      () => {
         success = true
-        this.mediaStore.updateMediaItem(response.data)
+        this.mediaStore.borrowMediaItem(mediaId)
       },
       (error) => {
         console.log(error)
+        this.mediaStore.markUnavailable(mediaId)
         success = false
       },
     )

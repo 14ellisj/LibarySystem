@@ -34,7 +34,7 @@ namespace Profile_Service.Controllers
                 .Include(x => x.library)
                 .AsQueryable();
 
-                query = query.Where(x => x.email.ToLower().Contains(email.ToLower()));
+                query = query.Where(x => x.email.ToLower() == (email.ToLower()));
 
             var results = await query.ToListAsync();
             var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);

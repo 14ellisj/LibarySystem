@@ -24,7 +24,7 @@ export default defineComponent({
 
 <template>
     <body>
-        <main v-if="store.user[0]['Password'] == store.password" >
+        <main v-if="store.user[0]['Password'] == store.password ">
             <h2>
                 Welcome back {{ store.user[0]['firstName'] }} {{ store.user[0]['lastName'] }}
             </h2>

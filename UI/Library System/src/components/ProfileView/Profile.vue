@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import '../../styles/variables.css'
 import type { MediaFilter } from '@/models/filters';
+import { useUserStore } from '@/stores/profileInformation';
 
 export default defineComponent({
     name: 'Profile',
@@ -12,6 +13,12 @@ export default defineComponent({
             hovering
         }
     },
+    setup() {
+        const store = useUserStore();
+        return {
+            store,
+        };
+    },
     methods: {
         async toOrders() {  
             this.$router.push('');
@@ -20,6 +27,8 @@ export default defineComponent({
             this.$router.push('/Wishlist');
         },
         async toReturn() {  
+            console.log( this.store.user[0]['id'] )
+
             this.$router.push('/Return');
         },
         async toSettings() {  

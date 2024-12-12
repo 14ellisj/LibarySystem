@@ -4,12 +4,14 @@ import { useMediaStore } from '../../stores/media';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
+import { useUserStore } from '../../stores/profileInformation';
 import toastr from 'toastr';
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
     const store = useMediaStore();
+    const profileStore = useUserStore();
     const expandedRowId = ref<number | null>(null);
     const isPopupVisible = ref(false); 
     const popupMessage = ref('');
@@ -65,12 +67,13 @@ export default defineComponent({
       closePopup,
       Type,
       Genre,
+      profileStore,
     };
   },
   methods: {
     async borrowMedia(id: number) {
       const mediaService = new MediaService();
-      const success = await mediaService.borrowMedia(id, 1);
+      const success = await mediaService.borrowMedia(id, this.profileStore.user[0]['id']);
       console.log(success);
       if (success)
         toastr.success("Successfully borrowed the media.");

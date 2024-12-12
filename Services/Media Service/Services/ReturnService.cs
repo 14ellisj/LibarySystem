@@ -1,11 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Media_Service.Repositories;
 
 namespace Media_Service.Services
 {
-    public class MediaService : IMediaService
+    public class ReturnService : IReturnService
     {
         private readonly IMediaDatabase _mediaDatabase;
         private readonly IMapper _mapper;
@@ -16,8 +16,13 @@ namespace Media_Service.Services
             _mapper = mapper;
             _context = context;
         }
+        public async Task<bool> ReturnMedia(int mediaId, int profileId)
+        {
+        }
+    }
+}
 
-        public async Task<bool> BorrowMedia(int mediaId, int profileId)
+        /*public async Task<bool> BorrowMedia(int mediaId, int profileId)
         {
             MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
 
@@ -32,25 +37,4 @@ namespace Media_Service.Services
                 return false;
 
             return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
-        }
-
-        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable)
-        {
-            MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
-            MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
-            MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(isAvailable);
-
-            List<ISpecification<MediaEntity>> specs = new()
-            {
-                titleSpec,
-                authorSpec,
-                availabilitySpec
-            };
-
-            var entities = await _mediaDatabase.FilterMediaAllInfo(specs);
-            var mapped = _mapper.Map<IEnumerable<Media>>(entities);
-
-            return mapped;
-        }
-    }
-}
+        }*/

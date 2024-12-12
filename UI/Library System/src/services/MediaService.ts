@@ -2,6 +2,7 @@ import type { Author } from "@/models/author";
 import type { MediaFilter } from "@/models/filters";
 import type { Media } from "@/models/media";
 import type { IAutoCompleteParams, IBorrowRequest } from "@/models/requests";
+import type { IReturnRequest } from "@/models/return"
 import type { SearchType } from "@/models/searchType";
 import { useMediaStore } from "@/stores/media";
 import axios from "axios";
@@ -26,9 +27,42 @@ export default class {
         return this.mediaStore.media;
     }
 
+    async getBorrowedMedia(profileId: number): Promise<Media[]> {
+        const requestUrl = this.apiUrl + 'Media/getBorrowedMedia';
+
+        await axios
+            .get(requestUrl, {
+                params: profileId
+            })
+            .then((response) => {
+                this.mediaStore.setMedia(response.data)
+            })
+
+        return this.mediaStore.media;
+    }
+
     async borrowMedia(mediaId: number, profileId: number): Promise<boolean> {
         const requestUrl = this.apiUrl + 'Media/Borrow';
         const body : IBorrowRequest = {
+            media_id: mediaId,
+            profile_id: profileId
+        }
+
+        let success = false;
+
+        await axios
+            .patch(requestUrl, body)
+            .then(
+                (response) => {success = true},
+                (error) => {console.log(error); success = false}
+            )
+
+        return success;
+    }
+
+    async returnMedia(mediaId: number, profileId: number): Promise<boolean> {
+        const requestUrl = this.apiUrl + 'Media/Return';
+        const body : IReturnRequest = {
             media_id: mediaId,
             profile_id: profileId
         }

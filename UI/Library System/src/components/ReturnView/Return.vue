@@ -6,6 +6,7 @@ import { useUserStore } from '../../stores/profileInformation'
 import { useMediaStore } from '../../stores/media'
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
+import MediaService from '@/services/MediaService';
 
 export default defineComponent({
     name: 'logInValidation',
@@ -19,14 +20,17 @@ export default defineComponent({
         return {
             store,
             mediaStore,
+            userID
         };
     },
     methods: {
       push() {
         this.$router.push('/logIn');
       },
-      returnMedia() {
-        
+      async returnMedia(id: number) {
+        console.log('media ID is: ' + id)
+        const mediaService = new MediaService();
+        const returnMedia = await mediaService.returnMedia(id, this.userID);
       }
     }
 });
@@ -51,7 +55,7 @@ export default defineComponent({
                         <tr>
                             <td> {{ media.name }} </td> 
                             <td> {{ }} </td> 
-                            <td> <button @click="returnMedia()"> Return </button> </td> 
+                            <td> <button @click="returnMedia(media.id)"> Return </button> </td> 
                         </tr>
                     </template>
                 </tbody>

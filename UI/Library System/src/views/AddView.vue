@@ -1,5 +1,5 @@
 <script lang="ts">
-import AddMedia from '@/components/AddNewMedia/addMedia.vue';
+import AddMedia from '@/components/Manage Media/addMedia.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({

@@ -3,7 +3,7 @@ import { defineComponent, ref, computed } from 'vue'
 import { useMediaStore } from '../../stores/media'
 
 export default defineComponent({
-  name: 'SingleMediaView',
+  name: 'Add Media',
   setup() {
     const mediaStore = useMediaStore()
     const media = ref(mediaStore.media)
@@ -188,6 +188,9 @@ export default defineComponent({
       <div class="form-group">
         <button type="submit">Submit</button>
       </div>
+      <button class="back-button" type="button" @click="$router.push('/manage')" style="margin-top: 10px; background-color: #6c757d;">
+          Back
+        </button>
     </form>
   </div>
 </template>

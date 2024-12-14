@@ -2,5 +2,6 @@ import type { Address } from './address'
 
 export interface Library {
   id: number
-  address_is: Address
+  name: string
+  address_id: Address
 }

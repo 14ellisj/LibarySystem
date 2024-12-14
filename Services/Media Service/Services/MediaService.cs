@@ -52,17 +52,19 @@ namespace Media_Service.Services
         }
 
 
-        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId)
+        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId, int? libraryId)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
             MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
             MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(isAvailable);
+            MediaLibraryIdSpecification libraryidspec = new MediaLibraryIdSpecification(libraryId);
 
             List<ISpecification<MediaEntity>> specs = new()
             {
                 titleSpec,
                 authorSpec,
-                availabilitySpec
+                availabilitySpec,
+                libraryId
             };
 
             var entities = await _mediaDatabase.FilterMediaAllInfo(specs);

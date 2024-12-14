@@ -6,10 +6,16 @@ export interface MediaFilter {
   is_selected?: boolean
   availability?: boolean
   profile_id?: number
+  library_id?: number
 }
 
 export interface ProfileFilter {
   firstname?: string
   lastname?: string
   email?: string
+}
+
+export interface MediaItem{
+  media_id?: number
+  borrower_id?: number
 }

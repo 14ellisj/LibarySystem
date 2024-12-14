@@ -1,18 +1,18 @@
 <script lang="ts">
-import ChangeQuantity from '@/components/Manage Media/changeQuantity.vue'
+import moveForm from '@/components/Manage Media/moveForm.vue';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'add-media',
+  name: 'move-form',
   components: {
-    ChangeQuantity,
+    moveForm,
   },
 })
 </script>
 
 <template>
   <div class="container">
-    <ChangeQuantity/>
+    <moveForm/>
   </div>
 </template>
 

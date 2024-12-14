@@ -1,13 +1,16 @@
 import type { Author } from '@/models/author'
-import type { MediaFilter } from '@/models/filters'
+import type { MediaFilter, MediaItem } from '@/models/filters'
 import type { Media } from '@/models/media'
+import type { Media_Item } from '@/models/media_item'
 import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest } from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
+import { useMediaItemStore } from '@/stores/mediaItem'
 import axios from 'axios'
 
 export default class {
   mediaStore = useMediaStore()
+  mediaItemStore = useMediaItemStore()
 
   apiUrl = 'http://localhost:5132/'
 
@@ -23,6 +26,20 @@ export default class {
       })
 
     return this.mediaStore.media
+  }
+
+  async getMediaItem(filter: MediaItem): Promise<Media_Item[]> {
+    const requestUrl = this.apiUrl + 'Media'
+
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaItemStore.setMediaItem(response.data)
+      })
+
+    return this.mediaItemStore.mediaItem
   }
 
   async borrowMedia(mediaId: number, profileId: number): Promise<boolean> {

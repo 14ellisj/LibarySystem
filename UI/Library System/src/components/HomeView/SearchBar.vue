@@ -4,6 +4,7 @@ import { SearchType } from '@/models/searchType'
 import MediaService from '@/services/MediaService'
 import { useUserStore } from '@/stores/profileInformation'
 import { defineComponent } from 'vue'
+import { useMediaStore } from '@/stores/media'
 
 export default defineComponent({
   name: 'Search-Bar',
@@ -13,11 +14,13 @@ export default defineComponent({
     var autoCompleteResults: string[] = []
     var autoCompleteTimeout: number = 0
     var userStore = useUserStore()
+    var mediaStore = useMediaStore()
 
 
     const searchTypesCount = Object.keys(SearchType).length / 2
 
     const mediaService = new MediaService()
+    
 
     return {
       query,
@@ -27,7 +30,8 @@ export default defineComponent({
       autoCompleteResults,
       autoCompleteTimeout,
       mediaService,
-      userStore
+      userStore,
+      mediaStore
     }
   },
   methods: {
@@ -38,8 +42,10 @@ export default defineComponent({
         author: this.searchType === SearchType.Author ? this.query : undefined,
         is_selected: fromSuggestions,
         profile_id: this.userStore.user?.id
+        //library_id: this.mediaItemStore.media
       }
       await this.mediaService.filterData(filter)
+      await this.mediaService.getMediaItem
       this.$router.push('/front')
     },
     selectAutocompleteOption(e: MouseEvent, selected: string) {

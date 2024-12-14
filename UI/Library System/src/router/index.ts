@@ -12,6 +12,8 @@ import NewsView from '@/views/NewsView.vue'
 import HomeView from '@/views/HomeView.vue'
 import AddView from '@/views/AddView.vue'
 import ChangeQuantity from '@/views/ChangeQuantity.vue'
+import ManageMedia from '@/views/manageMedia.vue'
+import moveFormView from '@/views/moveFormView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -84,6 +86,16 @@ const router = createRouter({
       path: '/change',
       name: 'Change',
       component: ChangeQuantity,
+    },
+    {
+      path: '/manage',
+      name: 'Manage',
+      component: ManageMedia,
+    },
+    {
+      path: '/move',
+      name: 'Move',
+      component: moveFormView,
     },
   ],
 })

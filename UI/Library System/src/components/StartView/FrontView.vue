@@ -1,12 +1,13 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import { useMediaItemStore } from '../../stores/media';
+import { useMediaItemStore } from '@/stores/mediaItem';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
 import { useUserStore } from '@/stores/profileInformation';
+
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -18,6 +19,7 @@ export default defineComponent({
     const popupMessage = ref('');
     const mediaStore = useMediaStore();
     const mediaItemStore = useMediaItemStore();
+  
     //const isAdmin = ref(userStore.user?.role_id.id === 1);
 
     const toggleRowDetails = (id: number) => {
@@ -54,7 +56,7 @@ export default defineComponent({
       return URL.createObjectURL(blob);
     };
 
-    console.log(mediaStore.media);
+    console.log(mediaStore.media)
     console.log(mediaItemStore.mediaItem)
 
     return {
@@ -167,8 +169,8 @@ export default defineComponent({
         </tbody>
       </table>
 
-      <button class="admin-button" @click="$router.push('/add')">
-        Add Media
+      <button class="admin-button" @click="$router.push('/manage')">
+        Manage Media
       </button>
     </main>
 

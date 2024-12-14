@@ -23,9 +23,9 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet(Name = "Get Media")]
-        public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? is_selected, bool? availability, int? profile_id)
+        public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? is_selected, bool? availability, int? profile_id, int? libaray_id)
         {
-            var results = await _mediaService.FilterMedia(title, author, is_selected, availability, profile_id);
+            var results = await _mediaService.FilterMedia(title, author, is_selected, availability, profile_id, library_id);
             
             return Ok(results);
         }

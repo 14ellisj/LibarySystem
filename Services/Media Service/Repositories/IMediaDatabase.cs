@@ -9,6 +9,5 @@ namespace Media_Service.Repositories
         Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec);
         Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs);
         Task<bool> BorrowItem(MediaItemEntity mediaId, int profileId);
-        Task<bool> ReserveItem(MediaItemEntity mediaId, int profileId);
     }
 }

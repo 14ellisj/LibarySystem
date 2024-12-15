@@ -18,4 +18,5 @@ export interface ProfileFilter {
 export interface MediaItem{
   media_id?: number
   borrower_id?: number
+  library_id?: number
 }

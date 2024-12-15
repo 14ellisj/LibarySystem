@@ -22,7 +22,6 @@ namespace Media_Service.Models
 
         [ForeignKey("library_id")]
         public LibraryEntity library { get; set; }
-        public int library_id {get; set;}
     }
 
     [Table("Profile")]
@@ -37,7 +36,6 @@ namespace Media_Service.Models
     {
         [Key]
         public int id { get; set; }
-        public AddressEntity address { get; : set; }
 
     }
 
@@ -59,7 +57,7 @@ namespace Media_Service.Models
         public string description { get; set; }
         public string length { get; set; }
         public string rating { get; set; }
-        public string image { get; set; } 
+        public string image { get; set; }
     }
 
     [Table("Author")]
@@ -85,17 +83,5 @@ namespace Media_Service.Models
         [Key]
         public int id { get; set; }
         public string name { get; set; }
-    }
-
-    [Table("Address")]
-    public class AddressEntity
-    {
-        [Key]
-        public int id { get; set; }
-        public int house_number { get; set;}
-        public string street_name { get; set;}
-        public string city { get; set;}
-        public string county { get; set;}
-        public string postcode { get; set;}
     }
 }

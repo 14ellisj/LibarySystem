@@ -33,38 +33,17 @@ namespace Media_Service.Services
             return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
         }
 
-        public async Task<bool> ReserveMedia(int mediaId, int profileId)
-        {
-            var media = await GetMediaById(mediaId);
-
-            if (media is null)
-                return false;
-
-            var isUserCurrentlyReserving = media.media_items.Any(x => x.borrower_id ==  profileId);
-            if (isUserCurrentlyReserving)
-                return false;
-
-            var availableItems = media.media_items.Where(x => x.borrower is null);
-            if (availableItems.Count() == 0)
-                return false;
-
-            return await _mediaDatabase.ReserveItem(availableItems.First(), profileId);
-        }
-
-
-        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId, int? libraryId)
+        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
             MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(author, isSelected);
             MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(isAvailable);
-            MediaLibraryIdSpecification libraryidspec = new MediaLibraryIdSpecification(libraryId);
 
             List<ISpecification<MediaEntity>> specs = new()
             {
                 titleSpec,
                 authorSpec,
-                availabilitySpec,
-                libraryId
+                availabilitySpec
             };
 
             var entities = await _mediaDatabase.FilterMediaAllInfo(specs);

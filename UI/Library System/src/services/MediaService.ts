@@ -5,12 +5,10 @@ import type { Media_Item } from '@/models/media_item'
 import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest } from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
-import { useMediaItemStore } from '@/stores/mediaItem'
 import axios from 'axios'
 
 export default class {
   mediaStore = useMediaStore()
-  mediaItemStore = useMediaItemStore()
 
   apiUrl = 'http://localhost:5132/'
 
@@ -36,10 +34,10 @@ export default class {
         params: filter,
       })
       .then((response) => {
-        this.mediaItemStore.setMediaItem(response.data)
+        this.mediaStore.setMediaItem(response.data)
       })
 
-    return this.mediaItemStore.mediaItem
+    return this.mediaStore.mediaItem
   }
 
   async borrowMedia(mediaId: number, profileId: number): Promise<boolean> {

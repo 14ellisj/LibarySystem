@@ -1,12 +1,12 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import { useMediaItemStore } from '@/stores/mediaItem';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
 import { useUserStore } from '@/stores/profileInformation';
+import type { MediaItem } from '@/models/filters';
 
 
 export default defineComponent({
@@ -18,7 +18,6 @@ export default defineComponent({
     const isPopupVisible = ref(false);
     const popupMessage = ref('');
     const mediaStore = useMediaStore();
-    const mediaItemStore = useMediaItemStore();
   
     //const isAdmin = ref(userStore.user?.role_id.id === 1);
 
@@ -30,6 +29,8 @@ export default defineComponent({
       popupMessage.value = message;
       isPopupVisible.value = true;
     };
+
+    const mediaService = new MediaService()
 
     const closePopup = () => {
       isPopupVisible.value = false;
@@ -57,7 +58,7 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media)
-    console.log(mediaItemStore.mediaItem)
+    console.log(mediaStore.mediaItem)
 
     return {
       media,
@@ -72,6 +73,7 @@ export default defineComponent({
       Type,
       Genre,
       mediaStore,
+      mediaService,
       //isAdmin, 
     };
   },
@@ -83,20 +85,16 @@ export default defineComponent({
       if (success) toastr.success('Successfully borrowed the media.');
       else toastr.error('Failed to borrow the media.');
     },
-    async reserveMedia(media_id: number, media_name: string) {
-      const mediaService = new MediaService();
-      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
-
-      if (success) {
-        const reservedItem = this.media.find((item) => item.id === media_id);
-        if (reservedItem) {
-          reservedItem.reserve_queue = (reservedItem.reserve_queue || 0) + 1;
-        }
-        toastr.success(`Successfully reserved ${media_name}. You are ${reservedItem?.reserve_queue}`);
-      } else {
-        toastr.error(`Failed to reserve ${media_name}.`);
+    async submit(media_id: number) {
+    
+      const filter: MediaItem = {
+        borrower_id: this.userStore.user?.id,
+        media_id: media_id
       }
-    }
+      await this.mediaService.getMediaItem(filter)
+      this.$router.push('/manage')
+
+    },
   },
 });
 </script>
@@ -147,7 +145,7 @@ export default defineComponent({
                       <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id, item.name)">
+                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="">
                         Reserve
                       </button>
                       <button @click="addToWishlist(item.id, item.name)">Add to Wishlist</button>
@@ -169,7 +167,7 @@ export default defineComponent({
         </tbody>
       </table>
 
-      <button class="admin-button" @click="$router.push('/manage')">
+      <button class="admin-button" onclick="submit">
         Manage Media
       </button>
     </main>

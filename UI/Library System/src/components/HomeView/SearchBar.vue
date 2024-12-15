@@ -42,11 +42,10 @@ export default defineComponent({
         author: this.searchType === SearchType.Author ? this.query : undefined,
         is_selected: fromSuggestions,
         profile_id: this.userStore.user?.id
-        //library_id: this.mediaItemStore.media
       }
       await this.mediaService.filterData(filter)
-      await this.mediaService.getMediaItem
       this.$router.push('/front')
+
     },
     selectAutocompleteOption(e: MouseEvent, selected: string) {
       this.query = selected

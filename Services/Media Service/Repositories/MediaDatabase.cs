@@ -29,22 +29,6 @@ namespace Media_Service.Repositories
             }
         }
 
-        public async Task<bool> ReserveItem(MediaItemEntity mediaItem, int profileId)
-        {
-            mediaItem.borrower_id = profileId;
-
-            _context.Update(mediaItem);
-            try
-            {
-                await _context.SaveChangesAsync();
-                return true;
-            } 
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
-
         public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
         {
             var query = _context.Media
@@ -58,19 +42,6 @@ namespace Media_Service.Repositories
 
             return await query.ToListAsync();
         }
-
-        public async Task<IEnumerable<LibraryEntity>> GetLibraryInfo(IEnumerable<ISpecification<LibraryEntity>> specs)
-        {
-            var query = _context.LibraryId
-                .Include(x => x.address)
-                .Include(x => x.media_items)
-                    .ThenInclude(mi => mi.borrower)
-                .ApplySpecifications(specs)
-                .OrderBy(x => x.name);
-
-            return await query.ToListAsync();
-        }
-
 
 
         public async Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec)

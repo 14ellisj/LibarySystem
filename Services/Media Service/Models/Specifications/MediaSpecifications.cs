@@ -112,24 +112,5 @@ namespace Media_Service.Models.Specifications
             }
         }
     }
-    public class MediaLibraryIdSpecification : ISpecification<MediaEntity>
-    {
-        int? _libraryId
-
-        public MediaLibraryIdSpecification(int? libraryId)
-        {
-            _libraryId = libraryId
-        }
-        public Expression<Func<MediaEntity, int>> Criteria
-        {
-            get{
-                if (!_libraryId.HasValue)
-                    return _ => true;
-
-                return media =>
-                    media.media_items.Any(item => item.libaray_id == _libraryId)
-            }
-        } 
-    }
 }
 

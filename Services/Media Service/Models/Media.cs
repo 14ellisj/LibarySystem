@@ -26,9 +26,5 @@ namespace Media_Service.Models
         public string Rating { get; set; }
         [JsonPropertyName("is_borrowed_by_user")]
         public bool IsBorrwedByUser { get; set; }
-        [JsonPropertyName("is_reserved_by_me")]
-        public bool IsReservedByMe { get; set; }
-        [JsonPropertyName("reserve_queue")]
-        public string ReserveQueue { get; set; }
     }
 }

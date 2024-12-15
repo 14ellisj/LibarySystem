@@ -1,5 +1,3 @@
-import type { SearchType } from './searchType'
-
 export interface MediaFilter {
   title?: string
   author?: string

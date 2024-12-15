@@ -5,6 +5,7 @@ using Media_Service.Models.Specifications;
 using Media_Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 
 namespace Media_Service.Controllers
 {
@@ -51,6 +52,15 @@ namespace Media_Service.Controllers
                 return StatusCode(500, ex.Message);
             }
 
+        }
+
+        [HttpPatch("return", Name = "Return Media")]
+        public async Task<IActionResult> ReturnMedia([FromBody] ReturnRequest body)
+        {
+            var currentBorrowerId = (int)body.ProfileId;
+            var mediaId = (int)body.MediaId;
+
+            var returned = await _
         }
     }
 }

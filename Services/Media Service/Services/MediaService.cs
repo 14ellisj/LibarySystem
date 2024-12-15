@@ -9,10 +9,12 @@ namespace Media_Service.Services
     {
         private readonly IMediaDatabase _mediaDatabase;
         private readonly IMapper _mapper;
-        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper)
+        private readonly Database.AppDbContext _context;
+        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper, Database.AppDbContext context)
         {
             _mediaDatabase = mediaDatabase;
             _mapper = mapper;
+            _context = context;
         }
 
         public async Task<bool> BorrowMedia(int mediaId, int profileId)

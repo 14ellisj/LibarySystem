@@ -62,6 +62,18 @@ namespace Media_Service.Services
             var mapped = _mapper.Map<Media>(media, opts => opts.Items["profile_id"] = profileId);
             return mapped;
         }
+        public async Task<IEnumerable<MediaItem>> GetMediaItems(int mediaId)
+        {
+            MediaItemIdSpecification idSpec = new MediaItemIdSpecification(mediaId);
+            var items = await _mediaDatabase.GetMediaItemsById(idSpec);
+
+            if (items.Count() == 0)
+                throw new Exception("Media items Not Found.");
+
+            var mapped = _mapper.Map<IEnumerable<MediaItem>>(items);
+            
+            return mapped;
+        }
 
         private async Task<MediaEntity?> GetMediaById(int id)
         {

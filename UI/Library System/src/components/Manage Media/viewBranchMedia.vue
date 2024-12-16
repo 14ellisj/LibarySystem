@@ -1,26 +1,22 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import { useMediaItemStore } from '@/stores/mediaItem';
 
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
     const mediaStore = useMediaStore();
-    const mediaItemStore = useMediaItemStore
+    const mediaItemStore = useMediaStore
     const selectedBranch = ref('');
-    const mediaItem = ref(useMediaItemStore().mediaItem);
+    const mediaItem = ref(useMediaStore().mediaItems);
+    const media = ref(useMediaStore().media);
 
-    // Computed property to get media data for the selected branch
-    const branchData = computed(() => {
-      return mediaItem.value.find(branch => branch.name === selectedBranch.value)?.data || [];
-    });
 
     return {
+      media,
       mediaStore,
       mediaItemStore,
       selectedBranch,
-      branchData,
       mediaItem
     };
   }
@@ -34,8 +30,8 @@ export default defineComponent({
     <!-- Dropdown for selecting a branch -->
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="branch in mediaStore.branches" :key="branch.name" :value="branch.name">
-        {{ branch.name }}
+      <option v-for="item in media" :key="item.id">
+        {{ item.name }}
       </option>
     </select>
 
@@ -45,8 +41,8 @@ export default defineComponent({
     <div v-if="selectedBranch">
       <h2>Data for {{ selectedBranch }}</h2>
       <ul>
-        <li v-for="(item, index) in branchData" :key="index">
-          {{ item }}
+        <li v-for="(item, index) in media" :key="index">
+          {{ item.description }}
         </li>
       </ul>
     </div>

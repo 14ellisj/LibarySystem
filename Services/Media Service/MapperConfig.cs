@@ -33,6 +33,11 @@ namespace Media_Service
             CreateMap<AuthorEntity, Author>()
                 .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.first_name))
                 .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.last_name));
+
+            CreateMap<MediaItemEntity, MediaItem>()
+                .ForMember(dest => dest.Library, opt => opt.MapFrom(src => src.library))
+                .ForMember(dest => dest.Media, opt => opt.MapFrom(src => src.media))
+                .ForMember(dest => dest.Borrower, opt => opt.MapFrom(src => src.borrower_id));
         }
     }
 }

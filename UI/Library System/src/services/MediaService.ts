@@ -27,7 +27,7 @@ export default class {
   }
 
   async getMediaItem(filter: MediaItem): Promise<Media_Item[]> {
-    const requestUrl = this.apiUrl + 'Media'
+    const requestUrl = this.apiUrl + 'Media/item'
 
     await axios
       .get(requestUrl, {
@@ -37,7 +37,7 @@ export default class {
         this.mediaStore.setMediaItem(response.data)
       })
 
-    return this.mediaStore.mediaItem
+    return this.mediaStore.mediaItems
   }
 
   async borrowMedia(mediaId: number, profileId: number): Promise<boolean> {

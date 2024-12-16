@@ -58,7 +58,6 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media)
-    console.log(mediaStore.mediaItem)
 
     return {
       media,
@@ -85,16 +84,9 @@ export default defineComponent({
       if (success) toastr.success('Successfully borrowed the media.');
       else toastr.error('Failed to borrow the media.');
     },
-    async submit(media_id: number) {
-    
-      const filter: MediaItem = {
-        borrower_id: this.userStore.user?.id,
-        media_id: media_id
-      }
-      await this.mediaService.getMediaItem(filter)
-      this.$router.push('/manage')
-
-    },
+    async submit() {
+      this.$router.push('/manage');
+    }
   },
 });
 </script>
@@ -167,7 +159,7 @@ export default defineComponent({
         </tbody>
       </table>
 
-      <button class="admin-button" onclick="submit">
+      <button class="admin-button" @click="submit()">
         Manage Media
       </button>
     </main>

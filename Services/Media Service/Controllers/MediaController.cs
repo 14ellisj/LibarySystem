@@ -52,5 +52,12 @@ namespace Media_Service.Controllers
             }
 
         }
+        [HttpGet("item", Name = "Get Media Item")]
+        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int mediaId)
+        {
+            var results = await _mediaService.GetMediaItems(mediaId);
+            
+            return Ok(results);
+        }
     }
 }

@@ -42,7 +42,15 @@ namespace Media_Service.Repositories
 
             return await query.ToListAsync();
         }
+        public async Task<IEnumerable<MediaItemEntity>> GetMediaItemsById(MediaItemIdSpecification spec)
+        {
+            var query = _context.MediaItem
+                .Include(x => x.library)
+                .Include(x => x.borrower)
+                .ApplySpecification(spec);
 
+            return await query.ToListAsync();
+        }
 
         public async Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec)
         {

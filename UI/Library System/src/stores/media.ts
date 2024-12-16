@@ -5,7 +5,7 @@ import type { Media_Item } from '@/models/media_item'
 export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [] as Media[],
-    mediaItem: [] as Media_Item[],
+    mediaItems: [] as Media_Item[],
     autoCompleteOptions: [] as string[],
   }),
   actions: {
@@ -13,7 +13,8 @@ export const useMediaStore = defineStore('media', {
       this.media = mediaInput
     },
     setMediaItem(mediaItemInput: Media_Item[]) {
-      this.mediaItem = mediaItemInput
+      this.mediaItems = mediaItemInput
+      console.log(this.mediaItems)
     },
     setAutocompleteOptions(input: string[]) {
       this.autoCompleteOptions = input

@@ -1,15 +1,13 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import { useMediaItemStore } from '@/stores/mediaItem';
 
 export default defineComponent({
   name: 'Add Media',
   setup() {
     const mediaStore = useMediaStore();
-    const media = ref(useMediaStore().media);
-    const mediaItemStore = useMediaItemStore();
-    const mediaItem = ref(useMediaItemStore().mediaItem);
+    const media = ref(mediaStore.media);
+    const mediaItems = ref(mediaStore.mediaItems);
     const showPopup = ref(false);
 
     const handleSubmit = async (event: Event) => {
@@ -31,8 +29,7 @@ export default defineComponent({
     return {
       mediaStore,
       media,
-      mediaItemStore,
-      mediaItem,
+      mediaItems,
       handleSubmit,
       showPopup,
     };
@@ -57,7 +54,7 @@ export default defineComponent({
         <label for="branch">Choose Branch:</label>
         <select id="branch" name="branch" required>
           <option value="">-- Select Branch --</option>
-          <option v-for="item in mediaItem" :key="item.id" :value="item.library_id">
+          <option v-for="item in mediaItems" :key="item.id" :value="item.library_id">
             {{ item.library_id }}
           </option>
           <option value="test-branch">Test Branch</option>

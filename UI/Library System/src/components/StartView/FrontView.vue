@@ -8,7 +8,6 @@ import toastr from 'toastr';
 import { useUserStore } from '@/stores/profileInformation';
 import type { MediaItem } from '@/models/filters';
 
-
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
@@ -18,8 +17,7 @@ export default defineComponent({
     const isPopupVisible = ref(false);
     const popupMessage = ref('');
     const mediaStore = useMediaStore();
-  
-    //const isAdmin = ref(userStore.user?.role_id.id === 1);
+    const reserveQueue = ref<number>(0); // New variable to track the reservation queue count.
 
     const toggleRowDetails = (id: number) => {
       expandedRowId.value = expandedRowId.value === id ? null : id;
@@ -30,15 +28,10 @@ export default defineComponent({
       isPopupVisible.value = true;
     };
 
-    const mediaService = new MediaService()
+    const mediaService = new MediaService();
 
     const closePopup = () => {
       isPopupVisible.value = false;
-    };
-
-    const addToWishlist = (id: number, name: string) => {
-      console.log(`Adding "${name}" with ID: ${id} to wishlist`);
-      showPopup(`${name} has been added to your wishlist!`);
     };
 
     const decodeBase64Image = (base64String: string): string => {
@@ -57,13 +50,12 @@ export default defineComponent({
       return URL.createObjectURL(blob);
     };
 
-    console.log(mediaStore.media)
+    console.log(mediaStore.media);
 
     return {
       media,
       expandedRowId,
       toggleRowDetails,
-      addToWishlist,
       decodeBase64Image,
       isPopupVisible,
       popupMessage,
@@ -73,7 +65,7 @@ export default defineComponent({
       Genre,
       mediaStore,
       mediaService,
-      //isAdmin, 
+      reserveQueue, // Expose reserveQueue to the template.
     };
   },
   methods: {
@@ -84,12 +76,24 @@ export default defineComponent({
       if (success) toastr.success('Successfully borrowed the media.');
       else toastr.error('Failed to borrow the media.');
     },
+    async reserveMedia(media_id: number) {
+      const mediaService = new MediaService();
+      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
+
+      if (success) {
+        this.reserveQueue += 1; 
+        toastr.success('Successfully reserved the media.');
+      } else {
+        toastr.error('Failed to reserve the media.');
+      }
+    },
     async submit() {
       this.$router.push('/manage');
-    }
+    },
   },
 });
 </script>
+
 
 <template>
   <head>
@@ -106,6 +110,7 @@ export default defineComponent({
             <th>Genre</th>
             <th>Availability</th>
             <th>Type</th>
+            <th>Location</th>
           </tr>
         </thead>
         <tbody>
@@ -116,6 +121,7 @@ export default defineComponent({
               <td>{{ Genre[item.genre] }}</td>
               <td>{{ item.is_available ? 'Available' : 'Not Available' }}</td>
               <td>{{ Type[item.type] }}</td>
+              <td>{{ item.id}}</td>
             </tr>
             <tr v-if="expandedRowId === item.id">
               <td colspan="6">
@@ -137,10 +143,11 @@ export default defineComponent({
                       <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="">
+                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
                         Reserve
                       </button>
-                      <button @click="addToWishlist(item.id, item.name)">Add to Wishlist</button>
+                      <p>Current Reserve Queue: {{ reserveQueue }}</p>
+
                       <div>
                         <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>
                         <p v-else-if="userStore.user?.id">Log in to reserve this item.</p>
@@ -159,7 +166,7 @@ export default defineComponent({
         </tbody>
       </table>
 
-      <button class="admin-button" @click="submit()">
+      <button class="admin-button" @click="submit">
         Manage Media
       </button>
     </main>

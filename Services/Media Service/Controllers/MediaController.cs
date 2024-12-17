@@ -57,7 +57,30 @@ namespace Media_Service.Controllers
         {
             var results = await _mediaService.GetMediaItems(mediaId);
             
+           
             return Ok(results);
+        }
+        [HttpPatch("reserve", Name = "Reserve Media")]
+        public async Task<IActionResult> ReserveMedia([FromBody] ReserveItemRequest body)
+        {
+            if (!body.MediaId.HasValue || !body.ProfileId.HasValue)
+                return BadRequest("Please include a media_id and a profile_id");
+
+            try
+            {
+                var success = await _mediaService.ReserveMedia((int)body.MediaId, (int)body.ProfileId);
+
+                if (!success)
+                    return Conflict("No available items");
+
+                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
+                return Ok(updatedItem);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
         }
     }
 }

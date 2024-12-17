@@ -1,25 +1,49 @@
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 import { useMediaStore } from '../../stores/media';
+import type { MediaItem } from '@/models/filters';
+import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
-    const mediaStore = useMediaStore();
-    const mediaItemStore = useMediaStore
+    const mediaStore = useMediaStore(); // Pinia store instance
     const selectedBranch = ref('');
-    const mediaItem = ref(useMediaStore().mediaItems);
-    const media = ref(useMediaStore().media);
+    const mediaService = new MediaService();
 
+    // Fetch media items on component mount
+    const fetchMediaItems = async () => {
+      try {
+        const filter: MediaItem = { media_id }; // Adjust this filter as needed
+        const data = await mediaService.getMediaItem(filter);
+        mediaStore.setMediaItem(data); // Set data in the Pinia store
+      } catch (error) {
+        console.error('Failed to fetch media items:', error);
+      }
+    };
+
+    // Fetch data when the component is mounted
+    onMounted(() => {
+      fetchMediaItems();
+    });
 
     return {
-      media,
       mediaStore,
-      mediaItemStore,
       selectedBranch,
-      mediaItem
+      submitForMediaItems: async (mediaId: number) => {
+        const filter: MediaItem = {
+          media_id: mediaId,
+        };
+        try {
+          const data = await mediaService.getMediaItem(filter);
+          mediaStore.setMediaItem(data); 
+          console.log('Media items fetched successfully');
+        } catch (error) {
+          console.error('Failed to submit for media items:', error);
+        }
+      },
     };
-  }
+  },
 });
 </script>
 
@@ -30,19 +54,17 @@ export default defineComponent({
     <!-- Dropdown for selecting a branch -->
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="item in mediaItem" :key="item.id">
+      <option v-for="item in mediaStore.mediaItems" :key="item.id">
         {{ item.library_id.name }}
       </option>
     </select>
-
-    
 
     <!-- Display data for the selected branch -->
     <div v-if="selectedBranch">
       <h2>Data for {{ selectedBranch }}</h2>
       <ul>
-        <li v-for="(item, index) in mediaItem" :key="index">
-          {{ item.id}}
+        <li v-for="(item, index) in mediaStore.mediaItems" :key="index">
+          {{ item.id }}
         </li>
       </ul>
     </div>
@@ -50,13 +72,29 @@ export default defineComponent({
     <!-- Message when no branch is selected -->
     <div v-else>
       <p>Please select a branch to view its data.</p>
-      <p> or </p>
-      <p><button @click="$router.push('/move')">Move Media</button></p>
-      <p> or </p>
-      <p><button @click="$router.push('/add')">Add New Media</button></p>
+      <p>or</p>
+      <p>
+        <button @click="submitForMediaItems(1)">Move Media</button>
+      </p>
     </div>
   </div>
 </template>
+
+<style scoped>
+button {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+button:hover {
+  background-color: #0056b3;
+}
+</style>
+
 <style scoped>
     body {
             font-family: Arial, sans-serif;

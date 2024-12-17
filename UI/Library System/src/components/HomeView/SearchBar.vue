@@ -47,6 +47,7 @@ export default defineComponent({
       this.$router.push('/front')
 
     },
+    
     selectAutocompleteOption(e: MouseEvent, selected: string) {
       this.query = selected
       this.submit(true)

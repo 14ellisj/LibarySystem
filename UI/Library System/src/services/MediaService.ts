@@ -63,7 +63,7 @@ export default class {
     return success
   }
 
-  async reserveMedia(mediaId: number, profileId: number): Promise<boolean> {
+  async reserveMedia(mediaId: number, profileId: number = 1): Promise<boolean> {
     const requestUrl = this.apiUrl + 'Media/Reserve'
     const body: IReserveRequest = {
       media_id: mediaId,

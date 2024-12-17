@@ -74,25 +74,15 @@ export default defineComponent({
           <option value="test-media">Test Media</option>
         </select>
 
-        <!-- Conditional Dropdown for Selected Media -->
         <div v-if="selectedMedia">
-          <label for="specific-option">Choose Specific Option for Selected Media:</label>
+          <label for="specific-option">Choose Media Location:</label>
           <select id="specific-option" name="specificOption" required>
             <option value="">-- Select Option --</option>
-            <option value="option-1">Option 1 for {{ selectedMedia }}</option>
-            <option value="option-2">Option 2 for {{ selectedMedia }}</option>
+            <option value="option-specific" v-for="item in mediaItems" :key="item.id">
+              {{ selectedMedia }}<!--{{ item.library_id.name }}-->
+            </option>
           </select>
         </div>
-
-        <!-- Branch Selection -->
-        <label for="branch">Choose Branch:</label>
-        <select id="branch" name="branchFrom" required>
-          <option value="">-- Select Branch --</option>
-          <option v-for="item in mediaItems" :key="item.id" :value="item.library_id">
-            {{ item.library_id }}
-          </option>
-          <option value="test-branch">Test Branch</option>
-        </select>
 
         <label for="branch">Choose Destination Branch:</label>
         <select id="branch" name="branchDestination" required>
@@ -113,7 +103,6 @@ export default defineComponent({
         </button>
       </form>
 
-      <!-- Popup Message -->
       <div v-if="showPopup" class="popup-overlay">
         <div class="popup">
           <p>Request Submitted!</p>
@@ -172,7 +161,6 @@ export default defineComponent({
             align-items: center;
             z-index: 1000;
         }
-
         .popup {
             background: white;
             padding: 20px;

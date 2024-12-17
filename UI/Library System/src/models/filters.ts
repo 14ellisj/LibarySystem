@@ -17,4 +17,6 @@ export interface MediaItem{
   media_id?: number
   borrower_id?: number
   library_id?: number
+  reserver_id?: number
+  reserve_queue?: number
 }

@@ -22,6 +22,11 @@ namespace Media_Service.Models
 
         [ForeignKey("library_id")]
         public LibraryEntity library { get; set; }
+
+        [ForeignKey("reserver_id")]
+        public UserEntity? reserver { get; set; }
+        public int? reserver_id;
+        public string reserve_queue { get; set; }
     }
 
     [Table("Profile")]

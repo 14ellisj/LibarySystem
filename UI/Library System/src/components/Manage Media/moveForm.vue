@@ -1,6 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
+import MediaService from '@/services/MediaService';
+import type { MediaItem } from '@/models/filters';
 
 export default defineComponent({
   name: 'Add Media',
@@ -9,6 +11,7 @@ export default defineComponent({
     const media = ref(mediaStore.media);
     const mediaItems = ref(mediaStore.mediaItems);
     const showPopup = ref(false);
+    const selectedMedia = ref<string | null>(null);
 
     const handleSubmit = async (event: Event) => {
       event.preventDefault();
@@ -16,7 +19,8 @@ export default defineComponent({
 
       const newMediaMove = {
         media: formData.get('media'),
-        branch: formData.get('branch'),
+        branchFrom: formData.get('branchFrom'),
+        branchDestination: formData.get('branchDestination'),
       };
       console.log('Form Data Submitted:', newMediaMove);
       showPopup.value = true;
@@ -26,12 +30,30 @@ export default defineComponent({
       }, 3000); // Popup disappears after 3 seconds
     };
 
+    watch(selectedMedia, async (newVal) => {
+      if (newVal) {
+        await GetMediaItems(parseInt(newVal));
+      }
+    });
+
+    const GetMediaItems = async (media_id: number) => {
+      const mediaService = new MediaService();
+      const filter: MediaItem = {}
+      const success = await mediaService.getMediaItem(filter);
+
+      if (success) console.log(`Media items loaded successfully for ID: ${media_id}`+ mediaStore.mediaItems);
+      else console.log(`Failed to load media items for ID: ${media_id}`);
+    };
+  
+
     return {
       mediaStore,
       media,
       mediaItems,
+      selectedMedia,
       handleSubmit,
       showPopup,
+      GetMediaItems, // Expose the method for the watcher
     };
   },
 });
@@ -42,17 +64,38 @@ export default defineComponent({
     <div class="form-container">
       <h2>Select Media and Branch</h2>
       <form @submit="handleSubmit" action="/move-media" method="POST">
-        <label for="media">Choose Media to Move:</label>
-        <select id="media" name="media" required>
+        <!-- Media Selection -->
+        <label for="media">Choose Media Title to Move:</label>
+        <select id="media" name="media" v-model="selectedMedia" required>
           <option value="">-- Select Media --</option>
-          <option v-for="item in media" :key="item.id" :value="item.id">
+          <option v-for="item in media" :key="item.id" :value="item.name">
             {{ item.name }}
           </option>
-          <option>Test Media</option>
+          <option value="test-media">Test Media</option>
         </select>
 
+        <!-- Conditional Dropdown for Selected Media -->
+        <div v-if="selectedMedia">
+          <label for="specific-option">Choose Specific Option for Selected Media:</label>
+          <select id="specific-option" name="specificOption" required>
+            <option value="">-- Select Option --</option>
+            <option value="option-1">Option 1 for {{ selectedMedia }}</option>
+            <option value="option-2">Option 2 for {{ selectedMedia }}</option>
+          </select>
+        </div>
+
+        <!-- Branch Selection -->
         <label for="branch">Choose Branch:</label>
-        <select id="branch" name="branch" required>
+        <select id="branch" name="branchFrom" required>
+          <option value="">-- Select Branch --</option>
+          <option v-for="item in mediaItems" :key="item.id" :value="item.library_id">
+            {{ item.library_id }}
+          </option>
+          <option value="test-branch">Test Branch</option>
+        </select>
+
+        <label for="branch">Choose Destination Branch:</label>
+        <select id="branch" name="branchDestination" required>
           <option value="">-- Select Branch --</option>
           <option v-for="item in mediaItems" :key="item.id" :value="item.library_id">
             {{ item.library_id }}
@@ -61,11 +104,16 @@ export default defineComponent({
         </select>
 
         <button type="submit">Move Media</button>
-        <button type="button" @click="$router.push('/manage')" style="margin-top: 10px; background-color: #6c757d;">
+        <button
+          type="button"
+          @click="$router.push('/manage')"
+          style="margin-top: 10px; background-color: #6c757d;"
+        >
           Back
         </button>
       </form>
 
+      <!-- Popup Message -->
       <div v-if="showPopup" class="popup-overlay">
         <div class="popup">
           <p>Request Submitted!</p>
@@ -74,6 +122,7 @@ export default defineComponent({
     </div>
   </body>
 </template>
+
 
 <style scoped>
         body {

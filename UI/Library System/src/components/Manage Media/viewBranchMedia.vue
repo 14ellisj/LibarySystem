@@ -30,8 +30,8 @@ export default defineComponent({
     <!-- Dropdown for selecting a branch -->
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="item in media" :key="item.id">
-        {{ item.name }}
+      <option v-for="item in mediaItem" :key="item.id">
+        {{ item.library_id.name }}
       </option>
     </select>
 
@@ -41,8 +41,8 @@ export default defineComponent({
     <div v-if="selectedBranch">
       <h2>Data for {{ selectedBranch }}</h2>
       <ul>
-        <li v-for="(item, index) in media" :key="index">
-          {{ item.description }}
+        <li v-for="(item, index) in mediaItem" :key="index">
+          {{ item.id}}
         </li>
       </ul>
     </div>

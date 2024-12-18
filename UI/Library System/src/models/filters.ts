@@ -13,7 +13,7 @@ export interface ProfileFilter {
   email?: string
 }
 
-export interface MediaItem{
+export interface mediaItemsFilter{
   media_id?: number
   borrower_id?: number
   library_id?: number

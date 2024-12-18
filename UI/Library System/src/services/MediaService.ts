@@ -1,7 +1,7 @@
 import type { Author } from '@/models/author'
-import type { MediaFilter, MediaItem } from '@/models/filters'
+import type { MediaFilter, mediaItemsFilter as MediaItemsFilter } from '@/models/filters'
 import type { Media } from '@/models/media'
-import type { Media_Item } from '@/models/media_item'
+import type { MediaItem } from '@/models/mediaItem'
 import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest, IGetItemsRequest } from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
@@ -26,7 +26,7 @@ export default class {
     return this.mediaStore.media
   }
 
-  async getMediaItem(filter: MediaItem): Promise<Media_Item[]> {
+  async getMediaItem(filter: MediaItemsFilter): Promise<MediaItem[]> {
     const requestUrl = this.apiUrl + 'Media/item'
 
     await axios

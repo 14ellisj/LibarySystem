@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import type { MediaItem } from '@/models/filters';
+import type { mediaItemsFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 
 export default defineComponent({
@@ -14,7 +14,7 @@ export default defineComponent({
 
     const fetchMediaItems = async () => {
       try {
-        const filter: MediaItem = {mediaId}; 
+        const filter: mediaItemsFilter = {}; 
         const data = await mediaService.getMediaItem(filter);
         mediaStore.setMediaItem(data); 
       } catch (error) {
@@ -30,7 +30,7 @@ export default defineComponent({
       mediaStore,
       selectedBranch,
       submitForMediaItems: async (mediaId: number) => {
-        const filter: MediaItem = {
+        const filter: mediaItemsFilter = {
           media_id: mediaId,
         };
         try {

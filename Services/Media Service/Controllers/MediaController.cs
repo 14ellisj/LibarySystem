@@ -30,9 +30,13 @@ namespace Media_Service.Controllers
         }
         
         [HttpGet("item", Name = "Get Media Item")]
-        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int mediaId, int? libraryId, int? borrowerId, int? reserverId)
+        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int? media_id, int? library_id, int? borrower_id, int? reserver_id)
         {
-            var results = await _mediaService.GetMediaItems(mediaId, libraryId, borrowerId, reserverId);
+            var mediaId = (int)media_id
+            if (!media_id.HasValue)
+                return BadRequest("Please include a media ID");
+
+            var results = await _mediaService.GetMediaItems(media_id, library_id, borrower_id, reserver_id);
             return Ok(results);
         }
 

@@ -14,6 +14,7 @@ import AddView from '@/views/AddView.vue'
 import ChangeQuantity from '@/views/ChangeQuantity.vue'
 import ManageMedia from '@/views/manageMedia.vue'
 import moveFormView from '@/views/moveFormView.vue'
+import ReservationView from '@/views/ReservationView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -97,6 +98,11 @@ const router = createRouter({
       name: 'Move',
       component: moveFormView,
     },
+    {
+    path: '/reservations',
+    name: 'Reservation',
+    component: ReservationView,
+  },
   ],
 })
 

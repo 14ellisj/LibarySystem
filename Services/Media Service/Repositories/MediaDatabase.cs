@@ -62,6 +62,8 @@ namespace Media_Service.Repositories
             var query = _context.MediaItem
                 .Include(x => x.library)
                 .Include(x => x.borrower)
+                .Include(x => x.reserver)
+                .Include(x => x.media)
                 .ApplySpecification(spec);
 
             return await query.ToListAsync();

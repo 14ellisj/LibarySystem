@@ -7,22 +7,21 @@ import MediaService from '@/services/MediaService';
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
-    const mediaStore = useMediaStore(); // Pinia store instance
+    const mediaStore = useMediaStore(); 
     const selectedBranch = ref('');
     const mediaService = new MediaService();
 
-    // Fetch media items on component mount
+
     const fetchMediaItems = async () => {
       try {
-        const filter: MediaItem = { media_id }; // Adjust this filter as needed
+        const filter: MediaItem = {mediaId}; 
         const data = await mediaService.getMediaItem(filter);
-        mediaStore.setMediaItem(data); // Set data in the Pinia store
+        mediaStore.setMediaItem(data); 
       } catch (error) {
         console.error('Failed to fetch media items:', error);
       }
     };
 
-    // Fetch data when the component is mounted
     onMounted(() => {
       fetchMediaItems();
     });
@@ -51,7 +50,6 @@ export default defineComponent({
   <div>
     <h1>Select a Branch</h1>
 
-    <!-- Dropdown for selecting a branch -->
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
       <option v-for="item in mediaStore.mediaItems" :key="item.id">
@@ -59,7 +57,6 @@ export default defineComponent({
       </option>
     </select>
 
-    <!-- Display data for the selected branch -->
     <div v-if="selectedBranch">
       <h2>Data for {{ selectedBranch }}</h2>
       <ul>
@@ -69,7 +66,6 @@ export default defineComponent({
       </ul>
     </div>
 
-    <!-- Message when no branch is selected -->
     <div v-else>
       <p>Please select a branch to view its data.</p>
       <p>or</p>
@@ -79,21 +75,6 @@ export default defineComponent({
     </div>
   </div>
 </template>
-
-<style scoped>
-button {
-  margin: 10px 0;
-  padding: 8px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
-}
-button:hover {
-  background-color: #0056b3;
-}
-</style>
 
 <style scoped>
     body {

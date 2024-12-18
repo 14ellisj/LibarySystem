@@ -10,6 +10,7 @@ import '../../styles/variables.css';
       <button @click="">Add Media</button>
       <button @click="$router.push('/Orders')">Orders</button>
       <button @click="$router.push('/Return')">Return Media</button>
+      <button @click="$router.push('/Reservations')">Reservations</button>
       <button @click="$router.push('/Settings')">Settings</button>
       <button @click="$router.push('/logIn')" class="logout-button">Log Out</button>
     </div>

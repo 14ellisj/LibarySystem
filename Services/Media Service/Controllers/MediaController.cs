@@ -26,19 +26,25 @@ namespace Media_Service.Controllers
         public async Task<ActionResult<IEnumerable<Media>>> GetMedia(string? title, string? author, bool? is_selected, bool? availability, int? profile_id)
         {
             var results = await _mediaService.FilterMedia(title, author, is_selected, availability, profile_id);
-            
+            return Ok(results);
+        }
+        
+        [HttpGet("item", Name = "Get Media Item")]
+        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int mediaId, int? libraryId, int? borrowerId, int? reserverId)
+        {
+            var results = await _mediaService.GetMediaItems(mediaId, libraryId, borrowerId, reserverId);
             return Ok(results);
         }
 
-        [HttpPatch("borrow", Name = "Borrow Media")]
-        public async Task<IActionResult> BorrowMedia([FromBody] BorrowItemRequest body)
+        [HttpPatch("reserve", Name = "Reserve Media")]
+        public async Task<IActionResult> ReserveMedia([FromBody] ReserveItemRequest body)
         {
             if (!body.MediaId.HasValue || !body.ProfileId.HasValue)
                 return BadRequest("Please include a media_id and a profile_id");
 
             try
             {
-                var success = await _mediaService.BorrowMedia((int)body.MediaId, (int)body.ProfileId);
+                var success = await _mediaService.ReserveMedia((int)body.MediaId, (int)body.ProfileId);
 
                 if (!success)
                     return Conflict("No available items");
@@ -52,23 +58,15 @@ namespace Media_Service.Controllers
             }
 
         }
-        [HttpGet("item", Name = "Get Media Item")]
-        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int mediaId)
-        {
-            var results = await _mediaService.GetMediaItems(mediaId);
-            
-           
-            return Ok(results);
-        }
-        [HttpPatch("reserve", Name = "Reserve Media")]
-        public async Task<IActionResult> ReserveMedia([FromBody] ReserveItemRequest body)
+        [HttpPatch("borrow", Name = "Borrow Media")]
+        public async Task<IActionResult> BorrowMedia([FromBody] BorrowItemRequest body)
         {
             if (!body.MediaId.HasValue || !body.ProfileId.HasValue)
                 return BadRequest("Please include a media_id and a profile_id");
 
             try
             {
-                var success = await _mediaService.ReserveMedia((int)body.MediaId, (int)body.ProfileId);
+                var success = await _mediaService.BorrowMedia((int)body.MediaId, (int)body.ProfileId);
 
                 if (!success)
                     return Conflict("No available items");

@@ -6,7 +6,6 @@ import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
 import { useUserStore } from '@/stores/profileInformation';
-import type { MediaItem } from '@/models/filters';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -51,6 +50,7 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media);
+    console.log(mediaStore.mediaItems);
 
     return {
       media,
@@ -131,10 +131,7 @@ export default defineComponent({
                   </div>
                   <div class="media-info">
                     <h2>{{ item.name }}</h2>
-                    <p>
-                      <strong>Author: </strong> {{ item.author.first_name }}
-                      {{ item.author.last_name }}
-                    </p>
+                    <p><strong>Author: </strong> {{ item.author.first_name }} {{ item.author.last_name }}</p>
                     <p><strong>Length: </strong>{{ item.length }} pages</p>
                     <p><strong>Description: </strong> {{ item.description }}</p>
                     <p><strong>Rating: </strong>{{ item.rating }}/5</p>
@@ -146,7 +143,6 @@ export default defineComponent({
                       <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
                         Reserve
                       </button>
-                      <p>Current Reserve Queue: {{ reserveQueue }}</p>
 
                       <div>
                         <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>

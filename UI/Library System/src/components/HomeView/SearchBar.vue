@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { MediaFilter } from '@/models/filters'
+import type { MediaFilter, MediaItem } from '@/models/filters'
 import { SearchType } from '@/models/searchType'
 import MediaService from '@/services/MediaService'
 import { useUserStore } from '@/stores/profileInformation'
@@ -36,13 +36,14 @@ export default defineComponent({
   },
   methods: {
     async submit(fromSuggestions: boolean) {
-    
+
       const filter: MediaFilter = {
         title: this.searchType === SearchType.Title ? this.query : undefined,
         author: this.searchType === SearchType.Author ? this.query : undefined,
         is_selected: fromSuggestions,
         profile_id: this.userStore.user?.id
       }
+
       await this.mediaService.filterData(filter)
       this.$router.push('/front')
 

@@ -16,7 +16,7 @@ export default defineComponent({
     setup() {
         const store = useUserStore();
         const mediaStore = useMediaStore();
-        var userID = store.user['id']
+        var userID = store.user[0]['id']
         return {
             store,
             mediaStore,
@@ -28,9 +28,9 @@ export default defineComponent({
         this.$router.push('/logIn');
       },
       async returnMedia(id: number) {
-        console.log('media ID is: ' + id)
         const mediaService = new MediaService();
         const returnMedia = await mediaService.returnMedia(id, this.userID);
+        this.$router.push('/Return')
       }
     }
 });

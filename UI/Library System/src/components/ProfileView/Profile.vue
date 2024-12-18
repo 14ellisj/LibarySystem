@@ -3,6 +3,7 @@ import { defineComponent } from 'vue';
 import '../../styles/variables.css'
 import type { MediaFilter } from '@/models/filters';
 import { useUserStore } from '@/stores/profileInformation';
+import MediaService from '@/services/MediaService';
 
 export default defineComponent({
     name: 'Profile',
@@ -15,8 +16,10 @@ export default defineComponent({
     },
     setup() {
         const store = useUserStore();
+        var userID = store.user[0]['id']
         return {
             store,
+            userID
         };
     },
     methods: {
@@ -27,8 +30,8 @@ export default defineComponent({
             this.$router.push('/Wishlist');
         },
         async toReturn() {  
-            console.log( this.store.user[0]['id'] )
-
+            const mediaService = new MediaService();
+            const returnMedia = await mediaService.getBorrowedMedia(this.userID);
             this.$router.push('/Return');
         },
         async toSettings() {  

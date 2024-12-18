@@ -34,6 +34,19 @@ namespace Media_Service.Services
             return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
         }
 
+        public async Task<bool> ReturnMedia(int mediaId, int profileId)
+        {
+            MediaIdSpecification idSpec = new MediaIdSpecification(mediaId);
+            var media = (await _mediaDatabase.FilterMediaAllInfo([idSpec])).First();
+
+            var returnItem = media.media_items.Where(x => x.borrower_id == profileId);
+
+            if (returnItem.Count() == 0)
+                return false;
+
+            return await _mediaDatabase.ReturnItem(returnItem.First());
+        }
+
         public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(title, isSelected);
@@ -49,6 +62,17 @@ namespace Media_Service.Services
 
             var entities = await _mediaDatabase.FilterMediaAllInfo(specs);
             var mapped = _mapper.Map<IEnumerable<Media>>(entities);
+
+            return mapped;
+        }
+
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileID)
+        {
+            var media = await _mediaDatabase.GetAllMedia();
+
+            var borrowedMedia = media.media_items.Where(x => x.borrower_id ==  profileID);
+
+            var mapped = _mapper.Map<IEnumerable<Media>>(borrowedMedia);
 
             return mapped;
         }

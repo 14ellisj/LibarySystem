@@ -29,6 +29,22 @@ namespace Media_Service.Repositories
             }
         }
 
+        public async Task<bool> ReturnItem(MediaItemEntity mediaItem)
+        {
+            mediaItem.borrower_id = null;
+
+            _context.Update(mediaItem);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
         {
             var query = _context.Media
@@ -61,6 +77,19 @@ namespace Media_Service.Repositories
                     .Distinct()
                     .OrderBy(x => x.name)
                     .Take(5);
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<IEnumerable<MediaEntity>> GetBorrowedMedia()
+        {
+            var query = _context.Media
+                .Include(x => x.author)
+                .Include(x => x.genre)
+                .Include(x => x.type)
+                .Include(x => x.media_items)
+                    .ThenInclude(mi => mi.borrower)
+                .OrderBy(x => x.name);
 
             return await query.ToListAsync();
         }

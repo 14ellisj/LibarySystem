@@ -9,10 +9,13 @@ namespace Media_Service.Services
     {
         private readonly IMediaDatabase _mediaDatabase;
         private readonly IMapper _mapper;
-        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper)
+        private readonly ILogger<MediaService> _logger;
+
+        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper, ILogger<MediaService> logger)
         {
             _mediaDatabase = mediaDatabase;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<bool> BorrowMedia(int mediaId, int profileId)
@@ -79,10 +82,12 @@ namespace Media_Service.Services
             var mapped = _mapper.Map<Media>(media, opts => opts.Items["profile_id"] = profileId);
             return mapped;
         }
-        public async Task<IEnumerable<MediaItem>> GetMediaItems(int? mediaId, int? libraryId, int? borrowerId, int? reserverId)
+        public async Task<IEnumerable<MediaItem>> GetMediaItems(int mediaId, int? libraryId, int? borrowerId, int? reserverId)
         {
             MediaItemIdSpecification idSpec = new MediaItemIdSpecification(mediaId);
             var items = await _mediaDatabase.GetMediaItemsById(idSpec);
+
+            _logger.LogInformation("Made it here woo!");
 
             if (items.Count() == 0)
                 throw new Exception("Media items Not Found.");

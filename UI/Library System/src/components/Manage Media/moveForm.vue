@@ -39,7 +39,7 @@ export default defineComponent({
     const GetMediaItems = async (media_id: number) => {
       const mediaService = new MediaService();
       const filter: MediaItem = {}
-      const success = await mediaService.getMediaItem(filter);
+      const success = await mediaService.getMediaItems(filter);
 
       if (success) console.log(`Media items loaded successfully for ID: ${media_id}`+ mediaStore.mediaItems);
       else console.log(`Failed to load media items for ID: ${media_id}`);

@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { MediaFilter, MediaItem } from '@/models/filters'
+import type { MediaFilter } from '@/models/filters'
 import { SearchType } from '@/models/searchType'
 import MediaService from '@/services/MediaService'
 import { useUserStore } from '@/stores/profileInformation'

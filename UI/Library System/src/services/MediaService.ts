@@ -26,7 +26,7 @@ export default class {
     return this.mediaStore.media
   }
 
-  async getMediaItem(filter: MediaItemsFilter): Promise<MediaItem[]> {
+  async getMediaItems(filter: MediaItemsFilter): Promise<MediaItem[]> {
     const requestUrl = this.apiUrl + 'Media/item'
 
     await axios

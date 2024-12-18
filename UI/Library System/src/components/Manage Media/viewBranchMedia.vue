@@ -15,7 +15,7 @@ export default defineComponent({
     const fetchMediaItems = async () => {
       try {
         const filter: mediaItemsFilter = {}; 
-        const data = await mediaService.getMediaItem(filter);
+        const data = await mediaService.getMediaItems(filter);
         mediaStore.setMediaItem(data); 
       } catch (error) {
         console.error('Failed to fetch media items:', error);
@@ -29,21 +29,27 @@ export default defineComponent({
     return {
       mediaStore,
       selectedBranch,
+      mediaService
+
+    }
+  },
+
+  methods: {
       submitForMediaItems: async (mediaId: number) => {
+        const mediaService = new MediaService();
         const filter: mediaItemsFilter = {
           media_id: mediaId,
         };
         try {
-          const data = await mediaService.getMediaItem(filter);
-          mediaStore.setMediaItem(data); 
+          const data = await mediaService.getMediaItems(filter);
           console.log('Media items fetched successfully');
         } catch (error) {
           console.error('Failed to submit for media items:', error);
         }
       },
-    };
   },
-});
+})
+
 </script>
 
 <template>

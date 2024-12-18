@@ -26,7 +26,7 @@ namespace Media_Service.Models
         [ForeignKey("reserver_id")]
         public UserEntity? reserver { get; set; }
         public int? reserver_id;
-        public string reserve_queue { get; set; }
+        public string? reserve_queue { get; set; }
     }
 
     [Table("Profile")]
@@ -41,7 +41,7 @@ namespace Media_Service.Models
     {
         [Key]
         public int id { get; set; }
-
+        public string name { get; set; }
     }
 
     [Table("Media")]    

@@ -1,20 +1,26 @@
 import { defineStore } from 'pinia'
 import type { Media } from '@/models/media'
-import type { Media_Item } from '@/models/media_item'
+import type { MediaItem } from '@/models/mediaItem'
+import type { Library } from '@/models/library'
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [] as Media[],
-    mediaItems: [] as Media_Item[],
+    library: [] as Library[],
+    mediaItems: [] as MediaItem[],
     autoCompleteOptions: [] as string[],
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
       this.media = mediaInput
     },
-    setMediaItem(mediaItemInput: Media_Item[]) {
+    setMediaItem(mediaItemInput: MediaItem[]) {
       this.mediaItems = mediaItemInput
       console.log(this.mediaItems)
+    },
+    setLibraryData(libraryInput: Library[]) {
+      this.library = libraryInput
+      console.log(this.library)
     },
     setAutocompleteOptions(input: string[]) {
       this.autoCompleteOptions = input

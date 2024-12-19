@@ -19,27 +19,19 @@ export default defineComponent({
   },
 
   methods: {
-    submitForLibraryData: async function () {
-      const mediaService = new MediaService();
-      const targetLibraryIds = [1, 2, 3, 4]; // IDs to fetch
-
-      try {
-        // Fetch data for specified library IDs
-        const data = await Promise.all(
-          targetLibraryIds.map(async (libraryId) => {
-            const filter: LibraryFilter = {
-              library_id: libraryId,
-            };
-            return mediaService.getLibraryData(filter);
-          })
-        );
-
-        console.log('Library Data for IDs 1, 2, 3, and 4 retrieved successfully:', data);
-      } catch (error) {
-        console.error('Failed to get Library Data', error);
-      }
-    },
-  },
+  submitForLibraryData: async (libraryId: number) => {
+        const mediaService = new MediaService();
+        const filter: LibraryFilter = {
+          library_id: libraryId,
+        };
+        try {
+          const data = await mediaService.getLibraryData(filter);
+          console.log('Library Data got successfully');
+        } catch (error) {
+          console.error('Failed to get Library Data', error);
+        }
+      },
+    }
 });
 </script>
 
@@ -67,7 +59,7 @@ export default defineComponent({
       <p>Please select a branch to view its data.</p>
       <p>or</p>
       <p>
-        <button @click="submitForLibraryData; $router.push('/move')">Fetch Library Data and Move Media</button>
+        <button @click="submitForLibraryData(1), submitForLibraryData(2),submitForLibraryData(3),submitForLibraryData(4), $router.push('/move')">Move Media</button>
       </p>
     </div>
   </div>

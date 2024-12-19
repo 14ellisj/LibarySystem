@@ -128,7 +128,7 @@ namespace Media_Service.Models.Specifications
                 if (!_id.HasValue)
                     return x => false;
 
-                return x => x.id.Equals(_id.Value);
+                return x => x.media.id.Equals(_id.Value);
             }
         }
     }

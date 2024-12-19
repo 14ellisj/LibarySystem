@@ -3,6 +3,7 @@ import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
 import MediaService from '@/services/MediaService';
 import type { mediaItemsFilter } from '@/models/filters';
+import type { LibraryFilter } from '@/models/filters';
 
 export default defineComponent({
   name: 'Add Media',
@@ -10,6 +11,7 @@ export default defineComponent({
     const mediaStore = useMediaStore();
     const media = ref(mediaStore.media);
     const mediaItems = ref(mediaStore.mediaItems);
+    const library = ref(mediaStore.library);
     const showPopup = ref(false);
     const showError = ref(false);
     const selectedMedia = ref<string | null>(null);
@@ -22,11 +24,11 @@ export default defineComponent({
       const branchDestination = formData.get('branchDestination');
 
       if (branchFrom === branchDestination) {
-        showError.value = true; // Display error message
+        showError.value = true; 
         setTimeout(() => {
-          showError.value = false; // Hide error message after 3 seconds
+          showError.value = false; 
         }, 3000);
-        return; // Prevent submission
+        return; 
       }
 
       const newMediaMove = {
@@ -39,10 +41,9 @@ export default defineComponent({
 
       setTimeout(() => {
         showPopup.value = false;
-      }, 3000); // Popup disappears after 3 seconds
+      }, 3000); 
     };
 
-    // Watch for changes in the selected media and call `submitForMediaItems`
     watch(selectedMedia, (newValue) => {
       if (newValue) {
         const selectedMediaItem = media.value.find((item) => item.name === newValue);
@@ -52,7 +53,6 @@ export default defineComponent({
       }
     });
 
-    // Method to fetch media items for the selected media
     const submitForMediaItems = async (mediaId: number) => {
       const mediaService = new MediaService();
       const filter: mediaItemsFilter = {
@@ -60,12 +60,16 @@ export default defineComponent({
       };
       try {
         const data = await mediaService.getMediaItems(filter);
-        mediaItems.value = data; // Update mediaItems with fetched data
+        mediaItems.value = data; 
         console.log('Media items fetched successfully:', data);
       } catch (error) {
         console.error('Failed to submit for media items:', error);
       }
     };
+
+
+
+    console.log(mediaStore.library);
 
     return {
       mediaStore,
@@ -75,6 +79,7 @@ export default defineComponent({
       handleSubmit,
       showPopup,
       showError,
+      library,
     };
   },
 });
@@ -82,6 +87,7 @@ export default defineComponent({
 
 <template>
   <body>
+    <button>Display</button>
     <div class="form-container">
       <h2>Select Media and Branch</h2>
       <form @submit="handleSubmit" action="/move-media" method="POST">
@@ -108,8 +114,8 @@ export default defineComponent({
         <label for="branch">Choose Destination Branch:</label>
         <select id="branch" name="branchDestination" required>
           <option value="">-- Select Branch --</option>
-          <option v-for="item in mediaItems" :key="item.id" :value="item.library.name">
-            {{ item.library.name }}
+          <option v-for="item in library" :key="item.id" :value="item.name">
+            {{ item.name }}
           </option>
         </select>
 

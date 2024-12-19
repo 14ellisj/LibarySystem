@@ -20,8 +20,3 @@ export interface mediaItemsFilter{
   reserver_id?: number
   reserve_queue?: number
 }
-
-export interface LibraryFilter {
-  library_id?: number
-  name?: string
-}

@@ -10,6 +10,7 @@ export default defineComponent({
     const mediaStore = useMediaStore();
     const media = ref(mediaStore.media);
     const mediaItems = ref(mediaStore.mediaItems);
+    const library = ref(mediaStore.library);
     const showPopup = ref(false);
     const showError = ref(false);
     const selectedMedia = ref<string | null>(null);
@@ -67,6 +68,8 @@ export default defineComponent({
       }
     };
 
+    console.log(mediaStore.library);
+
     return {
       mediaStore,
       media,
@@ -75,6 +78,7 @@ export default defineComponent({
       handleSubmit,
       showPopup,
       showError,
+      library,
     };
   },
 });
@@ -107,8 +111,8 @@ export default defineComponent({
         <label for="branch">Choose Destination Branch:</label>
         <select id="branch" name="branchDestination" required>
           <option value="">-- Select Branch --</option>
-          <option v-for="item in mediaItems" :key="item.id" :value="item.library.name">
-            {{ item.library.name }}
+          <option v-for="item in library" :key="item.id" :value="item.name">
+            {{ item.name }}
           </option>
         </select>
 

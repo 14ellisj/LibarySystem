@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import type { mediaItemsFilter } from '@/models/filters';
+import type { LibraryFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 
 export default defineComponent({
@@ -20,19 +20,20 @@ export default defineComponent({
   },
 
   methods: {
-      submitForMediaItems: async (mediaId: number) => {
+      submitForLibraryData: async (libraryId: number) => {
         const mediaService = new MediaService();
-        const filter: mediaItemsFilter = {
-          media_id: mediaId,
+        const filter: LibraryFilter = {
+          library_id: libraryId,
         };
         try {
-          const data = await mediaService.getMediaItems(filter);
-          console.log('Media items fetched successfully');
+          const data = await mediaService.getLibraryData(filter);
+          console.log('Library Data got successfully');
         } catch (error) {
-          console.error('Failed to submit for media items:', error);
+          console.error('Failed to get Library Data', error);
         }
       },
   },
+  
 })
 
 </script>
@@ -43,8 +44,8 @@ export default defineComponent({
 
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="item in mediaStore.mediaItems" :key="item.id">
-        {{ item.library_id.name }}
+      <option v-for="item in mediaStore.library" :key="item.id">
+        {{ item.name }}
       </option>
     </select>
 
@@ -61,7 +62,7 @@ export default defineComponent({
       <p>Please select a branch to view its data.</p>
       <p>or</p>
       <p>
-        <button @click="$router.push('/move')">Move Media</button>
+        <button @click="submitForLibraryData(4), $router.push('/move')">Move Media</button>
       </p>
     </div>
   </div>

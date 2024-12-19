@@ -102,5 +102,20 @@ namespace Media_Service.Services
             MediaIdSpecification idSpec = new MediaIdSpecification(id);
             return (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
         }
+
+         public async Task<IEnumerable<Library>> GetLibraryData(int libraryId, string? libraryName)
+        {
+            LibrarySpecification idSpec = new LibrarySpecification(libraryId);
+            var items = await _mediaDatabase.GetLibraryDataById(idSpec);
+
+            _logger.LogInformation("Made it here woo!");
+
+            if (items.Count() == 0)
+                throw new Exception("Media items Not Found.");
+
+            var mapped = _mapper.Map<IEnumerable<Library>>(items);
+            
+            return mapped;
+        }
     }
 }

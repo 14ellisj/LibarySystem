@@ -50,7 +50,6 @@ export default defineComponent({
     };
 
     console.log(mediaStore.media);
-    console.log(mediaStore.mediaItems);
 
     return {
       media,
@@ -87,9 +86,7 @@ export default defineComponent({
         toastr.error('Failed to reserve the media.');
       }
     },
-    async submit() {
-      this.$router.push('/manage');
-    },
+    
   },
 });
 </script>
@@ -161,10 +158,7 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
-
-      <button class="admin-button" @click="submit">
-        Manage Media
-      </button>
+      <button class="admin-button" @click="$router.push('/manage')">Manage Media</button>
     </main>
 
     <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>

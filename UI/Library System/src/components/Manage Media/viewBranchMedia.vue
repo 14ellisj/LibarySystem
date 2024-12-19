@@ -1,40 +1,46 @@
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import type { mediaItemsFilter } from '@/models/filters';
+import type { LibraryFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
-    const mediaStore = useMediaStore(); 
+    const mediaStore = useMediaStore();
     const selectedBranch = ref('');
     const mediaService = new MediaService();
 
     return {
       mediaStore,
       selectedBranch,
-      mediaService
-
-    }
+      mediaService,
+    };
   },
 
   methods: {
-      submitForMediaItems: async (mediaId: number) => {
-        const mediaService = new MediaService();
-        const filter: mediaItemsFilter = {
-          media_id: mediaId,
-        };
-        try {
-          const data = await mediaService.getMediaItems(filter);
-          console.log('Media items fetched successfully');
-        } catch (error) {
-          console.error('Failed to submit for media items:', error);
-        }
-      },
-  },
-})
+    submitForLibraryData: async function () {
+      const mediaService = new MediaService();
+      const targetLibraryIds = [1, 2, 3, 4]; // IDs to fetch
 
+      try {
+        // Fetch data for specified library IDs
+        const data = await Promise.all(
+          targetLibraryIds.map(async (libraryId) => {
+            const filter: LibraryFilter = {
+              library_id: libraryId,
+            };
+            return mediaService.getLibraryData(filter);
+          })
+        );
+
+        console.log('Library Data for IDs 1, 2, 3, and 4 retrieved successfully:', data);
+      } catch (error) {
+        console.error('Failed to get Library Data', error);
+      }
+    },
+  },
+});
 </script>
 
 <template>
@@ -43,8 +49,8 @@ export default defineComponent({
 
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="item in mediaStore.mediaItems" :key="item.id">
-        {{ item.library_id.name }}
+      <option v-for="item in mediaStore.library" :key="item.id">
+        {{ item.name }}
       </option>
     </select>
 
@@ -61,11 +67,12 @@ export default defineComponent({
       <p>Please select a branch to view its data.</p>
       <p>or</p>
       <p>
-        <button @click="$router.push('/move')">Move Media</button>
+        <button @click="submitForLibraryData; $router.push('/move')">Fetch Library Data and Move Media</button>
       </p>
     </div>
   </div>
 </template>
+
 
 <style scoped>
     body {

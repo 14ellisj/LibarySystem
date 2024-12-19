@@ -80,7 +80,6 @@ export default defineComponent({
 });
 </script>
 
-
 <template>
   <body>
     <div class="form-container">
@@ -89,7 +88,8 @@ export default defineComponent({
         <label for="media">Choose Media Title to Move:</label>
         <select id="media" name="media" v-model="selectedMedia" required>
           <option value="">-- Select Media --</option>
-          <option v-for="item in media" :key="item.id" :value="item.name">
+          <option 
+            v-for="item in media" :key="item.id" :value="item.name">
             {{ item.name }}
           </option>
         </select>
@@ -98,8 +98,9 @@ export default defineComponent({
           <label for="specific-option">Choose Media Location:</label>
           <select id="specific-option" name="branchFrom" required>
             <option value="">-- Select Option --</option>
-            <option v-for="item in mediaItems" :key="item.id" :value="item.library.name">
-             {{ item.id }}: {{ item.media.name }} - {{ item.library.name }}
+            <option 
+              v-for="item in mediaItems" :key="item.id" :value="item.library.name" :disabled="!item.media.is_available">
+              {{ item.id }}: {{ item.media.name }} - {{ item.library.name }} ({{ item.media.is_available ? 'Available' : 'Not Available' }})
             </option>
           </select>
         </div>
@@ -137,7 +138,6 @@ export default defineComponent({
     </div>
   </body>
 </template>
-
 
 
 

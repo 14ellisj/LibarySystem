@@ -96,7 +96,7 @@ namespace Media_Serivce.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task BorrowMedia_Success_OKResult()
+        public async Task BorrowMedia_Success_OKObjectResult()
         {
             MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
@@ -110,7 +110,7 @@ namespace Media_Serivce.Tests.Controllers
 
             var result = await sut.BorrowMedia(request);
 
-            Assert.IsInstanceOfType(result, typeof(OkResult));
+            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
         }
     }
 }

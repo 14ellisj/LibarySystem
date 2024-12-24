@@ -32,8 +32,8 @@ namespace Media_Serivce.Tests.Services
             var mediaId = 1;
             var profileId = 1;
 
-            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<IEnumerable<ISpecification<MediaEntity>>>()))
-                .ReturnsAsync(new List<MediaEntity>());
+            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<MediaFilter>()))
+                .ReturnsAsync(new List<Media>());
 
             var result = await sut.BorrowMedia(mediaId, profileId);
 
@@ -48,23 +48,14 @@ namespace Media_Serivce.Tests.Services
             var mediaId = 1;
             var profileId = 1;
 
-            MediaEntity mediaResult = new MediaEntity()
+            Media mediaResult = new Media()
             {
-                media_items = new List<MediaItemEntity>()
-                {
-                    new MediaItemEntity()
-                    {
-                        borrower_id = profileId,
-                        borrower = new UserEntity()
-                        {
-                            id = profileId
-                        }
-                    }
-                }
+                IsBorrwedByUser = true,
+                IsAvailable = true
             };
 
-            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<ISpecification<MediaEntity>[]>()))
-                .ReturnsAsync(new List<MediaEntity>());
+            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<MediaFilter>()))
+                .ReturnsAsync(new List<Media>() { mediaResult });
 
             var result = await sut.BorrowMedia(mediaId, profileId);
 
@@ -81,23 +72,13 @@ namespace Media_Serivce.Tests.Services
 
             var borrowerId = 2;
 
-            MediaEntity mediaResult = new MediaEntity()
+            Media mediaResult = new Media()
             {
-                media_items = new List<MediaItemEntity>()
-                {
-                    new MediaItemEntity()
-                    {
-                        borrower_id = borrowerId,
-                        borrower = new UserEntity()
-                        {
-                            id = borrowerId
-                        }
-                    }
-                }
+                IsAvailable = false
             };
 
-            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<IEnumerable<ISpecification<MediaEntity>>>()))
-                .ReturnsAsync(new List<MediaEntity>());
+            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<MediaFilter>()))
+                .ReturnsAsync(new List<Media>() { mediaResult });
 
             var result = await sut.BorrowMedia(mediaId, profileId);
 
@@ -112,27 +93,15 @@ namespace Media_Serivce.Tests.Services
             var mediaId = 1;
             var profileId = 1;
 
-            var borrowerId = 2;
-
-            MediaEntity mediaResult = new MediaEntity()
+            Media mediaResult = new Media()
             {
-                media_items = new List<MediaItemEntity>()
-                {
-                    new MediaItemEntity()
-                    {
-                        borrower_id = borrowerId,
-                        borrower = new UserEntity()
-                        {
-                            id = borrowerId
-                        }
-                    }
-                }
+                IsAvailable = true
             };
 
-            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<IEnumerable<ISpecification<MediaEntity>>>()))
-                .ReturnsAsync(new List<MediaEntity>());
+            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<MediaFilter>()))
+                .ReturnsAsync(new List<Media>() { mediaResult });
 
-            _mediaDatabaseMock.Setup(x => x.BorrowItem(It.IsAny<MediaItemEntity>(), It.IsAny<int>()))
+            _mediaDatabaseMock.Setup(x => x.BorrowItem(It.IsAny<int>(), It.IsAny<int>()))
                 .ReturnsAsync(false);
 
             var result = await sut.BorrowMedia(mediaId, profileId);
@@ -147,27 +116,16 @@ namespace Media_Serivce.Tests.Services
             var mediaId = 1;
             var profileId = 1;
 
-            var borrowerId = 2;
-
-            MediaEntity mediaResult = new MediaEntity()
+            Media mediaResult = new Media()
             {
-                media_items = new List<MediaItemEntity>()
-                {
-                    new MediaItemEntity()
-                    {
-                        borrower_id = borrowerId,
-                        borrower = new UserEntity()
-                        {
-                            id = borrowerId
-                        }
-                    }
-                }
+                IsAvailable = true,
+                IsBorrwedByUser = false
             };
 
-            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<IEnumerable<ISpecification<MediaEntity>>>()))
-                .ReturnsAsync(new List<MediaEntity>());
+            _mediaDatabaseMock.Setup(x => x.FilterMediaAllInfo(It.IsAny<MediaFilter>()))
+                .ReturnsAsync(new List<Media>() { mediaResult });
 
-            _mediaDatabaseMock.Setup(x => x.BorrowItem(It.IsAny<MediaItemEntity>(), It.IsAny<int>()))
+            _mediaDatabaseMock.Setup(x => x.BorrowItem(It.IsAny<int>(), It.IsAny<int>()))
                 .ReturnsAsync(true);
 
             var result = await sut.BorrowMedia(mediaId, profileId);

@@ -5,9 +5,9 @@ namespace Media_Service.Repositories
 {
     public interface IMediaDatabase
     {
-        Task<IEnumerable<MediaEntity>> GetMediaByTitle(MediaTitleSpecification spec);
-        Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec);
-        Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs);
-        Task<bool> BorrowItem(MediaItemEntity mediaId, int profileId);
+        Task<IEnumerable<Media>> GetMediaByTitle(string title);
+        Task<IEnumerable<Author>> GetAuthorsByName(string authorName);
+        Task<IEnumerable<Media>> FilterMediaAllInfo(MediaFilter filters);
+        Task<bool> BorrowItem(int mediaId, int profileId);
     }
 }

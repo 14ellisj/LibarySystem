@@ -89,7 +89,8 @@ export default defineComponent({
   <body>
     <main>
       <h1>Library</h1>
-      <table>
+      <h2 v-if="media.length === 0">No media found...</h2>
+      <table v-else>
         <thead>
           <tr>
             <th>Name</th>
@@ -130,7 +131,7 @@ export default defineComponent({
                       </button>
                       <button @click="addToWishlist(item.id)">Add to Wishlist</button>
                       <button @click="reserveMedia(item.id)">Reserve</button>
-                      
+
                       <p v-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
                       <p v-else-if="!item.is_available">Sorry, not available right now.</p>
                       <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>

@@ -4,7 +4,7 @@ import type { Profile } from '@/models/profile'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: {id: 1} as Profile,
+    user: {} as Profile,
     password: "" as string,
     loggedIn: "false" as string
   }),

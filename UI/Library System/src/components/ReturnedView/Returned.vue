@@ -26,7 +26,7 @@ export default defineComponent({
         async goBack() {    
             const mediaService = new MediaService();
             const filter: mediaItemsFilter = {
-                profileID: this.userID,
+                profile_id: this.userID,
             };
             const returnMedia = await mediaService.getBorrowedMedia(filter);
                 if (returnMedia.length != 0) {

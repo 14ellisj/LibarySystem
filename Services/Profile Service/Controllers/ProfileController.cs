@@ -9,7 +9,6 @@ using System.Security.Cryptography.Xml;
 
 
 namespace Profile_Service.Controllers
-
 {
     [ApiController]
     [Route("[controller]")]

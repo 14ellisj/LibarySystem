@@ -32,12 +32,12 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet("borrowedItem", Name = "Get Borrowed Media")]
-        public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int profileID)
+        public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int? profile_id)
         {
-            if (profileID == null)
+            if (profile_id == null)
                 return BadRequest("No Profile Id");
                 
-            var results = await _mediaService.GetBorrowedMedia(profileID);
+            var results = await _mediaService.GetBorrowedMedia((int)profile_id);
             
             return Ok(results);
         }
@@ -55,8 +55,7 @@ namespace Media_Service.Controllers
                 if (!success)
                     return Conflict("No available items");
 
-                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
-                return Ok(updatedItem);
+                return NoContent();
             }
             catch (Exception ex)
             {

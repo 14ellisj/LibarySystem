@@ -113,25 +113,4 @@ namespace Media_Service.Models.Specifications
         }
     }
 
-
-public class MediaItemBorrowerSpecification : ISpecification<MediaItemEntity>
-    {
-        int? _borrowerId;
-
-        public MediaItemBorrowerSpecification(int? borrower)
-        {
-            _borrowerId = borrower;
-        }
-
-        public Expression<Func<MediaItemEntity, bool>> Criteria
-        {
-            get
-            {
-                if (!_borrowerId.HasValue)
-                    return x => false;
-
-                return x => x.borrower_id.Equals(_borrowerId.Value);
-            }
-        }
-    }
 }

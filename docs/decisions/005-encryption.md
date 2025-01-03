@@ -62,4 +62,6 @@ Scrambling it with a key to unscramble it
 * Good, because it is fast
 * Bad, because the key might need to be brought to different places and therefore makes the key less secure
 
+References
+[Hashed vs 1 way encryption vs symmetric] (https://www.sealpath.com/blog/types-of-encryption-guide/)
 

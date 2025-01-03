@@ -38,14 +38,12 @@ export default class {
             })
             .then((response) => {
                 this.userStore.setUser(response.data)
-                console.log(response.data);
             })
 
         return this.userStore.user;
     }
 
     async createProfile(email: string, firstName: string, lastName: string, password: string){
-        console.log("email is: " + email + ", first name is: " + firstName + ", last name is: " + lastName + ", password is: " + password)
         const body : IRegisterDetails = {
             email: email,
             first_name: firstName,
@@ -55,7 +53,7 @@ export default class {
         axios
             .post(this.apiUrl, body)
             .then((response) => {
-                console.log(response.data);
+                console.log("Created new profile");
             })
 
         return this.userStore.user;

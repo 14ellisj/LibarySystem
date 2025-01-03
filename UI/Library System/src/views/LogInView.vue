@@ -12,9 +12,10 @@ import '../styles/variables.css'
 </template>
 
 <style scoped>
-.home {
-  text-align: center;
-  padding-top: 26vh;
+.home{
+    text-align: center;
+    padding-top: 13vh;
+
 }
 div {
   margin-left: 15%;

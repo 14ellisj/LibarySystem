@@ -43,7 +43,23 @@ namespace Media_Service.Repositories
             }
         }
 
-        public async Task<IEnumerable<Media>> FilterMediaAllInfo(MediaFilter filters)
+        public async Task<bool> ReturnItem(MediaItemEntity mediaItem)
+        {
+            mediaItem.borrower_id = null;
+
+            _context.Update(mediaItem);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
         {
             MediaTitleSpecification titleSpec = new MediaTitleSpecification(filters.Title, filters.IsSelected);
             MediaAuthorSpecification authorSpec = new MediaAuthorSpecification(filters.Author, filters.IsSelected);
@@ -98,6 +114,17 @@ namespace Media_Service.Repositories
 
             var entities = await query.ToListAsync();
             return _mapper.Map<IEnumerable<Media>>(entities);
+        }
+
+        public async Task<IEnumerable<MediaItemEntity>> GetBorrowedMedia(MediaItemBorrowerSpecification spec)
+        {
+            var query = _context.MediaItems
+                .Include(x => x.library)
+                .Include(x => x.borrower)
+                .Include(x => x.media)
+                .ApplySpecification(spec);
+
+            return await query.ToListAsync();
         }
     }
 }

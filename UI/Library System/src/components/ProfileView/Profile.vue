@@ -17,7 +17,7 @@ export default defineComponent({
     },
     setup() {
         const store = useUserStore();
-        var userID = store.user[0]['id'];
+        var userID = store.user.id;
 
         return {
             store,

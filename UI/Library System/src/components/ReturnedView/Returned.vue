@@ -13,7 +13,7 @@ export default defineComponent({
         const mediaStore = useMediaStore();
         var title = mediaStore.title
         const store = useUserStore();
-        var userID = store.user[0]['id'];
+        var userID = store.user.id;
 
         return {
             mediaStore,

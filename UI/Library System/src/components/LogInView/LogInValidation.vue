@@ -24,10 +24,10 @@ export default defineComponent({
 
 <template>
     <body>
-        <main v-if="store.user[0]['Password'] == store.password ">
+        <main v-if="store.user.id ">
             
             <h2>
-                Welcome back {{ store.user[0]['firstName'] }} {{ store.user[0]['lastName'] }}
+                Welcome back {{ store.user.first_name }} {{ store.user.last_name }}
             </h2>
             <button @click="push(); setLoggedIn();">
                 Go searching!

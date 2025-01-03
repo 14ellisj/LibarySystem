@@ -22,23 +22,27 @@ namespace Media_Serivce.Tests.Controllers
     {
         Mock<IMediaService> _mediaServiceMock;
         Mock<ILogger<MediaController>> _loggerMock;
-        public MediaControllerTests()
+        MediaController _sut;
+
+
+        [TestInitialize]
+        public void Initialize()
         {
             _mediaServiceMock = new Mock<IMediaService>();
             _loggerMock = new Mock<ILogger<MediaController>>();
+            _sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
         }
 
         [TestMethod]
         public async Task BorrowMedia_NoMediaId_BadRequest()
         {
-            MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
             {
                 MediaId = null,
                 ProfileId = 1
             };
 
-            var result = await sut.BorrowMedia(request);
+            var result = await _sut.BorrowMedia(request);
 
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -46,14 +50,13 @@ namespace Media_Serivce.Tests.Controllers
         [TestMethod]
         public async Task BorrowMedia_NoProfileId_BadRequest()
         {
-            MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
             {
                 MediaId = 1,
                 ProfileId = null
             };
 
-            var result = await sut.BorrowMedia(request);
+            var result = await _sut.BorrowMedia(request);
 
             Assert.IsInstanceOfType(result, typeof(BadRequestObjectResult));
         }
@@ -61,7 +64,6 @@ namespace Media_Serivce.Tests.Controllers
         [TestMethod]
         public async Task BorrowMedia_UnsuccessulFromService_ConflictError()
         {
-            MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
             {
                 MediaId = 1,
@@ -71,7 +73,7 @@ namespace Media_Serivce.Tests.Controllers
             _mediaServiceMock.Setup(x => x.BorrowMedia(It.IsAny<int>(), It.IsAny<int>()))
                 .ReturnsAsync(false);
 
-            var result = await sut.BorrowMedia(request);
+            var result = await _sut.BorrowMedia(request);
 
             Assert.IsInstanceOfType(result, typeof(ConflictObjectResult));
         }
@@ -79,7 +81,6 @@ namespace Media_Serivce.Tests.Controllers
         [TestMethod]
         public async Task BorrowMedia_InternalServerErrorInService_StatusCode500()
         {
-            MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
             {
                 MediaId = 1,
@@ -89,16 +90,15 @@ namespace Media_Serivce.Tests.Controllers
             _mediaServiceMock.Setup(x => x.BorrowMedia(It.IsAny<int>(), It.IsAny<int>()))
                 .Throws(new Exception());
 
-            var result = await sut.BorrowMedia(request);
+            var result = await _sut.BorrowMedia(request);
 
             Assert.IsInstanceOfType(result, typeof(ObjectResult));
             Assert.AreEqual(500, (result as ObjectResult).StatusCode);
         }
 
         [TestMethod]
-        public async Task BorrowMedia_Success_OKObjectResult()
+        public async Task BorrowMedia_Success_NoContentResult()
         {
-            MediaController sut = new MediaController(_loggerMock.Object, _mediaServiceMock.Object);
             BorrowItemRequest request = new BorrowItemRequest()
             {
                 MediaId = 1,
@@ -108,9 +108,9 @@ namespace Media_Serivce.Tests.Controllers
             _mediaServiceMock.Setup(x => x.BorrowMedia(It.IsAny<int>(), It.IsAny<int>()))
                 .ReturnsAsync(true);
 
-            var result = await sut.BorrowMedia(request);
+            var result = await _sut.BorrowMedia(request);
 
-            Assert.IsInstanceOfType(result, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(result, typeof(NoContentResult));
         }
     }
 }

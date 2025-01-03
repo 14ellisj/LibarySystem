@@ -4,26 +4,45 @@ import ProfileService from '@/services/ProfileService'
 import type { ProfileFilter } from '@/models/filters'
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
+import { useUserStore } from "@/stores/profileInformation";
 
 export default defineComponent({
-  name: 'Log-In',
-  data() {
-    var query: string = ''
+    name: "Log-In",
+    components: {
+            LogInItem,
+        },
+    data() {
+    var email: string = "";
+    var password: string = "";
+    const profileService = new ProfileService();
 
     return {
-      query,
+        email,
+        password,
+        profileService
     }
   },
   methods: {
     async signIn() {
-      const profileService = new ProfileService()
-      const filter: ProfileFilter = {
-        email: this.query,
-      }
-      await profileService.filterData(filter)
+        const filter: ProfileFilter = {
+            email: this.email
+        }
+        await this.profileService.filterData(filter, this.password);
+            
+        this.$router.push('/logInValidation');
+        },
+    async toRegister() {
+        this.$router.push('/register');
     },
-  },
-})
+    async setNotLoggedIn() {
+        useUserStore().setNotLoggedIn()
+    }
+    },
+    beforeMount() {
+        this.setNotLoggedIn();
+    },
+  }
+);
 </script>
 
 <template>
@@ -31,13 +50,13 @@ export default defineComponent({
     <template #Heading>Log In</template>
   </LogInItem>
 
-  <label for="logInEmail">Email:</label><br />
-  <input type="text" id="logInEmail" name="logInEmail" v-model="query" /><br />
-  <label for="Password">Password:</label><br />
-  <input type="text" id="Password" name="Password" /><br />
-  <button @click="signIn()">Sign in</button><br />
+        <label for="logInEmail">Email:</label><br>
+        <input type="text" id="logInEmail" name="logInEmail" v-model="email"><br>
+        <label for="Password">Password:</label><br>
+        <input type="password" id="Password" name="Password" v-model="password"><br>
+        <button @click="signIn()"> Sign in </button><br>
 
-  <RouterLink to="/register"> Register </RouterLink>
+        <button @click="toRegister()"> Go to registration </button><br>
 </template>
 
 <style scoped>

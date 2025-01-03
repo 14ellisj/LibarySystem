@@ -2,6 +2,7 @@
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Media_Service.Repositories;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Media_Service.Services
 {
@@ -9,6 +10,7 @@ namespace Media_Service.Services
     {
         private readonly IMediaDatabase _mediaDatabase;
         private readonly IMapper _mapper;
+
         public MediaService(IMediaDatabase mediaDatabase, IMapper mapper)
         {
             _mediaDatabase = mediaDatabase;
@@ -17,7 +19,13 @@ namespace Media_Service.Services
 
         public async Task<bool> BorrowMedia(int mediaId, int profileId)
         {
-            var media = await GetMediaById(mediaId, profileId);
+            MediaFilter filters = new MediaFilter()
+            {
+                Id = mediaId,
+                ProfileId = profileId
+            };
+
+            var media = (await _mediaDatabase.FilterMediaAllInfo(filters)).FirstOrDefault();
 
             if (media is null)
                 return false;
@@ -29,6 +37,22 @@ namespace Media_Service.Services
                 return false;
 
             return await _mediaDatabase.BorrowItem(mediaId, profileId);
+        }
+
+        public async Task<bool> ReturnMedia(int mediaId, int profileId)
+        {
+            MediaFilter filters = new MediaFilter()
+            {
+                Id = mediaId,
+                ProfileId = profileId
+            };
+
+            var returningItem = await _mediaDatabase.GetBorrowedMediaItem(mediaId, profileId);
+
+            if (returningItem is null)
+                return false;
+
+            return await _mediaDatabase.ReturnItem(returningItem);
         }
 
         public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId)
@@ -47,25 +71,10 @@ namespace Media_Service.Services
             return media;
         }
 
-        public async Task<Media> GetMedia(int id, int? profileId)
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)
         {
-            var media = await GetMediaById(id, profileId);
-
-            if (media is null)
-                throw new Exception("Media Not Found.");
-
+            var media = await _mediaDatabase.GetBorrowedMedia(profileId);
             return media;
-        }
-
-        private async Task<Media?> GetMediaById(int id, int? profileId)
-        {
-            MediaFilter filters = new MediaFilter()
-            {
-                Id = id,
-                ProfileId = profileId
-            };
-
-            return (await _mediaDatabase.FilterMediaAllInfo(filters)).FirstOrDefault();
         }
     }
 }

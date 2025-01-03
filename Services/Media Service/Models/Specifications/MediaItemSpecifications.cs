@@ -46,11 +46,11 @@ namespace Media_Service.Models.Specifications
         }
     }
 
-    public class MediaItemBorrowedByUser : ISpecification<MediaItemEntity>
+    public class MediaItemBorrowedBySpecification : ISpecification<MediaItemEntity>
     {
         int? _profileId;
 
-        public MediaItemBorrowedByUser(int? profileId)
+        public MediaItemBorrowedBySpecification(int? profileId)
         {
             _profileId = profileId;
         }

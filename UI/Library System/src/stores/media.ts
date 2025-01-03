@@ -5,6 +5,7 @@ export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [] as Media[],
     autoCompleteOptions: [] as string[],
+    title: "" as string
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
@@ -21,6 +22,9 @@ export const useMediaStore = defineStore('media', {
       var mediaIndex = this.media.findIndex(x => x.id === mediaId)
       this.media[mediaIndex].is_available = false;
       console.log(this.media[mediaIndex]);
-    }
-  },
+    },
+    setTitle(title: string) {
+      this.title = title
+    },
+  }
 })

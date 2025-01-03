@@ -9,7 +9,9 @@ import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import HomeView from '@/views/HomeView.vue'
+import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
 import NewsView from '@/views/NewsView.vue'
+import ReturnedView from '@/views/ReturnedView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -69,10 +71,20 @@ const router = createRouter({
       component: LogInValidation,
     },
     {
+      path: '/registrationValidation',
+      name: 'registrationValidation',
+      component: RegistrationValidation,
+    },
+    {
       path: '/news',
       name: 'News',
       component: NewsView,
     },
+    {
+      path: '/returned',
+      name: 'Returned',
+      component: ReturnedView,
+    }
   ],
 })
 

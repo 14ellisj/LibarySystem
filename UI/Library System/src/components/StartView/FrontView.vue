@@ -1,11 +1,11 @@
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { useMediaStore } from '../../stores/media'
-import { Type } from '@/models/type'
-import { Genre } from '@/models/genre'
-import MediaService from '@/services/MediaService'
-import toastr from 'toastr'
-import { useUserStore } from '@/stores/profileInformation'
+import { defineComponent, ref } from 'vue';
+import { useMediaStore } from '../../stores/media';
+import { Type } from '@/models/type';
+import { Genre } from '@/models/genre';
+import MediaService from '@/services/MediaService';
+import { useUserStore } from '../../stores/profileInformation';
+import toastr from 'toastr';
 
 export default defineComponent({
   name: 'SingleMediaView',

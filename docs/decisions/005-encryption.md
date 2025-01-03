@@ -16,9 +16,9 @@ We need a way to keep the passwords secure in the database
 <!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
-* {decision driver 1, e.g., a force, facing concern, …}
-* {decision driver 2, e.g., a force, facing concern, …}
-* … <!-- numbers of drivers can vary -->
+* Provides security for the users
+* No sensitive data is hard coded in
+
 
 ## Considered Options
 
@@ -62,6 +62,7 @@ Scrambling it with a key to unscramble it
 * Good, because it is fast
 * Bad, because the key might need to be brought to different places and therefore makes the key less secure
 
+### More Information
 References
 [Hashed vs 1 way encryption vs symmetric] (https://www.sealpath.com/blog/types-of-encryption-guide/)
 

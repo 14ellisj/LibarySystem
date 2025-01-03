@@ -9,12 +9,17 @@ export const useMediaStore = defineStore('media', {
     library: [] as Library[],
     mediaItems: [] as MediaItem[],
     autoCompleteOptions: [] as string[],
+    mediaMoves: [] as Array<{ media: string; branchFrom: string; branchDestination: string }>,
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
       this.media = mediaInput
     },
     setMediaItem(mediaItemInput: MediaItem[]) {
+      this.mediaItems = mediaItemInput
+      console.log(this.mediaItems)
+    },
+    setLibraryMediaItem(mediaItemInput: MediaItem[]) {
       this.mediaItems = mediaItemInput
       console.log(this.mediaItems)
     },
@@ -30,6 +35,9 @@ export const useMediaStore = defineStore('media', {
       this.media[mediaIndex] = updatedItem;
       console.log(updatedItem)
       console.log(this.media)
+    },
+    saveMediaMove(moveData: { media: string; branchFrom: string; branchDestination: string }) {
+      this.mediaMoves.push(moveData);
     }
   },
 })

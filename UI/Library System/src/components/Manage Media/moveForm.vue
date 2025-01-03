@@ -3,7 +3,6 @@ import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
 import MediaService from '@/services/MediaService';
 import type { mediaItemsFilter } from '@/models/filters';
-import type { LibraryFilter } from '@/models/filters';
 
 export default defineComponent({
   name: 'Add Media',
@@ -16,33 +15,46 @@ export default defineComponent({
     const showError = ref(false);
     const selectedMedia = ref<string | null>(null);
 
-    const handleSubmit = async (event: Event) => {
-      event.preventDefault();
-      const formData = new FormData(event.target as HTMLFormElement);
+  const handleSubmit = async (event: Event) => {
+  event.preventDefault();
+  const formData = new FormData(event.target as HTMLFormElement);
 
-      const branchFrom = formData.get('branchFrom');
-      const branchDestination = formData.get('branchDestination');
+  const branchFrom = formData.get('branchFrom') as string | null;
+  const branchDestination = formData.get('branchDestination') as string | null;
+  const media = formData.get('media') as string | null;
 
-      if (branchFrom === branchDestination) {
-        showError.value = true; 
-        setTimeout(() => {
-          showError.value = false; 
-        }, 3000);
-        return; 
-      }
+  if (!branchFrom || !branchDestination || !media) {
+    console.error('Form data is missing required fields');
+    return;
+  }
 
-      const newMediaMove = {
-        media: formData.get('media'),
-        branchFrom,
-        branchDestination,
-      };
-      console.log('Form Data Submitted:', newMediaMove);
-      showPopup.value = true;
+  if (branchFrom === branchDestination) {
+    showError.value = true; 
+    setTimeout(() => {
+      showError.value = false; 
+    }, 3000);
+    return; 
+  }
 
-      setTimeout(() => {
-        showPopup.value = false;
-      }, 3000); 
-    };
+  const newMediaMove = {
+    media,
+    branchFrom,
+    branchDestination,
+  };
+
+  console.log('Form Data Submitted:', newMediaMove);
+
+  mediaStore.saveMediaMove(newMediaMove);
+
+  showPopup.value = true;
+
+  setTimeout(() => {
+    showPopup.value = false;
+  }, 3000); 
+
+  console.log(mediaStore.mediaMoves)
+};
+
 
     watch(selectedMedia, (newValue) => {
       if (newValue) {
@@ -67,10 +79,6 @@ export default defineComponent({
       }
     };
 
-
-
-    console.log(mediaStore.library);
-
     return {
       mediaStore,
       media,
@@ -85,9 +93,9 @@ export default defineComponent({
 });
 </script>
 
+
 <template>
   <body>
-    <button>Display</button>
     <div class="form-container">
       <h2>Select Media and Branch</h2>
       <form @submit="handleSubmit" action="/move-media" method="POST">
@@ -117,6 +125,7 @@ export default defineComponent({
           <option v-for="item in library" :key="item.id" :value="item.name">
             {{ item.name }}
           </option>
+          <option>Sheffield</option>
         </select>
 
         <button type="submit">Move Media</button>
@@ -144,8 +153,6 @@ export default defineComponent({
     </div>
   </body>
 </template>
-
-
 
 <style scoped>
         body {
@@ -175,7 +182,7 @@ export default defineComponent({
             box-sizing: border-box;
         }
         button {
-            background-color: #007BFF;
+            background-color: var(--secondary-color);
             color: white;
             font-size: 16px;
             cursor: pointer;

@@ -97,6 +97,21 @@ namespace Media_Service.Services
             return mapped;
         }
 
+        public async Task<IEnumerable<MediaItem>> GetLibraryItems(int mediaId, int? libraryId)
+        {
+            LibraryItemIdSpecification idSpec = new LibraryItemIdSpecification(libraryId);
+            var items = await _mediaDatabase.GetMediaItemsByLibraryId(idSpec);
+
+            _logger.LogInformation("Made it here woo!");
+
+            if (items.Count() == 0)
+                throw new Exception("Media items Not Found.");
+
+            var mapped = _mapper.Map<IEnumerable<MediaItem>>(items);
+            
+            return mapped;
+        }
+
         private async Task<MediaEntity?> GetMediaById(int id)
         {
             MediaIdSpecification idSpec = new MediaIdSpecification(id);

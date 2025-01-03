@@ -41,6 +41,18 @@ namespace Media_Service.Controllers
             return Ok(results);
         }
 
+        [HttpGet("libraryItems", Name = "Get Library Item")]
+        public async Task<ActionResult<IEnumerable<MediaItem>>> GetLibraryItem(int? media_id, int? library_id)
+        {
+            _logger.LogInformation("Made it here woo! (controller)");
+
+            if (!library_id.HasValue)
+                return BadRequest("Please include a library ID");
+
+            var results = await _mediaService.GetLibraryItems((int)media_id, library_id);
+            return Ok(results);
+        }
+
         [HttpGet("library", Name = "Get Library Data")]
         public async Task<ActionResult<IEnumerable<Library>>> GetLibraryData(int? library_id, string? library_name)
         {

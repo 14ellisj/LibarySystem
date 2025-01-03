@@ -153,5 +153,26 @@ namespace Media_Service.Models.Specifications
             }
         }
     }
+
+ public class LibraryItemIdSpecification : ISpecification<MediaItemEntity>
+    {
+        int? _id;
+
+        public LibraryItemIdSpecification(int? id)
+        {
+            _id = id;
+        }
+
+        public Expression<Func<MediaItemEntity, bool>> Criteria
+        {
+            get
+            {
+                if (!_id.HasValue)
+                    return x => false;
+
+                return x => x.library.id.Equals(_id.Value);
+            }
+        }
+    }
 }
 

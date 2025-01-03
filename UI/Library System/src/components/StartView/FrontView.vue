@@ -107,7 +107,6 @@ export default defineComponent({
             <th>Genre</th>
             <th>Availability</th>
             <th>Type</th>
-            <th>Location</th>
           </tr>
         </thead>
         <tbody>
@@ -118,7 +117,6 @@ export default defineComponent({
               <td>{{ Genre[item.genre] }}</td>
               <td>{{ item.is_available ? 'Available' : 'Not Available' }}</td>
               <td>{{ Type[item.type] }}</td>
-              <td>{{ item.id}}</td>
             </tr>
             <tr v-if="expandedRowId === item.id">
               <td colspan="6">

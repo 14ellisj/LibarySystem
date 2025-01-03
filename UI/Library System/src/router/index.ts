@@ -10,10 +10,11 @@ import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
 import NewsView from '@/views/NewsView.vue'
 import HomeView from '@/views/HomeView.vue'
-import ChangeQuantity from '@/views/ChangeQuantity.vue'
 import moveFormView from '@/views/moveFormView.vue'
 import ReservationView from '@/views/ReservationView.vue'
 import viewBranchMedia from '@/components/Manage Media/viewBranchMedia.vue'
+import MoveRequestView from '@/views/MoveRequestView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -78,11 +79,6 @@ const router = createRouter({
       component: NewsView,
     },
     {
-      path: '/change',
-      name: 'Change',
-      component: ChangeQuantity,
-    },
-    {
       path: '/move',
       name: 'Move',
       component: moveFormView,
@@ -97,6 +93,11 @@ const router = createRouter({
     name: 'Manage',
     component: viewBranchMedia,
     },
+    {
+      path: '/request',
+      name: 'Request',
+      component: MoveRequestView,
+      },
   ],
 })
 

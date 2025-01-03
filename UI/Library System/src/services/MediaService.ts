@@ -1,5 +1,4 @@
-import type { Author } from '@/models/author'
-import type { MediaFilter, mediaItemsFilter as MediaItemsFilter, LibraryFilter } from '@/models/filters'
+import type { MediaFilter, mediaItemsFilter as MediaItemsFilter, LibraryFilter, libraryMediaItemsFilter } from '@/models/filters'
 import type { Media } from '@/models/media'
 import type { MediaItem } from '@/models/mediaItem'
 import type { Library } from '@/models/library'
@@ -40,6 +39,21 @@ export default class {
 
     return this.mediaStore.mediaItems
   }
+
+  async getLibraryMediaItems(filter: libraryMediaItemsFilter): Promise<MediaItem[]> {
+    const requestUrl = this.apiUrl + 'Media/libraryItems'
+
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaStore.setLibraryMediaItem(response.data)
+      })
+
+    return this.mediaStore.mediaItems
+  }
+
 
   async getLibraryData(filter: LibraryFilter): Promise<Library[]> {
     const requestUrl = this.apiUrl + 'Media/library'

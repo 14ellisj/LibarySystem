@@ -25,3 +25,8 @@ export interface LibraryFilter {
   library_id?: number
   name?: string
 }
+
+export interface libraryMediaItemsFilter{
+  media_id?: number
+  library_id?: number
+}

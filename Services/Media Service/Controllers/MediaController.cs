@@ -31,7 +31,7 @@ namespace Media_Service.Controllers
             return Ok(results);
         }
 
-        [HttpGet(Name = "Get Borrowed Media")]
+        [HttpGet("borrowedItem", Name = "Get Borrowed Media")]
         public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int profileID)
         {
             if (profileID == null)

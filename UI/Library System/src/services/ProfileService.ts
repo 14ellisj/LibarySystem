@@ -28,11 +28,38 @@ export default class {
             .then((response) => {
                 this.userStore.setUser(response.data)
                 this.userStore.setPassword(password)
+            })
+
+        return this.userStore.user;
+    }
+
+    async checkEmail(filter: ProfileFilter): Promise<Profile> {
+        await axios
+            .get(this.apiUrl, {
+                params: filter
+            })
+            .then((response) => {
+                this.userStore.setUser(response.data)
                 console.log(response.data);
             })
 
         return this.userStore.user;
     }
+
+    /*async checkEmail(filter: ProfileFilter): Promise<boolean> {
+        const thisUrl = this.apiUrl + "checkEmail";
+        let success = false;
+        await axios
+            .get(thisUrl, {
+                params: filter
+            })
+            .then((response) => {
+                (response: any) => {success = true}
+                (error: any) => {console.log(error); success = false}
+            })
+
+        return success;
+    }*/
 
     async createProfile(email: string, firstName: string, lastName: string, password: string){
         console.log("email is: " + email + ", first name is: " + firstName + ", last name is: " + lastName + ", password is: " + password)

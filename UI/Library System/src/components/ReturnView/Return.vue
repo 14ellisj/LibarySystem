@@ -7,6 +7,7 @@ import { useMediaStore } from '../../stores/media'
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
 import MediaService from '@/services/MediaService';
+import toastr from 'toastr';
 
 export default defineComponent({
     name: 'logInValidation',
@@ -27,10 +28,12 @@ export default defineComponent({
       push() {
         this.$router.push('/logIn');
       },
-      async returnMedia(id: number) {
+      async returnMedia(id: number, title: string) {
         const mediaService = new MediaService();
         const returnMedia = await mediaService.returnMedia(id, this.userID);
-        this.$router.push('/Return')
+        this.mediaStore.setTitle(title)
+        toastr.success("Successfully returned " + title)
+        this.$router.push('/Returned')
       }
     }
 });
@@ -47,15 +50,15 @@ export default defineComponent({
             <table>
                 <thead>
                     <th> Media name </th>
-                    <th> Status </th>
+                    <th> Author </th>
                     <th> Return </th>
                 </thead>
                 <tbody>
                     <template v-for="media in mediaStore.media" :key="store.user[0]['id']"> 
                         <tr>
                             <td> {{ media.name }} </td> 
-                            <td> {{ }} </td> 
-                            <td> <button @click="returnMedia(media.id)"> Return </button> </td> 
+                            <td></td>
+                            <td> <button @click="returnMedia(media.id, media.name)"> Return </button> </td> 
                         </tr>
                     </template>
                 </tbody>

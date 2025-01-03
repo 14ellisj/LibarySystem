@@ -4,6 +4,7 @@ using Profile_Service.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
+using System.Security.Cryptography.Xml;
 
 
 
@@ -26,7 +27,7 @@ namespace Profile_Service.Controllers
         }
 
         [HttpGet(Name = "GetProfile")]
-        public async Task<JsonResult> Get(string? email)
+        public async Task<JsonResult> Get(string? email, string? password)
         {
             var query = _context.Profile
                 .Include(x => x.address)
@@ -36,27 +37,36 @@ namespace Profile_Service.Controllers
 
                 query = query.Where(x => x.email.ToLower() == (email.ToLower()));
 
-            var results = await query.ToListAsync();
-            var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
+            try {
+                var results = await query.ToListAsync();
+                var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
+                return Json(output);
+            }
+            catch (Exception ex) {
 
-
-            return Json(output);
+                return Json("");
+            }
         }
 
     [HttpPost(Name = "CreateProfile")]
     public async Task<IActionResult> Post([FromBody] RegisterDetails body)
     {
+    var sql = "INSERT INTO Profile (email, first_name, last_name, password, role_id, library_id, address_id) " + "VALUES (@email, @firstName, @lastName, @password, @roleId, @libraryId, @addressId)";
 
-    var sql = "INSERT INTO Profile (email, first_name, last_name, password) " + "VALUES (@email, @firstName, @lastName, @password)";
 
     var email = (string)body.email;
     var firstName = (string)body.firstName;
     var lastName = (string)body.lastName;
     var password = (string)body.password;
+    Random randomId = new Random();
+    int roleID = randomId.Next(1, 5);
+    int libraryID = randomId.Next(1, 5);
+    int addressID = randomId.Next(1, 5);
 
-    try
+            try
     {
-        using var connection = new SqliteConnection(@"Data Source=C:\Users\jdent\OneDrive\Desktop\1) Uni stuff\Year 3\Software Architecture and Design\LibarySystem\LibarySystem\database\Library Database.db");
+        using var connection = new SqliteConnection(@"Data Source=../../database/Library Database.db");
+        
         connection.Open();
 
         using var command = new SqliteCommand(sql, connection);
@@ -65,6 +75,10 @@ namespace Profile_Service.Controllers
         command.Parameters.AddWithValue("@firstName", firstName);
         command.Parameters.AddWithValue("@lastName", lastName);
         command.Parameters.AddWithValue("@password", password);
+        command.Parameters.AddWithValue("@roleId", roleID);
+        command.Parameters.AddWithValue("@libraryId", libraryID);
+        command.Parameters.AddWithValue("@addressId", addressID);
+        
         
         var rowInserted = command.ExecuteNonQuery();
 

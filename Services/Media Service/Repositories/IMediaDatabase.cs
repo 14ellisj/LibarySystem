@@ -10,6 +10,6 @@ namespace Media_Service.Repositories
         Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs);
         Task<bool> BorrowItem(MediaItemEntity mediaId, int profileId);
         Task<bool> ReturnItem(MediaItemEntity mediaId);
-        Task<IEnumerable<MediaEntity>> GetBorrowedMedia();
+        Task<IEnumerable<MediaItemEntity>> GetBorrowedMedia(MediaItemBorrowerSpecification spec);
     }
 }

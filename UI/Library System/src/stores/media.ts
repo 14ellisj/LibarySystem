@@ -6,7 +6,8 @@ import type { Author } from '@/models/author';
 export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [] as Media[],
-    autoCompleteOptions: [] as string[]
+    autoCompleteOptions: [] as string[],
+    title: "" as string
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
@@ -14,6 +15,9 @@ export const useMediaStore = defineStore('media', {
     },
     setAutocompleteOptions(input: string[]) {
       this.autoCompleteOptions = input;
-    }
+    },
+    setTitle(title: string) {
+      this.title = title
+    },
   }
 })

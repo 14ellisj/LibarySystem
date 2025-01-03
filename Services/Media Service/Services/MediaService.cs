@@ -2,6 +2,7 @@
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Media_Service.Repositories;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Media_Service.Services
 {
@@ -10,11 +11,14 @@ namespace Media_Service.Services
         private readonly IMediaDatabase _mediaDatabase;
         private readonly IMapper _mapper;
         private readonly Database.AppDbContext _context;
-        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper, Database.AppDbContext context)
+        private readonly ILogger<MediaService> _logger;
+
+        public MediaService(IMediaDatabase mediaDatabase, IMapper mapper, Database.AppDbContext context, ILogger<MediaService> logger)
         {
             _mediaDatabase = mediaDatabase;
             _mapper = mapper;
             _context = context;
+            _logger = logger;
         }
 
         public async Task<bool> BorrowMedia(int mediaId, int profileId)
@@ -68,13 +72,26 @@ namespace Media_Service.Services
 
         public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileID)
         {
-            var media = await _mediaDatabase.GetAllMedia();
+            MediaItemBorrowerSpecification borrower = new MediaItemBorrowerSpecification(profileID);
+            List<MediaEntity> mediaList = new List<MediaEntity>();
+            var mediaItems = await _mediaDatabase.GetBorrowedMedia(borrower);
 
-            var borrowedMedia = media.media_items.Where(x => x.borrower_id ==  profileID);
+            if (mediaItems.Count() == 0)
+            {
+                var mapped = _mapper.Map<IEnumerable<Media>>(mediaList);
+                return mapped;
+            }
 
-            var mapped = _mapper.Map<IEnumerable<Media>>(borrowedMedia);
+            else
+            {
+                foreach (var item in mediaItems)
+                {
+                    mediaList.Add(item.media);
+                }
+                var mapped = _mapper.Map<IEnumerable<Media>>(mediaList);
 
-            return mapped;
+                return mapped;
+            }
         }
     }
 }

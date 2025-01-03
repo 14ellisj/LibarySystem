@@ -18,8 +18,6 @@ namespace Profile_Service.Models
         public string LastName { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }
-        [JsonPropertyName("DOB")]
-        public string DateOfBirth { get; set; }
         [JsonPropertyName("Password")]
         public string Password { get; set; }
     }

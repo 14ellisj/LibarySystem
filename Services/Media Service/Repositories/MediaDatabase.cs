@@ -81,15 +81,13 @@ namespace Media_Service.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<MediaEntity>> GetBorrowedMedia()
+        public async Task<IEnumerable<MediaItemEntity>> GetBorrowedMedia(MediaItemBorrowerSpecification spec)
         {
-            var query = _context.Media
-                .Include(x => x.author)
-                .Include(x => x.genre)
-                .Include(x => x.type)
-                .Include(x => x.media_items)
-                    .ThenInclude(mi => mi.borrower)
-                .OrderBy(x => x.name);
+            var query = _context.MediaItems
+                .Include(x => x.library)
+                .Include(x => x.borrower)
+                .Include(x => x.media)
+                .ApplySpecification(spec);
 
             return await query.ToListAsync();
         }

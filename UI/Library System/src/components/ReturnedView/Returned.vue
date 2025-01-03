@@ -2,36 +2,28 @@
 import { defineComponent } from 'vue';
 import '../../styles/variables.css'
 import type { MediaFilter, mediaItemsFilter } from '@/models/filters';
-import { useUserStore } from '@/stores/profileInformation';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
+import { useMediaStore } from '@/stores/media';
+import { useUserStore } from '@/stores/profileInformation';
 
 export default defineComponent({
-    name: 'Profile',
-    data() {
-        var hovering = false
-
-        return {
-            hovering
-        }
-    },
+    name: 'Returned Media',
     setup() {
+        const mediaStore = useMediaStore();
+        var title = mediaStore.title
         const store = useUserStore();
         var userID = store.user[0]['id'];
 
         return {
+            mediaStore,
+            title,
             store,
             userID
         };
     },
     methods: {
-        async toOrders() {  
-            this.$router.push('');
-        },
-        async toWishlist() {  
-            this.$router.push('/Wishlist');
-        },
-        async toReturn() {  
+        async goBack() {    
             const mediaService = new MediaService();
             const filter: mediaItemsFilter = {
                 profileID: this.userID,
@@ -41,26 +33,18 @@ export default defineComponent({
                     this.$router.push('/Return');
                 }
                 else {
-                    toastr.error("You have nothing to return");
+                    toastr.error("You have nothing to return, redirecting you back to profile");
+                    this.$router.push('/Profile')
                 }
-        },
-        async toSettings() {  
-            this.$router.push('');
-        },
-        async toLogIn() {  
-            this.$router.push('/logIn');
-        },
+        }
     }
 })
 </script>
 
 <template>
-    <h2>Profile</h2>
-    <button @click="toOrders()"> Orders </button> <br>
-    <button @click="toWishlist()"> Wishlist </button> <br>
-    <button @click="toReturn()"> Return Media </button> <br>
-    <button @click="toSettings()"> Settings </button> <br>
-    <button @click="toLogIn()"> Log Out </button>
+    <h2>Success!</h2>
+    <p>Successfully returned {{ this.title }}  </p>
+    <button @click="goBack()"> Back </button>
 </template>
   
 <style scoped> 

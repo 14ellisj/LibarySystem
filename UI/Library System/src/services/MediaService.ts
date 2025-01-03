@@ -1,5 +1,5 @@
 import type { Author } from "@/models/author";
-import type { MediaFilter } from "@/models/filters";
+import type { MediaFilter, mediaItemsFilter } from "@/models/filters";
 import type { Media } from "@/models/media";
 import type { IAutoCompleteParams, IBorrowRequest } from "@/models/requests";
 import type { IReturnRequest } from "@/models/return"
@@ -27,12 +27,12 @@ export default class {
         return this.mediaStore.media;
     }
 
-    async getBorrowedMedia(profileId: number): Promise<Media[]> {
-        const requestUrl = this.apiUrl + 'Media/getBorrowedMedia';
+    async getBorrowedMedia(filter: mediaItemsFilter): Promise<Media[]> {
+        const requestUrl = this.apiUrl + 'Media/borrowedItem';
 
         await axios
             .get(requestUrl, {
-                params: profileId
+                params: filter
             })
             .then((response) => {
                 this.mediaStore.setMedia(response.data)

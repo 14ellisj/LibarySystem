@@ -11,7 +11,6 @@ import RegistrationValidation from '@/components/RegistrationView/RegistrationVa
 import NewsView from '@/views/NewsView.vue'
 import HomeView from '@/views/HomeView.vue'
 import moveFormView from '@/views/moveFormView.vue'
-import ReservationView from '@/views/ReservationView.vue'
 import viewBranchMedia from '@/components/Manage Media/viewBranchMedia.vue'
 import MoveRequestView from '@/views/MoveRequestView.vue'
 
@@ -82,11 +81,6 @@ const router = createRouter({
       path: '/move',
       name: 'Move',
       component: moveFormView,
-    },
-    {
-    path: '/reservations',
-    name: 'Reservation',
-    component: ReservationView,
     },
     {
     path: '/manage',

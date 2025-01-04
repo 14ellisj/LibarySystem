@@ -35,6 +35,26 @@ namespace Media_Service.Services
 
             return await _mediaDatabase.BorrowItem(availableItems.First(), profileId);
         }
+public async Task<bool> MoveMedia(int mediaId, int libraryId)
+{
+    var media = await GetMediaById(mediaId);
+
+    if (media is null)
+        return false;
+
+    // Assuming media.media_items is a collection of MediaItemEntity objects,
+    // and you need to move the first available item
+    var availableItem = media.media_items.FirstOrDefault(); // or any specific logic to pick the item
+    
+    if (availableItem == null)
+        return false;
+
+    // Now pass the correct type (MediaItemEntity) to MoveItem
+    return await _mediaDatabase.MoveItem(availableItem, libraryId);
+}
+
+
+
         public async Task<bool> ReserveMedia(int mediaId, int profileId)
         {
             var media = await GetMediaById(mediaId);
@@ -91,6 +111,20 @@ namespace Media_Service.Services
 
             if (items.Count() == 0)
                 throw new Exception("Media items Not Found.");
+
+            var mapped = _mapper.Map<IEnumerable<MediaItem>>(items);
+            
+            return mapped;
+        }
+        public async Task<IEnumerable<MediaItem>> GetLibraryMediaItems(int libraryId, int? mediaId)
+        {
+            LibraryMediaItemIdSpecification idSpec = new LibraryMediaItemIdSpecification(libraryId);
+            var items = await _mediaDatabase.GetMediaItemsByLibraryId(idSpec);
+
+            _logger.LogInformation("Made it here woo! (Library Media Items)");
+
+            if (items.Count() == 0)
+                throw new Exception("Library media items Not Found.");
 
             var mapped = _mapper.Map<IEnumerable<MediaItem>>(items);
             

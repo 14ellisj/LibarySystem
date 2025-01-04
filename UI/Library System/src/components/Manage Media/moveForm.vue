@@ -18,64 +18,71 @@ export default defineComponent({
     const generateUniqueId = (): number =>
       Number(`${Date.now()}${Math.floor(Math.random() * 10000)}`);
 
-    // Generate an initial unique form ID
     const Id = ref(generateUniqueId());
 
-    const handleSubmit = async (event: Event) => {
-      event.preventDefault();
+  const handleSubmit = async (event: Event) => {
+  event.preventDefault();
 
-      // Generate a new unique ID for the form submission
-      Id.value = generateUniqueId();
+  Id.value = generateUniqueId();
 
-      const formData = new FormData(event.target as HTMLFormElement);
+  const formData = new FormData(event.target as HTMLFormElement);
 
-      // Add the new form ID to the FormData
-      formData.append('Id', Id.value.toString());
+  formData.append('Id', Id.value.toString());
 
-      const branchFrom = formData.get('branchFrom') as string | null;
-      const branchDestination = formData.get('branchDestination') as string | null;
-      const media = formData.get('media') as string | null;
+  const branchFrom = formData.get('branchFrom') as string | null;
+  const branchDestination = formData.get('branchDestination') as string | null;
+  const mediaName = formData.get('media') as string | null;
 
-      if (!branchFrom || !branchDestination || !media) {
-        console.error('Form data is missing required fields');
-        return;
-      }
+  if (!branchFrom || !branchDestination || !mediaName) {
+    console.error('Form data is missing required fields');
+    return;
+  }
 
-      if (branchFrom === branchDestination) {
-        showError.value = true;
-        setTimeout(() => {
-          showError.value = false;
-        }, 3000);
-        return;
-      }
+  if (branchFrom === branchDestination) {
+    showError.value = true;
+    setTimeout(() => {
+      showError.value = false;
+    }, 3000);
+    return;
+  }
 
-      // Get the selected library ID for `branchDestination`
-      const branchDestinationLibrary = library.value.find(
-        (item) => item.name === branchDestination
-      );
-      const branchDestinationId = branchDestinationLibrary
-        ? branchDestinationLibrary.id
-        : null;
+  const branchDestinationLibrary = library.value.find(
+    (item) => item.name === branchDestination
+  );
+  const branchDestinationId = branchDestinationLibrary
+    ? branchDestinationLibrary.id
+    : null;
 
-      // Include library name and ID in the submitted data
-      const newMediaMove = {
-        media,
-        branchFrom,
-        branchDestination,
-        branchDestinationId,
-        Id: Id.value, // Include the new unique ID in the submitted data
-      };
+  const selectedMediaItem = mediaItems.value.find(
+    (item) => item.media.name === mediaName
+  );
 
-      console.log('Form Data Submitted:', newMediaMove);
+  if (!selectedMediaItem) {
+    console.error('Selected media item not found');
+    return;
+  }
 
-      mediaStore.setMediaMove(newMediaMove);
+  const mediaId = selectedMediaItem.id; 
 
-      showPopup.value = true;
+  const newMediaMove = {
+    mediaName,
+    mediaId, 
+    branchFrom,
+    branchDestination,
+    branchDestinationId,
+    Id: Id.value, 
+  };
 
-      setTimeout(() => {
-        showPopup.value = false;
-      }, 3000);
-    };
+  console.log('Form Data Submitted:', newMediaMove);
+
+  mediaStore.setMediaMove(newMediaMove);
+
+  showPopup.value = true;
+
+  setTimeout(() => {
+    showPopup.value = false;
+  }, 3000);
+};
 
     watch(selectedMedia, (newValue) => {
       if (newValue) {
@@ -109,7 +116,7 @@ export default defineComponent({
       showPopup,
       showError,
       library,
-      Id, // Expose the formId
+      Id, 
     };
   },
 });
@@ -138,7 +145,7 @@ export default defineComponent({
               :value="item.library.name"
               :disabled="!item.media.is_available"
             >
-              {{ item.media.name }} - {{ item.library.name }} ({{ item.media.is_available ? 'Available' : 'Not Available' }})
+            {{ item.media.name }} - {{ item.library.name }} ({{ item.media.is_available ? 'Available' : 'Not Available' }})
             </option>
           </select>
         </div>

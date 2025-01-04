@@ -1,4 +1,3 @@
-
 import type { SearchType } from './searchType'
 
 export interface IAutoCompleteParams {
@@ -16,3 +15,7 @@ export interface IReserveRequest {
   profile_id: number
 }
 
+export interface IMoveRequest {
+  media_id: number
+  library_id: number
+}

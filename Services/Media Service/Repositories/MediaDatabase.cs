@@ -28,6 +28,21 @@ namespace Media_Service.Repositories
                 return false;
             }
         }
+        public async Task<bool> MoveItem(MediaItemEntity mediaItem, int libraryId)
+        {
+            mediaItem.library_id = libraryId;
+
+            _context.Update(mediaItem);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         public async Task<bool> ReserveItem(MediaItemEntity mediaItem, int profileId)
         {
@@ -63,6 +78,15 @@ namespace Media_Service.Repositories
                 .Include(x => x.library)
                 .Include(x => x.borrower)
                 .Include(x => x.reserver)
+                .Include(x => x.media)
+                .ApplySpecification(spec);
+
+            return await query.ToListAsync();
+        }
+        public async Task<IEnumerable<MediaItemEntity>> GetMediaItemsByLibraryId(LibraryMediaItemIdSpecification spec)
+        {
+            var query = _context.MediaItem
+                .Include(x => x.library)
                 .Include(x => x.media)
                 .ApplySpecification(spec);
 

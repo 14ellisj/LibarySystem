@@ -41,6 +41,18 @@ namespace Media_Service.Controllers
             return Ok(results);
         }
 
+        [HttpGet("libraryItems", Name = "Get Library Media Items")]
+        public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int? library_id, int? media_id)
+        {
+            _logger.LogInformation("Made it here woo! (Library Media Items)");
+
+            if (!library_id.HasValue)
+                return BadRequest("Please include a library ID");
+
+            var results = await _mediaService.GetLibraryMediaItems((int)library_id, media_id);
+            return Ok(results);
+        }
+
         [HttpGet("library", Name = "Get Library Data")]
         public async Task<ActionResult<IEnumerable<Library>>> GetLibraryData(int? library_id, string? library_name)
         {
@@ -87,6 +99,28 @@ namespace Media_Service.Controllers
                     return Conflict("No available items");
 
                 var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
+                return Ok(updatedItem);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpPatch("move", Name = "Move Media")]
+        public async Task<IActionResult> MoveMedia([FromBody] MoveItemRequest body)
+        {
+            if (!body.MediaId.HasValue || !body.LibraryId.HasValue)
+                return BadRequest("Please include a media_id and a library_id");
+
+            try
+            {
+                var success = await _mediaService.MoveMedia((int)body.MediaId, (int)body.LibraryId);
+
+                if (!success)
+                    return Conflict("No available items");
+
+                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.LibraryId);
                 return Ok(updatedItem);
             }
             catch (Exception ex)

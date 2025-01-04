@@ -28,9 +28,5 @@ export interface LibraryFilter {
 
 export interface libraryMediaItemsFilter{
   library_id?: number
-  media_id?: number
 }
 
-export interface RequestFilter {
-  
-}

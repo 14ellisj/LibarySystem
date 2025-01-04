@@ -8,43 +8,50 @@ export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
     const mediaStore = useMediaStore();
-    const selectedBranch = ref<string | null>(null); // Initialize with null to match the empty state
-    const mediaService = new MediaService();
+    const selectedBranch = ref<string | null>(null); 
     const library = ref(mediaStore.library);
-  
-    // Watch for changes in selectedBranch
-    watch(selectedBranch, async (newValue) => {
-      if (newValue) {
-        const branchId = Number(newValue);
-        const selectedLibraryMediaItem = library.value.find((item) => item.id === branchId); // Match ID
-        if (selectedLibraryMediaItem) {
-          await fetchLibraryMediaItems(selectedLibraryMediaItem.id);
-        }
-      }
-    });
+    const mediaItems = ref(mediaStore.libraryItems);
 
-    // Function to fetch media items for a specific library
-    const fetchLibraryMediaItems = async (libraryId: number) => {
+    const submitForLibraryMediaItems = async (libraryId: number) => {
+      console.log('submitForLibraryMediaItems is called with libraryId:', libraryId);
+      const mediaService = new MediaService();
       const filter: libraryMediaItemsFilter = {
         library_id: libraryId,
       };
       try {
         const data = await mediaService.getLibraryMediaItems(filter);
-        mediaStore.libraryMediaItems = data; // Update mediaStore directly
+        mediaItems.value = data;
         console.log('Media items fetched successfully:', data);
       } catch (error) {
-        console.error('Failed to fetch media items:', error);
+        console.error('Failed to submit for media items:', error);
       }
     };
+
+    watch(selectedBranch, (newValue) => {
+      console.log('Selected branch changed:', newValue);
+
+      if (newValue) {
+        const selectedBranchItem = library.value.find((item) => item.id === Number(newValue));
+
+        if (selectedBranchItem) {
+          console.log('Calling submitForLibraryMediaItems with libraryId:', selectedBranchItem.id);
+          submitForLibraryMediaItems(selectedBranchItem.id);
+        } else {
+          console.warn('No matching branch found in library for:', newValue);
+        }
+      } else {
+        console.warn('Selected branch is null or undefined.');
+      }
+    });
 
     return {
       mediaStore,
       selectedBranch,
+      library, 
     };
   },
 });
 </script>
-
 
 <template>
   <div class="container">
@@ -61,14 +68,14 @@ export default defineComponent({
       </option>
     </select>
 
-    <div class="data-display">
+    <div class="data-display" v-if="selectedBranch">
+      <h2>Media Titles:</h2>
       <ul>
-        <li v-for="(item, index) in mediaStore.libraryMediaItems" :key="index">
+        <li v-for="(item, index) in mediaStore.libraryItems" :key="index">
           {{ item.media.name }}
         </li>
       </ul>
     </div>
-
 
     <div class="action-buttons">
       <button @click="$router.push('/move');">Move Media</button>
@@ -77,17 +84,16 @@ export default defineComponent({
   </div>
 </template>
 
-
 <style scoped>
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .container {
@@ -98,10 +104,8 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: auto; 
+  margin-top: 50px; 
 }
 
 h1 {
@@ -122,6 +126,7 @@ select {
 
 button {
   padding: 12px;
+  margin-left: 10px;
   font-size: 16px;
   background-color: var(--secondary-color);
   color: #ffffff;

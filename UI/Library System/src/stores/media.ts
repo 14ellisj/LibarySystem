@@ -8,8 +8,9 @@ export const useMediaStore = defineStore('media', {
     media: [] as Media[],
     library: [] as Library[],
     mediaItems: [] as MediaItem[],
+    libraryItems: [] as MediaItem[],
     autoCompleteOptions: [] as string[],
-    mediaMoves: [] as Array<{ Id: number; media: string; branchFrom: string; branchDestination: string }>,
+    mediaMoves: [] as Array<{ Id: number; mediaName: string; mediaId: number; branchFrom: string; branchDestination: string; branchDestinationId: number;}>,
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
@@ -18,6 +19,10 @@ export const useMediaStore = defineStore('media', {
     setMediaItem(mediaItemInput: MediaItem[]) {
       this.mediaItems = mediaItemInput
       console.log(this.mediaItems)
+    },
+    setLibraryMediaItem(libraryMediaItemInput: MediaItem[]) {
+      this.libraryItems = libraryMediaItemInput
+      console.log(this.libraryItems)
     },
     setLibraryData(libraryInput: Library[]) {
       this.library = libraryInput
@@ -32,7 +37,7 @@ export const useMediaStore = defineStore('media', {
       console.log(updatedItem)
       console.log(this.media)
     },
-    setMediaMove(moveData: { Id: number; media: string; branchFrom: string; branchDestination: string }) {
+    setMediaMove(moveData: { Id: number; mediaName: string; mediaId: number; branchFrom: string; branchDestination: string; branchDestinationId: number; }) {
       this.mediaMoves.push(moveData);
     }
   },

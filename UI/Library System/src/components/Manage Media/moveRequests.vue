@@ -1,49 +1,76 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { useMediaStore } from '../../stores/media';
+import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'moveRequests',
   setup() {
-    const mediaStore = useMediaStore(); // Access the media store
-    const mediaMoves = ref(mediaStore.mediaMoves); // Reference to media moves in the store
-    const showConfirmDialog = ref(false); // Controls visibility of the confirmation dialog
-    const selectedMoveId = ref<number | null>(null); // Keeps track of the selected move for rejection
+    const mediaStore = useMediaStore(); 
+    const mediaMoves = ref(mediaStore.mediaMoves); 
+    const showRejectConfirmDialog = ref(false); 
+    const showAcceptConfirmDialog = ref(false); 
+    const selectedMoveId = ref<number | null>(null); 
+    const selectedAcceptedMoveId = ref<number | null>(null); 
+    const selectedAcceptedMoveItem = ref<any | null>(null); 
 
     const handleRejectMove = (id: number) => {
-      selectedMoveId.value = id; // Store the ID of the move being rejected
-      showConfirmDialog.value = true; // Show the confirmation dialog
+      selectedMoveId.value = id; 
+      showRejectConfirmDialog.value = true; 
     };
 
     const confirmRejection = () => {
       const rejectedMoveId = selectedMoveId.value;
 
       if (rejectedMoveId === null) return;
-
-      // Remove the rejected move from the mediaMoves list in the store
       mediaStore.mediaMoves = mediaStore.mediaMoves.filter(item => item.Id !== rejectedMoveId);
-
-      // Update the local reference
       mediaMoves.value = mediaStore.mediaMoves;
-
-      // Reset the selected move ID
       selectedMoveId.value = null;
-
-      // Close the confirmation dialog
-      showConfirmDialog.value = false;
+      showRejectConfirmDialog.value = false;
     };
 
     const cancelRejection = () => {
-      showConfirmDialog.value = false; // Close the dialog without taking action
+      showRejectConfirmDialog.value = false; 
+    };
+
+    const handleAcceptMove = (item: any) => {
+      selectedAcceptedMoveItem.value = item; 
+      showAcceptConfirmDialog.value = true; 
+    };
+
+    const confirmAcceptance = async () => {
+      const acceptedMoveItem = selectedAcceptedMoveItem.value;
+      if (acceptedMoveItem === null) return;
+      await moveMedia(acceptedMoveItem.mediaId, acceptedMoveItem.branchDestinationId);
+      mediaStore.mediaMoves = mediaStore.mediaMoves.filter(item => item.Id !== acceptedMoveItem.Id);
+      mediaMoves.value = mediaStore.mediaMoves;
+      selectedAcceptedMoveItem.value = null;
+      showAcceptConfirmDialog.value = false;
+    };
+
+    const cancelAcceptance = () => {
+      showAcceptConfirmDialog.value = false; 
+    };
+
+    const moveMedia = async (mediaId: number, branchDestinationId: number) => {
+      const mediaService = new MediaService();
+      const success = await mediaService.moveMedia(mediaId, branchDestinationId);
     };
 
     return {
       mediaMoves,
-      showConfirmDialog,
+      showRejectConfirmDialog,
+      showAcceptConfirmDialog,
       selectedMoveId,
+      selectedAcceptedMoveId,
+      selectedAcceptedMoveItem,
       handleRejectMove,
       confirmRejection,
       cancelRejection,
+      handleAcceptMove,
+      confirmAcceptance,
+      cancelAcceptance,
+      moveMedia,
     };
   },
 });
@@ -56,6 +83,7 @@ export default defineComponent({
       <table v-if="mediaMoves.length > 0">
         <thead>
           <tr>
+            <th>ID</th>
             <th>Name</th>
             <th>From</th>
             <th>Move to</th>
@@ -66,10 +94,11 @@ export default defineComponent({
         <tbody>
           <template v-for="item in mediaMoves" :key="item.Id">
             <tr>
-              <td>{{ item.media }}</td>
+              <td>{{ item.mediaId }}</td>
+              <td>{{ item.mediaName }}</td>
               <td>{{ item.branchFrom }}</td>
               <td>{{ item.branchDestination }}</td>
-              <td><button class="accept-button">Accept Move</button></td>
+              <td><button class="accept-button" @click="handleAcceptMove(item)">Accept Move</button></td>
               <td><button class="reject-button" @click="handleRejectMove(item.Id)">Reject Move</button></td>
             </tr>
           </template>
@@ -81,13 +110,22 @@ export default defineComponent({
         <button @click="$router.push('/manage');">Back</button>
       </div>
 
-      <!-- Confirmation Dialog -->
-      <div v-if="showConfirmDialog" class="confirm-dialog-overlay">
+      <div v-if="showRejectConfirmDialog" class="confirm-dialog-overlay">
         <div class="confirm-dialog">
           <p>Are you sure you want to reject this move?</p>
           <div class="dialog-buttons">
             <button @click="confirmRejection">Yes</button>
             <button @click="cancelRejection">No</button>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="showAcceptConfirmDialog" class="confirm-dialog-overlay">
+        <div class="confirm-dialog">
+          <p>Are you sure you want to accept this move?</p>
+          <div class="dialog-buttons">
+            <button @click="confirmAcceptance">Yes</button>
+            <button @click="cancelAcceptance">No</button>
           </div>
         </div>
       </div>

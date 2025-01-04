@@ -18,4 +18,12 @@ namespace Media_Service.Models
         public int? ProfileId { get; set; }
 
     }
+    public class MoveItemRequest
+    {
+        [JsonPropertyName("media_id")]
+        public int? MediaId { get; set; }
+        [JsonPropertyName("library_id")]
+        public int? LibraryId { get; set; }
+
+    }
 }

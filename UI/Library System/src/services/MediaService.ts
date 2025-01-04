@@ -1,8 +1,8 @@
-import type { MediaFilter, mediaItemsFilter as MediaItemsFilter, LibraryFilter, libraryMediaItemsFilter, RequestFilter } from '@/models/filters'
+import type { MediaFilter, mediaItemsFilter as MediaItemsFilter, LibraryFilter, libraryMediaItemsFilter} from '@/models/filters'
 import type { Media } from '@/models/media'
 import type { MediaItem } from '@/models/mediaItem'
 import type { Library } from '@/models/library'
-import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest} from '@/models/requests'
+import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest, IMoveRequest} from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
 import axios from 'axios'
@@ -40,6 +40,20 @@ export default class {
     return this.mediaStore.mediaItems
   }
 
+  async getLibraryMediaItems(filter: libraryMediaItemsFilter): Promise<MediaItem[]> {
+    const requestUrl = this.apiUrl + 'Media/libraryItems'
+
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaStore.setLibraryMediaItem(response.data)
+      })
+
+    return this.mediaStore.libraryItems
+  }
+
 
   async getLibraryData(filter: LibraryFilter): Promise<Library[]> {
     const requestUrl = this.apiUrl + 'Media/library'
@@ -60,6 +74,29 @@ export default class {
     const body: IBorrowRequest = {
       media_id: mediaId,
       profile_id: profileId,
+    }
+
+    let success = false
+
+    await axios.patch(requestUrl, body).then(
+      (response) => {
+        success = true
+        this.mediaStore.updateMediaItem(response.data)
+      },
+      (error) => {
+        console.log(error)
+        success = false
+      },
+    )
+
+    return success
+  }
+
+  async moveMedia(mediaId: number, branchDestinationId: number): Promise<boolean> {
+    const requestUrl = this.apiUrl + 'Media/move'
+    const body: IMoveRequest = {
+      media_id: mediaId,
+      library_id: branchDestinationId,
     }
 
     let success = false

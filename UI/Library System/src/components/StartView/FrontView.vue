@@ -6,6 +6,7 @@ import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
 import { useUserStore } from '@/stores/profileInformation';
+import type { LibraryFilter, mediaItemsFilter } from '@/models/filters';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -86,7 +87,17 @@ export default defineComponent({
         toastr.error('Failed to reserve the media.');
       }
     },
-    
+    async submitForLibraryData() {
+      const mediaService = new MediaService();
+      const filter: LibraryFilter = {
+    };
+    try {
+      const data = await mediaService.getLibraryData(filter);
+     console.log('Library Data retrieved successfully:', data);
+    } catch (error) {
+      console.error('Failed to get Library Data', error);
+    }
+    },
   },
 });
 </script>
@@ -156,7 +167,7 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
-      <button class="admin-button" @click="$router.push('/manage')">Manage Media</button>
+      <button class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
     </main>
 
     <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>

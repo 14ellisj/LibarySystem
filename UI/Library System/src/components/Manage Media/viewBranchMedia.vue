@@ -1,66 +1,50 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import type { LibraryFilter } from '@/models/filters';
-import type { libraryMediaItemsFilter } from '@/models/filters'
+import type { libraryMediaItemsFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
-
 
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
     const mediaStore = useMediaStore();
-    const selectedBranch = ref('');
+    const selectedBranch = ref<string | null>(null); // Initialize with null to match the empty state
     const mediaService = new MediaService();
     const library = ref(mediaStore.library);
-    const mediaItems = ref(mediaStore.mediaItems);
-    
-    watch(selectedBranch, (newValue) => {
+  
+    // Watch for changes in selectedBranch
+    watch(selectedBranch, async (newValue) => {
       if (newValue) {
-        const selectedBranch = library.value.find((item) => item.name === newValue);
-        if (selectedBranch) {
-          submitForLibraryItems(selectedBranch.id);
+        const branchId = Number(newValue);
+        const selectedLibraryMediaItem = library.value.find((item) => item.id === branchId); // Match ID
+        if (selectedLibraryMediaItem) {
+          await fetchLibraryMediaItems(selectedLibraryMediaItem.id);
         }
       }
     });
 
-    const submitForLibraryItems = async (libraryId: number) => {
-      const mediaService = new MediaService();
+    // Function to fetch media items for a specific library
+    const fetchLibraryMediaItems = async (libraryId: number) => {
       const filter: libraryMediaItemsFilter = {
         library_id: libraryId,
       };
       try {
         const data = await mediaService.getLibraryMediaItems(filter);
-        mediaItems.value = data; 
-        console.log('Library media items fetched successfully:', data);
+        mediaStore.libraryMediaItems = data; // Update mediaStore directly
+        console.log('Media items fetched successfully:', data);
       } catch (error) {
-        console.error('Failed to submit for library media items:', error);
+        console.error('Failed to fetch media items:', error);
       }
     };
 
     return {
       mediaStore,
       selectedBranch,
-      mediaService,
     };
-  },
-
-  methods: {
-    async submitForLibraryData(libraryId: number) {
-      const mediaService = new MediaService();
-      const filter: LibraryFilter = {
-        library_id: libraryId,
-      };
-      try {
-        const data = await mediaService.getLibraryData(filter);
-        console.log('Library Data retrieved successfully:', data);
-      } catch (error) {
-        console.error('Failed to get Library Data', error);
-      }
-    },
   },
 });
 </script>
+
 
 <template>
   <div class="container">
@@ -73,35 +57,26 @@ export default defineComponent({
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
       <option v-for="item in mediaStore.library" :key="item.id" :value="item.id">
-        {{ item.name }}
+        {{ item.id }}. {{ item.name }}
       </option>
     </select>
 
-    <div class="data-display" v-if="selectedBranch">
-      <h2>Media at:</h2>
+    <div class="data-display">
       <ul>
-        <li v-for="(item, index) in mediaStore.mediaItems" :key="index">
+        <li v-for="(item, index) in mediaStore.libraryMediaItems" :key="index">
           {{ item.media.name }}
         </li>
       </ul>
     </div>
 
+
     <div class="action-buttons">
-      <button 
-        @click="
-          submitForLibraryData(4);
-          $router.push('/move');
-        "
-      >
-        Move Media
-      </button>
-      <button 
-        @click="$router.push('/request');">
-        Requests
-      </button>
+      <button @click="$router.push('/move');">Move Media</button>
+      <button @click="$router.push('/request');">Requests</button>
     </div>
   </div>
 </template>
+
 
 <style scoped>
 body {

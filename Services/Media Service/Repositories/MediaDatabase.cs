@@ -77,10 +77,9 @@ namespace Media_Service.Repositories
 
             return await query.ToListAsync();
         }
-        public async Task<IEnumerable<LibraryEntity>> GetLibraryDataById(LibrarySpecification spec)
+        public async Task<IEnumerable<LibraryEntity>> GetAllLibraryData()
         {
-            var query = _context.Library
-                .ApplySpecification(spec);
+            var query = _context.Library;
 
             return await query.ToListAsync();
         }

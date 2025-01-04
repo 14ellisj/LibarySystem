@@ -27,6 +27,10 @@ export interface LibraryFilter {
 }
 
 export interface libraryMediaItemsFilter{
-  media_id?: number
   library_id?: number
+  media_id?: number
+}
+
+export interface RequestFilter {
+  
 }

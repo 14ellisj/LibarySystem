@@ -118,10 +118,9 @@ namespace Media_Service.Services
             return (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
         }
 
-         public async Task<IEnumerable<Library>> GetLibraryData(int libraryId, string? libraryName)
+         public async Task<IEnumerable<Library>> GetLibraryData(int? libraryId, string? libraryName)
         {
-            LibrarySpecification idSpec = new LibrarySpecification(libraryId);
-            var items = await _mediaDatabase.GetLibraryDataById(idSpec);
+            var items = await _mediaDatabase.GetAllLibraryData();
 
             _logger.LogInformation("Made it here woo!");
 

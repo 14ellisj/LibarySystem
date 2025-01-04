@@ -32,7 +32,7 @@ namespace Media_Service.Controllers
         [HttpGet("item", Name = "Get Media Item")]
         public async Task<ActionResult<IEnumerable<MediaItem>>> GetMediaItem(int? media_id, int? library_id, int? borrower_id, int? reserver_id)
         {
-            _logger.LogInformation("Made it here woo! (controller)");
+            _logger.LogInformation("Made it here woo! (Media Items)");
 
             if (!media_id.HasValue)
                 return BadRequest("Please include a media ID");
@@ -44,7 +44,7 @@ namespace Media_Service.Controllers
         [HttpGet("libraryItems", Name = "Get Library Item")]
         public async Task<ActionResult<IEnumerable<MediaItem>>> GetLibraryItem(int? media_id, int? library_id)
         {
-            _logger.LogInformation("Made it here woo! (controller)");
+            _logger.LogInformation("Made it here woo! (Library Media Data)");
 
             if (!library_id.HasValue)
                 return BadRequest("Please include a library ID");
@@ -56,12 +56,10 @@ namespace Media_Service.Controllers
         [HttpGet("library", Name = "Get Library Data")]
         public async Task<ActionResult<IEnumerable<Library>>> GetLibraryData(int? library_id, string? library_name)
         {
-            _logger.LogInformation("Made it here woo! (controller)");
+            _logger.LogInformation("Made it here woo! (Library Names)");
 
-            if (!library_id.HasValue)
-                return BadRequest("Please include a media ID");
 
-            var results = await _mediaService.GetLibraryData((int)library_id, library_name);
+            var results = await _mediaService.GetLibraryData(library_id, library_name);
             return Ok(results);
         }
 

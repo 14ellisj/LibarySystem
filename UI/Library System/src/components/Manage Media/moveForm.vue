@@ -53,7 +53,7 @@ export default defineComponent({
   }, 3000); 
 
   console.log(mediaStore.mediaMoves)
-};
+  };
 
 
     watch(selectedMedia, (newValue) => {
@@ -125,7 +125,7 @@ export default defineComponent({
           <option v-for="item in library" :key="item.id" :value="item.name">
             {{ item.name }}
           </option>
-          <option>Sheffield</option>
+
         </select>
 
         <button type="submit">Move Media</button>

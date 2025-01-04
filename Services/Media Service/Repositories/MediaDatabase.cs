@@ -68,15 +68,6 @@ namespace Media_Service.Repositories
 
             return await query.ToListAsync();
         }
-        public async Task<IEnumerable<MediaItemEntity>> GetMediaItemsByLibraryId(LibraryItemIdSpecification spec)
-        {
-            var query = _context.MediaItem
-                .Include(x => x.library)
-                .Include(x => x.media)
-                .ApplySpecification(spec);
-
-            return await query.ToListAsync();
-        }
         public async Task<IEnumerable<LibraryEntity>> GetAllLibraryData()
         {
             var query = _context.Library;

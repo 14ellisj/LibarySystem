@@ -1,4 +1,4 @@
-import type { Media_Item } from './media_item'
+
 import type { SearchType } from './searchType'
 
 export interface IAutoCompleteParams {
@@ -16,7 +16,3 @@ export interface IReserveRequest {
   profile_id: number
 }
 
-export interface IGetItemsRequest {
-  media_id: number
-  media_item: Media_Item
-}

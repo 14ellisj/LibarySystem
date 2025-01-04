@@ -2,11 +2,10 @@ import type { MediaFilter, mediaItemsFilter as MediaItemsFilter, LibraryFilter, 
 import type { Media } from '@/models/media'
 import type { MediaItem } from '@/models/mediaItem'
 import type { Library } from '@/models/library'
-import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest, IGetItemsRequest } from '@/models/requests'
+import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest} from '@/models/requests'
 import type { SearchType } from '@/models/searchType'
 import { useMediaStore } from '@/stores/media'
 import axios from 'axios'
-import type { RequestData } from '@/models/requestData'
 
 export default class {
   mediaStore = useMediaStore()
@@ -39,20 +38,6 @@ export default class {
       })
 
     return this.mediaStore.mediaItems
-  }
-
-  async getLibraryMediaItems(filter: libraryMediaItemsFilter): Promise<MediaItem[]> {
-    const requestUrl = this.apiUrl + 'Media/LibraryItems'
-
-    await axios
-      .get(requestUrl, {
-        params: filter,
-      })
-      .then((response) => {
-        this.mediaStore.setLibraryMediaItem(response.data)
-      })
-
-    return this.mediaStore.libraryMediaItems
   }
 
 

@@ -12,7 +12,6 @@ namespace Media_Service.Services
         Task<bool> MoveMedia(int mediaId, int libraryId);
         Task<bool> ReserveMedia(int mediaId, int profileId);
         Task <Media> GetMedia(int mediaId, int? profileId);
-        Task<bool> ReturnMedia(int mediaId, int profileId);
-        Task<IEnumerable<Media>> GetBorrowedMedia(int profileId);
+
     }
 }

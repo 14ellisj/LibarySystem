@@ -12,11 +12,15 @@ namespace Profile_Service.Models
         public Library Library { get; set; }
         [JsonPropertyName("address")]
         public Address Address { get; set; }
-        [JsonPropertyName("first_name")]
+        [JsonPropertyName("firstName")]
         public string FirstName { get; set; }
-        [JsonPropertyName("last_name")]
+        [JsonPropertyName("lastName")]
         public string LastName { get; set; }
         [JsonPropertyName("email")]
         public string Email { get; set; }
+        [JsonPropertyName("DOB")]
+        public string DateOfBirth { get; set; }
+        [JsonPropertyName("Password")]
+        public string Password { get; set; }
     }
 }

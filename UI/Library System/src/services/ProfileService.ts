@@ -28,24 +28,14 @@ export default class {
             .then((response) => {
                 this.userStore.setUser(response.data)
                 this.userStore.setPassword(password)
-            })
-
-        return this.userStore.user;
-    }
-
-    async checkEmail(filter: ProfileFilter): Promise<Profile> {
-        await axios
-            .get(this.apiUrl, {
-                params: filter
-            })
-            .then((response) => {
-                this.userStore.setUser(response.data)
+                console.log(response.data);
             })
 
         return this.userStore.user;
     }
 
     async createProfile(email: string, firstName: string, lastName: string, password: string){
+        console.log("email is: " + email + ", first name is: " + firstName + ", last name is: " + lastName + ", password is: " + password)
         const body : IRegisterDetails = {
             email: email,
             first_name: firstName,
@@ -55,7 +45,7 @@ export default class {
         axios
             .post(this.apiUrl, body)
             .then((response) => {
-                console.log("Created new profile");
+                console.log(response.data);
             })
 
         return this.userStore.user;

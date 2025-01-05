@@ -1,17 +1,17 @@
 ---
 # These are optional metadata elements. Feel free to remove any of them.
 status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: 2024/10/10
-decision-makers: Henry Barker, Jake Ellis, Joe Denton
-consulted: N/A
-informed: N/A
+date: {YYYY-MM-DD when the decision was last updated}
+decision-makers: {list everyone involved in the decision}
+consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
+informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
 ---
 
-# Choosing an architecture for the project
+# {short title, representative of solved problem and found solution}
 
 ## Context and Problem Statement
 
-The architecture of our system needs to be able to account for a considerable increase in users year on year. The system is also made up of multiple parts so we should be prepared for further feature requirements as there become more users.
+{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story. You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
 
 <!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
@@ -22,8 +22,9 @@ The architecture of our system needs to be able to account for a considerable in
 
 ## Considered Options
 
-* Micro services
-* Event Driven
+* {title of option 1}
+* {title of option 2}
+* {title of option 3}
 * … <!-- numbers of options can vary -->
 
 ## Decision Outcome
@@ -45,22 +46,17 @@ Chosen option: "{title of option 1}", because {justification. e.g., only option,
 <!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### Micro services
+### {title of option 1}
 
-* Good, because it can split the complex system down into more manageable services
+<!-- This is an optional element. Feel free to remove. -->
+{example | description | pointer to more information | …}
+
+* Good, because {argument a}
 * Good, because {argument b}
+<!-- use "neutral" if the given argument weights neither for good nor bad -->
 * Neutral, because {argument c}
 * Bad, because {argument d}
 * … <!-- numbers of pros and cons can vary -->
-
-### Event Driven
-
-{example | description | pointer to more information | …}
-
-* Good, because it keeps the different functions of the service seperate and manageable
-* Good, because it is easy to add new features to the architecture
-* Bad, because finding issues and testing can be difficult as finding the origins of a problem is hard
-* …
 
 ### {title of other option}
 

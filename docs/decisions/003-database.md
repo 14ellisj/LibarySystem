@@ -1,13 +1,12 @@
 ---
 # These are optional metadata elements. Feel free to remove any of them.
-status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: 2024/10/10
+status: accepted
+date: 11/11/2024
 decision-makers: Henry Barker, Jake Ellis, Joe Denton
-consulted: N/A
-informed: N/A
+informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
 ---
 
-# Choosing an architecture for the project
+# Relational or Non-relational database
 
 ## Context and Problem Statement
 
@@ -22,19 +21,19 @@ The architecture of our system needs to be able to account for a considerable in
 
 ## Considered Options
 
-* Micro services
-* Event Driven
-* … <!-- numbers of options can vary -->
+- SQL database
+- JSON database
 
 ## Decision Outcome
 
-Chosen option: "{title of option 1}", because {justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force {force} | … | comes out best (see below)}.
+Chosen option: SQL database, because the library has many interconnecting tables that all reference each other to structure their data.
 
 <!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
-* Good, because {positive consequence, e.g., improvement of one or more desired qualities, …}
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
+* Good, because this allows us to have a very interconnected database
+* Good with structured data
+* Bad, because it is slow and cannot handle too large of volumes of data
 * … <!-- numbers of consequences can vary -->
 
 <!-- This is an optional element. Feel free to remove. -->
@@ -45,31 +44,22 @@ Chosen option: "{title of option 1}", because {justification. e.g., only option,
 <!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### Micro services
+### SQL database
 
-* Good, because it can split the complex system down into more manageable services
-* Good, because {argument b}
+<!-- This is an optional element. Feel free to remove. -->
+{example | description | pointer to more information | …}
+
+* Good, because it helps structure the data and keeps it related throughout the database
 * Neutral, because {argument c}
 * Bad, because {argument d}
 * … <!-- numbers of pros and cons can vary -->
 
-### Event Driven
+### No-SQL database
 
 {example | description | pointer to more information | …}
 
-* Good, because it keeps the different functions of the service seperate and manageable
-* Good, because it is easy to add new features to the architecture
-* Bad, because finding issues and testing can be difficult as finding the origins of a problem is hard
-* …
-
-### {title of other option}
-
-{example | description | pointer to more information | …}
-
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
+* Good, because it's fast at updating and retrieving information
+* Bad, because there is no structure available for the database
 * …
 
 <!-- This is an optional element. Feel free to remove. -->

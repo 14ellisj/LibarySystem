@@ -13,10 +13,12 @@ export default defineComponent({
     var searchType: number = 0
     var autoCompleteResults: string[] = []
     var autoCompleteTimeout: number = 0
-    var isLoadingAutoCompleteResults: boolean = false
+    var userStore = useUserStore()
+    var mediaStore = useMediaStore()
 
-    const userStore = useUserStore()
+
     const searchTypesCount = Object.keys(SearchType).length / 2
+
     const mediaService = new MediaService()
     
 
@@ -29,7 +31,7 @@ export default defineComponent({
       autoCompleteTimeout,
       mediaService,
       userStore,
-      isLoadingAutoCompleteResults
+      mediaStore
     }
   },
   methods: {
@@ -56,7 +58,6 @@ export default defineComponent({
         this.autoCompleteResults = []
         return
       }
-      this.isLoadingAutoCompleteResults = true
 
       clearTimeout(this.autoCompleteTimeout)
       this.autoCompleteTimeout = setTimeout(async () => {
@@ -64,7 +65,6 @@ export default defineComponent({
           this.query,
           this.searchType,
         )
-        this.isLoadingAutoCompleteResults = false
       }, 300)
     },
     handleKeyPress(e: KeyboardEvent) {
@@ -89,7 +89,7 @@ export default defineComponent({
       <div class="search-bar-select-area">
         <div class="search-bar-select-dropdown">
           <label>Searching For...</label>
-          <select v-model="searchType" name="search-for" @change="getAutoComplete()">
+          <select v-model="searchType" name="search-for">
             <option v-for="(n, index) in searchTypesCount" :value="index">
               {{ SearchType[index] }}
             </option>
@@ -100,26 +100,14 @@ export default defineComponent({
         <button class="search-bar-button" @click="submit(false)">Search</button>
       </div>
     </div>
-    <div class="auto-complete-container" v-if="query.length >= 2">
+    <div class="auto-complete-container" v-show="autoCompleteResults.length > 0">
       <ul class="auto-complete-item-container">
-        <li v-if="autoCompleteResults.length > 0"
-          v-for="result in autoCompleteResults"
-          class="auto-complete-item selectable"
-          @click="selectAutocompleteOption($event, result)"
+        <li
+          v-for="author in autoCompleteResults"
+          class="auto-complete-item"
+          @click="selectAutocompleteOption($event, author)"
         >
-          {{ result }}
-        </li>
-        <li 
-          v-else-if="isLoadingAutoCompleteResults"
-          class="auto-complete-item"
-          >
-          Loading Results...
-        </li>
-        <li 
-          v-else
-          class="auto-complete-item"
-          >
-          No media found {{ searchType === SearchType.Author ? "by that author" : "with that title" }}...
+          {{ author }}
         </li>
       </ul>
     </div>
@@ -145,6 +133,7 @@ export default defineComponent({
 .auto-complete-item-container {
   list-style: none;
   font-size: 1.25rem;
+  cursor: pointer;
   padding: 0;
 }
 
@@ -152,10 +141,9 @@ export default defineComponent({
   padding: 1rem 2rem;
 }
 
-.selectable:hover {
+.auto-complete-item:hover {
   background-color: #ccc;
   text-decoration: underline;
-  cursor: pointer;
 }
 
 .search-bar-container {

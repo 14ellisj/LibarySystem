@@ -16,11 +16,8 @@ export default defineComponent({
         };
     },
     methods: {
-      pushLogIn() {
+      push() {
         this.$router.push('/logIn');
-      },
-      pushRegister() {
-        this.$router.push('/register');
       }
     }
 });
@@ -39,8 +36,7 @@ export default defineComponent({
     <main v-else>
       <div class="profileContainer">
         <div class="profile">
-          <button @click="pushLogIn()"> Log In </button> <br>
-          <button @click="pushRegister()"> Register </button>
+          <button @click="push()"> Log In </button>
         </div>
       </div>
     </main>

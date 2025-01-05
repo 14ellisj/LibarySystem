@@ -16,9 +16,9 @@ We need a way to keep the passwords secure in the database
 <!-- This is an optional element. Feel free to remove. -->
 ## Decision Drivers
 
-* Provides security for the users
-* No sensitive data is hard coded in
-
+* {decision driver 1, e.g., a force, facing concern, …}
+* {decision driver 2, e.g., a force, facing concern, …}
+* … <!-- numbers of drivers can vary -->
 
 ## Considered Options
 
@@ -28,15 +28,21 @@ We need a way to keep the passwords secure in the database
 
 ## Decision Outcome
 
-Chosen option: Hashed Password because it can be implemented effiectly to provide a deeper level of security for the users.
+Chosen option: "{title of option 1}", because {justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force {force} | … | comes out best (see below)}.
 
-
+<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
-* Good, because it can resist brute force and reduces the size in the database
-* Bad, because it can't handle large amounts of data and collision risks with same hash value
+* Good, because {positive consequence, e.g., improvement of one or more desired qualities, …}
+* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
+* … <!-- numbers of consequences can vary -->
 
+<!-- This is an optional element. Feel free to remove. -->
+### Confirmation
 
+{Describe how the implementation of/compliance with the ADR can/will be confirmed. Is the chosen design and its implementation in line with the decision? E.g., a design/code review or a test with a library such as ArchUnit can help validate this. Note that although we classify this element as optional, it is included in many ADRs.}
+
+<!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
 ### Hashed password 
@@ -62,7 +68,4 @@ Scrambling it with a key to unscramble it
 * Good, because it is fast
 * Bad, because the key might need to be brought to different places and therefore makes the key less secure
 
-### More Information
-References
-[Hashed vs 1 way encryption vs symmetric] (https://www.sealpath.com/blog/types-of-encryption-guide/)
-
+{You might want to provide additional evidence/confidence for the decision outcome here and/or document the team agreement on the decision and/or define when/how this decision the decision should be realized and if/when it should be re-visited. Links to other decisions and resources might appear here as well.}

@@ -6,8 +6,6 @@ import { useUserStore } from '../../stores/profileInformation'
 import { useMediaStore } from '../../stores/media'
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
-import MediaService from '@/services/MediaService';
-import toastr from 'toastr';
 
 export default defineComponent({
     name: 'logInValidation',
@@ -17,23 +15,18 @@ export default defineComponent({
     setup() {
         const store = useUserStore();
         const mediaStore = useMediaStore();
-        var userID = store.user.id
+        var userID = store.user['id']
         return {
             store,
             mediaStore,
-            userID
         };
     },
     methods: {
       push() {
         this.$router.push('/logIn');
       },
-      async returnMedia(id: number, title: string) {
-        const mediaService = new MediaService();
-        const returnMedia = await mediaService.returnMedia(id, this.userID);
-        this.mediaStore.setTitle(title)
-        toastr.success("Successfully returned " + title)
-        this.$router.push('/Returned')
+      returnMedia() {
+        
       }
     }
 });
@@ -50,15 +43,15 @@ export default defineComponent({
             <table>
                 <thead>
                     <th> Media name </th>
-                    <th> Author </th>
+                    <th> Status </th>
                     <th> Return </th>
                 </thead>
                 <tbody>
-                    <template v-for="media in mediaStore.media" :key="store.user.id"> 
+                    <template v-for="media in mediaStore.media" :key="store.user[0]['id']"> 
                         <tr>
                             <td> {{ media.name }} </td> 
-                            <td></td>
-                            <td> <button @click="returnMedia(media.id, media.name)"> Return </button> </td> 
+                            <td> {{ }} </td> 
+                            <td> <button @click="returnMedia()"> Return </button> </td> 
                         </tr>
                     </template>
                 </tbody>

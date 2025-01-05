@@ -1,13 +1,17 @@
 ---
-status: "Proposed"
-date: {2025-01-03}
+# These are optional metadata elements. Feel free to remove any of them.
+status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
+date: {YYYY-MM-DD when the decision was last updated}
+decision-makers: {list everyone involved in the decision}
+consulted: {list everyone whose opinions are sought (typically subject-matter experts); and with whom there is a two-way communication}
+informed: {list everyone who is kept up-to-date on progress; and with whom there is a one-way communication}
 ---
 
 # Using our database to store user login details
 
 ## Context and Problem Statement
 
-We need to decide how we are going to store the user profiles so that we can track roles, who's borrowing items and any information that might be necessary to provide users with a good experience.
+{Describe the context and problem statement, e.g., in free form using two to three sentences or in the form of an illustrative story. You may want to articulate the problem in form of a question and add links to collaboration boards or issue management systems.}
 
 ## Decision Drivers
 
@@ -30,8 +34,6 @@ Chosen option: Database, because we'll have full control over the system. This w
 
 ### Database
 
-[Storing user data best practices](https://stackoverflow.com/questions/6709775/methods-for-storing-login-information-in-database)
-
 * Good, because it's simple
 * Good, because we have complete control over it
 * Good, because it's quick and incorporated in the app flow
@@ -41,7 +43,6 @@ Chosen option: Database, because we'll have full control over the system. This w
 * Bad, because we're responsible for holding the data which might be senstive
 
 ### Multi-factor
-[Multi-factor in C#](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/mfa?view=aspnetcore-9.0)
 
 We would send an email / text with a code that you then use to sign in.
 
@@ -53,7 +54,7 @@ We would send an email / text with a code that you then use to sign in.
 * Bad, because you have to send notifications which will cost money
 
 ### Custom SSO Solution
-[What is SSO](https://frontegg.com/guides/single-sign-on-sso)
+
 Make use of a custom SSO solution online
 
 * Good, because it's quick and incorporated in the app flow
@@ -65,7 +66,7 @@ Make use of a custom SSO solution online
 * Bad, because if it goes down there's nothing we can actively do to fix it
 
 ### Google / Facebook SSO
-[Integrating with Google](https://developers.google.com/identity/sign-in/web/sign-in)
+
 Use your google or facebook account to sign in to our apps
 
 * Good, because it's simple to set up
@@ -79,4 +80,7 @@ This would be the same as above but with the addition of a multi factor sign in 
 * Good, because this is even more secure
 * Bad, because it's slower for the user
 
-### More Information
+<!-- This is an optional element. Feel free to remove. -->
+## More Information
+
+{You might want to provide additional evidence/confidence for the decision outcome here and/or document the team agreement on the decision and/or define when/how this decision the decision should be realized and if/when it should be re-visited. Links to other decisions and resources might appear here as well.}

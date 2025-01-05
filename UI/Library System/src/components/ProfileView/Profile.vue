@@ -1,66 +1,20 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import '../../styles/variables.css'
-import type { MediaFilter, mediaItemsFilter } from '@/models/filters';
-import { useUserStore } from '@/stores/profileInformation';
-import MediaService from '@/services/MediaService';
-import toastr from 'toastr';
+import '../../styles/variables.css';
 
-export default defineComponent({
-    name: 'Profile',
-    data() {
-        var hovering = false
-
-        return {
-            hovering
-        }
-    },
-    setup() {
-        const store = useUserStore();
-        var userID = store.user.id;
-
-        return {
-            store,
-            userID
-        };
-    },
-    methods: {
-        async toOrders() {  
-            this.$router.push('');
-        },
-        async toWishlist() {  
-            this.$router.push('/Wishlist');
-        },
-        async toReturn() {  
-            const mediaService = new MediaService();
-            const filter: mediaItemsFilter = {
-                profile_id: this.userID,
-            };
-            const returnMedia = await mediaService.getBorrowedMedia(filter);
-                if (returnMedia.length != 0) {
-                    this.$router.push('/Return');
-                }
-                else {
-                    toastr.error("You have nothing to return");
-                }
-        },
-        async toSettings() {  
-            this.$router.push('');
-        },
-        async toLogIn() {  
-            this.$router.push('/logIn');
-        },
-    }
-})
 </script>
 
 <template>
-    <h2>Profile</h2>
-    <button @click="toOrders()"> Orders </button> <br>
-    <button @click="toWishlist()"> Wishlist </button> <br>
-    <button @click="toReturn()"> Return Media </button> <br>
-    <button @click="toSettings()"> Settings </button> <br>
-    <button @click="toLogIn()"> Log Out </button>
+  <div class="profile-container">
+    <h2>My Profile</h2>
+    <div class="profile-card">
+      <button @click="">Add Media</button>
+      <button @click="$router.push('/Orders')">Orders</button>
+      <button @click="$router.push('/Return')">Return Media</button>
+      <button @click="$router.push('/Reservations')">Reservations</button>
+      <button @click="$router.push('/Settings')">Settings</button>
+      <button @click="$router.push('/logIn')" class="logout-button">Log Out</button>
+    </div>
+  </div>
 </template>
 
 <style scoped>

@@ -5,6 +5,7 @@ import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
+import axios from 'axios';
 import { useUserStore } from '@/stores/profileInformation';
 import type { LibraryFilter, mediaItemsFilter } from '@/models/filters';
 
@@ -14,25 +15,39 @@ export default defineComponent({
     const media = ref(useMediaStore().media);
     const userStore = useUserStore();
     const expandedRowId = ref<number | null>(null);
-    const isPopupVisible = ref(false);
-    const popupMessage = ref('');
     const mediaStore = useMediaStore();
-    const reserveQueue = ref<number>(0); // New variable to track the reservation queue count.
+    const reserveQueue = ref<number>(0);
+    const isPopupOpen = ref(false);
+
+    // Email form data
+const email = ref({
+  to: "",
+  subject: "Your next in line!",
+  body: "Your reserved media is about to become available.\n" + 
+        "Head to app to borrow the media now.\n" +
+        "Thank you for using AML.",
+});
+
+    const message = ref("");
+
+    const togglePopup = () => {
+      isPopupOpen.value = !isPopupOpen.value;
+    };
+
+    const sendEmail = async () => {
+      try {
+        const response = await axios.post("http://localhost:5132/email/send", email.value);
+        message.value = response.data.message;
+        toastr.success("Email sent successfully.");
+        togglePopup();
+      } catch (error) {}
+    };
 
     const toggleRowDetails = (id: number) => {
       expandedRowId.value = expandedRowId.value === id ? null : id;
     };
 
-    const showPopup = (message: string) => {
-      popupMessage.value = message;
-      isPopupVisible.value = true;
-    };
-
     const mediaService = new MediaService();
-
-    const closePopup = () => {
-      isPopupVisible.value = false;
-    };
 
     const decodeBase64Image = (base64String: string): string => {
       let cleanBase64String = base64String;
@@ -50,58 +65,54 @@ export default defineComponent({
       return URL.createObjectURL(blob);
     };
 
-    console.log(mediaStore.media);
+    const reserveMedia = async (media_id: number) => {
+      const success = await mediaService.reserveMedia(media_id, userStore.user?.id);
+      if (success) {
+        reserveQueue.value += 1;
+        toastr.success("Successfully reserved the media.");
+        isPopupOpen.value = true; // Open popup
+      } else {
+        toastr.error("Failed to reserve the media.");
+      }
+    };
 
     return {
       media,
       expandedRowId,
       toggleRowDetails,
       decodeBase64Image,
-      isPopupVisible,
-      popupMessage,
-      closePopup,
       userStore,
       Type,
       Genre,
       mediaStore,
       mediaService,
-      reserveQueue, 
+      reserveQueue,
+      isPopupOpen,
+      togglePopup,
+      reserveMedia,
+      email,
+      message,
+      sendEmail,
     };
   },
   methods: {
     async borrowMedia(media_id: number) {
-      const mediaService = new MediaService();
-      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id);
-
-      if (success) toastr.success('Successfully borrowed the media.');
-      else toastr.error('Failed to borrow the media.');
-    },
-    async reserveMedia(media_id: number) {
-      const mediaService = new MediaService();
-      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
-
-      if (success) {
-        this.reserveQueue += 1; 
-        toastr.success('Successfully reserved the media.');
-      } else {
-        toastr.error('Failed to reserve the media.');
-      }
+      const success = await this.mediaService.borrowMedia(media_id, this.userStore.user?.id);
+      if (success) toastr.success("Successfully borrowed the media.");
+      else toastr.error("Failed to borrow the media.");
     },
     async submitForLibraryData() {
-      const mediaService = new MediaService();
-      const filter: LibraryFilter = {
-    };
-    try {
-      const data = await mediaService.getLibraryData(filter);
-     console.log('Library Data retrieved successfully:', data);
-    } catch (error) {
-      console.error('Failed to get Library Data', error);
-    }
+      const filter: LibraryFilter = {};
+      try {
+        const data = await this.mediaService.getLibraryData(filter);
+        console.log("Library Data retrieved successfully:", data);
+      } catch (error) {
+        console.error("Failed to get Library Data", error);
+      }
     },
   },
 });
 </script>
-
 
 <template>
   <head>
@@ -142,24 +153,13 @@ export default defineComponent({
                     <p><strong>Length: </strong>{{ item.length }} pages</p>
                     <p><strong>Description: </strong> {{ item.description }}</p>
                     <p><strong>Rating: </strong>{{ item.rating }}/5</p>
-                    <ul></ul>
                     <div class="actions">
                       <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
+                      <button :disabled="!item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
                         Reserve
                       </button>
-
-                      <div>
-                        <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>
-                        <p v-else-if="userStore.user?.id">Log in to reserve this item.</p>
-                      </div>
-                      <div>
-                        <p v-if="!item.is_available">Sorry, not available right now.</p>
-                        <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
-                        <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -168,20 +168,23 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
-      <button 
-        class="admin-button" 
-        @click="submitForLibraryData(); $router.push('/manage')"
-        >
-         Manage Media
-      </button>
+      <button class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
 
+      <!-- Popup -->
+      <div v-if="isPopupOpen" class="overlay">
+        <div class="popup">
+          <h2>Send Reservation Confirmation Email</h2>
+          <form @submit.prevent="sendEmail">
+            <label for="to">Recipient Email:</label>
+            <input v-model="email.to" id="to" type="email" placeholder="Enter recipient email" required />
+
+            <button type="submit">Send Email</button>
+          </form>
+          <p v-if="message" class="response-message">{{ message }}</p>
+          <button class="close-btn" @click="togglePopup">Close</button>
+        </div>
+      </div>
     </main>
-
-    <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>
-    <div v-if="isPopupVisible" class="popup">
-      <p>{{ popupMessage }}</p>
-      <button @click="closePopup" class="close-btn">Close</button>
-    </div>
   </body>
 </template>
 
@@ -331,5 +334,49 @@ tbody tr:hover {
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: 80px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+button {
+  margin-bottom: 10px;
+  padding: 8px;
+}
+
+.close-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 </style>

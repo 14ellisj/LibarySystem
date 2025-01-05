@@ -168,7 +168,13 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
-      <button class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
+      <button 
+        class="admin-button" 
+        @click="submitForLibraryData(); $router.push('/manage')"
+        >
+         Manage Media
+      </button>
+
     </main>
 
     <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>

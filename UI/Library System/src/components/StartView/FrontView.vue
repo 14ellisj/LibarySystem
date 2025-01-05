@@ -65,7 +65,7 @@ export default defineComponent({
       Genre,
       mediaStore,
       mediaService,
-      reserveQueue, // Expose reserveQueue to the template.
+      reserveQueue, 
     };
   },
   methods: {
@@ -110,7 +110,8 @@ export default defineComponent({
   <body>
     <main>
       <h1>Library</h1>
-      <table>
+      <h2 v-if="media.length === 0">No media found...</h2>
+      <table v-else>
         <thead>
           <tr>
             <th>Name</th>

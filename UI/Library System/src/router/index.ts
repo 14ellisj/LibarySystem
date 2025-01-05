@@ -13,7 +13,7 @@ import HomeView from '@/views/HomeView.vue'
 import moveFormView from '@/views/moveFormView.vue'
 import viewBranchMedia from '@/components/Manage Media/viewBranchMedia.vue'
 import MoveRequestView from '@/views/MoveRequestView.vue'
-
+import ReturnedView from '@/views/ReturnedView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -91,7 +91,12 @@ const router = createRouter({
       path: '/request',
       name: 'Request',
       component: MoveRequestView,
-      },
+    },
+    {
+      path: '/returned',
+      name: 'Returned',
+      component: ReturnedView,
+    },
   ],
 })
 

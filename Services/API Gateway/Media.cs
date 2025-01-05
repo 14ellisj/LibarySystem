@@ -1,5 +1,0 @@
-﻿namespace API_Gateway
-{
-
-    
-}

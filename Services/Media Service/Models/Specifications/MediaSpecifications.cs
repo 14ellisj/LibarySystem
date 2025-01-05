@@ -49,7 +49,7 @@ namespace Media_Service.Models.Specifications
             get
             {
                 if (!_id.HasValue)
-                    return x => false;
+                    return x => true;
 
                 return x => x.id.Equals(_id.Value);
             }
@@ -175,3 +175,4 @@ namespace Media_Service.Models.Specifications
     }
 }
 
+}

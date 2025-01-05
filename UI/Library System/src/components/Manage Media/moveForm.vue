@@ -218,9 +218,6 @@ export default defineComponent({
             font-size: 16px;
             cursor: pointer;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
         .popup-overlay {
             position: fixed;
             top: 0;

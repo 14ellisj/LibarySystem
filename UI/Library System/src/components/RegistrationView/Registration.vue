@@ -5,9 +5,16 @@ import ProfileService from '@/services/ProfileService';
 import { useUserStore } from '@/stores/profileInformation';
 import { defineComponent } from 'vue'
 import toastr from 'toastr';
+import type { ProfileFilter } from '@/models/filters';
 
 export default defineComponent({
     name: "Register",
+    setup() {
+        const store = useUserStore();
+        return {
+            store
+        }
+    },
     components: {
             RegistrationItem,
         },
@@ -15,7 +22,6 @@ export default defineComponent({
     var email: string = "";
     var firstName: string = "";
     var lastName: string = "";
-    var DOB: string = "";
     var password: string = "";
     var confirmPassword: string = "";
     const profileService = new ProfileService();
@@ -24,7 +30,6 @@ export default defineComponent({
         email,
         firstName,
         lastName,
-        DOB,
         password,
         confirmPassword,
         profileService
@@ -34,10 +39,19 @@ export default defineComponent({
     async Register() {         
         if (this.email != "" && this.firstName != "" && this.lastName != "" && this.password != "") {
             if (this.password == this.confirmPassword) {
-            await this.profileService.createProfile(this.email, this.firstName, this.lastName, this.password);
+                const filter: ProfileFilter = {
+                    email: this.email
+                } 
+                await this.profileService.checkEmail(filter);
+                const result = this.store.user;
+                if (result?.length == 0) {
+                    await this.profileService.createProfile(this.email, this.firstName, this.lastName, this.password);
             
-
-            this.$router.push('/logIn');
+                    this.$router.push('/logIn');
+                }
+                else{
+                    toastr.error("That email is already in use.")
+                }
             }
             else {
                 toastr.error("The passwords do not match");
@@ -72,8 +86,6 @@ export default defineComponent({
     <input type="text" id="fName" name="fName" v-model="firstName"><br>
     <label for="lName">Last Name:</label><br>
     <input type="text" id="lName" name="lName" v-model="lastName"><br>
-    <label for="DOB">Date Of Birth:</label><br>
-    <input type="date" id="DOB" name="DOB" v-model="DOB"><br>
     <label for="Password">Password:</label><br>
     <input type="text" id="Password" name="Password" v-model="password"><br>
     <label for="ConfirmPassword">Confirm Password:</label><br>

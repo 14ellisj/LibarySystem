@@ -2,6 +2,7 @@
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Media_Service.Repositories;
+using System.Diagnostics.Eventing.Reader;
 
 namespace Media_Service.Services
 {
@@ -41,15 +42,12 @@ public async Task<bool> MoveMedia(int mediaId, int libraryId)
 
     if (media is null)
         return false;
-
-    // Assuming media.media_items is a collection of MediaItemEntity objects,
-    // and you need to move the first available item
-    var availableItem = media.media_items.FirstOrDefault(); // or any specific logic to pick the item
+   
+    var availableItem = media.media_items.FirstOrDefault(); 
     
     if (availableItem == null)
         return false;
 
-    // Now pass the correct type (MediaItemEntity) to MoveItem
     return await _mediaDatabase.MoveItem(availableItem, libraryId);
 }
 
@@ -80,27 +78,24 @@ public async Task<bool> MoveMedia(int mediaId, int libraryId)
             MediaAvailabilitySpecification availabilitySpec = new MediaAvailabilitySpecification(isAvailable);
 
             List<ISpecification<MediaEntity>> specs = new()
+            MediaFilter filters = new MediaFilter()
             {
-                titleSpec,
-                authorSpec,
-                availabilitySpec
+                Id = mediaId,
+                ProfileId = profileId
             };
 
-            var entities = await _mediaDatabase.FilterMediaAllInfo(specs);
-            var mapped = _mapper.Map<IEnumerable<Media>>(entities, opts => opts.Items["profile_id"] = profileId);
-
-            return mapped;
-        }
-
-        public async Task<Media> GetMedia(int id, int? profileId)
-        {
-            var media = await GetMediaById(id);
+            var media = (await _mediaDatabase.FilterMediaAllInfo(filters)).FirstOrDefault();
 
             if (media is null)
-                throw new Exception("Media Not Found.");
+                return false;
 
-            var mapped = _mapper.Map<Media>(media, opts => opts.Items["profile_id"] = profileId);
-            return mapped;
+            if (media.IsBorrwedByUser)
+                return false;
+
+            if (!media.IsAvailable)
+                return false;
+
+            return await _mediaDatabase.BorrowItem(mediaId, profileId);
         }
         public async Task<IEnumerable<MediaItem>> GetMediaItems(int mediaId, int? libraryId, int? borrowerId, int? reserverId)
         {
@@ -131,10 +126,42 @@ public async Task<bool> MoveMedia(int mediaId, int libraryId)
             return mapped;
         }
 
-        private async Task<MediaEntity?> GetMediaById(int id)
+        public async Task<bool> ReturnMedia(int mediaId, int profileId)
         {
-            MediaIdSpecification idSpec = new MediaIdSpecification(id);
-            return (await _mediaDatabase.FilterMediaAllInfo([idSpec])).FirstOrDefault();
+            MediaFilter filters = new MediaFilter()
+            {
+                Id = mediaId,
+                ProfileId = profileId
+            };
+
+            var returningItem = await _mediaDatabase.GetBorrowedMediaItem(mediaId, profileId);
+
+            if (returningItem is null)
+                return false;
+
+            return await _mediaDatabase.ReturnItem(returningItem);
+        }
+
+        public async Task<IEnumerable<Media>> FilterMedia(string? title, string? author, bool? isSelected, bool? isAvailable, int? profileId)
+        {
+            MediaFilter filters = new MediaFilter()
+            {
+                Title = title,
+                Author = author,
+                IsAvailable = isAvailable,
+                ProfileId = profileId,
+                IsSelected = isSelected
+            };
+
+            var media = await _mediaDatabase.FilterMediaAllInfo(filters);
+
+            return media;
+        }
+
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)
+        {
+            var media = await _mediaDatabase.GetBorrowedMedia(profileId);
+            return media;
         }
 
          public async Task<IEnumerable<Library>> GetLibraryData(int? libraryId, string? libraryName)

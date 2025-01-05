@@ -5,6 +5,7 @@ using Media_Service.Models.Specifications;
 using Media_Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 
 namespace Media_Service.Controllers
 {
@@ -85,6 +86,17 @@ namespace Media_Service.Controllers
             }
 
         }
+        [HttpGet("borrowedItem", Name = "Get Borrowed Media")]
+        public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int? profile_id)
+        {
+            if (profile_id == null)
+                return BadRequest("No Profile Id");
+                
+            var results = await _mediaService.GetBorrowedMedia((int)profile_id);
+            
+            return Ok(results);
+        }
+
         [HttpPatch("borrow", Name = "Borrow Media")]
         public async Task<IActionResult> BorrowMedia([FromBody] BorrowItemRequest body)
         {
@@ -98,8 +110,7 @@ namespace Media_Service.Controllers
                 if (!success)
                     return Conflict("No available items");
 
-                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
-                return Ok(updatedItem);
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -128,6 +139,25 @@ namespace Media_Service.Controllers
                 return StatusCode(500, ex.Message);
             }
 
+
+        [HttpPatch("return", Name = "Return Media")]
+        public async Task<IActionResult> ReturnMedia([FromBody] ReturnRequest body)
+        {
+            if (!body.MediaId.HasValue)
+                return BadRequest("No Media Id");
+
+            else if (!body.ProfileId.HasValue)
+                return BadRequest("No Profile Id");
+                
+            var currentBorrowerId = (int)body.ProfileId;
+            var mediaId = (int)body.MediaId;
+
+            var returned = await _mediaService.ReturnMedia(mediaId, currentBorrowerId);
+
+            if (returned)
+                return Ok();
+
+            return Conflict("Something went wrong");
         }
     }
 }

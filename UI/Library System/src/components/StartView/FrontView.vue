@@ -76,6 +76,7 @@ export default defineComponent({
       if (success) toastr.success('Successfully borrowed the media.');
       else toastr.error('Failed to borrow the media.');
     },
+    
     async reserveMedia(media_id: number) {
       const mediaService = new MediaService();
       const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
@@ -110,7 +111,8 @@ export default defineComponent({
   <body>
     <main>
       <h1>Library</h1>
-      <table>
+      <h2 v-if="media.length === 0">No media found...</h2>
+      <table v-else>
         <thead>
           <tr>
             <th>Name</th>

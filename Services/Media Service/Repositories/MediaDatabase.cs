@@ -1,4 +1,5 @@
-﻿using Media_Service.Database;
+﻿using AutoMapper;
+using Media_Service.Database;
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Microsoft.EntityFrameworkCore;
@@ -8,14 +9,44 @@ namespace Media_Service.Repositories
     public class MediaDatabase : IMediaDatabase
     {
         private readonly AppDbContext _context;
-        public MediaDatabase(AppDbContext context)
+        private readonly IMapper _mapper;
+        public MediaDatabase(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<bool> BorrowItem(MediaItemEntity mediaItem, int profileId)
+        public async Task<bool> BorrowItem(int mediaId, int profileId)
         {
-            mediaItem.borrower_id = profileId;
+            MediaItemParentIdSpecification idSpec = new(mediaId);
+            MediaItemBorrowStatusSpecification borrowSpec = new(false);
+
+            var mediaItemBorrowing = await _context.MediaItems
+                .Include(x => x.media)
+                .ApplySpecifications([idSpec, borrowSpec])
+                .FirstOrDefaultAsync();
+
+            if (mediaItemBorrowing is null)
+                throw new Exception("Media Item not found");
+
+            mediaItemBorrowing.borrower_id = profileId;
+
+            _context.Update(mediaItemBorrowing);
+            try
+            {
+                await _context.SaveChangesAsync();
+                return true;
+            } 
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ReturnItem(MediaItem mediaItem)
+        {
+            var entity = _mapper.Map<MediaItemEntity>(mediaItem);
+            entity.borrower_id = null;
 
             _context.Update(mediaItem);
             try
@@ -60,7 +91,21 @@ namespace Media_Service.Repositories
             }
         }
         public async Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs)
+        public async Task<IEnumerable<Media>> FilterMediaAllInfo(MediaFilter filters)
         {
+            MediaTitleSpecification titleSpec = new(filters.Title, filters.IsSelected);
+            MediaAuthorSpecification authorSpec = new(filters.Author, filters.IsSelected);
+            MediaAvailabilitySpecification availabilitySpec = new(filters.IsAvailable);
+            MediaIdSpecification idSpec = new(filters.Id);
+
+            List<ISpecification<MediaEntity>> specs = new()
+            {
+                titleSpec,
+                authorSpec,
+                availabilitySpec,
+                idSpec
+            };
+
             var query = _context.Media
                 .Include(x => x.author)
                 .Include(x => x.genre)
@@ -70,7 +115,9 @@ namespace Media_Service.Repositories
                 .ApplySpecifications(specs)
                 .OrderBy(x => x.name);
 
-            return await query.ToListAsync();
+            var entities = await query.ToListAsync();
+
+            return _mapper.Map<IEnumerable<Media>>(entities, opts => opts.Items["profile_id"] = filters.ProfileId);
         }
         public async Task<IEnumerable<MediaItemEntity>> GetMediaItemsById(MediaItemIdSpecification spec)
         {
@@ -99,25 +146,56 @@ namespace Media_Service.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec)
+        public async Task<IEnumerable<Author>> GetAuthorsByName(string author)
         {
+            AuthorNameSpecification authorSpec = new(author);
+
             var dbQuery = _context.Author
-                    .ApplySpecification(spec)
+                    .ApplySpecification(authorSpec)
                     .OrderBy(x => x.last_name)
                     .Take(5);
 
-            return await dbQuery.ToListAsync();
+            var entities = await dbQuery.ToListAsync();
+            return _mapper.Map<IEnumerable<Author>>(entities);
         }
 
-        public async Task<IEnumerable<MediaEntity>> GetMediaByTitle(MediaTitleSpecification spec)
+        public async Task<IEnumerable<Media>> GetMediaByTitle(string title)
         {
+            MediaTitleSpecification titleSpec = new(title, false);
+
             var query = _context.Media
-                    .ApplySpecification(spec)
+                    .ApplySpecification(titleSpec)
                     .Distinct()
                     .OrderBy(x => x.name)
                     .Take(5);
 
-            return await query.ToListAsync();
+            var entities = await query.ToListAsync();
+            return _mapper.Map<IEnumerable<Media>>(entities);
+        }
+
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)
+        {
+            MediaItemBorrowedBySpecification spec = new(profileId);
+
+            var query = _context.MediaItems
+                .Include(x => x.media)
+                .ApplySpecification(spec);
+
+            var mediaEntities = (await query.ToListAsync()).Select(x => x.media);
+
+            return _mapper.Map<IEnumerable<Media>>(mediaEntities);
+        }
+
+        public async Task<MediaItem?> GetBorrowedMediaItem(int mediaId, int profileId)
+        {
+            MediaItemBorrowedBySpecification profileSpec = new(profileId);
+            MediaItemParentIdSpecification idSpec = new(mediaId);
+
+            var query = _context.MediaItems
+                .ApplySpecifications([idSpec, profileSpec]);
+
+            var mediaItem = (await query.ToListAsync()).FirstOrDefault();
+            return _mapper.Map<MediaItem>(mediaItem);
         }
     }
 }

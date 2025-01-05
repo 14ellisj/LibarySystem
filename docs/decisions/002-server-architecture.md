@@ -1,10 +1,6 @@
 ---
-# These are optional metadata elements. Feel free to remove any of them.
-status: "{proposed | rejected | accepted | deprecated | … | superseded by ADR-0123"
-date: 2024/10/10
-decision-makers: Henry Barker, Jake Ellis, Joe Denton
-consulted: N/A
-informed: N/A
+status: "Accepted"
+date: {2025-01-03}
 ---
 
 # Choosing an architecture for the project
@@ -13,66 +9,52 @@ informed: N/A
 
 The architecture of our system needs to be able to account for a considerable increase in users year on year. The system is also made up of multiple parts so we should be prepared for further feature requirements as there become more users.
 
-<!-- This is an optional element. Feel free to remove. -->
+
 ## Decision Drivers
 
-* {decision driver 1, e.g., a force, facing concern, …}
-* {decision driver 2, e.g., a force, facing concern, …}
-* … <!-- numbers of drivers can vary -->
+* Facing concern of scalability
+* Facing concern of security
 
 ## Considered Options
 
+* Service Oriented
 * Micro services
 * Event Driven
-* … <!-- numbers of options can vary -->
 
 ## Decision Outcome
 
-Chosen option: "{title of option 1}", because {justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force {force} | … | comes out best (see below)}.
+Chosen option: "Service Oriented", because 
 
-<!-- This is an optional element. Feel free to remove. -->
-### Consequences
-
-* Good, because {positive consequence, e.g., improvement of one or more desired qualities, …}
-* Bad, because {negative consequence, e.g., compromising one or more desired qualities, …}
-* … <!-- numbers of consequences can vary -->
-
-<!-- This is an optional element. Feel free to remove. -->
-### Confirmation
-
-{Describe how the implementation of/compliance with the ADR can/will be confirmed. Is the chosen design and its implementation in line with the decision? E.g., a design/code review or a test with a library such as ArchUnit can help validate this. Note that although we classify this element as optional, it is included in many ADRs.}
-
-<!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
-### Micro services
+### Service Oriented
+[Pros and Cons](https://www.geeksforgeeks.org/service-oriented-architecture/)
 
-* Good, because it can split the complex system down into more manageable services
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* … <!-- numbers of pros and cons can vary -->
+* Good, because services should be focussed so more maintainable
+* Good, because you should be able to scale by business function
+* Good, because if one service goes down only services that use it should be affected
+* Good, because it allows you to break down system into business functions
+* Good, because services should be focussed making it easier for developers to understand
+* Bad, because lots of interactions between services results in slow downs and additional costs
+* Bad, because making changes to a service will affect lots of things and is hard to track
+
+### Micro services
+[Pros and Cons](https://www.qa.com/resources/blog/microservices-architecture-challenge-advantage-drawback/)
+
+* Good, because each service is scalabale
+* Good, because any errors should be relatively isolated
+* Good, because services are very focussed so easy to understand
+* Bad, because can become incredibly complex with interactions
+* Bad, because lots of services to track
+* Bad, because individual databases for services means data may take time to become consistent
+* Bad, because multiple sources of the truth
 
 ### Event Driven
+[Pros and Cons](https://solace.com/blog/event-driven-architecture-pros-and-cons/)
 
-{example | description | pointer to more information | …}
-
-* Good, because it keeps the different functions of the service seperate and manageable
+* Good, because if a downstream function stops working then others will still continue
 * Good, because it is easy to add new features to the architecture
+* Good, because loose coupling makes the code scalable
 * Bad, because finding issues and testing can be difficult as finding the origins of a problem is hard
-* …
-
-### {title of other option}
-
-{example | description | pointer to more information | …}
-
-* Good, because {argument a}
-* Good, because {argument b}
-* Neutral, because {argument c}
-* Bad, because {argument d}
-* …
-
-<!-- This is an optional element. Feel free to remove. -->
-## More Information
-
-{You might want to provide additional evidence/confidence for the decision outcome here and/or document the team agreement on the decision and/or define when/how this decision the decision should be realized and if/when it should be re-visited. Links to other decisions and resources might appear here as well.}
+* Bad, because it's harder to understand the monitor issues due to very loosely coupled nature
+* Bad, because it will eventually become complex with multiple producers / consumers

@@ -30,7 +30,7 @@ export default defineComponent({
       <MenuItem Title="News" Path="/news"></MenuItem>
     </div>
     <div class="header-user">
-      <RouterLink to="/profile"><img class="user-img" src="@/images/profile.webp" /></RouterLink>
+      <RouterLink :to="userRoute"><img class="user-img" src="@/images/profile.webp" /></RouterLink>
     </div>
   </div>
 </template>

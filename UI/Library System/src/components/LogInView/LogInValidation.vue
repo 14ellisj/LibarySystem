@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 
 <template>
-    <main v-if="store.user.id">
+    <main v-if="store.user?.id">
         <h2>
             Welcome back {{ store.user.first_name }} {{ store.user.last_name }}
         </h2>

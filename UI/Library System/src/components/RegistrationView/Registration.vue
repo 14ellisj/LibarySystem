@@ -44,13 +44,13 @@ export default defineComponent({
                 } 
                 await this.profileService.checkEmail(filter);
                 const result = this.store.user;
-                if (result?.length == 0) {
+                if (result?.id) {
+                    toastr.error("That email is already in use.");
+                }
+                else{
                     await this.profileService.createProfile(this.email, this.firstName, this.lastName, this.password);
             
                     this.$router.push('/logIn');
-                }
-                else{
-                    toastr.error("That email is already in use.")
                 }
             }
             else {

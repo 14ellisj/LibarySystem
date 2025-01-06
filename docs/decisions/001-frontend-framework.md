@@ -1,10 +1,6 @@
 ---
-# These are optional metadata elements. Feel free to remove any of them.
 status: "Accepted"
-date: 07/10/2024
-decision-makers: Henry Barker, Jake Ellis, Joe Denton
-consulted: NA
-informed: NA
+date: {2025-01-03}
 ---
 
 # Use Vue.js for frontend framework
@@ -20,20 +16,17 @@ How can we quickly create a prototype for our library application that allows us
 
 ## Decision Outcome
 
-Chosen Outcome, Vue.js, because see pros and cons below.
+Chosen Option: "Vue.js", because see pros and cons below.
 
-<!-- This is an optional element. Feel free to remove. -->
 ### Consequences
 
 * Good, because we can quickly start our project and work around one another easily
 * Bad, because the small size of it may limit it's scalability, encouraging us to change frameworks after prototyping
 
-<!-- This is an optional element. Feel free to remove. -->
 ## Pros and Cons of the Options
 
 ### Vue.js
 
-<!-- This is an optional element. Feel free to remove. -->
 [Pros and Cons](https://www.altexsoft.com/blog/pros-and-cons-of-vue-js/)
 
 * Good, because handles lots of boiler plate code
@@ -44,6 +37,7 @@ Chosen Outcome, Vue.js, because see pros and cons below.
 * Bad, because the team is relatively small so there may be more problems and slower to fix
 
 ### React
+[Pros and Cons](https://medium.com/@reactmasters.in/advantages-and-disadvantages-of-react-js-e6c80b25763b)
 
 * Good, because modular
 * Good, because scalable
@@ -51,6 +45,7 @@ Chosen Outcome, Vue.js, because see pros and cons below.
 * Bad, because quite large
 
 ### Angular
+[Pros and Cons](https://leobit.com/blog/why-to-use-angular-in-an-overview-of-angular-pros-and-cons/)
 
 * Good, because modular
 * Good, because scalable
@@ -58,3 +53,4 @@ Chosen Outcome, Vue.js, because see pros and cons below.
 * Good, because generally backward compatability
 * Bad, because steep learning curve
 * Bad, because community disagreement
+* Bad, because lots of boiler plate code

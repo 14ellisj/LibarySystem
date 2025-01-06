@@ -10,8 +10,6 @@ namespace Media_Service.Models
         public Media Media { get; set; }
         [JsonPropertyName("borrower")]
         public User? Borrower {  get; set; }
-        [JsonPropertyName("reserver")]
-        public User? Reserver {  get; set; }
         [JsonPropertyName("library")]
         public Library Library { get; set; }
     }

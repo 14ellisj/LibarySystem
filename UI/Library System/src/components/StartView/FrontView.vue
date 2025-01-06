@@ -4,57 +4,63 @@ import { useMediaStore } from '../../stores/media';
 import { Type } from '@/models/type';
 import { Genre } from '@/models/genre';
 import MediaService from '@/services/MediaService';
+import { useUserStore } from '../../stores/profileInformation';
 import toastr from 'toastr';
-import { useUserStore } from '@/stores/profileInformation';
 
 export default defineComponent({
   name: 'SingleMediaView',
   setup() {
-    const media = ref(useMediaStore().media);
-    const userStore = useUserStore();
-    const expandedRowId = ref<number | null>(null);
-    const isPopupVisible = ref(false);
-    const popupMessage = ref('');
-    const mediaStore = useMediaStore();
-    const reserveQueue = ref<number>(0); // New variable to track the reservation queue count.
+    const media = ref(useMediaStore().media)
+    const userStore = useUserStore()
+    const expandedRowId = ref<number | null>(null)
+    const isPopupVisible = ref(false)
+    const popupMessage = ref('')
 
     const toggleRowDetails = (id: number) => {
-      expandedRowId.value = expandedRowId.value === id ? null : id;
-    };
+      expandedRowId.value = expandedRowId.value === id ? null : id
+    }
 
     const showPopup = (message: string) => {
-      popupMessage.value = message;
-      isPopupVisible.value = true;
-    };
-
-    const mediaService = new MediaService();
+      popupMessage.value = message
+      isPopupVisible.value = true
+    }
 
     const closePopup = () => {
-      isPopupVisible.value = false;
-    };
+      isPopupVisible.value = false
+    }
+
+    const addToWishlist = (id: number) => {
+      console.log(`Adding with ID: ${id} to wishlist`)
+      showPopup('Media has been added to your wishlist!')
+    }
+
+    const reserveMedia = (id: number) => {
+      console.log(`Reserving media with ID: ${id}`)
+      showPopup('Media has been reserved!')
+    }
 
     const decodeBase64Image = (base64String: string): string => {
-      let cleanBase64String = base64String;
+      let cleanBase64String = base64String
       if (cleanBase64String.startsWith('data:image')) {
-        cleanBase64String = cleanBase64String.split(',')[1];
+        cleanBase64String = cleanBase64String.split(',')[1]
       }
-      const byteCharacters = atob(cleanBase64String);
-      const byteArrays = [];
+      const byteCharacters = atob(cleanBase64String)
+      const byteArrays = []
 
       for (let offset = 0; offset < byteCharacters.length; offset++) {
-        const byte = byteCharacters.charCodeAt(offset);
-        byteArrays.push(byte);
+        const byte = byteCharacters.charCodeAt(offset)
+        byteArrays.push(byte)
       }
-      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' });
-      return URL.createObjectURL(blob);
-    };
-
-    console.log(mediaStore.media);
+      const blob = new Blob([new Uint8Array(byteArrays)], { type: 'image/jpeg' })
+      return URL.createObjectURL(blob)
+    }
 
     return {
       media,
       expandedRowId,
       toggleRowDetails,
+      addToWishlist,
+      reserveMedia,
       decodeBase64Image,
       isPopupVisible,
       popupMessage,
@@ -62,35 +68,19 @@ export default defineComponent({
       userStore,
       Type,
       Genre,
-      mediaStore,
-      mediaService,
-      reserveQueue, // Expose reserveQueue to the template.
-    };
+    }
   },
   methods: {
     async borrowMedia(media_id: number) {
-      const mediaService = new MediaService();
-      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id);
+      const mediaService = new MediaService()
+      const success = await mediaService.borrowMedia(media_id, this.userStore.user?.id)
 
-      if (success) toastr.success('Successfully borrowed the media.');
-      else toastr.error('Failed to borrow the media.');
+      if (success) toastr.success('Successfully borrowed the media.')
+      else toastr.error('Failed to borrow the media.')
     },
-    async reserveMedia(media_id: number) {
-      const mediaService = new MediaService();
-      const success = await mediaService.reserveMedia(media_id, this.userStore.user?.id);
-
-      if (success) {
-        this.reserveQueue += 1; 
-        toastr.success('Successfully reserved the media.');
-      } else {
-        toastr.error('Failed to reserve the media.');
-      }
-    },
-    
   },
-});
+})
 </script>
-
 
 <template>
   <head>
@@ -99,7 +89,8 @@ export default defineComponent({
   <body>
     <main>
       <h1>Library</h1>
-      <table>
+      <h2 v-if="media.length === 0">No media found...</h2>
+      <table v-else>
         <thead>
           <tr>
             <th>Name</th>
@@ -107,7 +98,6 @@ export default defineComponent({
             <th>Genre</th>
             <th>Availability</th>
             <th>Type</th>
-            <th>Location</th>
           </tr>
         </thead>
         <tbody>
@@ -118,7 +108,6 @@ export default defineComponent({
               <td>{{ Genre[item.genre] }}</td>
               <td>{{ item.is_available ? 'Available' : 'Not Available' }}</td>
               <td>{{ Type[item.type] }}</td>
-              <td>{{ item.id}}</td>
             </tr>
             <tr v-if="expandedRowId === item.id">
               <td colspan="6">
@@ -128,28 +117,24 @@ export default defineComponent({
                   </div>
                   <div class="media-info">
                     <h2>{{ item.name }}</h2>
-                    <p><strong>Author: </strong> {{ item.author.first_name }} {{ item.author.last_name }}</p>
+                    <p>
+                      <strong>Author: </strong> {{ item.author.first_name }}
+                      {{ item.author.last_name }}
+                    </p>
                     <p><strong>Length: </strong>{{ item.length }} pages</p>
                     <p><strong>Description: </strong> {{ item.description }}</p>
                     <p><strong>Rating: </strong>{{ item.rating }}/5</p>
                     <ul></ul>
                     <div class="actions">
-                      <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
+                      <button :disabled="!item.is_available || item.is_borrowed_by_user || !userStore.user?.id" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
-                        Reserve
-                      </button>
+                      <button @click="addToWishlist(item.id)">Add to Wishlist</button>
+                      <button @click="reserveMedia(item.id)">Reserve</button>
 
-                      <div>
-                        <p v-if="item.is_reserved_by_me">You are already in the queue for this item.</p>
-                        <p v-else-if="userStore.user?.id">Log in to reserve this item.</p>
-                      </div>
-                      <div>
-                        <p v-if="!item.is_available">Sorry, not available right now.</p>
-                        <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
-                        <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
-                      </div>
+                      <p v-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
+                      <p v-else-if="!item.is_available">Sorry, not available right now.</p>
+                      <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
                     </div>
                   </div>
                 </div>
@@ -158,7 +143,6 @@ export default defineComponent({
           </template>
         </tbody>
       </table>
-      <button class="admin-button" @click="$router.push('/manage')">Manage Media</button>
     </main>
 
     <div v-if="isPopupVisible" class="overlay" @click="closePopup"></div>
@@ -275,6 +259,7 @@ tbody tr:hover {
   z-index: 999;
 }
 
+/* Popup styling */
 .popup {
   position: fixed;
   top: 50%;
@@ -302,18 +287,5 @@ tbody tr:hover {
 
 .close-btn:hover {
   background: var(--secondary-color);
-}
-.admin-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: var(--secondary-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-top: 80px;
 }
 </style>

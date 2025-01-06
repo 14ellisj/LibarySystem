@@ -1,7 +1,7 @@
 <script lang="ts">
 import LogInItem from './LogInItem.vue'
-import ProfileService from '@/services/ProfileService';
-import type { ProfileFilter } from '@/models/filters';
+import ProfileService from '@/services/ProfileService'
+import type { ProfileFilter } from '@/models/filters'
 import '../../styles/variables.css'
 import { defineComponent } from 'vue'
 import { useUserStore } from "@/stores/profileInformation";
@@ -46,9 +46,9 @@ export default defineComponent({
 </script>
 
 <template>
-    <LogInItem>
-        <template #Heading>Log In</template>
-    </LogInItem>
+  <LogInItem>
+    <template #Heading>Log In</template>
+  </LogInItem>
 
         <label for="logInEmail">Email:</label><br>
         <input type="text" id="logInEmail" name="logInEmail" v-model="email"><br>
@@ -58,20 +58,19 @@ export default defineComponent({
 
         <button @click="toRegister()"> Go to registration </button><br>
 </template>
-  
-<style scoped> 
+
+<style scoped>
 a {
-    margin-top: 2rem;
-    position: relative;
-    color: var(--secondary-color);
+  margin-top: 2rem;
+  position: relative;
+  color: var(--secondary-color);
 }
 
 form {
-    position: relative;
+  position: relative;
 }
 
 form label {
-    color: var(--secondary-color);
+  color: var(--secondary-color);
 }
-
 </style>

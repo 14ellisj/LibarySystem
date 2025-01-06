@@ -2,9 +2,9 @@ import type { Library } from './library'
 import type { Media } from './media'
 import type { Profile } from './profile'
 
-export interface MediaItem {
+export interface Media_Item {
   id: number
-  media: Media
-  borrower?: Profile
-  library: Library
+  media_id: Media
+  borrower_id: Profile
+  library_id: Library
 }

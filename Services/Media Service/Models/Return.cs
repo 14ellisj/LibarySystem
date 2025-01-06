@@ -1,8 +1,8 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Media_Service.Models
 {
-    public class BorrowItemRequest
+    public class ReturnRequest
     {
         [JsonPropertyName("media_id")]
         public int? MediaId { get; set; }

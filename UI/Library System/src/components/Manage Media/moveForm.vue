@@ -2,7 +2,7 @@
 import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
 import MediaService from '@/services/MediaService';
-import type { mediaItemsFilter } from '@/models/filters';
+import type { MediaItem } from '@/models/filters';
 
 export default defineComponent({
   name: 'Add Media',
@@ -11,28 +11,16 @@ export default defineComponent({
     const media = ref(mediaStore.media);
     const mediaItems = ref(mediaStore.mediaItems);
     const showPopup = ref(false);
-    const showError = ref(false);
     const selectedMedia = ref<string | null>(null);
 
     const handleSubmit = async (event: Event) => {
       event.preventDefault();
       const formData = new FormData(event.target as HTMLFormElement);
 
-      const branchFrom = formData.get('branchFrom');
-      const branchDestination = formData.get('branchDestination');
-
-      if (branchFrom === branchDestination) {
-        showError.value = true; // Display error message
-        setTimeout(() => {
-          showError.value = false; // Hide error message after 3 seconds
-        }, 3000);
-        return; // Prevent submission
-      }
-
       const newMediaMove = {
         media: formData.get('media'),
-        branchFrom,
-        branchDestination,
+        branchFrom: formData.get('branchFrom'),
+        branchDestination: formData.get('branchDestination'),
       };
       console.log('Form Data Submitted:', newMediaMove);
       showPopup.value = true;
@@ -42,30 +30,21 @@ export default defineComponent({
       }, 3000); // Popup disappears after 3 seconds
     };
 
-    // Watch for changes in the selected media and call `submitForMediaItems`
-    watch(selectedMedia, (newValue) => {
-      if (newValue) {
-        const selectedMediaItem = media.value.find((item) => item.name === newValue);
-        if (selectedMediaItem) {
-          submitForMediaItems(selectedMediaItem.id);
-        }
+    watch(selectedMedia, async (newVal) => {
+      if (newVal) {
+        await GetMediaItems(parseInt(newVal));
       }
     });
 
-    // Method to fetch media items for the selected media
-    const submitForMediaItems = async (mediaId: number) => {
+    const GetMediaItems = async (media_id: number) => {
       const mediaService = new MediaService();
-      const filter: mediaItemsFilter = {
-        media_id: mediaId,
-      };
-      try {
-        const data = await mediaService.getMediaItems(filter);
-        mediaItems.value = data; // Update mediaItems with fetched data
-        console.log('Media items fetched successfully:', data);
-      } catch (error) {
-        console.error('Failed to submit for media items:', error);
-      }
+      const filter: MediaItem = {}
+      const success = await mediaService.getMediaItem(filter);
+
+      if (success) console.log(`Media items loaded successfully for ID: ${media_id}`+ mediaStore.mediaItems);
+      else console.log(`Failed to load media items for ID: ${media_id}`);
     };
+  
 
     return {
       mediaStore,
@@ -74,32 +53,33 @@ export default defineComponent({
       selectedMedia,
       handleSubmit,
       showPopup,
-      showError,
+      GetMediaItems, // Expose the method for the watcher
     };
   },
 });
 </script>
-
 
 <template>
   <body>
     <div class="form-container">
       <h2>Select Media and Branch</h2>
       <form @submit="handleSubmit" action="/move-media" method="POST">
+        <!-- Media Selection -->
         <label for="media">Choose Media Title to Move:</label>
         <select id="media" name="media" v-model="selectedMedia" required>
           <option value="">-- Select Media --</option>
           <option v-for="item in media" :key="item.id" :value="item.name">
             {{ item.name }}
           </option>
+          <option value="test-media">Test Media</option>
         </select>
 
         <div v-if="selectedMedia">
           <label for="specific-option">Choose Media Location:</label>
-          <select id="specific-option" name="branchFrom" required>
+          <select id="specific-option" name="specificOption" required>
             <option value="">-- Select Option --</option>
-            <option v-for="item in mediaItems" :key="item.id" :value="item.library.name">
-             {{ item.id }}: {{ item.media.name }} - {{ item.library.name }}
+            <option value="option-specific" v-for="item in mediaItems" :key="item.id">
+              {{ selectedMedia }}<!--{{ item.library_id.name }}-->
             </option>
           </select>
         </div>
@@ -107,9 +87,10 @@ export default defineComponent({
         <label for="branch">Choose Destination Branch:</label>
         <select id="branch" name="branchDestination" required>
           <option value="">-- Select Branch --</option>
-          <option v-for="item in mediaItems" :key="item.id" :value="item.library.name">
-            {{ item.library.name }}
+          <option v-for="item in mediaItems" :key="item.id" :value="item.library_id">
+            {{ item.library_id }}
           </option>
+          <option value="test-branch">Test Branch</option>
         </select>
 
         <button type="submit">Move Media</button>
@@ -127,18 +108,9 @@ export default defineComponent({
           <p>Request Submitted!</p>
         </div>
       </div>
-
-      <div v-if="showError" class="popup-overlay">
-        <div class="popup">
-        <p>Error!</p>
-        <p>Media cannot move to same location as it's from</p>
-        </div>
-      </div>
     </div>
   </body>
 </template>
-
-
 
 
 <style scoped>

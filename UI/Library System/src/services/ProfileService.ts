@@ -5,20 +5,18 @@ import type { IRegisterDetails } from "@/models/register.ts";
 import axios from "axios";
 
 export default class {
+  userStore = useUserStore()
+  apiUrl = 'http://localhost:5273/Profile'
 
-    userStore = useUserStore();
-    apiUrl = "http://localhost:5273/Profile"
+  async getData(): Promise<Profile> {
+    await axios
+        .get(this.apiUrl)
+        .then((response) => {
+            this.userStore.setUser(response.data)
+        })
 
-    async getData(): Promise<Profile> {
-        await axios
-            .get(this.apiUrl)
-            .then((response) => {
-                this.userStore.setUser(response.data)
-                console.log(response.data);
-            })
-
-        return this.userStore.user;
-    }
+    return this.userStore.user
+  }
 
     async filterData(filter: ProfileFilter, password: string): Promise<Profile> {
         await axios
@@ -28,14 +26,24 @@ export default class {
             .then((response) => {
                 this.userStore.setUser(response.data)
                 this.userStore.setPassword(password)
-                console.log(response.data);
+            })
+
+        return this.userStore.user;
+    }
+
+    async checkEmail(filter: ProfileFilter): Promise<Profile> {
+        await axios
+            .get(this.apiUrl, {
+                params: filter
+            })
+            .then((response) => {
+                this.userStore.setUser(response.data)
             })
 
         return this.userStore.user;
     }
 
     async createProfile(email: string, firstName: string, lastName: string, password: string){
-        console.log("email is: " + email + ", first name is: " + firstName + ", last name is: " + lastName + ", password is: " + password)
         const body : IRegisterDetails = {
             email: email,
             first_name: firstName,
@@ -45,7 +53,7 @@ export default class {
         axios
             .post(this.apiUrl, body)
             .then((response) => {
-                console.log(response.data);
+                console.log("Created new profile");
             })
 
         return this.userStore.user;

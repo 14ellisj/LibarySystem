@@ -49,7 +49,7 @@ namespace Media_Service.Models.Specifications
             get
             {
                 if (!_id.HasValue)
-                    return x => false;
+                    return x => true;
 
                 return x => x.id.Equals(_id.Value);
             }
@@ -112,46 +112,5 @@ namespace Media_Service.Models.Specifications
             }
         }
     }
-    public class MediaItemIdSpecification : ISpecification<MediaItemEntity>
-    {
-        int? _id;
 
-        public MediaItemIdSpecification(int? id)
-        {
-            _id = id;
-        }
-
-        public Expression<Func<MediaItemEntity, bool>> Criteria
-        {
-            get
-            {
-                if (!_id.HasValue)
-                    return x => false;
-
-                return x => x.id.Equals(_id.Value);
-            }
-        }
-    }
-
-    public class LibrarySpecification : ISpecification<LibraryEntity>
-    {
-        int? _id;
-
-        public LibrarySpecification(int? id)
-        {
-            _id = id;
-        }
-
-        public Expression<Func<LibraryEntity, bool>> Criteria
-        {
-            get
-            {
-                if (!_id.HasValue)
-                    return x => false;
-
-                return x => x.id.Equals(_id.Value);
-            }
-        }
-    }
 }
-

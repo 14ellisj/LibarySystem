@@ -1,5 +1,5 @@
-import type { Library } from "./library";
-import type { Role } from "./role";
+import type { Library } from './library'
+import type { Role } from './role'
 
 export interface Profile {
     id: number,
@@ -10,7 +10,6 @@ export interface Profile {
     last_name: string,
     date_of_birth: string,
     password: string,
-    address_id: Library,
+    address_id: Library
   }
-  
   

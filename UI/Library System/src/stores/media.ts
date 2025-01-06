@@ -1,33 +1,30 @@
 import { defineStore } from 'pinia'
 import type { Media } from '@/models/media'
-import type { Media_Item } from '@/models/media_item'
 
 export const useMediaStore = defineStore('media', {
   state: () => ({
     media: [] as Media[],
-    mediaItems: [] as Media_Item[],
     autoCompleteOptions: [] as string[],
+    title: "" as string
   }),
   actions: {
     setMedia(mediaInput: Media[]) {
       this.media = mediaInput
     },
-    setMediaItem(mediaItemInput: Media_Item[]) {
-      this.mediaItems = mediaItemInput
-      console.log(this.mediaItems)
-    },
     setAutocompleteOptions(input: string[]) {
       this.autoCompleteOptions = input
     },
-    updateMediaItem(updatedItem: Media) {
-      var mediaIndex = this.media.findIndex(x => x.id === updatedItem.id);
-      this.media[mediaIndex] = updatedItem;
-      console.log(updatedItem)
-      console.log(this.media)
-    }
-  },
+    borrowMediaItem(mediaId: number) {
+      var mediaIndex = this.media.findIndex(x => x.id === mediaId);
+      this.media[mediaIndex].is_borrowed_by_user = true;
+    },
+    markUnavailable(mediaId: number) {
+      var mediaIndex = this.media.findIndex(x => x.id === mediaId)
+      this.media[mediaIndex].is_available = false;
+      console.log(this.media[mediaIndex]);
+    },
+    setTitle(title: string) {
+      this.title = title
+    },
+  }
 })
-
-
-
-

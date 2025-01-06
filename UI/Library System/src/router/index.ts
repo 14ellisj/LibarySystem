@@ -5,16 +5,13 @@ import SingleMediaView from '@/views/SingleMediaView.vue'
 import RegisterView from '../views/RegistrationView.vue'
 import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
+import HomeView from '@/views/HomeView.vue'
 import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
 import NewsView from '@/views/NewsView.vue'
-import HomeView from '@/views/HomeView.vue'
-import AddView from '@/views/AddView.vue'
-import ChangeQuantity from '@/views/ChangeQuantity.vue'
-import ManageMedia from '@/views/manageMedia.vue'
-import moveFormView from '@/views/moveFormView.vue'
-import ReservationView from '@/views/ReservationView.vue'
+import ReturnedView from '@/views/ReturnedView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,6 +56,11 @@ const router = createRouter({
       component: ProfileView,
     },
     {
+      path: '/wishlist',
+      name: 'WishList',
+      component: WishlistView,
+    },
+    {
       path: '/return',
       name: 'Return',
       component: ReturnView,
@@ -79,30 +81,10 @@ const router = createRouter({
       component: NewsView,
     },
     {
-      path: '/add',
-      name: 'Add',
-      component: AddView,
-    },
-    {
-      path: '/change',
-      name: 'Change',
-      component: ChangeQuantity,
-    },
-    {
-      path: '/manage',
-      name: 'Manage',
-      component: ManageMedia,
-    },
-    {
-      path: '/move',
-      name: 'Move',
-      component: moveFormView,
-    },
-    {
-    path: '/reservations',
-    name: 'Reservation',
-    component: ReservationView,
-  },
+      path: '/returned',
+      name: 'Returned',
+      component: ReturnedView,
+    }
   ],
 })
 

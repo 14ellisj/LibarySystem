@@ -10,6 +10,7 @@ export interface Profile {
     last_name: string,
     date_of_birth: string,
     password: string,
-    address_id: Library
+    address_id: Library,
   }
+  
   

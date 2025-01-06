@@ -20,7 +20,7 @@ namespace Media_Service.Models.Specifications
             {
                 if (string.IsNullOrWhiteSpace(_query))
                     return _ => true;
-                
+
                 if (_isSelected.HasValue && _isSelected.Value)
                 {
                     return x => x.name.ToLower().Equals(_query.ToLower());
@@ -29,7 +29,7 @@ namespace Media_Service.Models.Specifications
                 {
                     return x => x.name.ToLower().Contains(_query.ToLower());
                 }
-                
+
 
             }
         }
@@ -49,7 +49,7 @@ namespace Media_Service.Models.Specifications
             get
             {
                 if (!_id.HasValue)
-                    return x => false;
+                    return x => true;
 
                 return x => x.id.Equals(_id.Value);
             }
@@ -73,7 +73,7 @@ namespace Media_Service.Models.Specifications
                     return _ => true;
 
                 var authorNames = _query.Trim().ToLower().Split(" ");
-               
+
                 if (_isAuthorSelected.HasValue && _isAuthorSelected.Value)
                 {
                     return x => x.author.first_name.ToLower().Equals(authorNames.First()) &&
@@ -113,25 +113,4 @@ namespace Media_Service.Models.Specifications
         }
     }
 
-
-public class MediaItemBorrowerSpecification : ISpecification<MediaItemEntity>
-    {
-        int? _borrowerId;
-
-        public MediaItemBorrowerSpecification(int? borrower)
-        {
-            _borrowerId = borrower;
-        }
-
-        public Expression<Func<MediaItemEntity, bool>> Criteria
-        {
-            get
-            {
-                if (!_borrowerId.HasValue)
-                    return x => false;
-
-                return x => x.borrower_id.Equals(_borrowerId.Value);
-            }
-        }
-    }
 }

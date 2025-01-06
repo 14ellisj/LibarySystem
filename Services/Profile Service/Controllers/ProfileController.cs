@@ -9,7 +9,6 @@ using System.Security.Cryptography.Xml;
 
 
 namespace Profile_Service.Controllers
-
 {
     [ApiController]
     [Route("[controller]")]
@@ -39,7 +38,7 @@ namespace Profile_Service.Controllers
 
             try {
                 var results = await query.ToListAsync();
-                var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results);
+                var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results).FirstOrDefault();
                 return Json(output);
             }
             catch (Exception ex) {

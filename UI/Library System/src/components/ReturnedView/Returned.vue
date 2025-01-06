@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import '../../styles/variables.css'
-import type { MediaFilter, mediaItemsFilter } from '@/models/filters';
+import type { MediaItemsFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 import toastr from 'toastr';
 import { useMediaStore } from '@/stores/media';
@@ -13,7 +13,7 @@ export default defineComponent({
         const mediaStore = useMediaStore();
         var title = mediaStore.title
         const store = useUserStore();
-        var userID = store.user[0]['id'];
+        var userID = store.user.id;
 
         return {
             mediaStore,
@@ -25,8 +25,8 @@ export default defineComponent({
     methods: {
         async goBack() {    
             const mediaService = new MediaService();
-            const filter: mediaItemsFilter = {
-                profileID: this.userID,
+            const filter: MediaItemsFilter = {
+                profile_id: this.userID,
             };
             const returnMedia = await mediaService.getBorrowedMedia(filter);
                 if (returnMedia.length != 0) {
@@ -43,7 +43,7 @@ export default defineComponent({
 
 <template>
     <h2>Success!</h2>
-    <p>Successfully returned {{ this.title }}  </p>
+    <p>Successfully returned {{ title }}  </p>
     <button @click="goBack()"> Back </button>
 </template>
   

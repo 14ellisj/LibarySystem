@@ -1,33 +1,78 @@
-import type { Author } from "@/models/author";
-import type { MediaFilter, mediaItemsFilter } from "@/models/filters";
-import type { Media } from "@/models/media";
-import type { IAutoCompleteParams, IBorrowRequest } from "@/models/requests";
-import type { IReturnRequest } from "@/models/return"
-import type { SearchType } from "@/models/searchType";
-import { useMediaStore } from "@/stores/media";
-import axios from "axios";
+import type { MediaFilter, MediaItemsFilter as MediaItemsFilter, LibraryFilter, libraryMediaItemsFilter} from '@/models/filters'
+import type { Media } from '@/models/media'
+import type { MediaItem } from '@/models/mediaItem'
+import type { Library } from '@/models/library'
+import type { IAutoCompleteParams, IBorrowRequest, IReserveRequest, IMoveRequest} from '@/models/requests'
+import type { Author } from '@/models/author'
+import type { IReturnRequest } from '@/models/return'
+import type { SearchType } from '@/models/searchType'
+import { useMediaStore } from '@/stores/media'
+import axios from 'axios'
 
 export default class {
+  mediaStore = useMediaStore()
 
-    mediaStore = useMediaStore();
+  apiUrl = 'http://localhost:5132/'
 
-    apiUrl = "http://localhost:5132/"
+  async filterData(filter: MediaFilter): Promise<Media[]> {
+    const requestUrl = this.apiUrl + 'Media';
 
-    async filterData(filter: MediaFilter): Promise<Media[]> {
-        const requestUrl = this.apiUrl + 'Media';
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        console.log(response.data)
+        this.mediaStore.setMedia(response.data)
+      })
 
-        await axios
-            .get(requestUrl, {
-                params: filter
-            })
-            .then((response) => {
-                this.mediaStore.setMedia(response.data)
-            })
+    return this.mediaStore.media
+  }
 
-        return this.mediaStore.media;
-    }
+  async getMediaItems(filter: MediaItemsFilter): Promise<MediaItem[]> {
+    const requestUrl = this.apiUrl + 'Media/item'
 
-    async getBorrowedMedia(filter: mediaItemsFilter): Promise<Media[]> {
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaStore.setMediaItem(response.data)
+      })
+
+    return this.mediaStore.mediaItems
+  }
+
+  async getLibraryMediaItems(filter: libraryMediaItemsFilter): Promise<MediaItem[]> {
+    const requestUrl = this.apiUrl + 'Media/libraryItems'
+
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaStore.setLibraryMediaItem(response.data)
+      })
+
+    return this.mediaStore.libraryItems
+  }
+
+
+  async getLibraryData(filter: LibraryFilter): Promise<Library[]> {
+    const requestUrl = this.apiUrl + 'Media/library'
+
+    await axios
+      .get(requestUrl, {
+        params: filter,
+      })
+      .then((response) => {
+        this.mediaStore.setLibraryData(response.data)
+      })
+
+    return this.mediaStore.library
+  }
+
+    async getBorrowedMedia(filter: MediaItemsFilter): Promise<Media[]> {
         const requestUrl = this.apiUrl + 'Media/borrowedItem';
 
         await axios
@@ -48,17 +93,68 @@ export default class {
             profile_id: profileId
         }
 
-        let success = false;
+        let success = false
 
-        await axios
-            .patch(requestUrl, body)
-            .then(
-                (response) => {success = true},
-                (error) => {console.log(error); success = false}
-            )
+    await axios.patch(requestUrl, body).then(
+      () => {
+        success = true
+        this.mediaStore.borrowMediaItem(mediaId)
+      },
+      (error) => {
+        console.log(error)
+        this.mediaStore.markUnavailable(mediaId)
+        success = false
+      },
+    )
 
-        return success;
+    return success
+  }
+
+  async moveMedia(mediaId: number, branchDestinationId: number): Promise<boolean> {
+    const requestUrl = this.apiUrl + 'Media/move'
+    const body: IMoveRequest = {
+      media_id: mediaId,
+      library_id: branchDestinationId,
     }
+
+    let success = false
+
+    await axios.patch(requestUrl, body).then(
+      (response) => {
+        success = true
+        this.mediaStore.updateMediaItem(response.data)
+      },
+      (error) => {
+        console.log(error)
+        success = false
+      },
+    )
+
+    return success
+  }
+
+  async reserveMedia(mediaId: number, profileId: number = 1): Promise<boolean> {
+    const requestUrl = this.apiUrl + 'Media/Reserve'
+    const body: IReserveRequest = {
+      media_id: mediaId,
+      profile_id: profileId,
+    }
+
+    let success = false
+
+    await axios.patch(requestUrl, body).then(
+      (response) => {
+        success = true
+        this.mediaStore.updateMediaItem(response.data)
+      },
+      (error) => {
+        console.log(error)
+        success = false
+      },
+    )
+
+    return success
+  }
 
     async returnMedia(mediaId: number, profileId: number): Promise<boolean> {
         const requestUrl = this.apiUrl + 'Media/Return';

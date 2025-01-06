@@ -1,19 +1,19 @@
 <template>
-    <div class="item">
-      <div class="details">
-        <h2>
-          <slot name="Heading"></slot>
-        </h2>
+  <div class="item">
+    <div class="details">
+      <h2>
+        <slot name="Heading"></slot>
+      </h2>
 
-        <h3>
-          <slot name="Subheading"></slot>
-        </h3>
+      <h3>
+        <slot name="Subheading"></slot>
+      </h3>
 
-        <body>
-          <slot name="Body"></slot>
-        </body>
-      </div>
+      <main>
+        <slot name="Body"></slot>
+      </main>
     </div>
+  </div>
 </template>
 
 <style scoped>

@@ -7,4 +7,6 @@ export interface MediaItem {
   media: Media
   borrower?: Profile
   library: Library
+  reserver?: Profile
+  reserve_queue?: number
 }

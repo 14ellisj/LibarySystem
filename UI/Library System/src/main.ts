@@ -11,7 +11,7 @@ import toastr from './plugins/toastr'
 
 const app = createApp(App)
 
-app.config.globalProperties.$toastr = toastr;
+app.config.globalProperties.$toastr = toastr
 
 app.use(createPinia())
 app.use(router)

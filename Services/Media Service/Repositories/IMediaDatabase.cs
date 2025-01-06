@@ -5,11 +5,18 @@ namespace Media_Service.Repositories
 {
     public interface IMediaDatabase
     {
-        Task<IEnumerable<MediaEntity>> GetMediaByTitle(MediaTitleSpecification spec);
-        Task<IEnumerable<AuthorEntity>> GetAuthorsByName(AuthorNameSpecification spec);
-        Task<IEnumerable<MediaEntity>> FilterMediaAllInfo(IEnumerable<ISpecification<MediaEntity>> specs);
-        Task<bool> BorrowItem(MediaItemEntity mediaId, int profileId);
-        Task<bool> ReturnItem(MediaItemEntity mediaId);
-        Task<IEnumerable<MediaItemEntity>> GetBorrowedMedia(MediaItemBorrowerSpecification spec);
+        Task<IEnumerable<Media>> GetMediaByTitle(string title);
+        Task<IEnumerable<Author>> GetAuthorsByName(string author);
+        Task<IEnumerable<Media>> FilterMediaAllInfo(MediaFilter filters);
+        Task<IEnumerable<MediaItem>> GetMediaItemsByParentId(int mediaId);
+        Task<MediaItem> GetMediaItemById(int mediaItemId);
+        Task<IEnumerable<MediaItem>> GetMediaItemsByLibraryId(int libraryId);
+        Task<IEnumerable<Library>> GetAllLibraryData();
+        Task<bool> BorrowItem(int mediaId, int profileId);
+        Task<bool> MoveItem(int mediaItemId, int libraryId);
+        Task<bool> ReserveItem(int mediaItemId, int profileId);
+        Task<bool> ReturnItem(int mediaItemId);
+        Task<IEnumerable<Media>> GetBorrowedMedia(int profileId);
+        Task<MediaItem?> GetBorrowedMediaItem(int mediaId, int profileId);
     }
 }

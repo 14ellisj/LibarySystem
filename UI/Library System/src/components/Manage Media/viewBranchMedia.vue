@@ -1,118 +1,166 @@
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import { useMediaStore } from '../../stores/media';
-import type { mediaItemsFilter } from '@/models/filters';
+import type { libraryMediaItemsFilter } from '@/models/filters';
 import MediaService from '@/services/MediaService';
 
 export default defineComponent({
   name: 'ViewBranchMedia',
   setup() {
-    const mediaStore = useMediaStore(); 
-    const selectedBranch = ref('');
-    const mediaService = new MediaService();
+    const mediaStore = useMediaStore();
+    const selectedBranch = ref<string | null>(null); 
+    const library = ref(mediaStore.library);
+    const mediaItems = ref(mediaStore.libraryItems);
 
-
-    const fetchMediaItems = async () => {
+    const submitForLibraryMediaItems = async (libraryId: number) => {
+      console.log('submitForLibraryMediaItems is called with libraryId:', libraryId);
+      const mediaService = new MediaService();
+      const filter: libraryMediaItemsFilter = {
+        library_id: libraryId,
+      };
       try {
-        const filter: mediaItemsFilter = {}; 
-        const data = await mediaService.getMediaItem(filter);
-        mediaStore.setMediaItem(data); 
+        const data = await mediaService.getLibraryMediaItems(filter);
+        mediaItems.value = data;
+        console.log('Media items fetched successfully:', data);
       } catch (error) {
-        console.error('Failed to fetch media items:', error);
+        console.error('Failed to submit for media items:', error);
       }
     };
 
-    onMounted(() => {
-      fetchMediaItems();
+    watch(selectedBranch, (newValue) => {
+      console.log('Selected branch changed:', newValue);
+
+      if (newValue) {
+        const selectedBranchItem = library.value.find((item) => item.id === Number(newValue));
+
+        if (selectedBranchItem) {
+          console.log('Calling submitForLibraryMediaItems with libraryId:', selectedBranchItem.id);
+          submitForLibraryMediaItems(selectedBranchItem.id);
+        } else {
+          console.warn('No matching branch found in library for:', newValue);
+        }
+      } else {
+        console.warn('Selected branch is null or undefined.');
+      }
     });
 
     return {
       mediaStore,
       selectedBranch,
-      submitForMediaItems: async (mediaId: number) => {
-        const filter: mediaItemsFilter = {
-          media_id: mediaId,
-        };
-        try {
-          const data = await mediaService.getMediaItem(filter);
-          mediaStore.setMediaItem(data); 
-          console.log('Media items fetched successfully');
-        } catch (error) {
-          console.error('Failed to submit for media items:', error);
-        }
-      },
+      library, 
     };
   },
 });
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <h1>Select a Branch</h1>
+
+    <div class="instructions">
+      <p>Please select a branch to view its data.</p>
+    </div>
 
     <select v-model="selectedBranch">
       <option value="" disabled>Select a branch</option>
-      <option v-for="item in mediaStore.mediaItems" :key="item.id">
-        {{ item.library_id.name }}
+      <option v-for="item in mediaStore.library" :key="item.id" :value="item.id">
+        {{ item.id }}. {{ item.name }}
       </option>
     </select>
 
-    <div v-if="selectedBranch">
-      <h2>Data for {{ selectedBranch }}</h2>
+    <div class="data-display" v-if="selectedBranch">
+      <h2>Media Titles:</h2>
       <ul>
-        <li v-for="(item, index) in mediaStore.mediaItems" :key="index">
-          {{ item.id }}
+        <li v-for="(item, index) in mediaStore.libraryItems" :key="index">
+          {{ item.media.name }}
         </li>
       </ul>
     </div>
 
-    <div v-else>
-      <p>Please select a branch to view its data.</p>
-      <p>or</p>
-      <p>
-        <button @click="submitForMediaItems(1)">Move Media</button>
-      </p>
+    <div class="action-buttons">
+      <button @click="$router.push('/move');">Move Media</button>
+      <button @click="$router.push('/request');">Requests</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-    body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-        }
-        .container {
-            text-align: center;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        select {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .data-display {
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background: #f9f9f9;
-        }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.container {
+  text-align: center;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 90%;
+  margin: auto; 
+  margin-top: 50px; 
+}
+
+h1 {
+  color: #333333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+select {
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 12px;
+  margin-left: 10px;
+  font-size: 16px;
+  background-color: var(--secondary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.instructions {
+  margin-top: 20px;
+  color: #666666;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.data-display {
+  padding: 15px;
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 5px 0;
+  color: #333333;
+  font-size: 16px;
+}
 </style>

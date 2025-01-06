@@ -1,30 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import MediaView from '../views/MediaView.vue'
 import StartView from '../views/StartView.vue'
 import SingleMediaView from '@/views/SingleMediaView.vue'
 import RegisterView from '../views/RegistrationView.vue'
 import LogInView from '@/views/LogInView.vue'
 import ProfileView from '@/views/ProfileView.vue'
-import WishlistView from '@/views/WishlistView.vue'
 import ReturnView from '@/views/ReturnView.vue'
 import LogInValidation from '@/components/LogInView/LogInValidation.vue'
 import RegistrationValidation from '@/components/RegistrationView/RegistrationValidation.vue'
-import AboutPage from '@/views/AboutPage.vue'
 import NewsView from '@/views/NewsView.vue'
+import HomeView from '@/views/HomeView.vue'
+import moveFormView from '@/views/moveFormView.vue'
+import viewBranchMedia from '@/components/Manage Media/viewBranchMedia.vue'
+import MoveRequestView from '@/views/MoveRequestView.vue'
 import ReturnedView from '@/views/ReturnedView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      redirect: { path: "/home" },
+      path: '/',
+      redirect: { path: '/home' },
     },
     {
       path: '/home',
       name: 'home',
-      component: AboutPage,
+      component: HomeView,
     },
     {
       path: '/media',
@@ -57,11 +58,6 @@ const router = createRouter({
       component: ProfileView,
     },
     {
-      path: '/wishlist',
-      name: 'WishList',
-      component: WishlistView,
-    },
-    {
       path: '/return',
       name: 'Return',
       component: ReturnView,
@@ -82,10 +78,25 @@ const router = createRouter({
       component: NewsView,
     },
     {
+      path: '/move',
+      name: 'Move',
+      component: moveFormView,
+    },
+    {
+    path: '/manage',
+    name: 'Manage',
+    component: viewBranchMedia,
+    },
+    {
+      path: '/request',
+      name: 'Request',
+      component: MoveRequestView,
+    },
+    {
       path: '/returned',
       name: 'Returned',
       component: ReturnedView,
-    }
+    },
   ],
 })
 

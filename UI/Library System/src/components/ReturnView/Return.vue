@@ -17,7 +17,7 @@ export default defineComponent({
     setup() {
         const store = useUserStore();
         const mediaStore = useMediaStore();
-        var userID = store.user[0]['id']
+        var userID = store.user.id
         return {
             store,
             mediaStore,
@@ -54,7 +54,7 @@ export default defineComponent({
                     <th> Return </th>
                 </thead>
                 <tbody>
-                    <template v-for="media in mediaStore.media" :key="store.user[0]['id']"> 
+                    <template v-for="media in mediaStore.media" :key="store.user.id"> 
                         <tr>
                             <td> {{ media.name }} </td> 
                             <td></td>

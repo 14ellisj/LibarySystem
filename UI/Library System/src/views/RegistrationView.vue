@@ -4,20 +4,20 @@ import '../styles/variables.css'
 </script>
 
 <template>
-    <div class="home">
-        <main>
-            <Registration />
-        </main>
-    </div>
+  <div class="home">
+    <main>
+      <Registration />
+    </main>
+  </div>
 </template>
 
 <style scoped>
-main{
-    text-align: center;
-    padding-top: 16vh;
+main {
+  text-align: center;
+  padding-top: 16vh;
 }
- div {
-    margin-left: 15%;
-    margin-right: 15%;
- }
+div {
+  margin-left: 15%;
+  margin-right: 15%;
+}
 </style>

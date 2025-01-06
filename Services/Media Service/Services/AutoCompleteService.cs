@@ -39,16 +39,14 @@ namespace Media_Service.Services
 
         private async Task<IEnumerable<Author>> GetAuthors(string query)
         {
-            AuthorNameSpecification authorSpec = new AuthorNameSpecification(query);
-            var authors = await _mediaDatabase.GetAuthorsByName(authorSpec);
+            var authors = await _mediaDatabase.GetAuthorsByName(query);
 
             return _mapper.Map<IEnumerable<Author>>(authors);
         }
 
         private async Task<IEnumerable<Media>> GetMediaByTitle(string query)
         {
-            MediaTitleSpecification titleSpec = new MediaTitleSpecification(query, false);
-            var media = await _mediaDatabase.GetMediaByTitle(titleSpec);
+            var media = await _mediaDatabase.GetMediaByTitle(query);
 
             return _mapper.Map<IEnumerable<Media>>(media);
         }

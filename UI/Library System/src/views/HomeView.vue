@@ -61,6 +61,7 @@ export default defineComponent({
 
   background-image: url('../assets/Welcome-background.jpg');
   background-position: center;
+  background-size: cover;
 }
 
 .about-area {

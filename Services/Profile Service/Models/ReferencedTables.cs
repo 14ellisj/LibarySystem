@@ -12,10 +12,12 @@ namespace Profile_Service.Models
         public string postcode { get; set; }
     }
 
-    public class Role
+    public enum Role
     {
-        public int id { get; set; }
-        public string role { get; set; }
+        ADMIN=1,
+        MEMBER=2,
+        GUEST=3,
+        OPERATOR=4
     }
 
     public class Library

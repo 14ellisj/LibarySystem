@@ -8,6 +8,7 @@ import { useUserStore } from '../../stores/profileInformation';
 import toastr from 'toastr';
 import axios from 'axios';
 import type { LibraryFilter, MediaItemsFilter } from '@/models/filters';
+import { Role } from '@/models/role';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -93,6 +94,7 @@ const email = ref({
       email,
       message,
       sendEmail,
+      Role
     };
   },
   methods: {
@@ -173,7 +175,7 @@ const email = ref({
           </template>
         </tbody>
       </table>
-      <button class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
+      <button v-if="userStore.user.role === Role.Admin" class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
 
       <!-- Popup -->
       <div v-if="isPopupOpen" class="overlay">

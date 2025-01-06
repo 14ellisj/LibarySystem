@@ -160,6 +160,11 @@ const email = ref({
                       <button :disabled="!item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
                         Reserve
                       </button>
+
+                      <p v-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
+                      <p v-else-if="!item.is_available">Sorry, not available right now.</p>
+                      <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
+                      
                     </div>
                   </div>
                 </div>

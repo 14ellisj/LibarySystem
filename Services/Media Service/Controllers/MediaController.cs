@@ -103,8 +103,7 @@ namespace Media_Service.Controllers
                 if (!success)
                     return Conflict("No available items");
 
-                var updatedItem = await _mediaService.GetMedia((int)body.MediaId, (int)body.ProfileId);
-                return Ok(updatedItem);
+                return NoContent();
             }
             catch (Exception ex)
             {

@@ -51,5 +51,6 @@ export default defineComponent({
   justify-items: center;
   background-image: url('../../assets/Welcome-background.jpg');
   background-position: center;
+  background-size: cover;
 }
 </style>

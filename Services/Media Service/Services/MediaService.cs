@@ -41,13 +41,7 @@ namespace Media_Service.Services
         }
         public async Task<bool> MoveMedia(int mediaItemId, int newLibraryId)
         {
-            var mediaItem = await _mediaDatabase.GetMediaItemById(mediaItemId);
-
-            if (mediaItem is null)
-                return false;
-
-            // Now pass the correct type (MediaItemEntity) to MoveItem
-            return await _mediaDatabase.MoveItem(mediaItem.Id, newLibraryId);
+            return await _mediaDatabase.MoveItem(mediaItemId, newLibraryId);
         }
 
         public async Task<bool> ReserveMedia(int mediaId, int profileId)

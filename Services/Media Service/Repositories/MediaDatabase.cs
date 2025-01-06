@@ -43,12 +43,16 @@ namespace Media_Service.Repositories
             }
         }
 
-        public async Task<bool> MoveItem(int mediaItem, int libraryId)
+        public async Task<bool> MoveItem(int mediaItemId, int libraryId)
         {
-            var mediaItemEntity = _mapper.Map<MediaItemEntity>(mediaItem);
-            mediaItemEntity.library_id = libraryId;
+            var entity = await GetMediaItemEntityById(mediaItemId);
 
-            _context.Update(mediaItemEntity);
+            if (entity is null)
+                throw new Exception("Could not find media item by id.");
+
+            entity.library_id = libraryId;
+
+            _context.Update(entity);
 
             try
             {

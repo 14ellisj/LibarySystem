@@ -132,14 +132,10 @@ namespace Media_Service.Services
         {
             var items = await _mediaDatabase.GetAllLibraryData();
 
-            _logger.LogInformation("Made it here woo!");
-
             if (items.Count() == 0)
                 throw new Exception("Media items Not Found.");
-
-            var mapped = _mapper.Map<IEnumerable<Library>>(items);
             
-            return mapped;
+            return items;
         }
 
         public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)

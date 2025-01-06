@@ -34,6 +34,28 @@ namespace Profile_Service.Controllers
                 .Include(x => x.library)
                 .AsQueryable();
 
+                query = query.Where(x => x.email.ToLower() == (email.ToLower()) && x.password == (password));
+
+            try {
+                var results = await query.ToListAsync();
+                var output = _mapper.Map<IEnumerable<ProfileEntity>, IEnumerable<UserProfile>>(results).FirstOrDefault();
+                return Json(output);
+            }
+            catch (Exception ex) {
+
+                return Json("");
+            }
+        }
+
+        [HttpGet("checkEmail", Name = "checkEmail")]
+        public async Task<JsonResult> Get(string? email)
+        {
+            var query = _context.Profile
+                .Include(x => x.address)
+                .Include(x => x.role)
+                .Include(x => x.library)
+                .AsQueryable();
+
                 query = query.Where(x => x.email.ToLower() == (email.ToLower()));
 
             try {

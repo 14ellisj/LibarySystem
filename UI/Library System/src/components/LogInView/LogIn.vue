@@ -25,7 +25,8 @@ export default defineComponent({
   methods: {
     async signIn() {
         const filter: ProfileFilter = {
-            email: this.email
+            email: this.email,
+            password: this.password
         }
         await this.profileService.filterData(filter, this.password);
             

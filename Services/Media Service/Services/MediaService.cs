@@ -132,9 +132,9 @@ namespace Media_Service.Services
             return items;
         }
 
-        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profile_id)
         {
-            var media = await _mediaDatabase.GetBorrowedMedia(profileId);
+            var media = await _mediaDatabase.GetBorrowedMedia(profile_id);
             return media;
         }
 

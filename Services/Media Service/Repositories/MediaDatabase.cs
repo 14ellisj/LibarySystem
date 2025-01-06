@@ -214,9 +214,9 @@ namespace Media_Service.Repositories
             return _mapper.Map<IEnumerable<Media>>(entities);
         }
 
-        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profileId)
+        public async Task<IEnumerable<Media>> GetBorrowedMedia(int profile_id)
         {
-            MediaItemBorrowedBySpecification spec = new(profileId);
+            MediaItemBorrowedBySpecification spec = new(profile_id);
 
             var query = _context.MediaItems
                 .Include(x => x.media)

@@ -41,9 +41,6 @@ export default defineComponent({
         <div class="header-user" @click= "toProfile()" @hover= "darkenImage()" v-if="hovering == false">
             <img class="user-img" src="@/images/profile.webp"><img>
         </div>
-        <div class="header-user-dark" @click= "toProfile()" @hover= "darkenImage()" v-else>
-            <img class="user-img-dark" src="@/images/profile.webp"><img>
-        </div>
     </div>
 </template>
   

@@ -59,12 +59,12 @@ namespace Media_Service.Controllers
         }
 
         [HttpGet("borrowedItem", Name = "Get Borrowed Media")]
-        public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int profileID)
+        public async Task<ActionResult<IEnumerable<Media>>> GetBorrowedMedia(int profile_id)
         {
-            if (profileID == null)
+            if (profile_id == null)
                 return BadRequest("No Profile Id");
                 
-            var results = await _mediaService.GetBorrowedMedia(profileID);
+            var results = await _mediaService.GetBorrowedMedia(profile_id);
             
             return Ok(results);
         }

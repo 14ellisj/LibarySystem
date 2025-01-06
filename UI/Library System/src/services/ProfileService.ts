@@ -34,8 +34,9 @@ export default class {
     }
 
     async checkEmail(filter: ProfileFilter): Promise<Profile> {
+        const requestUrl = this.apiUrl + "/checkEmail"
         await axios
-            .get(this.apiUrl, {
+            .get(requestUrl, {
                 params: filter
             })
             .then((response) => {

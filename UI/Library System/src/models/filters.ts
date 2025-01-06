@@ -11,6 +11,7 @@ export interface ProfileFilter {
   firstname?: string
   lastname?: string
   email?: string
+  password?: string
 }
 
 export interface MediaItemsFilter{

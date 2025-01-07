@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Castle.Core.Logging;
 using Media_Service.Models;
 using Media_Service.Models.Specifications;
 using Media_Service.Repositories;
 using Media_Service.Services;
+using Microsoft.Extensions.Logging;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ namespace Media_Serivce.Tests.Services
     {
         Mock<IMediaDatabase> _mediaDatabaseMock;
         Mock<IMapper> _mapperMock;
+        Mock<ILogger<MediaService>> _loggerMock;
         MediaService _sut;
 
 
@@ -26,7 +29,8 @@ namespace Media_Serivce.Tests.Services
         {
             _mediaDatabaseMock = new Mock<IMediaDatabase>();
             _mapperMock = new Mock<IMapper>();
-            _sut = new MediaService(_mediaDatabaseMock.Object, _mapperMock.Object);
+            _loggerMock = new Mock<ILogger<MediaService>>();
+            _sut = new MediaService(_mediaDatabaseMock.Object, _mapperMock.Object, _loggerMock.Object);
         }
 
         [TestMethod]

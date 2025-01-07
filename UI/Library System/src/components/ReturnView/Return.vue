@@ -57,7 +57,7 @@ export default defineComponent({
                     <template v-for="media in mediaStore.media" :key="store.user.id"> 
                         <tr>
                             <td> {{ media.name }} </td> 
-                            <td></td>
+                            <td> </td>
                             <td> <button @click="returnMedia(media.id, media.name)"> Return </button> </td> 
                         </tr>
                     </template>

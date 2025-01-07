@@ -50,6 +50,7 @@ export default defineComponent({
                 else{
                     await this.profileService.createProfile(this.email, this.firstName, this.lastName, this.password);
             
+                    toastr.success("Profile created successfully");
                     this.$router.push('/logIn');
                 }
             }

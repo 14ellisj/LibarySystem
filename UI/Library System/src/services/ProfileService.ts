@@ -46,21 +46,6 @@ export default class {
         return this.userStore.user;
     }
 
-    /*async checkEmail(filter: ProfileFilter): Promise<boolean> {
-        const thisUrl = this.apiUrl + "checkEmail";
-        let success = false;
-        await axios
-            .get(thisUrl, {
-                params: filter
-            })
-            .then((response) => {
-                (response: any) => {success = true}
-                (error: any) => {console.log(error); success = false}
-            })
-
-        return success;
-    }*/
-
     async createProfile(email: string, firstName: string, lastName: string, password: string){
         const body : IRegisterDetails = {
             email: email,

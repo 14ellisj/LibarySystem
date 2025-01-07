@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using System.Security.Cryptography.Xml;
-
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
 
 
 namespace Profile_Service.Controllers
@@ -83,6 +84,19 @@ namespace Profile_Service.Controllers
     int roleID = randomId.Next(1, 5);
     int libraryID = randomId.Next(1, 5);
     int addressID = randomId.Next(1, 5);
+
+        /*byte[] salt = RandomNumberGenerator.GetBytes(128 / 8);
+        Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
+        this.DecryptPassword()
+
+        string passwordHashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: password!,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
+        Console.WriteLine($"Hashed: {passwordHashed}");*/
 
             try
     {

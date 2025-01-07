@@ -7,7 +7,8 @@ import MediaService from '@/services/MediaService';
 import { useUserStore } from '../../stores/profileInformation';
 import toastr from 'toastr';
 import axios from 'axios';
-import type { LibraryFilter, MediaItemsFilter } from '@/models/filters';
+import type { LibraryFilter } from '@/models/filters';
+import { Role } from '@/models/role';
 
 export default defineComponent({
   name: 'SingleMediaView',
@@ -23,7 +24,7 @@ export default defineComponent({
 const email = ref({
   to: "",
   subject: "Your next in line!",
-  body: "Your reserved media is about to become available.\n" + 
+  body: "Your reserved media is about to become available.\n" +
         "Head to app to borrow the media now.\n" +
         "Thank you for using AML.",
 });
@@ -93,6 +94,7 @@ const email = ref({
       email,
       message,
       sendEmail,
+      Role
     };
   },
   methods: {
@@ -154,17 +156,17 @@ const email = ref({
                     <p><strong>Description: </strong> {{ item.description }}</p>
                     <p><strong>Rating: </strong>{{ item.rating }}/5</p>
                     <div class="actions">
-                      <button :disabled="!item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
+                      <button :disabled="!userStore.user?.id || !item.is_available || item.is_borrowed_by_user" @click="borrowMedia(item.id)">
                         Borrow
                       </button>
-                      <button :disabled="!item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
+                      <button :disabled="!userStore.user?.id || item.is_available || item.is_reserved_by_me" @click="reserveMedia(item.id)">
                         Reserve
                       </button>
 
-                      <p v-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
+                      <p v-if="!userStore.user?.id">Log in to borrow this item.</p>
+                      <p v-else-if="item.is_borrowed_by_user">You are already borrowing this item.</p>
                       <p v-else-if="!item.is_available">Sorry, not available right now.</p>
-                      <p v-else-if="!userStore.user?.id">Log in to borrow this item.</p>
-                      
+
                     </div>
                   </div>
                 </div>
@@ -173,7 +175,7 @@ const email = ref({
           </template>
         </tbody>
       </table>
-      <button class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
+      <button v-if="userStore.user.role === Role.Admin" class="admin-button" @click="submitForLibraryData(); $router.push('/manage')">Manage Media</button>
 
       <!-- Popup -->
       <div v-if="isPopupOpen" class="overlay">

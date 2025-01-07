@@ -3,7 +3,7 @@ import type { Role } from "./role";
 
 export interface Profile {
     id: number,
-    role_id: Role,
+    role: Role,
     library_id: Library,
     email: string,
     first_name: string,

@@ -49,7 +49,5 @@ export default defineComponent({
   height: 30rem;
   align-content: center;
   justify-items: center;
-  background-image: url('../../assets/Welcome-background.jpg');
-  background-position: center;
 }
 </style>
